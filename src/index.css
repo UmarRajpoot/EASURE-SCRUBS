@@ -4,6 +4,13 @@
 
 @layer base {
     html {
-      font-family: 'Raleway', sans-serif !important;
+      font-family: 'Roboto', sans-serif !important;
     }
+  }
+  
+  .textaccount {
+    @apply text-sm text-gray-600 hover:cursor-pointer relative;
+  }
+  .textDropDown {
+    @apply text-base text-gray-600 hover:cursor-pointer relative;
   }
