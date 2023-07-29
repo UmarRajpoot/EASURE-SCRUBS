@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Women1 from "../../assets/Kamal0363.jpg";
-import Women2 from "../../assets/Kamal0396.jpg";
-import Women3 from "../../assets/Kamal0332.jpg";
 import { ProductData } from "../../components/Date/ProductData";
 
 const Collections = () => {

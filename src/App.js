@@ -8,7 +8,7 @@ import Collections from "./pages/collections/collections";
 import Home from "./pages/home";
 import Products from "./pages/products/products";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
