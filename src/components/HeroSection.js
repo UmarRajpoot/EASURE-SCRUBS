@@ -15,7 +15,7 @@ const HeroSection = () => {
               backgroundImage: `url(${MensImage})`,
             }}
           >
-            <Link to={"/collections/Black/mens"}>
+            <Link to={"/collection/Black-scrubs-men"}>
               <Button label={"Shop Men →"} />
             </Link>
           </div>
@@ -23,7 +23,7 @@ const HeroSection = () => {
             className={`w-full md:w-1/2 h-full bg-contain bg-left bg-no-repeat hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-2xl cursor-pointer`}
             style={{ backgroundImage: `url(${WomenImage})` }}
           >
-            <Link to={"/collections/Navy-Blue/womens"}>
+            <Link to={"/collection/Navy-Blue-scrubs-women"}>
               <div className="h-full flex items-center md:ml-10">
                 <Button label={"Shop Women →"} />
               </div>

@@ -5,7 +5,6 @@ import WomensTrending from "../components/WomensTrending";
 import MensTrending from "../components/MensTrending";
 import OurPromise from "../components/OurPromise";
 import NewsLetter from "../components/NewsLetter";
-import Footer from "../components/Footer";
 
 const index = () => {
   return (

@@ -4,18 +4,18 @@ const NewsLetter = () => {
   return (
     <div className="bg-slate-200 flex flex-col items-center">
       <div className="w-10 h-10 "></div>
-      <div className="w-[30rem] flex flex-col items-center ">
+      <div className=" flex flex-col items-center ">
         <h3 className="text-xl">TAKE 15% OFF</h3>
         <h3 className="text-lg text-center ">
           Subscribe to take 15% oFF your first purchase and stay in the know on
           exclusive new colors, style and pronouns.
         </h3>
         <h3 className="text-sm text-center">
-          By Clicking "sign up", you agree to receive emails from FIGS and
+          By Clicking "sign up", you agree to receive emails from EASURE and
           accept our Terms of use and our Privacy Policy.
         </h3>
       </div>
-      <div className="py-3 w-96 ">
+      <div className="py-3 w-72 md:w-96 ">
         <input
           type="text"
           id="first_name"

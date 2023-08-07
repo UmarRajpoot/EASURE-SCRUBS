@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 const Wrapper = ({ children }) => {
   return (
-    <div className="w-full h-full ">
+    <div className="w-full h-full">
       <NavBarComp />
       {children}
       <Footer />
