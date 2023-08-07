@@ -26,7 +26,7 @@ const MensTrending = () => {
       <h3 className="text-gray-800 text-lg md:text-3xl font-bold">
         Mens Trending
       </h3>
-      <div className="flex overflow-x-auto  overflow-y-hidden">
+      <div className="flex overflow-x-auto  overflow-y-hidden no-scrollbar w-full">
         {MensTrend.map((mensT, index) => {
           if (mensT.parentcategory === "MEN") {
             return (

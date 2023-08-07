@@ -27,7 +27,7 @@ const WomensTrending = () => {
       <h3 className="text-gray-800 text-lg md:text-3xl font-bold">
         Womens Trending
       </h3>
-      <div className="flex overflow-x-auto  overflow-y-hidden">
+      <div className="flex overflow-x-auto  overflow-y-hidden no-scrollbar w-full">
         {womenTrend?.map((WTrend, index) => {
           if (WTrend.parentcategory === "WOMEN")
             return (

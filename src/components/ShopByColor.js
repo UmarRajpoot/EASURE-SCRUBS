@@ -26,7 +26,7 @@ const ShopByColor = () => {
       <h3 className="text-gray-800 text-lg md:text-3xl font-bold">
         Shop By Color
       </h3>
-      <div className="flex  overflow-x-auto overflow-y-hidden">
+      <div className="flex  overflow-x-auto overflow-y-hidden no-scrollbar w-full">
         {allColors.map((shBC, index) => {
           return (
             <Link
