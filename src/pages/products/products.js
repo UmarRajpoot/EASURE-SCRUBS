@@ -14,6 +14,7 @@ import { DrawerState } from "../../Store/Drawer/actions";
 import { AddCartItem } from "../../Store/Cart/actions";
 import { Box, Button, Text, useDisclosure } from "@chakra-ui/react";
 import ReviewModel from "../../components/ReviewModel";
+import Suggestion from "../../components/Suggestion";
 
 const Products = () => {
   const [imageSlide, setImageSlide] = useState(0);
@@ -88,7 +89,7 @@ const Products = () => {
     // getProData();
     getProductData();
     getAllColors();
-  }, []);
+  }, [params.id]);
 
   const LeftControl = (
     <div className="bg-gray-200 hover:outline outline-2 outline-gray-600 flex items-center justify-center rounded-full">
@@ -315,9 +316,12 @@ const Products = () => {
           <h3 className="text-xs">ANTI-WRINKLE</h3>
         </div>
       </div>
-      {/* <h4 className="text-xl px-10 mt-10 font-bold ">
+      <h4 className="text-xl px-10 mt-10 font-bold ">
         Don't Forget to Check These
-      </h4> */}
+      </h4>
+      <div className="px-3 md:px-10">
+        <Suggestion productSuggestions={productData.suggestions} />
+      </div>
       <div className="flex flex-col px-10">
         <ReviewModel
           isOpen={ReviewModelDis.isOpen}
@@ -330,7 +334,7 @@ const Products = () => {
             alignItems={"center"}
             justifyContent={"space-between"}
           >
-            <Text fontSize={"3xl"} fontWeight={"bold"} my={"10"}>
+            <Text fontSize={["md", "lg", "3xl"]} fontWeight={"bold"} my={"10"}>
               The Reviews Are In
             </Text>
             <Button onClick={() => ReviewModelDis.onOpen()}>
@@ -346,7 +350,12 @@ const Products = () => {
           >
             {allReviews.map((review, index) => {
               return (
-                <Box w={"90%"} bgColor={"gray.300"} p={"5"} key={index}>
+                <Box
+                  w={["100%", "90%"]}
+                  bgColor={"gray.300"}
+                  p={"5"}
+                  key={index}
+                >
                   <Text fontSize={"lg"} fontWeight={"medium"} pb={"3"}>
                     {review.title}
                   </Text>
