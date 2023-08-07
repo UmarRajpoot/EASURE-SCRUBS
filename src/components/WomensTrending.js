@@ -12,6 +12,7 @@ const WomensTrending = () => {
       .get(`${BASEURL}/Product`)
       .then((resp) => {
         // console.log(resp.data);
+
         setWomenTrend(resp.data.response);
       })
       .catch((error) => {
@@ -29,22 +30,25 @@ const WomensTrending = () => {
       </h3>
       <div className="flex overflow-x-auto  overflow-y-hidden no-scrollbar w-full">
         {womenTrend?.map((WTrend, index) => {
-          if (WTrend.parentcategory === "WOMEN")
-            return (
-              <Link
-                to={`/products/${WTrend.productname.toLowerCase()}/women`}
-                key={index.toString()}
-              >
-                <div className="py-10 px-3 hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer">
-                  <div className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center">
-                    <Image
-                      src={WTrend.productimage && WTrend.productimage[0]}
-                      // onLoad={() => console.log("loading")}
-                    />
+          if (WTrend.parentcategory === "WOMEN") {
+            if (WTrend.trend === true) {
+              return (
+                <Link
+                  to={`/products/${WTrend.productname.toLowerCase()}/women`}
+                  key={index.toString()}
+                >
+                  <div className="py-10 px-3 hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer">
+                    <div className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center">
+                      <Image
+                        src={WTrend.productimage && WTrend.productimage[0]}
+                        // onLoad={() => console.log("loading")}
+                      />
+                    </div>
                   </div>
-                </div>
-              </Link>
-            );
+                </Link>
+              );
+            }
+          }
         })}
         {/* <Link to={"/products/Bev-one-pocket-scrub-Top/women"}>
           <div className="py-10 px-3 hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer">

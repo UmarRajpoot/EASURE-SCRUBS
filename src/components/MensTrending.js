@@ -29,21 +29,23 @@ const MensTrending = () => {
       <div className="flex overflow-x-auto  overflow-y-hidden no-scrollbar w-full">
         {MensTrend.map((mensT, index) => {
           if (mensT.parentcategory === "MEN") {
-            return (
-              <Link
-                to={`/products/${mensT.productname.toLowerCase()}/men`}
-                key={index.toString()}
-              >
-                <div className="py-10 px-3 hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer">
-                  <div className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center">
-                    <Image
-                      src={mensT.productimage && mensT.productimage[0]}
-                      // onLoad={() => console.log("loading")}
-                    />
+            if (mensT.trend === true) {
+              return (
+                <Link
+                  to={`/products/${mensT.productname.toLowerCase()}/men`}
+                  key={index.toString()}
+                >
+                  <div className="py-10 px-3 hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer">
+                    <div className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center">
+                      <Image
+                        src={mensT.productimage && mensT.productimage[0]}
+                        // onLoad={() => console.log("loading")}
+                      />
+                    </div>
                   </div>
-                </div>
-              </Link>
-            );
+                </Link>
+              );
+            }
           }
         })}
         {/* <Link to={"/products/Lex-one-pocket-scrub-Top/mens"}>
