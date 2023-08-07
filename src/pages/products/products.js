@@ -62,7 +62,7 @@ const Products = () => {
     return await axios
       .get(`${BASEURL}/Review/${productID}`)
       .then((resp) => {
-        console.log(resp.data);
+        // console.log(resp.data);
         setAllReviews(resp.data.response);
       })
       .catch((error) => {

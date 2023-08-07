@@ -59,7 +59,7 @@ const Checkout = () => {
         orderItems: CartItems,
       })
       .then((resp) => {
-        console.log(resp.data);
+        // console.log(resp.data);
         dispatch(ResetCart());
       })
       .catch((error) => {

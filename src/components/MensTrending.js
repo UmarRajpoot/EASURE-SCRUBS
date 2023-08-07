@@ -38,7 +38,7 @@ const MensTrending = () => {
                   <div className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center">
                     <Image
                       src={mensT.productimage && mensT.productimage[0]}
-                      onLoad={() => console.log("loading")}
+                      // onLoad={() => console.log("loading")}
                     />
                   </div>
                 </div>

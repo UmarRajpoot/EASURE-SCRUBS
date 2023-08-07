@@ -11,7 +11,7 @@ const WomensTrending = () => {
     return await axios
       .get(`${BASEURL}/Product`)
       .then((resp) => {
-        console.log(resp.data);
+        // console.log(resp.data);
         setWomenTrend(resp.data.response);
       })
       .catch((error) => {
@@ -39,7 +39,7 @@ const WomensTrending = () => {
                   <div className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center">
                     <Image
                       src={WTrend.productimage && WTrend.productimage[0]}
-                      onLoad={() => console.log("loading")}
+                      // onLoad={() => console.log("loading")}
                     />
                   </div>
                 </div>
