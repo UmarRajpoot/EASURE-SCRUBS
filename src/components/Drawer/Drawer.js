@@ -62,7 +62,7 @@ const Drawer = ({ openDrawer }) => {
           id="drawer-form"
           className={`fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform ${
             openDrawer ? "-translate-x-0" : "translate-x-full"
-          } bg-white w-1/3 dark:bg-gray-800`}
+          } bg-white md:w-1/3 dark:bg-gray-800`}
           tabIndex="-1"
           aria-labelledby="drawer-form-label"
         >
