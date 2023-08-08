@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import DrawerReducer from "./Drawer/Reducer";
 import CartItemReducers from "./Cart/Reducer";
+import AuthReducer from "./Auth/reducer";
 
 const store = configureStore({
   middleware: (getDefaultMiddleware) =>
@@ -12,6 +13,7 @@ const store = configureStore({
   reducer: {
     DrawerOptions: DrawerReducer,
     CartOptions: CartItemReducers,
+    Auths: AuthReducer,
   },
 });
 

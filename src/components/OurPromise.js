@@ -13,8 +13,9 @@ const OurPromice = () => {
       <div className="flex flex-col mt-10 md:w-4/5 items-center ">
         <h4 className="text-3xl font-bold ">OUR PROMISE</h4>
         <h4 className="text-md w-2/3 text-center">
-          Boss-level styles that perform like you do. Business casual for
-          healthcare is here — now in Oak and Willow.
+          Easure: Elevating Comfort and Confidence Through Expertly Crafted
+          Scrubs. Experience the Perfect Blend of Style, Functionality, and
+          Unmatched Quality, Tailored Just for You
         </h4>
         <div className="flex items-center py-5 ">
           <Button

@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DrawerBodyItems from "../../components/Drawer/DrawerBodyItems";
 import CheckoutItems from "../../components/Checkout/CheckoutItems";
 import { ResetCart } from "../../Store/Cart/actions";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const CartItems = useSelector((state) => state.CartOptions.CartItems);
@@ -67,6 +68,10 @@ const Checkout = () => {
       });
   };
 
+  const navigate = useNavigate();
+
+  const AuthState = useSelector((state) => state.Auths.users);
+
   return (
     <Box h={"100vh"} px={"2.5"}>
       <section className="pt-5">
@@ -77,14 +82,41 @@ const Checkout = () => {
               <Text fontSize={"xl"}>Payment Methods</Text>
             </Box>
             <hr />
-            <Text size={"md"} py={"3"} fontSize={"xl"}>
-              Shipping address
-            </Text>
+            <Box
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
+            >
+              <Text size={"md"} py={"3"} fontSize={"xl"}>
+                Shipping address
+              </Text>
+              {AuthState.length !== 0 ? (
+                <Text display={"flex"} flexDirection={"row"}>
+                  <Text mr={"2"}>Login as </Text>
+                  <Text color={"teal"} fontSize={"md"} fontWeight={"medium"}>
+                    {AuthState.firstname}-{AuthState.lastname}
+                  </Text>
+                </Text>
+              ) : (
+                <Text display={"flex"} flexDirection={"row"}>
+                  <Text mr={"2"}>(Optional)</Text>
+                  <Text
+                    color={"teal"}
+                    fontSize={"md"}
+                    fontWeight={"medium"}
+                    cursor={"pointer"}
+                    onClick={() => navigate("/account/login")}
+                  >
+                    Login
+                  </Text>
+                </Text>
+              )}
+            </Box>
             <Formik
               initialValues={{
                 country: "",
-                firstname: "",
-                lastname: "",
+                firstname: AuthState.length !== 0 ? AuthState.firstname : "",
+                lastname: AuthState.length !== 0 ? AuthState.lastname : "",
                 address: "",
                 city: "",
                 state: "",

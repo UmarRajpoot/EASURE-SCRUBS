@@ -249,18 +249,22 @@ const Products = () => {
             <div
               className="flex flex-col items-center mt-3 "
               onClick={() => {
-                const item = {
-                  productID: productData.id,
-                  productimage: productData.productimage[0],
-                  productname: productData.productname,
-                  productsize: chooseSize,
-                  productcolor: chooseColor,
-                  productPrice: productData.price,
-                  originalPrice: productData.price,
-                  count: 1,
-                };
-                dispatch(AddCartItem(item));
-                dispatch(DrawerState(!IsDrawerOpen));
+                if(chooseSize !== '' && chooseColor !== ''){
+                  const item = {
+                    productID: productData.id,
+                    productimage: productData.productimage[0],
+                    productname: productData.productname,
+                    productsize: chooseSize,
+                    productcolor: chooseColor,
+                    productPrice: productData.price,
+                    originalPrice: productData.price,
+                    count: 1,
+                  };
+                  dispatch(AddCartItem(item));
+                  dispatch(DrawerState(!IsDrawerOpen));
+                }else{
+                  alert("Choose Size and Color")
+                }
               }}
             >
               <div className="bg-black text-white w-full text-center py-3 rounded-md hover:bg-gray-900 hover:cursor-pointer ">

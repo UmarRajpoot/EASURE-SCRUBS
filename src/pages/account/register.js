@@ -1,10 +1,58 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import {
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  HStack,
+  Input,
+  InputGroup,
+  InputRightElement,
+  VStack,
+} from "@chakra-ui/react";
+import axios from "axios";
+import { Field, Form, Formik } from "formik";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { BASEURL } from "../../Config/URL";
+import { AddUser } from "../../Store/Auth/actions";
+import { useDispatch } from "react-redux";
 
-const register = () => {
+const Register = () => {
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
+
+  function validateName(value, field) {
+    let error;
+    if (!value) {
+      error = `${field} is required.`;
+    }
+    return error;
+  }
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const registerUser = async (firstname, lastname, email, password) => {
+    return await axios
+      .post(`${BASEURL}/register`, {
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: password,
+      })
+      .then((resp) => {
+        // console.log(resp.data);
+        dispatch(AddUser(resp.data.response));
+        navigate(-1);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
-    <div className="container md:mx-auto flex flex-col items-center justify-center ">
-      <div className="mt-6 w-1/3">
+    <div className="container md:px-6 md:mx-auto flex flex-col items-center justify-center ">
+      <div className="mt-6 md:w-1/2">
         <div className="px-10 flex flex-col items-center justify-center">
           <div className="flex flex-col text-center">
             <h2 className="text-4xl">Create your EASURE account</h2>
@@ -15,70 +63,142 @@ const register = () => {
             </h2>
           </div>
           <div>
-            <div class="my-3 text-center">
-              <input
-                type="text"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-gray-900 focus:border-gray-900 block w-full p-4"
-                placeholder="First Name"
-                required
-              />
-            </div>
-            <div class="my-3 text-center">
-              <input
-                type="text"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-gray-900 focus:border-gray-900 block w-full p-4"
-                placeholder="Last Name"
-                required
-              />
-            </div>
-            <div class="my-3 text-center">
-              <input
-                type="email"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-gray-900 focus:border-gray-900 block w-full p-4"
-                placeholder="Email"
-                required
-              />
-              {/* <p className="text-red-600 text-sm my-3">
-                Please enter a valid email
-              </p> */}
-            </div>
-            <div class="mb-3 text-center ">
-              <input
-                type="password"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-gray-900 focus:border-gray-900 block w-full p-4"
-                placeholder="Password"
-                required
-              />
-              {/* <p className="text-red-600 text-sm my-3">
-                Please enter a password
-              </p> */}
-            </div>
-            {/* <div className="flex items-center justify-between">
-              <Text text={"Forget your password?"} />
-              <Text text={"Show Password"} />
-            </div> */}
-            <div class="flex items-start my-6">
-              {/* <div class="flex items-center h-5">
-                <input
-                  id="remember"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                  required
-                />
-              </div>
-              <label
-                for="remember"
-                class="ml-2 text-md pl-2 text-gray-900 dark:text-gray-300"
-              >
-                Yes, I would like to receive emails from FIGS about products,
-                updates, and exclusive offers and promotions. You can
-                unsubscribe at any time. See our Privacy Policy.
-              </label> */}
-            </div>
-            <div className="bg-gray-800 hover:bg-gray-700 hover:cursor-pointer w-full p-4 rounded-md mt-6 ">
-              <h3 className="text-white text-center font-bold">CREATE</h3>
-            </div>
+            <Formik
+              initialValues={{
+                firstname: "",
+                lastname: "",
+                email: "",
+                password: "",
+              }}
+              onSubmit={async (values, actions) => {
+                await registerUser(
+                  values.firstname,
+                  values.lastname,
+                  values.email,
+                  values.password
+                )
+                  .then(() => {
+                    actions.setSubmitting(false);
+                  })
+                  .catch((error) => {
+                    actions.setSubmitting(false);
+                  });
+              }}
+            >
+              {(props) => (
+                <Form>
+                  <VStack>
+                    <Field
+                      name="firstname"
+                      validate={(value) => validateName(value, "First name")}
+                    >
+                      {({ field, form }) => (
+                        <FormControl
+                          isInvalid={
+                            form.errors.firstname && form.touched.firstname
+                          }
+                          isRequired
+                        >
+                          <Input {...field} placeholder="First name" />
+                          <FormErrorMessage>
+                            {form.errors.firstname}
+                          </FormErrorMessage>
+                        </FormControl>
+                      )}
+                    </Field>
+                    <Field
+                      name="lastname"
+                      validate={(value) => validateName(value, "Last name")}
+                    >
+                      {({ field, form }) => (
+                        <FormControl
+                          isInvalid={
+                            form.errors.lastname && form.touched.lastname
+                          }
+                          isRequired
+                        >
+                          <Input {...field} placeholder="Last name" />
+                          <FormErrorMessage>
+                            {form.errors.lastname}
+                          </FormErrorMessage>
+                        </FormControl>
+                      )}
+                    </Field>
+                    <Field
+                      name="email"
+                      validate={(value) => validateName(value, "email")}
+                    >
+                      {({ field, form }) => (
+                        <FormControl
+                          isInvalid={form.errors.email && form.touched.email}
+                          isRequired
+                        >
+                          <Input {...field} placeholder="Email" />
+                          <FormErrorMessage>
+                            {form.errors.email}
+                          </FormErrorMessage>
+                        </FormControl>
+                      )}
+                    </Field>
+
+                    <Field
+                      name="password"
+                      validate={(value) => validateName(value, "password")}
+                    >
+                      {({ field, form }) => (
+                        <FormControl
+                          isInvalid={
+                            form.errors.password && form.touched.password
+                          }
+                          isRequired
+                        >
+                          <InputGroup size="md">
+                            <Input
+                              {...field}
+                              pr="4.5rem"
+                              type={show ? "text" : "password"}
+                              placeholder="Password"
+                            />
+                            <InputRightElement width="4.5rem">
+                              <Button
+                                h="1.75rem"
+                                size="sm"
+                                onClick={handleClick}
+                              >
+                                {show ? "Hide" : "Show"}
+                              </Button>
+                            </InputRightElement>
+                          </InputGroup>
+                          <FormErrorMessage>
+                            {form.errors.password}
+                          </FormErrorMessage>
+                        </FormControl>
+                      )}
+                    </Field>
+                  </VStack>
+                  <HStack
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent={"flex-end"}
+                    mb={"3"}
+                  >
+                    <Button
+                      mt={4}
+                      bgColor={"gray.900"}
+                      color={"white"}
+                      _hover={{
+                        bgColor: "gray.600",
+                      }}
+                      isLoading={props.isSubmitting}
+                      type="submit"
+                      w={"full"}
+                    >
+                      Create
+                    </Button>
+                  </HStack>
+                </Form>
+              )}
+            </Formik>
             <div className="my-6">
               <h3 className="text-md text-center">
                 By clicking the button above, you agree to our Terms of Use and
@@ -92,7 +212,7 @@ const register = () => {
               <h3 className="text-xl font-bold text-center">
                 Have an account?
               </h3>
-              <Link to={"/account/login"}>
+              <Link to={"/account/login"} replace={true}>
                 <h3 className="text-lg text-center my-4 hover:cursor-pointer underline">
                   Log In Here
                 </h3>
@@ -105,4 +225,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;

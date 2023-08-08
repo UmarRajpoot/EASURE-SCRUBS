@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { BsPerson } from "react-icons/bs";
-import { BiBasket } from "react-icons/bi";
+import { BiBasket, BiLogOutCircle } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import DropDownComp from "./DropDowns/DropDown";
 import Drawer from "./Drawer/Drawer";
 import { useDispatch, useSelector } from "react-redux";
 import { DrawerState } from "../Store/Drawer/actions";
+import { AddUser } from "../Store/Auth/actions";
 
 const NavbarComp = () => {
   const [DropDown, setDropDown] = useState(false);
 
   const IsDrawerOpen = useSelector((state) => state.DrawerOptions.DrawerState);
+  const AuthState = useSelector((state) => state.Auths.users);
+
   const dispatch = useDispatch();
 
   return (
@@ -25,14 +28,27 @@ const NavbarComp = () => {
           </Link>
           <div className="flex md:order-2">
             <div className="flex flex-row items-center">
-              {/* <div className="group ml-3 relative">
-                <Link to={`/account/login`}>
+              {AuthState.length !== 0 ? (
+                <div
+                  className="group ml-3 relative"
+                  onClick={() => dispatch(AddUser([]))}
+                >
                   <div className="group-hover:cursor-pointer p-2">
-                    <BsPerson size={25} />
+                    <BiLogOutCircle size={25} />
                   </div>
-                </Link>
-                <span className="w-0 group-hover:w-full h-0.5 bg-gray-600 absolute bottom-0 left-0 transition-all ease-in-out duration-200"></span>
-              </div> */}
+
+                  <span className="w-0 group-hover:w-full h-0.5 bg-gray-600 absolute bottom-0 left-0 transition-all ease-in-out duration-200"></span>
+                </div>
+              ) : (
+                <div className="group ml-3 relative">
+                  <Link to={`/account/login`}>
+                    <div className="group-hover:cursor-pointer p-2">
+                      <BsPerson size={25} />
+                    </div>
+                  </Link>
+                  <span className="w-0 group-hover:w-full h-0.5 bg-gray-600 absolute bottom-0 left-0 transition-all ease-in-out duration-200"></span>
+                </div>
+              )}
               <div className="group mr-2 relative">
                 <div className="group-hover:cursor-pointer p-2">
                   <BiBasket

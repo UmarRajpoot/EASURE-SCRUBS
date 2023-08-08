@@ -97,11 +97,13 @@ const Drawer = ({ openDrawer }) => {
             </svg>
             <span className="sr-only">Close menu</span>
           </button>
-          <div className="bg-gray-300 p-3">
-            <h4 className="text-base text-center">
-              Your cart is currently empty.
-            </h4>
-          </div>
+          {CartItems.length === 0 && (
+            <div className="bg-gray-300 p-3">
+              <h4 className="text-base text-center">
+                Your cart is currently empty.
+              </h4>
+            </div>
+          )}
           <div className="my-2">
             {CartItems.map((item, index) => {
               return (
