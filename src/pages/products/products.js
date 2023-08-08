@@ -104,8 +104,8 @@ const Products = () => {
   return (
     <div className="w-full">
       <div className="grid grid-rows-6 md:grid-rows-4 md:grid-cols-12 md:gap-3 px-6 h-screen">
-        <div className="hidden md:block md:col-span-1">
-          <div className="flex flex-col items-center">
+        <div className="hidden overflow-auto md:block md:col-span-1 md:h-screen no-scrollbar">
+          <div className="flex flex-row md:flex-col items-center">
             {productData?.productimage?.map((img, index) => {
               return (
                 <img
@@ -135,7 +135,7 @@ const Products = () => {
                 width={"100%"}
                 height={"100%"}
               />
-              <div className=" w-5 h-5 absolute top-8 right-8 ">
+              <div className=" w-6 h-6 absolute top-1/2 right-1/2 ">
                 <AiOutlinePlayCircle size={25} />
               </div>
             </div>
@@ -143,7 +143,11 @@ const Products = () => {
         </div>
         <div className="row-span-2 md:row-span-6 md:col-span-8 ">
           {videoplayer ? (
-            <video autoPlay={true} controls>
+            <video
+              autoPlay={true}
+              controls
+              style={{ height: "100%", width: "100%" }}
+            >
               <source src={productData?.productvideo} type="video/mp4" />
             </video>
           ) : (
@@ -169,6 +173,41 @@ const Products = () => {
           {/* <div className="w-full h-full overflow-hidden rounded-sm ">
           <img src={images[imageSlide]} width={"100%"} height={"100%"} />
         </div> */}
+        </div>
+        <div className="md:hidden overflow-auto flex flex-row md:flex-col items-center no-scrollbar pr-10">
+          {productData?.productimage?.map((img, index) => {
+            return (
+              <img
+                className={`p-1 ${
+                  index === imageSlide ? "opacity-100" : "opacity-50"
+                } hover:opacity-100 transition-all ease-in-out w-32 h-32 md:w-full md:h-full`}
+                key={index}
+                src={img}
+                width={"100%"}
+                height={"100%"}
+                onClick={() => {
+                  setvideoPlayer(false);
+                  setImageSlide(index);
+                }}
+              />
+            );
+          })}
+          <div
+            className="relative hover:cursor-pointer w-40 h-32 group bg-[url('https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195')] pr-10"
+            onClick={() => setvideoPlayer(true)}
+          >
+            <img
+              className={`p-1 opacity-50 group-hover:opacity-100  `}
+              src={
+                "https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195"
+              }
+              width={"100%"}
+              height={"100%"}
+            />
+            <div className=" w-5 h-5 absolute top-14 right-5 ">
+              <AiOutlinePlayCircle size={25} />
+            </div>
+          </div>
         </div>
         <div className="row-span-1 md:row-span-2 md:col-span-3">
           <div>
@@ -249,7 +288,7 @@ const Products = () => {
             <div
               className="flex flex-col items-center mt-3 "
               onClick={() => {
-                if(chooseSize !== '' && chooseColor !== ''){
+                if (chooseSize !== "" && chooseColor !== "") {
                   const item = {
                     productID: productData.id,
                     productimage: productData.productimage[0],
@@ -262,8 +301,8 @@ const Products = () => {
                   };
                   dispatch(AddCartItem(item));
                   dispatch(DrawerState(!IsDrawerOpen));
-                }else{
-                  alert("Choose Size and Color")
+                } else {
+                  alert("Choose Size and Color");
                 }
               }}
             >
