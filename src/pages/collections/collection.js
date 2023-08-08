@@ -22,7 +22,7 @@ const Collection = () => {
   };
 
   useEffect(() => {
-    if (params.category === "men") {
+    if (params.collection.split("-")[2].toLowerCase() === "men") {
       setCategory("men");
     } else {
       setCategory("women");
@@ -76,7 +76,7 @@ const Collection = () => {
             .split("-")
             .slice(0, -2)
             .toString()
-            .replace(",", "-")}-scrubs-women`}
+            .replace(",", "-")}-scrub-women`}
         >
           <h2
             className={`text-sm text-gray-900 font-bold mr-4 ${
@@ -96,7 +96,7 @@ const Collection = () => {
             .split("-")
             .slice(0, -2)
             .toString()
-            .replace(",", "-")}-scrubs-men`}
+            .replace(",", "-")}-scrub-men`}
         >
           <h2
             className={`text-sm text-gray-900 font-bold ${
