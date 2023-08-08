@@ -313,8 +313,8 @@ const Products = () => {
           </div>
         </div>
       </div>
-      <div className="bg-gray-100 flex flex-col md:flex-row items-center justify-evenly mt-14">
-        <div className="flex flex-col items-center p-20">
+      <div className="bg-gray-100 flex  md:flex-row items-center justify-evenly py-20 my-14 ">
+        <div className="flex flex-col items-center md:p-20">
           <div className="mb-3">
             <img
               src="https://images.ctfassets.net/5j6wpslh72e4/JY4MM2RQjWzrmNx4jPQNY/0fe7ae049eaf125d3431e93edb3accdd/FIGS_Fabric_Icons_ClassicFit.png"
@@ -324,8 +324,7 @@ const Products = () => {
           </div>
           <h3 className="text-xs">CLASSIC FIT</h3>
         </div>
-        <div className="w-20 h-0.5 md:w-0.5 md:h-20 bg-gray-600"></div>
-        <div className="flex flex-col items-center p-20">
+        <div className="flex flex-col items-center ">
           <div className="mb-3">
             <img
               src="https://images.ctfassets.net/5j6wpslh72e4/BiW7KWk3KwyPSNujJXTZi/ae1fb2611eda4619745e078b30dc76ea/icon-supersoft.svg"
@@ -335,8 +334,7 @@ const Products = () => {
           </div>
           <h3 className="text-xs">CLASSIC FIT</h3>
         </div>
-        <div className="w-20 h-0.5 md:w-0.5 md:h-20 bg-gray-600"></div>
-        <div className="flex flex-col items-center p-20">
+        <div className="flex flex-col items-center ">
           <div className="mb-3">
             <img
               src="https://images.ctfassets.net/5j6wpslh72e4/1bcTq6qRNPBHPsqoJOADa8/80ca4177536b7c3cf494f9e9015c5ba2/icon-pocket.svg"
@@ -346,9 +344,7 @@ const Products = () => {
           </div>
           <h3 className="text-xs">3 POCKETS</h3>
         </div>
-        <div className="w-20 h-0.5 md:w-0.5 md:h-20 bg-gray-600"></div>
-
-        <div className="flex flex-col items-center p-20">
+        <div className="flex flex-col items-center ">
           <div className="mb-3">
             <img
               src="https://images.ctfassets.net/5j6wpslh72e4/6J3kIc4yq5lYvto7yDVBnP/f305e339b6e0f9735dd0fd6111f07c4c/icon-antiwrinkle.svg"
