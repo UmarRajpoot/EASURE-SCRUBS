@@ -133,10 +133,12 @@ const Collection = () => {
                     {prod.productname}
                   </h2>
                   <h2 className="text-md text-gray-900 font-extrabold cursor-pointer mb-3">
-                    {prod.color}
+                    {prod.colors[0].colors[0] === "#000000" && "BLACK"}
+                    {prod.colors[0].colors[0] === "#000080" && "NAVY BLUE"}
+                    {prod.colors[0].colors[0] === "#92a1cf" && "NAVY BLUE"}
                   </h2>
                   <h2 className="text-xl text-gray-900 font-medium cursor-pointer">
-                    {prod.price}
+                    ${prod.price}.00
                   </h2>
                 </div>
               </div>

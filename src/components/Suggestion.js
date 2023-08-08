@@ -60,10 +60,18 @@ const Suggestion = ({ productSuggestions }) => {
                     {suggest.response.productname}
                   </h2>
                   <h2 className="text-md text-gray-900 font-extrabold cursor-pointer mb-3">
-                    {suggest.response.color}
+                    {suggest.response.colors &&
+                      suggest.response.colors[0].colors[0] === "#000000" &&
+                      "BLACK"}
+                    {suggest.response.colors &&
+                      suggest.response.colors[0].colors[0] === "#000080" &&
+                      "NAVY BLUE"}
+                    {suggest.response.colors &&
+                      suggest.response.colors[0].colors[0] === "#92a1cf" &&
+                      "NAVY BLUE"}
                   </h2>
                   <h2 className="text-xl text-gray-900 font-medium cursor-pointer">
-                    {suggest.response.price}
+                    ${suggest.response.price}.00
                   </h2>
                 </div>
               </div>

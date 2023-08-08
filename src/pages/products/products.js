@@ -123,7 +123,7 @@ const Products = () => {
                 />
               );
             })}
-            <div
+            {/* <div
               className="relative hover:cursor-pointer group"
               onClick={() => setvideoPlayer(true)}
             >
@@ -138,7 +138,7 @@ const Products = () => {
               <div className=" w-6 h-6 absolute top-1/2 right-1/2 ">
                 <AiOutlinePlayCircle size={25} />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="row-span-2 md:row-span-6 md:col-span-8 ">
@@ -192,7 +192,7 @@ const Products = () => {
               />
             );
           })}
-          <div
+          {/* <div
             className="relative hover:cursor-pointer w-40 h-32 group bg-[url('https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195')] pr-10"
             onClick={() => setvideoPlayer(true)}
           >
@@ -207,11 +207,22 @@ const Products = () => {
             <div className=" w-5 h-5 absolute top-14 right-5 ">
               <AiOutlinePlayCircle size={25} />
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="row-span-1 md:row-span-2 md:col-span-3">
           <div>
-            <h4 className="text-3xl">{productData.productname}</h4>
+            <h4 className="text-3xl">
+              {productData.personname && productData?.personname[0]}
+              {productData.personname &&
+                productData?.personname?.slice(1).toLowerCase()}
+              -
+              {productData.varientname &&
+                productData?.varientname?.toLowerCase()}
+              -{productData.typename && productData?.typename?.toLowerCase()}-
+              {productData.typestylename && productData?.typestylename[0]}
+              {productData.typestylename &&
+                productData?.typestylename?.slice(1).toLowerCase()}
+            </h4>
           </div>
           <div className="flex items-center my-5 ">
             {Array.from(Array(5)).map((items, index) => {
@@ -224,7 +235,9 @@ const Products = () => {
             {/* <h4 className="text-sm">(37,751 Reviews)</h4> */}
           </div>
           <div>
-            <h4 className="text-2xl">${productData?.price}</h4>
+            <h4 className="text-2xl font-medium mb-5">
+              ${productData?.price}.00
+            </h4>
           </div>
           <div className="flex item-center">
             <h4 className="text-sm p-0.5 px-3 m-1 rounded-md font-medium  border border-spacing-2 border-gray-300 text-gray-500">
@@ -234,7 +247,40 @@ const Products = () => {
               Limited Edition
             </h4>
           </div>
-          {productData?.colors?.map((color, index) => {
+          <div className="my-3">
+            <h3 className="text-base font-medium">CLASSIC</h3>
+            <div className="mt-2 flex items-center">
+              <div className="w-5 h-5 rounded-full bg-black mx-2 outline outline-offset-2 outline-0 hover:outline-1 "></div>
+              <div className="w-5 h-5 rounded-full bg-blue-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-green-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-yellow-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-red-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-pink-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+            </div>
+          </div>
+          <div className="my-3">
+            <h3 className="text-base font-medium">ICONIC</h3>
+            <div className="mt-2 flex items-center">
+              <div className="w-5 h-5 rounded-full bg-black mx-2 outline outline-offset-2 outline-0 hover:outline-1 "></div>
+              <div className="w-5 h-5 rounded-full bg-blue-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-green-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-yellow-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-red-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-pink-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+            </div>
+          </div>
+          <div className="my-3">
+            <h3 className="text-base font-medium">INJECTION</h3>
+            <div className="mt-2 flex items-center">
+              <div className="w-5 h-5 rounded-full bg-black mx-2 outline outline-offset-2 outline-0 hover:outline-1 "></div>
+              <div className="w-5 h-5 rounded-full bg-blue-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-green-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-yellow-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-red-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-pink-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+            </div>
+          </div>
+          {/* {productData?.colors?.map((color, index) => {
             return (
               <div className="my-3" key={index}>
                 <h3 className="text-base">{color.name}</h3>
@@ -258,13 +304,30 @@ const Products = () => {
                 </div>
               </div>
             );
-          })}
+          })} */}
 
           {/* Sizes */}
-          <div className="">
-            <h3 className="text-base">SIZES</h3>
+          <div>
+            <h3 className="text-normal font-medium my-3">SIZES</h3>
 
             <div className="flex item-center">
+              <h4 className="text-sm p-1.5 px-3 m-1 hover:bg-gray-200 hover:cursor-pointer  rounded-md font-medium  border border-spacing-2 border-gray-300 text-gray-500">
+                S
+              </h4>
+              <h4 className="text-sm p-1.5 px-3 m-1 hover:bg-gray-200 hover:cursor-pointer  rounded-md font-medium border border-spacing-2 border-gray-300 text-gray-500">
+                M
+              </h4>
+              <h4 className="text-sm p-1.5 px-3 m-1 hover:bg-gray-200 hover:cursor-pointer  rounded-md font-medium border border-spacing-2 border-gray-300 text-gray-500">
+                L
+              </h4>
+              <h4 className="text-sm p-1.5 px-3 m-1 hover:bg-gray-200 hover:cursor-pointer  rounded-md font-medium border border-spacing-2 border-gray-300 text-gray-500">
+                X
+              </h4>
+              <h4 className="text-sm p-1.5 px-3 m-1 hover:bg-gray-200 hover:cursor-pointer  rounded-md font-medium border border-spacing-2 border-gray-300 text-gray-500">
+                XXL
+              </h4>
+            </div>
+            {/* <div className="flex item-center">
               {productData?.sizes?.map((size, index) => {
                 return (
                   <h4
@@ -284,26 +347,26 @@ const Products = () => {
                   </h4>
                 );
               })}
-            </div>
+            </div> */}
             <div
               className="flex flex-col items-center mt-3 "
               onClick={() => {
-                if (chooseSize !== "" && chooseColor !== "") {
-                  const item = {
-                    productID: productData.id,
-                    productimage: productData.productimage[0],
-                    productname: productData.productname,
-                    productsize: chooseSize,
-                    productcolor: chooseColor,
-                    productPrice: productData.price,
-                    originalPrice: productData.price,
-                    count: 1,
-                  };
-                  dispatch(AddCartItem(item));
-                  dispatch(DrawerState(!IsDrawerOpen));
-                } else {
-                  alert("Choose Size and Color");
-                }
+                const item = {
+                  productID: productData.id,
+                  productimage: productData.productimage[0],
+                  productname: productData.productname,
+                  productsize: chooseSize,
+                  productcolor: chooseColor,
+                  productPrice: productData.price,
+                  originalPrice: productData.price,
+                  count: 1,
+                };
+                dispatch(AddCartItem(item));
+                dispatch(DrawerState(!IsDrawerOpen));
+                // if (chooseSize !== "" && chooseColor !== "") {
+                // } else {
+                //   alert("Choose Size and Color");
+                // }
               }}
             >
               <div className="bg-black text-white w-full text-center py-3 rounded-md hover:bg-gray-900 hover:cursor-pointer ">
