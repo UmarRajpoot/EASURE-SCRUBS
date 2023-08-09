@@ -103,7 +103,7 @@ const Products = () => {
   );
   return (
     <div className="w-full">
-      <div className="grid grid-rows-6 md:grid-rows-4 md:grid-cols-12 md:gap-3 px-6 h-screen">
+      <div className="grid grid-cols-1 grid-rows-6 md:grid-rows-4 md:grid-cols-12 md:gap-3 px-6 h-screen mb-48 md:mb-2">
         <div className="hidden overflow-auto md:block md:col-span-1 md:h-screen no-scrollbar">
           <div className="flex flex-row md:flex-col items-center">
             {productData?.productimage?.map((img, index) => {
@@ -141,7 +141,7 @@ const Products = () => {
             </div> */}
           </div>
         </div>
-        <div className="row-span-2 md:row-span-6 md:col-span-8 ">
+        <div className="row-span-2 md:row-span-6 md:col-span-8">
           {videoplayer ? (
             <video
               autoPlay={true}
@@ -174,7 +174,7 @@ const Products = () => {
           <img src={images[imageSlide]} width={"100%"} height={"100%"} />
         </div> */}
         </div>
-        <div className="md:hidden overflow-auto flex flex-row md:flex-col items-center no-scrollbar pr-10">
+        <div className="md:hidden row-span-1 overflow-auto flex flex-row md:flex-col items-center no-scrollbar pr-10">
           {productData?.productimage?.map((img, index) => {
             return (
               <img
@@ -209,7 +209,7 @@ const Products = () => {
             </div>
           </div> */}
         </div>
-        <div className="row-span-1 md:row-span-2 md:col-span-3">
+        <div className=" row-span-3 md:row-span-2 md:col-span-3">
           <div>
             <h4 className="text-3xl">
               {productData.personname && productData?.personname[0]}
@@ -349,7 +349,7 @@ const Products = () => {
               })}
             </div> */}
             <div
-              className="flex flex-col items-center mt-3 "
+              className="flex flex-col items-center my-3 "
               onClick={() => {
                 const item = {
                   productID: productData.id,
@@ -369,50 +369,46 @@ const Products = () => {
                 // }
               }}
             >
-              <div className="bg-black text-white w-full text-center py-3 rounded-md hover:bg-gray-900 hover:cursor-pointer ">
+              <div className="bg-black text-white w-full text-center py-3 rounded-md hover:bg-gray-900 hover:cursor-pointer">
                 <p className="text-sm">Add to Cart</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="bg-gray-100 flex  md:flex-row items-center justify-evenly py-20 my-14 ">
-        <div className="flex flex-col items-center md:p-20">
+      <div className="bg-gray-100 flex flex-row items-center justify-between md:justify-evenly p-5 py-10  md:p-20 my-14">
+        <div className="flex flex-col items-center">
           <div className="mb-3">
             <img
               src="https://images.ctfassets.net/5j6wpslh72e4/JY4MM2RQjWzrmNx4jPQNY/0fe7ae049eaf125d3431e93edb3accdd/FIGS_Fabric_Icons_ClassicFit.png"
-              width={40}
-              height={40}
+              className="w-8 h-8 md:w-12 md:h-12"
             />
           </div>
           <h3 className="text-xs">CLASSIC FIT</h3>
         </div>
-        <div className="flex flex-col items-center ">
+        <div className="flex flex-col items-center">
           <div className="mb-3">
             <img
               src="https://images.ctfassets.net/5j6wpslh72e4/BiW7KWk3KwyPSNujJXTZi/ae1fb2611eda4619745e078b30dc76ea/icon-supersoft.svg"
-              width={40}
-              height={40}
+              className="w-8 h-8 md:w-12 md:h-12"
             />
           </div>
           <h3 className="text-xs">CLASSIC FIT</h3>
         </div>
-        <div className="flex flex-col items-center ">
+        <div className="flex flex-col items-center">
           <div className="mb-3">
             <img
               src="https://images.ctfassets.net/5j6wpslh72e4/1bcTq6qRNPBHPsqoJOADa8/80ca4177536b7c3cf494f9e9015c5ba2/icon-pocket.svg"
-              width={40}
-              height={40}
+              className="w-8 h-8 md:w-12 md:h-12"
             />
           </div>
           <h3 className="text-xs">3 POCKETS</h3>
         </div>
-        <div className="flex flex-col items-center ">
+        <div className="flex flex-col items-center">
           <div className="mb-3">
             <img
               src="https://images.ctfassets.net/5j6wpslh72e4/6J3kIc4yq5lYvto7yDVBnP/f305e339b6e0f9735dd0fd6111f07c4c/icon-antiwrinkle.svg"
-              width={40}
-              height={40}
+              className="w-8 h-8 md:w-12 md:h-12"
             />
           </div>
           <h3 className="text-xs">ANTI-WRINKLE</h3>
