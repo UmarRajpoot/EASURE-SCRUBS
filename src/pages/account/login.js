@@ -52,9 +52,9 @@ const Login = () => {
   };
 
   return (
-    <div className="container md:px-6 md:mx-auto flex">
-      <div className="mt-6 md:w-1/2 hidden md:block">
-        <Image src={LoginSideImage} />
+    <div className="container md:px-6 md:mx-auto flex mb-20">
+      <div className="mt-6 md:w-1/2 hidden  md:flex justify-end">
+        <Image src={LoginSideImage} h={"500px"} />
       </div>
       <div className="mt-6 w-full md:w-1/2 justify-center items-center">
         <div className="px-10 flex flex-col  justify-end">

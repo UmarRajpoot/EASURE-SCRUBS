@@ -3,7 +3,6 @@ import {
   Button,
   FormControl,
   FormErrorMessage,
-  FormLabel,
   HStack,
   Heading,
   Input,
@@ -18,7 +17,6 @@ import { Field, Form, Formik } from "formik";
 import React from "react";
 import { BASEURL } from "../../Config/URL";
 import { useDispatch, useSelector } from "react-redux";
-import DrawerBodyItems from "../../components/Drawer/DrawerBodyItems";
 import CheckoutItems from "../../components/Checkout/CheckoutItems";
 import { ResetCart } from "../../Store/Cart/actions";
 import { useNavigate } from "react-router-dom";
@@ -159,10 +157,15 @@ const Checkout = () => {
                         >
                           {/* <FormLabel>Country</FormLabel> */}
                           <Select {...field} placeholder="Country">
+                            <option>Azerbaijan</option>
+                            <option>Belgium</option>
+                            <option>France</option>
+                            <option>Germany</option>
+                            <option>Italy</option>
+                            <option>India</option>
                             <option>Pakistan</option>
-                            <option>United State</option>
+                            <option>United States</option>
                             <option>United Kingdom</option>
-                            <option>Itely</option>
                           </Select>
                           <FormErrorMessage>
                             {form.errors.country}

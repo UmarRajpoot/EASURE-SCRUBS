@@ -2,7 +2,6 @@ import {
   Button,
   FormControl,
   FormErrorMessage,
-  FormLabel,
   HStack,
   Image,
   Input,
@@ -55,8 +54,8 @@ const Register = () => {
 
   return (
     <div className="container md:px-6 md:mx-auto flex">
-      <div className="mt-6 md:w-1/2 hidden md:block">
-        <Image src={RegisterSideImage} />
+      <div className="mt-6 md:w-1/2 hidden md:flex justify-end">
+        <Image src={RegisterSideImage} h={"500px"} />
       </div>
       <div className="mt-6 md:w-1/2 justify-center items-center">
         <div className="px-10 flex flex-col items-center justify-end">
