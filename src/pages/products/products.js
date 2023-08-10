@@ -12,9 +12,10 @@ import { BASEURL } from "../../Config/URL";
 import { useDispatch, useSelector } from "react-redux";
 import { DrawerState } from "../../Store/Drawer/actions";
 import { AddCartItem } from "../../Store/Cart/actions";
-import { Box, Button, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, HStack, Text, useDisclosure } from "@chakra-ui/react";
 import ReviewModel from "../../components/ReviewModel";
 import Suggestion from "../../components/Suggestion";
+import { GrStar } from "react-icons/gr";
 
 const Products = () => {
   const [imageSlide, setImageSlide] = useState(0);
@@ -450,10 +451,23 @@ const Products = () => {
               return (
                 <Box
                   w={["100%", "90%"]}
-                  bgColor={"gray.300"}
+                  bgColor={"gray.100"}
                   p={"5"}
+                  my={"2"}
                   key={index}
                 >
+                  <HStack my={"3"}>
+                    {Array.from({ length: review.starcount }).map(
+                      (star, index) => {
+                        return (
+                          <GrStar
+                            key={index}
+                            color={index === 5 ? "gray" : "black"}
+                          />
+                        );
+                      }
+                    )}
+                  </HStack>
                   <Text fontSize={"lg"} fontWeight={"medium"} pb={"3"}>
                     {review.title}
                   </Text>

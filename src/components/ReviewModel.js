@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -15,15 +15,26 @@ import {
   FormErrorMessage,
   HStack,
   Textarea,
+  Box,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { Field, Form, Formik } from "formik";
 import { BASEURL } from "../Config/URL";
+import { GrStar } from "react-icons/gr";
+import { Rating } from "react-simple-star-rating";
 
 const ReviewModel = ({ isOpen, onClose, productID }) => {
-  const AddReview = async (title, desc, xproductID) => {
+  const [rating, setRating] = useState(0);
+
+  // Catch Rating value
+  const handleRating = (rate) => {
+    setRating(rate);
+  };
+
+  const AddReview = async (title, desc, xproductID, starcount) => {
     return await axios
       .post(`${BASEURL}/Review`, {
+        starcount: starcount,
         title: title,
         desc: desc,
         productID: xproductID,
@@ -45,7 +56,7 @@ const ReviewModel = ({ isOpen, onClose, productID }) => {
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size={["xs", "md"]}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Write a Review</ModalHeader>
@@ -54,7 +65,7 @@ const ReviewModel = ({ isOpen, onClose, productID }) => {
           <Formik
             initialValues={{ title: "", desc: "" }}
             onSubmit={async (values, actions) => {
-              await AddReview(values.title, values.desc, productID)
+              await AddReview(values.title, values.desc, productID, rating)
                 .then((resp) => {
                   actions.setSubmitting(false);
                   onClose();
@@ -68,6 +79,17 @@ const ReviewModel = ({ isOpen, onClose, productID }) => {
             {(props) => (
               <Form>
                 <VStack>
+                  <Box>
+                    <Rating
+                      onClick={handleRating}
+                      initialValue={rating}
+                      SVGstyle={{ display: "inline" }}
+                      fillColor="black"
+                      size={25}
+                      allowHover={false}
+                      customIcons={() => <GrStar />}
+                    />
+                  </Box>
                   <Field
                     name="title"
                     validate={(value) => validateName(value, "Review Title")}
