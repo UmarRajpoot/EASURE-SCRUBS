@@ -4,6 +4,7 @@ import {
   FormErrorMessage,
   FormLabel,
   HStack,
+  Image,
   Input,
   InputGroup,
   InputRightElement,
@@ -16,6 +17,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASEURL } from "../../Config/URL";
 import { AddUser } from "../../Store/Auth/actions";
 import { useDispatch } from "react-redux";
+
+import RegisterSideImage from "../../assets/black3.jpeg";
 
 const Register = () => {
   const [show, setShow] = useState(false);
@@ -51,12 +54,15 @@ const Register = () => {
   };
 
   return (
-    <div className="container md:px-6 md:mx-auto flex flex-col items-center justify-center ">
-      <div className="mt-6 md:w-1/2">
-        <div className="px-10 flex flex-col items-center justify-center">
+    <div className="container md:px-6 md:mx-auto flex">
+      <div className="mt-6 md:w-1/2 hidden md:block">
+        <Image src={RegisterSideImage} />
+      </div>
+      <div className="mt-6 md:w-1/2 justify-center items-center">
+        <div className="px-10 flex flex-col items-center justify-end">
           <div className="flex flex-col text-center">
             <h2 className="text-4xl">Create your EASURE account</h2>
-            <h2 className="text-md my-4 ">
+            <h2 className="text-md my-4">
               C'mon, everybody's doing it. Create an account to apply discount
               codes at checkout and get access to exclusive offers and
               promotions.

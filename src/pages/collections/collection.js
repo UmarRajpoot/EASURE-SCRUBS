@@ -111,7 +111,7 @@ const Collection = () => {
         </Link>
       </div>
 
-      <div className="flex overflow-x-scroll md:overflow-x-hidden overflow-y-hidden px-10">
+      <div className="flex md:flex-wrap overflow-x-scroll px-10 no-scrollbar">
         {extProduct.map((prod, index) => {
           return (
             <Link

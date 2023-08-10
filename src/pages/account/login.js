@@ -7,6 +7,7 @@ import {
   FormControl,
   FormErrorMessage,
   HStack,
+  Image,
   Input,
   InputGroup,
   InputRightElement,
@@ -16,6 +17,8 @@ import axios from "axios";
 import { BASEURL } from "../../Config/URL";
 import { useDispatch } from "react-redux";
 import { AddUser } from "../../Store/Auth/actions";
+
+import LoginSideImage from "../../assets/black3.jpeg";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -49,10 +52,13 @@ const Login = () => {
   };
 
   return (
-    <div className="container md:px-6 md:mx-auto flex flex-col items-center justify-center h-screen">
-      <div className="mt-6 md:w-1/2">
-        <div className="flex flex-col ">
-          <div className="flex flex-col text-center">
+    <div className="container md:px-6 md:mx-auto flex">
+      <div className="mt-6 md:w-1/2 hidden md:block">
+        <Image src={LoginSideImage} />
+      </div>
+      <div className="mt-6 w-full md:w-1/2 justify-center items-center">
+        <div className="px-10 flex flex-col  justify-end">
+          <div className="flex flex-col items-center ">
             <h2 className="text-3xl my-4">Welcome To EASURE!</h2>
             {/* <h2 className="text-md my-4 ">Welcome to EASURE</h2> */}
           </div>

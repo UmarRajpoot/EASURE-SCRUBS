@@ -1,6 +1,6 @@
 import React from "react";
-import MensImage from "../assets/Kamal0729.jpg";
-import WomenImage from "../assets/Kamal0633.jpg";
+import MensImage from "../assets/Kamal0729-min.jpg";
+import WomenImage from "../assets/Kamal0633-min.jpg";
 import Button from "./button";
 import { Link } from "react-router-dom";
 
