@@ -74,7 +74,7 @@ const Checkout = () => {
 
   return (
     <Box h={"100vh"} px={"2.5"}>
-      <section className="pt-5">
+      <section className="pt-5 px-6 md:px-0">
         <div className="container mx-auto flex flex-col md:flex-row  md:h-96 lg:h-screen justify-center">
           <div className="w-full md:w-2/5 ">
             <Heading>ENSURE</Heading>
@@ -101,7 +101,7 @@ const Checkout = () => {
                 <Text display={"flex"} flexDirection={"row"}>
                   <Text mr={"2"}>(Optional)</Text>
                   <Text
-                    color={"teal"}
+                    color={"blue"}
                     fontSize={"md"}
                     fontWeight={"medium"}
                     cursor={"pointer"}
