@@ -2,20 +2,23 @@ import React, { useState } from "react";
 import { BsPerson } from "react-icons/bs";
 import { BiBasket, BiLogOutCircle } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import DropDownComp from "./DropDowns/DropDown";
 import Drawer from "./Drawer/Drawer";
 import { useDispatch, useSelector } from "react-redux";
 import { DrawerState } from "../Store/Drawer/actions";
 import { AddUser } from "../Store/Auth/actions";
+import WomenDropDownComp from "./DropDowns/WomenDropDown";
+import MenDropDownComp from "./DropDowns/MenDropDown";
 
 const NavbarComp = () => {
-  const [DropDown, setDropDown] = useState(false);
+  const [WomenDropDown, setWomenDropDown] = useState(false);
+  const [MenDropDown, setMenDropDown] = useState(false);
+
+  const [mobileDropDown, setMobileDropDown] = useState(false);
 
   const IsDrawerOpen = useSelector((state) => state.DrawerOptions.DrawerState);
   const AuthState = useSelector((state) => state.Auths.users);
 
   const dispatch = useDispatch();
-
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -87,12 +90,15 @@ const NavbarComp = () => {
                 <span className="w-0 group-hover:w-full h-0.5 bg-gray-600 absolute bottom-0 left-0 transition-all ease-in-out duration-200"></span>
               </div>
             </div>
-            {/* <button
+            <button
               data-collapse-toggle="navbar-search"
               type="button"
               className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               aria-controls="navbar-search"
               aria-expanded="false"
+              onClick={() => {
+                setMobileDropDown((oldState) => setMobileDropDown(!oldState));
+              }}
             >
               <span className="sr-only">Open main menu</span>
               <svg
@@ -110,10 +116,12 @@ const NavbarComp = () => {
                   d="M1 1h15M1 7h15M1 13h15"
                 />
               </svg>
-            </button> */}
+            </button>
           </div>
           <div
-            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            className={`items-center justify-between ${
+              mobileDropDown ? "block" : "hidden"
+            } w-full md:flex md:w-auto md:order-1`}
             id="navbar-search"
           >
             <div className="relative mt-3 md:hidden">
@@ -142,31 +150,66 @@ const NavbarComp = () => {
               />
             </div>
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-              <li
-                className="relative"
-                onMouseEnter={() => {
-                  setDropDown(true);
-                }}
-              >
-                <a
-                  href="#"
-                  className="block py-2 pl-3 pr-4 mx-4 rounded md:bg-transparent  md:p-0 text-black"
-                  aria-current="page"
+              <Link to={"/collection/black-scrub-women"}>
+                <li
+                  className="relative"
+                  onMouseEnter={() => {
+                    if (mobileDropDown === false) setWomenDropDown(true);
+                  }}
+                  onMouseLeave={() => {
+                    if (mobileDropDown === false) setWomenDropDown(false);
+                  }}
                 >
-                  Women
-                </a>
-                {DropDown && (
-                  <div className="absolute -bottom-full bg-black w-full h-1"></div>
-                )}
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  <a
+                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    aria-current="page"
+                  >
+                    Women
+                  </a>
+                  {WomenDropDown && (
+                    <>
+                      <div className="absolute mt-2 bg-black w-full h-1"></div>
+                      {WomenDropDown && (
+                        <div className="relative">
+                          <div className="block min-w-screen absolute top-0 md:-left-60 pt-5 z-50">
+                            <WomenDropDownComp />
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </li>
+              </Link>
+              <Link to={"/collection/black-scrub-men"}>
+                <li
+                  className="relative"
+                  onMouseEnter={() => {
+                    if (mobileDropDown === false) setMenDropDown(true);
+                  }}
+                  onMouseLeave={() => {
+                    if (mobileDropDown === false) setMenDropDown(false);
+                  }}
                 >
-                  Men
-                </a>
-              </li>
+                  <a
+                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    aria-current="page"
+                  >
+                    Men
+                  </a>
+                  {MenDropDown && (
+                    <>
+                      <div className="absolute mt-2 bg-black w-full h-1"></div>
+                      {MenDropDown && (
+                        <div className="relative">
+                          <div className="block min-w-screen absolute top-0 md:-left-60 pt-5 z-50">
+                            <MenDropDownComp />
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </li>
+              </Link>
               <li>
                 <a
                   href="#"
@@ -204,18 +247,6 @@ const NavbarComp = () => {
         </div>
       </nav>
       <Drawer openDrawer={IsDrawerOpen} />
-
-      {DropDown && (
-        <div className="relative">
-          <div
-            className=" absolute w-full h-96 z-40 opacity-30 "
-            onMouseEnter={() => setDropDown(false)}
-          ></div>
-          <div className="absolute top-0 w-full z-50">
-            <DropDownComp />
-          </div>
-        </div>
-      )}
     </>
   );
 };

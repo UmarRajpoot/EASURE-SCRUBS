@@ -27,7 +27,7 @@ const Collection = () => {
     } else {
       setCategory("women");
     }
-  }, []);
+  }, [params.collection]);
 
   // let totalLength = params.collection.split("-").length;
   // console.log(params.collection.split("-").slice(0, totalLength - 2));
@@ -115,7 +115,7 @@ const Collection = () => {
         {extProduct.map((prod, index) => {
           return (
             <Link
-              to={`/products/${prod.productname.toLowerCase()}/women`}
+              to={`/products/${prod.productname.toLowerCase()}/${prod.parentcategory.toLowerCase()}`}
               key={index.toString()}
             >
               <div className="py-10 px-3 hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer">
