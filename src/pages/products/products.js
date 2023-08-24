@@ -124,6 +124,22 @@ const Products = () => {
                 />
               );
             })}
+            <div
+              className="relative hover:cursor-pointer w-28 h-28 group  pr-10"
+              onClick={() => setvideoPlayer(true)}
+            >
+              <img
+                className={`p-1 opacity-50 group-hover:opacity-100  `}
+                src={
+                  "https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195"
+                }
+                width={"100%"}
+                height={"100%"}
+              />
+              <div className=" w-5 h-5 absolute bottom-14 right-14 ">
+                <AiOutlinePlayCircle size={25} />
+              </div>
+            </div>
             {/* <div
               className="relative hover:cursor-pointer group"
               onClick={() => setvideoPlayer(true)}
@@ -144,14 +160,24 @@ const Products = () => {
         </div>
         <div className="row-span-2 md:row-span-6 md:col-span-8">
           {videoplayer ? (
-            <video
-              autoPlay={true}
-              controls
-              style={{ height: "100%", width: "100%" }}
-            >
-              <source src={productData?.productvideo} type="video/mp4" />
-            </video>
+            <Box>
+              <ReactPlayer
+                width={"100%"}
+                height={"300px"}
+                url={productData?.productvideo}
+              />
+            </Box>
           ) : (
+            // <video
+            //   autoPlay={true}
+            //   controls
+            //   style={{ height: "100%", width: "100%" }}
+            // >
+            //   <source
+            //     src={"https://youtube.com/shorts/cbI5tExrIUM"}
+            //     type="video"
+            //   />
+            // </video>
             <Carousel
               slide={false}
               indicators={false}
@@ -171,6 +197,7 @@ const Products = () => {
               })}
             </Carousel>
           )}
+
           {/* <div className="w-full h-full overflow-hidden rounded-sm ">
           <img src={images[imageSlide]} width={"100%"} height={"100%"} />
         </div> */}
@@ -193,7 +220,7 @@ const Products = () => {
               />
             );
           })}
-          {/* <div
+          <div
             className="relative hover:cursor-pointer w-40 h-32 group bg-[url('https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195')] pr-10"
             onClick={() => setvideoPlayer(true)}
           >
@@ -208,7 +235,7 @@ const Products = () => {
             <div className=" w-5 h-5 absolute top-14 right-5 ">
               <AiOutlinePlayCircle size={25} />
             </div>
-          </div> */}
+          </div>
         </div>
         <div className=" row-span-3 md:row-span-2 md:col-span-3">
           <div>
