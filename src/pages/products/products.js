@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Carousel } from "flowbite-react";
 import Star from "../../components/star";
 // import { Carousel } from "react-responsive-carousel";
@@ -19,7 +19,9 @@ import { GrStar } from "react-icons/gr";
 
 const Products = () => {
   const [imageSlide, setImageSlide] = useState(0);
-  const [productData, setProductData] = useState("");
+  const [productData, setProductData] = useState([]);
+
+  const [CarouselData, setCarouselData] = useState([]);
 
   const [allColors, setAllColors] = useState([]);
   const [allReviews, setAllReviews] = useState([]);
@@ -38,6 +40,7 @@ const Products = () => {
   const [videoplayer, setvideoPlayer] = useState(false);
 
   const params = useParams();
+  const videoRef = useRef();
 
   useEffect(() => {
     if (selectColor !== "") {
@@ -72,6 +75,37 @@ const Products = () => {
       });
   };
 
+  const makeCarousel = (prodata) => {
+    const images = prodata?.productimage.map((img) => {
+      return {
+        link: img,
+        type: "image",
+      };
+    });
+    setCarouselData([
+      ...images,
+      {
+        link: prodata?.productvideo,
+        type: "video",
+      },
+    ]);
+    // setCarouselData([
+    //   ...CarouselData,
+    //   {
+    //     link: prodata?.productvideo,
+    //     type: "video",
+    //   },
+    // ]);
+  };
+
+  useEffect(() => {
+    // videoRef.current.play();
+    // setTimeout(() => {
+    //   videoRef.current.pause();
+    //   console.log("it pause");
+    // }, 10000);
+  }, []);
+
   const getProductData = async () => {
     return await axios
       .get(`${BASEURL}/Product/${params.id}`)
@@ -80,6 +114,7 @@ const Products = () => {
         // console.log(resp.data.response);
         getAllReviews(resp.data.response.id);
         setProductData(resp.data.response);
+        makeCarousel(resp.data.response);
       })
       .catch((error) => {
         console.log(error.response.data.error);
@@ -162,13 +197,6 @@ const Products = () => {
         </div>
         <div className="row-span-2 md:row-span-6 md:col-span-8">
           {videoplayer ? (
-            // <Box>
-            //   <ReactPlayer
-            //     width={"100%"}
-            //     height={"300px"}
-            //     url={productData?.productvideo}
-            //   />
-            // </Box>
             <video
               autoPlay={true}
               // controls
@@ -183,16 +211,37 @@ const Products = () => {
               leftControl={LeftControl}
               rightControl={RightControl}
             >
-              {productData?.productimage?.map((img, index) => {
-                return (
-                  <img
-                    className={`object-contain h-full w-full `}
-                    key={index}
-                    src={img}
-                    width={"100%"}
-                    height={"100%"}
-                  />
-                );
+              {CarouselData?.map((data, index) => {
+                if (data.type === "image") {
+                  return (
+                    <img
+                      className={`object-contain h-full w-full `}
+                      key={index}
+                      src={data.link}
+                      width={"100%"}
+                      height={"100%"}
+                    />
+                  );
+                } else {
+                  return (
+                    <video
+                      ref={videoRef}
+                      key={index}
+                      autoPlay={true}
+                      muted
+                      loop
+                      // controls
+                      style={{ height: "100%", width: "100%" }}
+                    >
+                      <source src={data.link} type="video/mp4" />
+                    </video>
+                  );
+                }
+                // if (data.type === "video") {
+                //   return (
+
+                //   );
+                // }
               })}
             </Carousel>
           )}
