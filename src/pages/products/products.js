@@ -168,14 +168,12 @@ const Products = () => {
                   <AiOutlinePlayCircle size={25} />
                 </div>
               </div>
-              {/* <img
+              <img
                 className={` p-1 opacity-50 group-hover:opacity-100  `}
-                src={
-                  "https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195"
-                }
+                src={productData?.productimage && productData?.productimage[0]}
                 width={"100%"}
                 height={"100%"}
-              /> */}
+              />
             </div>
             {/* <div
               className="relative hover:cursor-pointer group"
@@ -269,22 +267,20 @@ const Products = () => {
             );
           })}
           <div
-            className="relative hover:cursor-pointer group  h-full flex items-center justify-center  px-10"
+            className="relative hover:cursor-pointer group  h-full flex items-center justify-center  "
             onClick={() => setvideoPlayer(true)}
           >
-            <div className="flex items-center justify-center">
+            <div className="absolute flex items-center justify-center">
               <div className=" w-5 h-5 ">
                 <AiOutlinePlayCircle size={30} />
               </div>
             </div>
-            {/* <img
+            <img
               className={`opacity-50 group-hover:opacity-100 max-w-[84px] h-auto `}
-              src={
-                "https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195"
-              }
+              src={productData?.productimage && productData?.productimage[0]}
               // width={"250px"}
               // height={"250px"}
-            /> */}
+            />
           </div>
           {/* <div
             className="relative hover:cursor-pointer w-40 h-32 group bg-[url('https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195')] pr-10"
