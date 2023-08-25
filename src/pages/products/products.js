@@ -125,20 +125,22 @@ const Products = () => {
               );
             })}
             <div
-              className="relative hover:cursor-pointer w-28 h-28 group  pr-10"
+              className="relative hover:cursor-pointer w-full h-28 group"
               onClick={() => setvideoPlayer(true)}
             >
+              <div className="absolute z-20 w-full h-full flex items-center justify-center">
+                <div className=" w-5 h-5 ">
+                  <AiOutlinePlayCircle size={25} />
+                </div>
+              </div>
               <img
-                className={`p-1 opacity-50 group-hover:opacity-100  `}
+                className={` p-1 opacity-50 group-hover:opacity-100  `}
                 src={
                   "https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195"
                 }
                 width={"100%"}
                 height={"100%"}
               />
-              <div className=" w-5 h-5 absolute bottom-14 right-14 ">
-                <AiOutlinePlayCircle size={25} />
-              </div>
             </div>
             {/* <div
               className="relative hover:cursor-pointer group"
@@ -160,24 +162,21 @@ const Products = () => {
         </div>
         <div className="row-span-2 md:row-span-6 md:col-span-8">
           {videoplayer ? (
-            <Box>
-              <ReactPlayer
-                width={"100%"}
-                height={"300px"}
-                url={productData?.productvideo}
-              />
-            </Box>
-          ) : (
-            // <video
-            //   autoPlay={true}
-            //   controls
-            //   style={{ height: "100%", width: "100%" }}
-            // >
-            //   <source
-            //     src={"https://youtube.com/shorts/cbI5tExrIUM"}
-            //     type="video"
+            // <Box>
+            //   <ReactPlayer
+            //     width={"100%"}
+            //     height={"300px"}
+            //     url={productData?.productvideo}
             //   />
-            // </video>
+            // </Box>
+            <video
+              autoPlay={true}
+              // controls
+              style={{ height: "100%", width: "100%" }}
+            >
+              <source src={productData?.productvideo} type="video/mp4" />
+            </video>
+          ) : (
             <Carousel
               slide={false}
               indicators={false}
@@ -221,6 +220,24 @@ const Products = () => {
             );
           })}
           <div
+            className="relative hover:cursor-pointer w-full group"
+            onClick={() => setvideoPlayer(true)}
+          >
+            <div className="absolute z-20 w-full h-full flex items-center justify-center">
+              <div className=" w-5 h-5 ">
+                <AiOutlinePlayCircle size={25} />
+              </div>
+            </div>
+            <img
+              className={` p-2 opacity-50 group-hover:opacity-100  `}
+              src={
+                "https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195"
+              }
+              width={"100%"}
+              height={"100%"}
+            />
+          </div>
+          {/* <div
             className="relative hover:cursor-pointer w-40 h-32 group bg-[url('https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195')] pr-10"
             onClick={() => setvideoPlayer(true)}
           >
@@ -235,7 +252,7 @@ const Products = () => {
             <div className=" w-5 h-5 absolute top-14 right-5 ">
               <AiOutlinePlayCircle size={25} />
             </div>
-          </div>
+          </div> */}
         </div>
         <div className=" row-span-3 md:row-span-2 md:col-span-3">
           <div>
