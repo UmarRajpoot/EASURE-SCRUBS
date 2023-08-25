@@ -220,7 +220,7 @@ const Products = () => {
             );
           })}
           <div
-            className="relative hover:cursor-pointer w-full group"
+            className="relative hover:cursor-pointer  group"
             onClick={() => setvideoPlayer(true)}
           >
             <div className="absolute z-20 w-full h-full flex items-center justify-center">
@@ -229,12 +229,12 @@ const Products = () => {
               </div>
             </div>
             <img
-              className={` p-2 opacity-50 group-hover:opacity-100  `}
+              className={`opacity-50 group-hover:opacity-100 max-w-[84px] h-auto `}
               src={
                 "https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195"
               }
-              width={"100%"}
-              height={"100%"}
+              // width={"250px"}
+              // height={"250px"}
             />
           </div>
           {/* <div
