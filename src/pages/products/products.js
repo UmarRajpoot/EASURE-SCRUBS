@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Carousel } from "flowbite-react";
+// import { Carousel } from "flowbite-react";
 import Star from "../../components/star";
-// import { Carousel } from "react-responsive-carousel";
-// import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useParams } from "react-router-dom";
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 import { AiOutlinePlayCircle } from "react-icons/ai";
@@ -16,6 +14,15 @@ import { Box, Button, HStack, Text, useDisclosure } from "@chakra-ui/react";
 import ReviewModel from "../../components/ReviewModel";
 import Suggestion from "../../components/Suggestion";
 import { GrStar } from "react-icons/gr";
+
+import {
+  CarouselProvider,
+  Slider,
+  Slide,
+  ButtonBack,
+  ButtonNext,
+} from "pure-react-carousel";
+import "pure-react-carousel/dist/react-carousel.es.css";
 
 const Products = () => {
   const [imageSlide, setImageSlide] = useState(0);
@@ -142,24 +149,59 @@ const Products = () => {
       <div className="grid grid-cols-1 grid-rows-6 md:grid-rows-4 md:grid-cols-12 md:gap-3 px-6 h-screen mb-48 md:mb-2">
         <div className="hidden overflow-auto md:block md:col-span-1 md:h-screen no-scrollbar">
           <div className="flex flex-row md:flex-col items-center">
-            {productData?.productimage?.map((img, index) => {
-              return (
-                <img
-                  className={`p-1 ${
-                    index === imageSlide ? "opacity-100" : "opacity-50"
-                  } hover:opacity-100 transition-all ease-in-out w-32 h-32 md:w-full md:h-full`}
-                  key={index}
-                  src={img}
-                  width={"100%"}
-                  height={"100%"}
-                  onClick={() => {
-                    setvideoPlayer(false);
-                    setImageSlide(index);
-                  }}
-                />
-              );
+            {CarouselData?.map((data, index) => {
+              if (data.type === "image") {
+                return (
+                  <img
+                    // className={`p-1 object-contain h-full w-full`}
+                    className={`p-1 ${
+                      index === imageSlide ? "opacity-100" : "opacity-50"
+                    } hover:opacity-100 transition-all ease-in-out w-32 h-32 md:w-full md:h-full`}
+                    key={index}
+                    src={data.link}
+                    width={"100%"}
+                    height={"100%"}
+                    onClick={() => {
+                      setImageSlide(index);
+                    }}
+                  />
+                );
+              } else {
+                return (
+                  <video
+                    className="p-1"
+                    ref={videoRef}
+                    key={index}
+                    autoPlay={true}
+                    muted
+                    loop
+                    // controls
+                    style={{ height: "100%", width: "100%" }}
+                    onClick={() => {
+                      setImageSlide(index);
+                    }}
+                  >
+                    <source src={data.link} type="video/mp4" />
+                  </video>
+                );
+              }
+              // return (
+              //   <img
+              //     className={`p-1 ${
+              //       index === imageSlide ? "opacity-100" : "opacity-50"
+              //     } hover:opacity-100 transition-all ease-in-out w-32 h-32 md:w-full md:h-full`}
+              //     key={index}
+              //     src={img}
+              //     width={"100%"}
+              //     height={"100%"}
+              //     onClick={() => {
+              //       setvideoPlayer(false);
+              //       setImageSlide(index);
+              //     }}
+              //   />
+              // );
             })}
-            <div
+            {/* <div
               className="relative hover:cursor-pointer w-full h-28 group"
               onClick={() => setvideoPlayer(true)}
             >
@@ -174,7 +216,7 @@ const Products = () => {
                 width={"100%"}
                 height={"100%"}
               />
-            </div>
+            </div> */}
             {/* <div
               className="relative hover:cursor-pointer group"
               onClick={() => setvideoPlayer(true)}
@@ -193,80 +235,109 @@ const Products = () => {
             </div> */}
           </div>
         </div>
-        <div className="row-span-2 md:row-span-6 md:col-span-8">
-          {videoplayer ? (
-            <video
-              autoPlay={true}
-              // controls
-              style={{ height: "100%", width: "100%" }}
-            >
-              <source src={productData?.productvideo} type="video/mp4" />
-            </video>
-          ) : (
-            <Carousel
-              slide={false}
-              indicators={false}
-              leftControl={LeftControl}
-              rightControl={RightControl}
-            >
+        <div className="row-span-2 md:row-span-6 md:col-span-8 relative">
+          <CarouselProvider
+            naturalSlideWidth={150}
+            naturalSlideHeight={125}
+            totalSlides={CarouselData.length}
+            currentSlide={imageSlide}
+          >
+            <Slider>
               {CarouselData?.map((data, index) => {
                 if (data.type === "image") {
                   return (
-                    <img
-                      className={`object-contain h-full w-full `}
-                      key={index}
-                      src={data.link}
-                      width={"100%"}
-                      height={"100%"}
-                    />
+                    <Slide index={index}>
+                      <img
+                        className={`object-contain h-full w-full`}
+                        key={index}
+                        src={data.link}
+                        width={"100%"}
+                        height={"100%"}
+                      />
+                    </Slide>
                   );
                 } else {
                   return (
-                    <video
-                      ref={videoRef}
-                      key={index}
-                      autoPlay={true}
-                      muted
-                      loop
-                      // controls
-                      style={{ height: "100%", width: "100%" }}
-                    >
-                      <source src={data.link} type="video/mp4" />
-                    </video>
+                    <Slide index={index}>
+                      <video
+                        ref={videoRef}
+                        key={index}
+                        autoPlay={true}
+                        muted
+                        loop
+                        // controls
+                        style={{ height: "100%", width: "100%" }}
+                      >
+                        <source src={data.link} type="video/mp4" />
+                      </video>
+                    </Slide>
                   );
                 }
-                // if (data.type === "video") {
-                //   return (
-
-                //   );
-                // }
               })}
-            </Carousel>
-          )}
-
-          {/* <div className="w-full h-full overflow-hidden rounded-sm ">
-          <img src={images[imageSlide]} width={"100%"} height={"100%"} />
-        </div> */}
+            </Slider>
+            {/* <div className="flex items-center justify-between absolute w-full top-0 left-0 bottom-0 right-0"> */}
+            <ButtonBack className="absolute top-0 bottom-0 ">
+              {LeftControl}
+            </ButtonBack>
+            <ButtonNext className="absolute top-0 bottom-0  right-0">
+              {RightControl}
+            </ButtonNext>
+          </CarouselProvider>
         </div>
         <div className="md:hidden row-span-1 overflow-auto flex flex-row md:flex-col items-center no-scrollbar pr-10">
-          {productData?.productimage?.map((img, index) => {
-            return (
-              <img
-                className={`p-1 ${
-                  index === imageSlide ? "opacity-100" : "opacity-50"
-                } hover:opacity-100 transition-all ease-in-out w-32 h-32 md:w-full md:h-full`}
-                key={index}
-                src={img}
-                width={"100%"}
-                height={"100%"}
-                onClick={() => {
-                  setvideoPlayer(false);
-                  setImageSlide(index);
-                }}
-              />
-            );
+          {CarouselData?.map((data, index) => {
+            if (data.type === "image") {
+              return (
+                <img
+                  // className={`p-1 object-contain h-full w-full`}
+                  className={`p-1 ${
+                    index === imageSlide ? "opacity-100" : "opacity-50"
+                  } hover:opacity-100 transition-all ease-in-out w-32 h-32 md:w-full md:h-full`}
+                  key={index}
+                  src={data.link}
+                  width={"100%"}
+                  height={"100%"}
+                  onClick={() => {
+                    setImageSlide(index);
+                  }}
+                />
+              );
+            } else {
+              return (
+                <video
+                  className="p-2.5"
+                  ref={videoRef}
+                  key={index}
+                  autoPlay={true}
+                  muted
+                  loop
+                  // controls
+                  style={{ height: "100%", width: "100%" }}
+                  onClick={() => {
+                    setImageSlide(index);
+                  }}
+                >
+                  <source src={data.link} type="video/mp4" />
+                </video>
+              );
+            }
+            // return (
+            //   <img
+            //     className={`p-1 ${
+            //       index === imageSlide ? "opacity-100" : "opacity-50"
+            //     } hover:opacity-100 transition-all ease-in-out w-32 h-32 md:w-full md:h-full`}
+            //     key={index}
+            //     src={img}
+            //     width={"100%"}
+            //     height={"100%"}
+            //     onClick={() => {
+            //       setvideoPlayer(false);
+            //       setImageSlide(index);
+            //     }}
+            //   />
+            // );
           })}
-          <div
+          {/* <div
             className="relative hover:cursor-pointer group  h-full flex items-center justify-center  "
             onClick={() => setvideoPlayer(true)}
           >
@@ -281,7 +352,7 @@ const Products = () => {
               // width={"250px"}
               // height={"250px"}
             />
-          </div>
+          </div> */}
           {/* <div
             className="relative hover:cursor-pointer w-40 h-32 group bg-[url('https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195')] pr-10"
             onClick={() => setvideoPlayer(true)}
