@@ -145,10 +145,11 @@ const Products = () => {
     </div>
   );
   return (
-    <div className="w-full">
-      <div className="grid grid-cols-1 grid-rows-6 md:grid-rows-4 md:grid-cols-12 md:gap-3 px-6 h-screen mb-48 md:mb-2">
-        <div className="hidden overflow-auto md:block md:col-span-1 md:h-screen no-scrollbar">
-          <div className="flex flex-row md:flex-col items-center">
+    <div className="w-full min-h-screen">
+      <div className="flex flex-col md:flex-row px-3 min-h-screen ">
+        {/* First Column */}
+        <div className="w-full md:w-[8%] hidden overflow-auto md:block md:h-screen no-scrollbar">
+          <div className="flex flex-row md:flex-col items-center ">
             {CarouselData?.map((data, index) => {
               if (data.type === "image") {
                 return (
@@ -185,62 +186,17 @@ const Products = () => {
                   </video>
                 );
               }
-              // return (
-              //   <img
-              //     className={`p-1 ${
-              //       index === imageSlide ? "opacity-100" : "opacity-50"
-              //     } hover:opacity-100 transition-all ease-in-out w-32 h-32 md:w-full md:h-full`}
-              //     key={index}
-              //     src={img}
-              //     width={"100%"}
-              //     height={"100%"}
-              //     onClick={() => {
-              //       setvideoPlayer(false);
-              //       setImageSlide(index);
-              //     }}
-              //   />
-              // );
             })}
-            {/* <div
-              className="relative hover:cursor-pointer w-full h-28 group"
-              onClick={() => setvideoPlayer(true)}
-            >
-              <div className="absolute z-20 w-full h-full flex items-center justify-center">
-                <div className=" w-5 h-5 ">
-                  <AiOutlinePlayCircle size={25} />
-                </div>
-              </div>
-              <img
-                className={` p-1 opacity-50 group-hover:opacity-100  `}
-                src={productData?.productimage && productData?.productimage[0]}
-                width={"100%"}
-                height={"100%"}
-              />
-            </div> */}
-            {/* <div
-              className="relative hover:cursor-pointer group"
-              onClick={() => setvideoPlayer(true)}
-            >
-              <img
-                className={`p-1 opacity-50  group-hover:opacity-100 transition-all ease-in-out w-32 h-32 md:w-full md:h-full`}
-                src={
-                  "https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195"
-                }
-                width={"100%"}
-                height={"100%"}
-              />
-              <div className=" w-6 h-6 absolute top-1/2 right-1/2 ">
-                <AiOutlinePlayCircle size={25} />
-              </div>
-            </div> */}
           </div>
         </div>
-        <div className="row-span-2 md:row-span-6 md:col-span-8 relative">
+        {/* Second Column */}
+        <div className="flex w-full md:w-[70%] md:mx-10 flex-col">
           <CarouselProvider
             naturalSlideWidth={150}
             naturalSlideHeight={125}
             totalSlides={CarouselData.length}
             currentSlide={imageSlide}
+            className="relative"
           >
             <Slider>
               {CarouselData?.map((data, index) => {
@@ -248,7 +204,7 @@ const Products = () => {
                   return (
                     <Slide index={index}>
                       <img
-                        className={`object-contain h-full w-full`}
+                        className={`object-contain w-full h-full`}
                         key={index}
                         src={data.link}
                         width={"100%"}
@@ -276,101 +232,58 @@ const Products = () => {
               })}
             </Slider>
             {/* <div className="flex items-center justify-between absolute w-full top-0 left-0 bottom-0 right-0"> */}
-            <ButtonBack className="absolute top-0 bottom-0 ">
+            <ButtonBack className="absolute top-0 bottom-0 left-0 ">
               {LeftControl}
             </ButtonBack>
             <ButtonNext className="absolute top-0 bottom-0  right-0">
               {RightControl}
             </ButtonNext>
           </CarouselProvider>
-        </div>
-        <div className="md:hidden row-span-1 overflow-auto flex flex-row md:flex-col items-center no-scrollbar pr-10">
-          {CarouselData?.map((data, index) => {
-            if (data.type === "image") {
-              return (
-                <img
-                  // className={`p-1 object-contain h-full w-full`}
-                  className={`p-1 ${
-                    index === imageSlide ? "opacity-100" : "opacity-50"
-                  } hover:opacity-100 transition-all ease-in-out w-32 h-32 md:w-full md:h-full`}
-                  key={index}
-                  src={data.link}
-                  width={"100%"}
-                  height={"100%"}
-                  onClick={() => {
-                    setImageSlide(index);
-                  }}
-                />
-              );
-            } else {
-              return (
-                <video
-                  className="p-2.5"
-                  ref={videoRef}
-                  key={index}
-                  autoPlay={true}
-                  muted
-                  loop
-                  // controls
-                  style={{ height: "100%", width: "100%" }}
-                  onClick={() => {
-                    setImageSlide(index);
-                  }}
-                >
-                  <source src={data.link} type="video/mp4" />
-                </video>
-              );
-            }
-            // return (
-            //   <img
-            //     className={`p-1 ${
-            //       index === imageSlide ? "opacity-100" : "opacity-50"
-            //     } hover:opacity-100 transition-all ease-in-out w-32 h-32 md:w-full md:h-full`}
-            //     key={index}
-            //     src={img}
-            //     width={"100%"}
-            //     height={"100%"}
-            //     onClick={() => {
-            //       setvideoPlayer(false);
-            //       setImageSlide(index);
-            //     }}
-            //   />
-            // );
-          })}
-          {/* <div
-            className="relative hover:cursor-pointer group  h-full flex items-center justify-center  "
-            onClick={() => setvideoPlayer(true)}
-          >
-            <div className="absolute flex items-center justify-center">
-              <div className=" w-5 h-5 ">
-                <AiOutlinePlayCircle size={30} />
-              </div>
-            </div>
-            <img
-              className={`opacity-50 group-hover:opacity-100 max-w-[84px] h-auto `}
-              src={productData?.productimage && productData?.productimage[0]}
-              // width={"250px"}
-              // height={"250px"}
-            />
-          </div> */}
-          {/* <div
-            className="relative hover:cursor-pointer w-40 h-32 group bg-[url('https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195')] pr-10"
-            onClick={() => setvideoPlayer(true)}
-          >
-            <img
-              className={`p-1 opacity-50 group-hover:opacity-100  `}
-              src={
-                "https://mandalascrubs.com/cdn/shop/products/Jogger_Pants_A_MANDALA_ECOM_CS_Top1_CeilBlue_1178_600x.jpg?v=1624829195"
+          {/* First Mobile Column */}
+          <div className="md:hidden overflow-auto flex flex-row items-center no-scrollbar my-10">
+            {CarouselData?.map((data, index) => {
+              if (data.type === "image") {
+                if (data.link !== "") {
+                  return (
+                    <img
+                      // className={`p-1 object-contain h-full w-full`}
+                      className={`p-1 ${
+                        index === imageSlide ? "opacity-100" : "opacity-50"
+                      } hover:opacity-100 transition-all ease-in-out w-32 h-32 md:w-full md:h-full `}
+                      key={index}
+                      src={data.link}
+                      width={"100%"}
+                      height={"100%"}
+                      onClick={() => {
+                        setImageSlide(index);
+                      }}
+                    />
+                  );
+                }
+              } else {
+                return (
+                  <video
+                    className="max-sm:p-2 w-32 h-32"
+                    ref={videoRef}
+                    key={index}
+                    autoPlay={true}
+                    muted
+                    loop
+                    // controls
+                    // style={{ height: "50%", width: "50%" }}
+                    onClick={() => {
+                      setImageSlide(index);
+                    }}
+                  >
+                    <source src={data.link} type="video/mp4" />
+                  </video>
+                );
               }
-              width={"100%"}
-              height={"100%"}
-            />
-            <div className=" w-5 h-5 absolute top-14 right-5 ">
-              <AiOutlinePlayCircle size={25} />
-            </div>
-          </div> */}
+            })}
+          </div>
         </div>
-        <div className=" row-span-3 md:row-span-2 md:col-span-3">
+        {/* Third Column */}
+        <div className=" flex flex-col w-full md:w-[20%] ">
           <div>
             <h4 className="text-3xl">
               {productData.personname && productData?.personname[0]}
@@ -537,42 +450,45 @@ const Products = () => {
           </div>
         </div>
       </div>
-      <div className="bg-gray-100 flex flex-row items-center justify-between md:justify-evenly p-5 py-10  md:p-20 my-14">
-        <div className="flex flex-col items-center">
-          <div className="mb-3">
-            <img
-              src="https://images.ctfassets.net/5j6wpslh72e4/JY4MM2RQjWzrmNx4jPQNY/0fe7ae049eaf125d3431e93edb3accdd/FIGS_Fabric_Icons_ClassicFit.png"
-              className="w-8 h-8 md:w-12 md:h-12"
-            />
+      {/* Features */}
+      <div>
+        <div className="bg-gray-100 flex flex-row items-center justify-between md:justify-evenly p-5 py-10 md:p-20 my-10">
+          <div className="flex flex-col items-center">
+            <div className="mb-3">
+              <img
+                src="https://images.ctfassets.net/5j6wpslh72e4/JY4MM2RQjWzrmNx4jPQNY/0fe7ae049eaf125d3431e93edb3accdd/FIGS_Fabric_Icons_ClassicFit.png"
+                className="w-8 h-8 md:w-12 md:h-12"
+              />
+            </div>
+            <h3 className="text-xs">CLASSIC FIT</h3>
           </div>
-          <h3 className="text-xs">CLASSIC FIT</h3>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="mb-3">
-            <img
-              src="https://images.ctfassets.net/5j6wpslh72e4/BiW7KWk3KwyPSNujJXTZi/ae1fb2611eda4619745e078b30dc76ea/icon-supersoft.svg"
-              className="w-8 h-8 md:w-12 md:h-12"
-            />
+          <div className="flex flex-col items-center">
+            <div className="mb-3">
+              <img
+                src="https://images.ctfassets.net/5j6wpslh72e4/BiW7KWk3KwyPSNujJXTZi/ae1fb2611eda4619745e078b30dc76ea/icon-supersoft.svg"
+                className="w-8 h-8 md:w-12 md:h-12"
+              />
+            </div>
+            <h3 className="text-xs">CLASSIC FIT</h3>
           </div>
-          <h3 className="text-xs">CLASSIC FIT</h3>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="mb-3">
-            <img
-              src="https://images.ctfassets.net/5j6wpslh72e4/1bcTq6qRNPBHPsqoJOADa8/80ca4177536b7c3cf494f9e9015c5ba2/icon-pocket.svg"
-              className="w-8 h-8 md:w-12 md:h-12"
-            />
+          <div className="flex flex-col items-center">
+            <div className="mb-3">
+              <img
+                src="https://images.ctfassets.net/5j6wpslh72e4/1bcTq6qRNPBHPsqoJOADa8/80ca4177536b7c3cf494f9e9015c5ba2/icon-pocket.svg"
+                className="w-8 h-8 md:w-12 md:h-12"
+              />
+            </div>
+            <h3 className="text-xs">3 POCKETS</h3>
           </div>
-          <h3 className="text-xs">3 POCKETS</h3>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="mb-3">
-            <img
-              src="https://images.ctfassets.net/5j6wpslh72e4/6J3kIc4yq5lYvto7yDVBnP/f305e339b6e0f9735dd0fd6111f07c4c/icon-antiwrinkle.svg"
-              className="w-8 h-8 md:w-12 md:h-12"
-            />
+          <div className="flex flex-col items-center">
+            <div className="mb-3">
+              <img
+                src="https://images.ctfassets.net/5j6wpslh72e4/6J3kIc4yq5lYvto7yDVBnP/f305e339b6e0f9735dd0fd6111f07c4c/icon-antiwrinkle.svg"
+                className="w-8 h-8 md:w-12 md:h-12"
+              />
+            </div>
+            <h3 className="text-xs">ANTI-WRINKLE</h3>
           </div>
-          <h3 className="text-xs">ANTI-WRINKLE</h3>
         </div>
       </div>
       <h4 className="text-xl px-10 mt-10 font-bold ">
