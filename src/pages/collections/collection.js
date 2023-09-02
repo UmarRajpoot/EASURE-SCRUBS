@@ -126,17 +126,17 @@ const Collection = () => {
                   }}
                 ></div>
                 <div className="w-64 mt-3 ">
-                  <h2 className="text-sm text-blue-600 font-bold cursor-pointer mb-3">
+                  {/* <h2 className="text-sm text-blue-600 font-bold cursor-pointer mb-3">
                     BEST SELLER
-                  </h2>
+                  </h2> */}
                   <h2 className="text-lg text-gray-900 font-bold cursor-pointer mb-3">
                     {prod.productname}
                   </h2>
-                  <h2 className="text-md text-gray-900 font-extrabold cursor-pointer mb-3">
+                  {/* <h2 className="text-md text-gray-900 font-extrabold cursor-pointer mb-3">
                     {prod.colors[0].colors[0] === "#000000" && "BLACK"}
                     {prod.colors[0].colors[0] === "#000080" && "NAVY BLUE"}
                     {prod.colors[0].colors[0] === "#92a1cf" && "NAVY BLUE"}
-                  </h2>
+                  </h2> */}
                   <h2 className="text-xl text-gray-900 font-medium cursor-pointer">
                     ${prod.price}.00
                   </h2>

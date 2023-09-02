@@ -4,10 +4,12 @@ import WomenImage from "../assets/Kamal0633-min.jpg";
 import Button from "./button";
 import { Link } from "react-router-dom";
 
+// bg-[#eeeeef]
+
 const HeroSection = () => {
   return (
     <div className="overflow-hidden">
-      <section className="hero-section bg-[#eeeeef] pt-5">
+      <section className="hero-section  pt-5">
         <div className="container mx-auto flex flex-row h-80 md:h-96 lg:h-screen">
           <div
             className="w-full md:w-1/2 h-full bg-contain bg-right bg-no-repeat hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-2xl cursor-pointer"
