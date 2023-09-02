@@ -325,14 +325,15 @@ const Products = () => {
             <h3 className="text-base font-medium">CLASSIC</h3>
             <div className="mt-2 flex items-center">
               <div className="w-5 h-5 rounded-full bg-black mx-2 outline outline-offset-2 outline-0 hover:outline-1 "></div>
-              <div className="w-5 h-5 rounded-full bg-blue-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-              <div className="w-5 h-5 rounded-full bg-green-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-[#000080] mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-[#92a1cf] mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              {/* <div className="w-5 h-5 rounded-full bg-green-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
               <div className="w-5 h-5 rounded-full bg-yellow-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
               <div className="w-5 h-5 rounded-full bg-red-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-              <div className="w-5 h-5 rounded-full bg-pink-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div className="w-5 h-5 rounded-full bg-pink-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div> */}
             </div>
           </div>
-          <div className="my-3">
+          {/* <div className="my-3">
             <h3 className="text-base font-medium">ICONIC</h3>
             <div className="mt-2 flex items-center">
               <div className="w-5 h-5 rounded-full bg-black mx-2 outline outline-offset-2 outline-0 hover:outline-1 "></div>
@@ -353,7 +354,7 @@ const Products = () => {
               <div className="w-5 h-5 rounded-full bg-red-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
               <div className="w-5 h-5 rounded-full bg-pink-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
             </div>
-          </div>
+          </div> */}
           {/* {productData?.colors?.map((color, index) => {
             return (
               <div className="my-3" key={index}>
