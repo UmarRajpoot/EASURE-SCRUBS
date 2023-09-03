@@ -5,9 +5,11 @@ const Footer = () => {
     <footer className="bg-[#282828] w-full ">
       <div className="flex flex-col items-center md:items-start py-10 px-5 ">
         <div className="flex flex-col items-center md:items-start">
-          <h1 className="text-4xl text-white font-medium ">AWESOME</h1>
-          <h1 className="text-4xl text-white font-medium ">HUMANS</h1>
-          <h1 className="text-xl text-white font-normal ">#EASURE</h1>
+          <h1 className="text-3xl text-white font-medium ">
+            Comfort Assured with EASURE
+          </h1>
+          {/* <h1 className="text-4xl text-white font-medium ">HUMANS</h1> */}
+          {/* <h1 className="text-xl text-white font-normal ">With EASURE</h1> */}
           <div className="flex mt-4 space-x-8 sm:justify-center md:mt-0 pt-5">
             <a
               href="#"
@@ -104,7 +106,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="mx-auto w-full max-w-screen-xl">
-        <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3">
           <div>
             <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
               Company
@@ -115,7 +117,7 @@ const Footer = () => {
                   About
                 </a>
               </li>
-              <li className="mb-4">
+              {/* <li className="mb-4">
                 <a href="#" className="hover:underline">
                   Careers
                 </a>
@@ -124,7 +126,7 @@ const Footer = () => {
                 <a href="#" className="hover:underline">
                   Brand Center
                 </a>
-              </li>
+              </li> */}
               <li className="mb-4">
                 <a href="#" className="hover:underline">
                   Blog
@@ -137,11 +139,6 @@ const Footer = () => {
               Help center
             </h2>
             <ul className="text-white font-medium">
-              <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  Discord Server
-                </a>
-              </li>
               <li className="mb-4">
                 <a href="#" className="hover:underline">
                   Twitter
@@ -181,7 +178,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div>
+          {/* <div>
             <h2 className="mb-6 text-sm font-semibold text-white uppercase ">
               Download
             </h2>
@@ -207,7 +204,7 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
         <div className="px-4 py-6  md:flex md:items-center md:justify-between">
           <span className="text-sm text-white sm:text-center">
