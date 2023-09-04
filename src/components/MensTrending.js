@@ -41,6 +41,20 @@ const MensTrending = () => {
                         src={mensT.productimage && mensT.productimage[0]}
                         // onLoad={() => console.log("loading")}
                       />
+                      <div className="p-2 text-sm font-bold text-gray-500 ">
+                        <h1>
+                          {mensT.personname && mensT?.personname[0]}
+                          {mensT.personname &&
+                            mensT?.personname?.slice(1).toLowerCase()}
+                          -
+                          {mensT.varientname &&
+                            mensT?.varientname?.toLowerCase()}
+                          -{mensT.typename && mensT?.typename?.toLowerCase()}-
+                          {mensT.typestylename && mensT?.typestylename[0]}
+                          {mensT.typestylename &&
+                            mensT?.typestylename?.slice(1).toLowerCase()}
+                        </h1>
+                      </div>
                     </div>
                   </div>
                 </Link>
