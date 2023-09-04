@@ -267,13 +267,18 @@ const Products = () => {
                     autoPlay={true}
                     muted
                     loop
+                    playsInline
                     // controls
                     // style={{ height: "50%", width: "50%" }}
                     onClick={() => {
                       setImageSlide(index);
                     }}
                   >
-                    <source src={data.link} type="video/mp4" />
+                    <source
+                      src={data.link}
+                      type="video/mp4"
+                      onerror="console.log('Error Occure')"
+                    />
                   </video>
                 );
               }
