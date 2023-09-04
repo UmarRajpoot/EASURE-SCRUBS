@@ -265,14 +265,18 @@ const Products = () => {
                     autoPlay
                     muted
                     loop
-                    playsInline
                     // controls
                     // style={{ height: "50%", width: "50%" }}
                     onClick={() => {
                       setImageSlide(index);
                     }}
                   >
-                    <source src={data.link} type="video/mp4" />
+                    <source
+                      src={data.link}
+                      type="video/mp4"
+                      width={"100%"}
+                      height={"100%"}
+                    />
                   </video>
                 );
               }
