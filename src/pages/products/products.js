@@ -105,11 +105,11 @@ const Products = () => {
     // ]);
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      videoRef.current.play();
-    }, 3000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     videoRef.current.play();
+  //   }, 3000);
+  // }, []);
 
   const getProductData = async () => {
     return await axios
@@ -262,7 +262,7 @@ const Products = () => {
                     className="max-sm:p-2 w-32 h-32"
                     ref={videoRef}
                     key={index}
-                    autoPlay={true}
+                    autoPlay
                     muted
                     loop
                     playsInline
@@ -272,11 +272,7 @@ const Products = () => {
                       setImageSlide(index);
                     }}
                   >
-                    <source
-                      src={data.link}
-                      type="video/mp4"
-                      onerror="console.log('Error Occure')"
-                    />
+                    <source src={data.link} type="video/mp4" />
                   </video>
                 );
               }
