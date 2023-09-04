@@ -32,6 +32,7 @@ const WomensTrending = () => {
         {womenTrend?.map((WTrend, index) => {
           if (WTrend.parentcategory === "WOMEN") {
             if (WTrend.trend === true) {
+              // console.log(WTrend.displayImage);
               return (
                 <Link
                   to={`/products/${WTrend.productname.toLowerCase()}/women`}
@@ -43,7 +44,7 @@ const WomensTrending = () => {
                         src={WTrend.productimage && WTrend.productimage[0]}
                         // onLoad={() => console.log("loading")}
                       />
-                      <div className="p-2 text-sm font-bold text-gray-500 ">
+                      <div className="p-2 text-base font-bold text-gray-500 ">
                         <h1>
                           {WTrend.personname && WTrend?.personname[0]}
                           {WTrend.personname &&

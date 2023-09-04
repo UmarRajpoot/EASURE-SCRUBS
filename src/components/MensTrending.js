@@ -41,7 +41,7 @@ const MensTrending = () => {
                         src={mensT.productimage && mensT.productimage[0]}
                         // onLoad={() => console.log("loading")}
                       />
-                      <div className="p-2 text-sm font-bold text-gray-500 ">
+                      <div className="p-2 text-base font-bold text-gray-500 ">
                         <h1>
                           {mensT.personname && mensT?.personname[0]}
                           {mensT.personname &&
