@@ -243,23 +243,21 @@ const Products = () => {
           <div className="md:hidden overflow-auto flex flex-row items-center no-scrollbar my-10">
             {CarouselData?.map((data, index) => {
               if (data.type === "image") {
-                if (data.link !== "") {
-                  return (
-                    <img
-                      // className={`p-1 object-contain h-full w-full`}
-                      className={`p-1 ${
-                        index === imageSlide ? "opacity-100" : "opacity-50"
-                      } hover:opacity-100 transition-all ease-in-out w-32 h-32 md:w-full md:h-full `}
-                      key={index}
-                      src={data.link}
-                      width={"100%"}
-                      height={"100%"}
-                      onClick={() => {
-                        setImageSlide(index);
-                      }}
-                    />
-                  );
-                }
+                return (
+                  <img
+                    // className={`p-1 object-contain h-full w-full`}
+                    className={`p-1 ${
+                      index === imageSlide ? "opacity-100" : "opacity-50"
+                    } hover:opacity-100 transition-all ease-in-out w-32 h-32 md:w-full md:h-full `}
+                    key={index}
+                    src={data.link}
+                    width={"100%"}
+                    height={"100%"}
+                    onClick={() => {
+                      setImageSlide(index);
+                    }}
+                  />
+                );
               } else {
                 return (
                   <video
