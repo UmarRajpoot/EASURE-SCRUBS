@@ -106,11 +106,9 @@ const Products = () => {
   };
 
   useEffect(() => {
-    // videoRef.current.play();
-    // setTimeout(() => {
-    //   videoRef.current.pause();
-    //   console.log("it pause");
-    // }, 10000);
+    setTimeout(() => {
+      videoRef.current.play();
+    }, 3000);
   }, []);
 
   const getProductData = async () => {
