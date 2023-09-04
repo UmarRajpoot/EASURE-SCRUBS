@@ -120,7 +120,7 @@ const Collection = () => {
             >
               <div className="py-10 px-3 hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer">
                 <div
-                  className=" h-96 w-64  bg-cover bg-no-repeat bg-center"
+                  className=" h-96 w-64 bg-contain bg-no-repeat bg-center"
                   style={{
                     backgroundImage: `url(${prod.productimage[0]})`,
                   }}
