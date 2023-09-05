@@ -217,10 +217,12 @@ const Products = () => {
                         ref={videoRef}
                         key={index}
                         autoPlay={true}
+                        playsInline
                         muted
                         loop
                         // controls
                         style={{ height: "100%", width: "100%" }}
+                        src={data.link}
                       >
                         <source src={data.link} type="video/mp4" />
                       </video>
@@ -265,11 +267,13 @@ const Products = () => {
                     autoPlay
                     muted
                     loop
+                    playsInline
                     // controls
                     // style={{ height: "50%", width: "50%" }}
                     onClick={() => {
                       setImageSlide(index);
                     }}
+                    src={data.link}
                   >
                     <source
                       src={data.link}
