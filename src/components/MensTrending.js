@@ -46,8 +46,8 @@ const MensTrending = () => {
                           {mensT.personname && mensT?.personname[0]}
                           {mensT.personname &&
                             mensT?.personname?.slice(1).toLowerCase()}
-                          -
-                          {mensT.varientname &&
+                          {mensT.varientname !== "JOGGER" && "-"}
+                          {mensT.varientname !== "JOGGER" &&
                             mensT?.varientname?.toLowerCase()}
                           -{mensT.typename && mensT?.typename?.toLowerCase()}-
                           {mensT.typestylename && mensT?.typestylename[0]}
@@ -78,7 +78,7 @@ const MensTrending = () => {
               className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center"
               style={{
                 backgroundImage: `url(${Mens3})`,
-              }}
+              }}-
             ></div>
           </div>
         </Link> */}

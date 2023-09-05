@@ -294,8 +294,11 @@ const Products = () => {
               {productData.personname && productData?.personname[0]}
               {productData.personname &&
                 productData?.personname?.slice(1).toLowerCase()}
-              -
-              {productData.varientname &&
+              {productData.varientname !== "JOGGER" && "-"}
+              {productData.parentcategory &&
+                productData.parentcategory === "WOMEN" &&
+                "-" + productData?.varientname?.toLowerCase()}
+              {productData.varientname !== "JOGGER" &&
                 productData?.varientname?.toLowerCase()}
               -{productData.typename && productData?.typename?.toLowerCase()}-
               {productData.typestylename && productData?.typestylename[0]}
