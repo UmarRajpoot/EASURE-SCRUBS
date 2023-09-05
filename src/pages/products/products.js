@@ -470,7 +470,7 @@ const Products = () => {
                 className="w-8 h-8 md:w-12 md:h-12"
               />
             </div>
-            <h3 className="text-xs">CLASSIC FIT</h3>
+            <h3 className="text-[10px] md:text-sm">CLASSIC FIT</h3>
           </div>
           <div className="flex flex-col items-center">
             <div className="mb-3">
@@ -479,7 +479,7 @@ const Products = () => {
                 className="w-8 h-8 md:w-12 md:h-12"
               />
             </div>
-            <h3 className="text-xs">CLASSIC FIT</h3>
+            <h3 className="text-[10px] md:text-sm">RIDICULOUSLY SOFT</h3>
           </div>
           <div className="flex flex-col items-center">
             <div className="mb-3">
@@ -488,7 +488,7 @@ const Products = () => {
                 className="w-8 h-8 md:w-12 md:h-12"
               />
             </div>
-            <h3 className="text-xs">3 POCKETS</h3>
+            <h3 className="text-[10px] md:text-sm">ANTI-WRINKLE</h3>
           </div>
           <div className="flex flex-col items-center">
             <div className="mb-3">
@@ -497,8 +497,17 @@ const Products = () => {
                 className="w-8 h-8 md:w-12 md:h-12"
               />
             </div>
-            <h3 className="text-xs">ANTI-WRINKLE</h3>
+            <h3 className="text-[10px] md:text-sm">ANTI-MICROBIAL</h3>
           </div>
+          {/* <div className="flex flex-col items-center">
+            <div className="mb-3">
+              <img
+                src="https://images.ctfassets.net/5j6wpslh72e4/6J3kIc4yq5lYvto7yDVBnP/f305e339b6e0f9735dd0fd6111f07c4c/icon-antiwrinkle.svg"
+                className="w-8 h-8 md:w-12 md:h-12"
+              />
+            </div>
+            <h3 className="text-xs">AMAZINGLY STRETCHABLE</h3>
+          </div> */}
         </div>
       </div>
       <h4 className="text-xl px-10 mt-10 font-bold ">
