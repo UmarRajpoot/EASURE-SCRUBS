@@ -35,6 +35,8 @@ const Products = () => {
 
   const ReviewModelDis = useDisclosure();
 
+  const Sizes = ["S", "M", "L", "XL", "XXL"];
+
   const [chooseSize, setchooseSize] = useState("");
   const [chooseColor, setchooseColor] = useState("");
   const [selectColor, setSelectColor] = useState("");
@@ -131,6 +133,8 @@ const Products = () => {
     getProductData();
     getAllColors();
   }, [params.id]);
+
+  const colors = ["Black", "Navy-Blue", "Ceil-Blue"];
 
   const LeftControl = (
     <div className="bg-gray-200 hover:outline outline-2 outline-gray-600 flex items-center justify-center rounded-full">
@@ -333,9 +337,24 @@ const Products = () => {
           <div className="my-3">
             <h3 className="text-base font-medium">CLASSIC</h3>
             <div className="mt-2 flex items-center">
-              <div className="w-5 h-5 rounded-full bg-black mx-2 outline outline-offset-2 outline-0 hover:outline-1 "></div>
-              <div className="w-5 h-5 rounded-full bg-[#000080] mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-              <div className="w-5 h-5 rounded-full bg-[#92a1cf] mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
+              <div
+                className={`w-5 h-5 rounded-full bg-black mx-2 ${
+                  chooseColor === "BLACK" ? "outline-2" : "outline-0"
+                } outline outline-offset-2 outline-0 hover:outline-1 hover:cursor-pointer`}
+                onClick={() => setchooseColor("BLACK")}
+              ></div>
+              <div
+                className={`w-5 h-5 rounded-full bg-[#000080] mr-2 ${
+                  chooseColor === "NAVY-BLUE" ? "outline-2" : "outline-0"
+                } outline outline-offset-2 outline-0 hover:outline-1 hover:cursor-pointer`}
+                onClick={() => setchooseColor("NAVY-BLUE")}
+              ></div>
+              <div
+                className={`w-5 h-5 rounded-full bg-[#92a1cf] mr-2 ${
+                  chooseColor === "CEIL-BLUE" ? "outline-2" : "outline-0"
+                } outline outline-offset-2 outline-0 hover:outline-1 hover:cursor-pointer`}
+                onClick={() => setchooseColor("CEIL-BLUE")}
+              ></div>
               {/* <div className="w-5 h-5 rounded-full bg-green-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
               <div className="w-5 h-5 rounded-full bg-yellow-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
               <div className="w-5 h-5 rounded-full bg-red-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
@@ -395,7 +414,23 @@ const Products = () => {
             <h3 className="text-normal font-medium my-3">SIZES</h3>
 
             <div className="flex item-center">
-              <h4 className="text-sm p-1.5 px-3 m-1 hover:bg-gray-200 hover:cursor-pointer  rounded-md font-medium  border border-spacing-2 border-gray-300 text-gray-500">
+              {Sizes.map((size, index) => {
+                return (
+                  <button
+                    key={index}
+                    className={`text-sm p-1.5 px-3 m-1 ${
+                      chooseSize === Sizes[index]
+                        ? "bg-black text-white"
+                        : "bg-transparent text-gray-500"
+                    } hover:bg-black hover:text-white hover:cursor-pointer  rounded-md font-medium  border border-spacing-2 border-gray-300 `}
+                    onClick={() => setchooseSize(size)}
+                  >
+                    {size}
+                  </button>
+                );
+              })}
+
+              {/* <h4 className="text-sm p-1.5 px-3 m-1 hover:bg-gray-200 hover:cursor-pointer  rounded-md font-medium  border border-spacing-2 border-gray-300 text-gray-500">
                 S
               </h4>
               <h4 className="text-sm p-1.5 px-3 m-1 hover:bg-gray-200 hover:cursor-pointer  rounded-md font-medium border border-spacing-2 border-gray-300 text-gray-500">
@@ -409,7 +444,7 @@ const Products = () => {
               </h4>
               <h4 className="text-sm p-1.5 px-3 m-1 hover:bg-gray-200 hover:cursor-pointer  rounded-md font-medium border border-spacing-2 border-gray-300 text-gray-500">
                 XXL
-              </h4>
+              </h4> */}
             </div>
             {/* <div className="flex item-center">
               {productData?.sizes?.map((size, index) => {
