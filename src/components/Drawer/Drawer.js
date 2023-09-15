@@ -10,7 +10,7 @@ import {
   CartRemoveItem,
 } from "../../Store/Cart/actions";
 import { Button } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Drawer = ({ openDrawer }) => {
   useEffect(() => {
@@ -43,6 +43,14 @@ const Drawer = ({ openDrawer }) => {
 
   const Navigate = useNavigate();
 
+  const navigate = useLocation();
+
+  useEffect(() => {
+    // setMobileDropDown(false);
+    console.log("Drawer Closed");
+    dispatch(DrawerState(false));
+  }, [navigate.pathname]);
+
   return (
     <>
       <div className="relative">
@@ -62,7 +70,7 @@ const Drawer = ({ openDrawer }) => {
           id="drawer-form"
           className={`fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform ${
             openDrawer ? "-translate-x-0" : "translate-x-full"
-          } bg-white md:w-1/4 dark:bg-gray-800`}
+          } bg-white md:w-1/4 dark:bg-gray-800 min-h-screen pb-5`}
           tabIndex="-1"
           aria-labelledby="drawer-form-label"
         >
@@ -138,6 +146,7 @@ const Drawer = ({ openDrawer }) => {
             mt={4}
             colorScheme="teal"
             onClick={() => {
+              dispatch(DrawerState(!IsDrawerOpen));
               Navigate("/checkout");
             }}
           >
