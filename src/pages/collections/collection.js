@@ -66,6 +66,12 @@ const Collection = () => {
                 .toString()
                 .replace(",", "-") === "pewt"
             ? "bg-[url('https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Pewt%205.jpg?alt=media&token=72a021b6-d274-424f-ac05-749f7d5c6bfc')]"
+            : params.collection
+                .split("-")
+                .slice(0, params.collection.split("-").length - 2)
+                .toString()
+                .replace(",", "-") === "royal-blue"
+            ? "bg-[url('https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Royal%20Blue%204.jpg?alt=media&token=3a454bda-1603-4319-8e0d-5df65c7ef23a')]"
             : "bg-gray-800"
         } items-center justify-center flex flex-col`}
       >
