@@ -35,7 +35,7 @@ const ShopByColor = () => {
             >
               <div className="py-10 px-3 hover:scale-105 transition-all ease-in-out duration-200 cursor-pointer ">
                 <div
-                  className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center"
+                  className=" h-96 w-80 rounded-lg bg-cover bg-no-repeat bg-center"
                   style={{
                     backgroundImage: `url(${shBC.photo})`,
                   }}

@@ -41,28 +41,40 @@ const Collection = () => {
       <div
         className={`h-96 w-full  bg-cover bg-no-repeat bg-center ${
           params.collection.split("-")[0] === "black"
-            ? "bg-[#000000]"
+            ? "bg-[url('https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Black%201.jpg?alt=media&token=52bc7761-5989-466f-a39b-a0ec430c83ab')]"
             : params.collection
                 .split("-")
                 .slice(0, params.collection.split("-").length - 2)
                 .toString()
                 .replace(",", "-") === "navy-blue"
-            ? "bg-[#000080]"
+            ? "bg-[url('https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Navy%20Blue%206.jpg?alt=media&token=17c6a5cc-839f-470d-a2b2-774d3c52557a')]"
             : params.collection
                 .split("-")
                 .slice(0, params.collection.split("-").length - 2)
                 .toString()
                 .replace(",", "-") === "ceil-blue"
-            ? "bg-[#92a1cf]"
-            : "bg-gray-700"
+            ? "bg-[url('https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Ceil%20Blue%202.jpg?alt=media&token=60769f7f-f10b-4718-8eb0-5bfe2feb7190')]"
+            : params.collection
+                .split("-")
+                .slice(0, params.collection.split("-").length - 2)
+                .toString()
+                .replace(",", "-") === "wine"
+            ? "bg-[url('https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Wine%203.jpg?alt=media&token=45502092-4d36-4c9a-901b-aaa2d9434058')]"
+            : params.collection
+                .split("-")
+                .slice(0, params.collection.split("-").length - 2)
+                .toString()
+                .replace(",", "-") === "pewt"
+            ? "bg-[url('https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Pewt%205.jpg?alt=media&token=72a021b6-d274-424f-ac05-749f7d5c6bfc')]"
+            : "bg-gray-800"
         } items-center justify-center flex flex-col`}
       >
-        <h2 className="text-xl md:text-4xl text-gray-300 font-medium ">
+        <h2 className="text-xl md:text-4xl text-gray-300 font-medium uppercase block  md:hidden">
           {params.collection
             .split("-")
             .slice(0, params.collection.split("-").length - 2)}
         </h2>
-        <h3 className="text-lg md:text-3xl text-gray-300 mt-5">
+        <h3 className="text-lg md:text-3xl text-gray-300 mt-5  block  md:hidden">
           Feel the{" "}
           {params.collection
             .split("-")
