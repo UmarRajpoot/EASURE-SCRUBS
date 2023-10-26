@@ -39,7 +39,7 @@ const Collection = () => {
     // Ceil-Blue
     <div>
       <div
-        className={`h-96 w-full  bg-cover bg-no-repeat bg-center ${
+        className={`h-[28rem] w-full  bg-cover bg-no-repeat bg-center ${
           params.collection.split("-")[0] === "black"
             ? "bg-[url('https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Black%201.jpg?alt=media&token=52bc7761-5989-466f-a39b-a0ec430c83ab')]"
             : params.collection
