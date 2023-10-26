@@ -60,7 +60,7 @@ const ShopByColor = () => {
 
   // overflow-x-auto overflow-y-hidden no-scrollbar
 
-  const Color_Card = ({ index, shBC, selected }) => {
+  const Color_Card = ({ index, shBC }) => {
     const visibility = React.useContext(VisibilityContext);
     return (
       <Link
@@ -113,14 +113,7 @@ const ShopByColor = () => {
       >
         {/* <div className="flex w-full no-scrollbar"> */}
         {allColors.map((shBC, index) => {
-          return (
-            <Color_Card
-              key={index}
-              shBC={shBC}
-              index={index}
-              selected={isItemSelected(index)}
-            />
-          );
+          return <Color_Card key={index} shBC={shBC} index={index} />;
         })}
         {/* </div> */}
       </ScrollMenu>
