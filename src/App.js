@@ -9,6 +9,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Checkout from "./pages/checkout/checkout";
 
 import { Routes, Route } from "react-router-dom";
+import Fabric from "./pages/Fabric/Fabric";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Wrapper>
         <Routes>
           <Route path="/checkout" Component={Checkout} />
+          <Route path="/fabric" Component={Fabric} />
           <Route path="/account/register" Component={register} />
           <Route path="/account/login" Component={login} />
           <Route path="/products/:id/:category" Component={Products} />
