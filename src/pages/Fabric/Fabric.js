@@ -7,7 +7,7 @@ const Fabric = () => {
 
   const fabrics = [
     {
-      fabric_Name: "black",
+      fabric_Name: "BLACK",
       fabricImage: "/Images/FabricsBg/Black.png",
       pri_Color: "#444444",
       fabricAnimation: [
@@ -19,7 +19,7 @@ const Fabric = () => {
       ],
     },
     {
-      fabric_Name: "ceil_blue",
+      fabric_Name: "CEIL BLUE",
       fabricImage: "/Images/FabricsBg/Ceil-Blue.png",
       pri_Color: "#83A6CC",
       fabricAnimation: [
@@ -31,7 +31,7 @@ const Fabric = () => {
       ],
     },
     {
-      fabric_Name: "navy_blue",
+      fabric_Name: "NAVY BLUE",
       fabricImage: "/Images/FabricsBg/Navy-Blue.png",
       pri_Color: "#081D48",
       fabricAnimation: [
@@ -43,7 +43,7 @@ const Fabric = () => {
       ],
     },
     {
-      fabric_Name: "pewt",
+      fabric_Name: "PEWT",
       fabricImage: "/Images/FabricsBg/Pewt.png",
       pri_Color: "#465775",
       fabricAnimation: [
@@ -55,7 +55,7 @@ const Fabric = () => {
       ],
     },
     {
-      fabric_Name: "royal_blue",
+      fabric_Name: "ROYAL BLUE",
       fabricImage: "/Images/FabricsBg/Royal-Blue.png",
       pri_Color: "#2D65D6",
       fabricAnimation: [
@@ -67,7 +67,7 @@ const Fabric = () => {
       ],
     },
     {
-      fabric_Name: "wine",
+      fabric_Name: "WINE",
       fabricImage: "/Images/FabricsBg/Wine.png",
       pri_Color: "#913A71",
       fabricAnimation: [
@@ -79,12 +79,6 @@ const Fabric = () => {
       ],
     },
   ];
-
-  //   const randomFabicColors = Math.floor(Math.random() * 6);
-
-  //   useEffect(() => {
-  //     setFabic(randomFabicColors);
-  //   }, []);
 
   return (
     <Box>
@@ -101,6 +95,19 @@ const Fabric = () => {
           fontWeight={"bold"}
         >
           FABRIC TECHNOLOGY
+        </Text>
+        <Text
+          fontSize={"5xl"}
+          fontWeight={"bold"}
+          color={"white"}
+          position={"absolute"}
+          w={"full"}
+          height={"100%"}
+          alignItems={"end"}
+          display={"flex"}
+          p={"2.5"}
+        >
+          {fabrics[currentFabric].fabric_Name}
         </Text>
         <img
           src={fabrics[currentFabric].fabricImage}
