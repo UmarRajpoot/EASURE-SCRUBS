@@ -3,7 +3,7 @@ import React from "react";
 const button = ({ label, staticbutton, styles, onClick }) => {
   return (
     <div
-      className={`h-full flex items-center justify-end md:mr-10  hover:cursor-pointer `}
+      className={`h-full flex items-center justify-end md:mr-10  `}
       onClick={onClick}
     >
       {staticbutton ? (
@@ -16,7 +16,7 @@ const button = ({ label, staticbutton, styles, onClick }) => {
       ) : (
         <a
           // href=""
-          className={`hero-button text-gray-400 font-semibold hover:text-gray-100 text-xs md:text-lg hover:bg-black px-3 md:px-5 py-2.5 flex transition-colors ease-in-out duration-500 ${styles}`}
+          className={`hero-button bg-white text-black font-semibold text-xs md:text-sm cursor-pointer hover:bg-black hover:text-white px-4 md:px-10 py-3 flex transition-colors ease-in-out duration-500 ${styles}`}
         >
           {label}
         </a>
