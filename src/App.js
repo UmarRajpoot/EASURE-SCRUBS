@@ -10,6 +10,7 @@ import Checkout from "./pages/checkout/checkout";
 
 import { Routes, Route } from "react-router-dom";
 import Fabric from "./pages/Fabric/Fabric";
+import OurStory from "./pages/OurStory/OurStory";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Wrapper>
         <Routes>
           <Route path="/checkout" Component={Checkout} />
+          <Route path="/OurStory" Component={OurStory} />
           <Route path="/fabric" Component={Fabric} />
           <Route path="/account/register" Component={register} />
           <Route path="/account/login" Component={login} />

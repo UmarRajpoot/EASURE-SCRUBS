@@ -132,6 +132,16 @@ const Footer = () => {
                   Blog
                 </a>
               </li>
+              <li className="mb-4">
+                <a href="#" className="hover:underline">
+                  Fit Guide Men
+                </a>
+              </li>
+              <li className="mb-4">
+                <a href="#" className="hover:underline">
+                  Fit Guide Women
+                </a>
+              </li>
             </ul>
           </div>
           <div>
