@@ -138,11 +138,6 @@ const Footer = () => {
                   <a className="hover:underline">Fit Guide</a>
                 </li>
               </Link>
-              <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  Fit Guide
-                </a>
-              </li>
             </ul>
           </div>
           <div>

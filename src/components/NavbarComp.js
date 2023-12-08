@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BsPerson } from "react-icons/bs";
 import { BiBasket, BiLogOutCircle } from "react-icons/bi";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Drawer from "./Drawer/Drawer";
 import { useDispatch, useSelector } from "react-redux";
 import { DrawerState } from "../Store/Drawer/actions";
@@ -186,96 +186,129 @@ const NavbarComp = () => {
               />
             </div>
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-              <Link
-                to={"/collection/black-scrub-women"}
-                // onClick={() =>
-                //   setMobileDropDown((oldState) => setMobileDropDown(!oldState))
-                // }
-              >
-                <li
-                  className="relative"
-                  onMouseEnter={() => {
-                    if (mobileDropDown === false) setWomenDropDown(true);
-                  }}
-                  onMouseLeave={() => {
-                    if (mobileDropDown === false) setWomenDropDown(false);
-                  }}
-                >
-                  <a
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                    aria-current="page"
+              {navigate.pathname.split("/")[1] === "fitguide" && (
+                <>
+                  <Link to={"/fitguide/men"}>
+                    <li>
+                      <a
+                        className={`block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 hover:text-blue-600 ${
+                          navigate.pathname.split("/")[2] === "men" &&
+                          "text-blue-600"
+                        }`}
+                      >
+                        Men
+                      </a>
+                    </li>
+                  </Link>
+                  <Link to={"/fitguide/women"}>
+                    <li>
+                      <a
+                        className={`block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 hover:text-blue-600 ${
+                          navigate.pathname.split("/")[2] === "women" &&
+                          "text-blue-600"
+                        }`}
+                      >
+                        Women
+                      </a>
+                    </li>
+                  </Link>
+                </>
+              )}
+
+              {navigate.pathname.split("/")[1] !== "fitguide" && (
+                <>
+                  <Link
+                    to={"/collection/black-scrub-women"}
+                    // onClick={() =>
+                    //   setMobileDropDown((oldState) => setMobileDropDown(!oldState))
+                    // }
                   >
-                    Women
-                  </a>
-                  {WomenDropDown && (
-                    <>
-                      <div className="absolute mt-2 bg-black w-full h-1"></div>
+                    <li
+                      className="relative"
+                      onMouseEnter={() => {
+                        if (mobileDropDown === false) setWomenDropDown(true);
+                      }}
+                      onMouseLeave={() => {
+                        if (mobileDropDown === false) setWomenDropDown(false);
+                      }}
+                    >
+                      <a
+                        className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                        aria-current="page"
+                      >
+                        Women
+                      </a>
                       {WomenDropDown && (
-                        <div className="relative">
-                          <div className="block min-w-screen absolute top-0 md:-left-60 pt-5 z-50">
-                            <WomenDropDownComp />
-                          </div>
-                        </div>
+                        <>
+                          <div className="absolute mt-2 bg-black w-full h-1"></div>
+                          {WomenDropDown && (
+                            <div className="relative">
+                              <div className="block min-w-screen absolute top-0 md:-left-60 pt-5 z-50">
+                                <WomenDropDownComp />
+                              </div>
+                            </div>
+                          )}
+                        </>
                       )}
-                    </>
-                  )}
-                </li>
-              </Link>
-              <Link
-                to={"/collection/black-scrub-men"}
-                // onClick={() =>
-                //   setMobileDropDown((oldState) => setMobileDropDown(!oldState))
-                // }
-              >
-                <li
-                  className="relative"
-                  onMouseEnter={() => {
-                    if (mobileDropDown === false) setMenDropDown(true);
-                  }}
-                  onMouseLeave={() => {
-                    if (mobileDropDown === false) setMenDropDown(false);
-                  }}
-                >
-                  <a
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                    aria-current="page"
+                    </li>
+                  </Link>
+                  <Link
+                    to={"/collection/black-scrub-men"}
+                    // onClick={() =>
+                    //   setMobileDropDown((oldState) => setMobileDropDown(!oldState))
+                    // }
                   >
-                    Men
-                  </a>
-                  {MenDropDown && (
-                    <>
-                      <div className="absolute mt-2 bg-black w-full h-1"></div>
+                    <li
+                      className="relative"
+                      onMouseEnter={() => {
+                        if (mobileDropDown === false) setMenDropDown(true);
+                      }}
+                      onMouseLeave={() => {
+                        if (mobileDropDown === false) setMenDropDown(false);
+                      }}
+                    >
+                      <a
+                        className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                        aria-current="page"
+                      >
+                        Men
+                      </a>
                       {MenDropDown && (
-                        <div className="relative">
-                          <div className="block min-w-screen absolute top-0 md:-left-60 pt-5 z-50">
-                            <MenDropDownComp />
-                          </div>
-                        </div>
+                        <>
+                          <div className="absolute mt-2 bg-black w-full h-1"></div>
+                          {MenDropDown && (
+                            <div className="relative">
+                              <div className="block min-w-screen absolute top-0 md:-left-60 pt-5 z-50">
+                                <MenDropDownComp />
+                              </div>
+                            </div>
+                          )}
+                        </>
                       )}
-                    </>
-                  )}
-                </li>
-              </Link>
-              <Link to={"/fabric"}>
-                <li>
-                  <a
-                    href="#"
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                  >
-                    TECHNOLOGY
-                  </a>
-                </li>
-              </Link>
-              <Link to={"/OurStory"}>
-                <li>
-                  <a
-                    href="#"
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                  >
-                    Our Story
-                  </a>
-                </li>
-              </Link>
+                    </li>
+                  </Link>
+                  <Link to={"/fabric"}>
+                    <li>
+                      <a
+                        href="#"
+                        className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                      >
+                        TECHNOLOGY
+                      </a>
+                    </li>
+                  </Link>
+                  <Link to={"/OurStory"}>
+                    <li>
+                      <a
+                        href="#"
+                        className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                      >
+                        Our Story
+                      </a>
+                    </li>
+                  </Link>
+                </>
+              )}
             </ul>
           </div>
         </div>
