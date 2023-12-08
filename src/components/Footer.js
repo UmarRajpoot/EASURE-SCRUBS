@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -132,14 +133,14 @@ const Footer = () => {
                   Blog
                 </a>
               </li>
+              <Link to={"/fitguide/men"}>
+                <li className="mb-4">
+                  <a className="hover:underline">Fit Guide</a>
+                </li>
+              </Link>
               <li className="mb-4">
                 <a href="#" className="hover:underline">
-                  Fit Guide Men
-                </a>
-              </li>
-              <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  Fit Guide Women
+                  Fit Guide
                 </a>
               </li>
             </ul>
