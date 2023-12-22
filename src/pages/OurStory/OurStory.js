@@ -2,6 +2,7 @@ import React from "react";
 import OurStory5 from "../../assets/OurStory/OurStory5-min.jpg";
 import ModelPhoto from "../../assets/OurStory/Modelphoto-min.png";
 import { Box, HStack, Stack, Text, VStack } from "@chakra-ui/react";
+import ReactPlayer from "react-player";
 
 const OurStory = () => {
   return (
@@ -53,6 +54,20 @@ const OurStory = () => {
           </Text>
         </Box>
       </Stack>
+      <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
+        <Box w={["95%", "80%"]}>
+          <ReactPlayer
+            width={"100%"}
+            height={"100%"}
+            muted
+            controls
+            playing
+            url={
+              "https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/women%20final%20reneder.mp4?alt=media&token=b63eb885-9650-416b-a7c9-d112caa06f47"
+            }
+          />
+        </Box>
+      </Box>
       <VStack className="flex flex-col items-center justify-center my-32">
         <Text fontSize={"3xl"} fontWeight={"bold"}>
           FABRIC INNOVATION
