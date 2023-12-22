@@ -32,7 +32,7 @@ const OurStory = () => {
       <Stack
         spacing={"10"}
         direction={["column", "row"]}
-        className="flex flex-col md:flex-row items-center justify-center my-28"
+        className="flex flex-col md:flex-row items-center justify-center my-40"
       >
         <Box w={"80"} h={"80"}>
           <img src={ModelPhoto} width={"100%"} height={"100%"} />
@@ -55,7 +55,7 @@ const OurStory = () => {
         </Box>
       </Stack>
       <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
-        <Box w={["80%", "70%"]}>
+        <Box w={["80%", "60%"]}>
           <ReactPlayer
             width={"100%"}
             height={"100%"}
