@@ -32,7 +32,7 @@ const OurStory = () => {
       <Stack
         spacing={"10"}
         direction={["column", "row"]}
-        className="flex flex-col md:flex-row items-center justify-center my-20"
+        className="flex flex-col md:flex-row items-center justify-center my-28"
       >
         <Box w={"80"} h={"80"}>
           <img src={ModelPhoto} width={"100%"} height={"100%"} />
@@ -55,12 +55,11 @@ const OurStory = () => {
         </Box>
       </Stack>
       <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
-        <Box w={["95%", "80%"]}>
+        <Box w={["80%", "70%"]}>
           <ReactPlayer
             width={"100%"}
             height={"100%"}
             muted
-            controls
             playing
             url={
               "https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/women%20final%20reneder.mp4?alt=media&token=b63eb885-9650-416b-a7c9-d112caa06f47"
