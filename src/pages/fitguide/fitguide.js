@@ -19,6 +19,115 @@ import { Link, useParams } from "react-router-dom";
 
 const Fitguide = () => {
   const params = useParams();
+
+  // Table Data
+  const TableData = [
+    [
+      {
+        name: "SIZES",
+      },
+      {
+        name: "XS",
+      },
+      {
+        name: "S",
+      },
+      {
+        name: "M",
+      },
+      {
+        name: "L",
+      },
+      {
+        name: "XL",
+      },
+      {
+        name: "2XL",
+      },
+      {
+        name: "3XL",
+      },
+    ],
+    [
+      {
+        name: "CHEST",
+      },
+      {
+        name: "32-34",
+      },
+      {
+        name: "35-37",
+      },
+      {
+        name: "38-40",
+      },
+      {
+        name: "42-44",
+      },
+      {
+        name: "46-48",
+      },
+      {
+        name: "50-52",
+      },
+      {
+        name: "54-56",
+      },
+    ],
+    [
+      {
+        name: "WAIST",
+      },
+      {
+        name: "25-27",
+      },
+      {
+        name: "28-30",
+      },
+      {
+        name: "31-33",
+      },
+      {
+        name: "35-37",
+      },
+      {
+        name: "39-41",
+      },
+      {
+        name: "43-45",
+      },
+      {
+        name: "47-49",
+      },
+    ],
+    [
+      {
+        name: "HIP",
+      },
+      {
+        name: "32-34",
+      },
+      {
+        name: "35-37",
+      },
+      {
+        name: "38-40",
+      },
+      {
+        name: "42-44",
+      },
+      {
+        name: "46-48",
+      },
+      {
+        name: "50-52",
+      },
+      {
+        name: "54-56",
+      },
+    ],
+  ];
+
   return (
     <div>
       <img
@@ -44,7 +153,7 @@ const Fitguide = () => {
           />
         </Box>
         <Box w={["100%", "40%"]} p={"10"} mt={"10"}>
-          <Stack spacing={"10"}>
+          <Stack spacing={"8"}>
             <Text
               fontSize={"2xl"}
               fontWeight={"bold"}
@@ -91,238 +200,26 @@ const Fitguide = () => {
               </Tr>
             </Thead> */}
             <Tbody>
-              <Tr border={"2px"} h={"20"}>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  SIZES
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  XS
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  S
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  M
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  L
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  XL
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  2XL
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  3XL
-                </Td>
-              </Tr>
-              <Tr border={"2px"} h={"20"}>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  CHEST
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  32-34
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  35-37
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  38-40
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  42-44
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  46-48
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  50-52
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  54-56
-                </Td>
-              </Tr>
-              <Tr border={"2px"} h={"20"}>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  WAIST
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  25-27
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  28-30
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  31-33
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  35-37
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  39-41
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  43-45
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  47-49
-                </Td>
-              </Tr>
-              <Tr border={"2px"} h={"20"}>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  HIP
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  32-34
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  35-37
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  38-40
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  42-44
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  46-48
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  50-52
-                </Td>
-                <Td
-                  border={"2px"}
-                  textAlign={"center"}
-                  color={params.category === "men" ? "black" : "#721853"}
-                >
-                  54-56
-                </Td>
-              </Tr>
+              {TableData.map((tableRow) => {
+                return (
+                  <Tr border={"2px"} h={["10", "20"]}>
+                    {tableRow.map((tableCol) => {
+                      return (
+                        <Td
+                          border={"2px"}
+                          textAlign={"center"}
+                          color={
+                            params.category === "men" ? "black" : "#721853"
+                          }
+                          fontSize={["sm", "md"]}
+                        >
+                          {tableCol.name}
+                        </Td>
+                      );
+                    })}
+                  </Tr>
+                );
+              })}
             </Tbody>
           </Table>
         </TableContainer>
@@ -339,8 +236,12 @@ const Fitguide = () => {
             </Text>
           </Box>
           <Box textAlign={"center"}>
-            <Text fontWeight={"bold"}>REGULAR: 31"</Text>
-            <Text fontWeight={"bold"}>TALL: 33"</Text>
+            <Text fontWeight={"bold"} fontSize={["xs", "md"]}>
+              REGULAR: 31"
+            </Text>
+            <Text fontWeight={"bold"} fontSize={["xs", "md"]}>
+              TALL: 33"
+            </Text>
           </Box>
         </Box>
       ) : (
@@ -353,10 +254,10 @@ const Fitguide = () => {
             alignItems={"center"}
             justifyContent={"space-evenly"}
           >
-            <Text fontSize={"md"} textAlign={"center"} color={"white"}>
+            <Text fontSize={["xs", "md"]} textAlign={"center"} color={"white"}>
               WOMEN'S HEIGHT
             </Text>
-            <Text fontSize={"md"} textAlign={"center"} color={"white"}>
+            <Text fontSize={["xs", "md"]} textAlign={"center"} color={"white"}>
               MISSES INSEAM LENGTHS
             </Text>
           </Box>
@@ -370,18 +271,21 @@ const Fitguide = () => {
               <Text
                 fontWeight={"medium"}
                 color={params.category === "men" ? "black" : "#721853"}
+                fontSize={["xs", "md"]}
               >
                 Regular: 5'4 1/2" to 5'7"
               </Text>
               <Text
                 fontWeight={"medium"}
                 color={params.category === "men" ? "black" : "#721853"}
+                fontSize={["xs", "md"]}
               >
                 Petite: 5'4 and under
               </Text>
               <Text
                 fontWeight={"medium"}
                 color={params.category === "men" ? "black" : "#721853"}
+                fontSize={["xs", "md"]}
               >
                 Tall: 5"9" to 5'11"
               </Text>
@@ -390,18 +294,21 @@ const Fitguide = () => {
               <Text
                 fontWeight={"medium"}
                 color={params.category === "men" ? "black" : "#721853"}
+                fontSize={["xs", "md"]}
               >
                 Regular: 30-31*
               </Text>
               <Text
                 fontWeight={"medium"}
                 color={params.category === "men" ? "black" : "#721853"}
+                fontSize={["xs", "md"]}
               >
                 Petite: 28-29*
               </Text>
               <Text
                 fontWeight={"medium"}
                 color={params.category === "men" ? "black" : "#721853"}
+                fontSize={["xs", "md"]}
               >
                 Tall: 32 1/2-33 1/2*
               </Text>

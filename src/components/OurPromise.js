@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./button";
 import { useNavigate } from "react-router-dom";
-import { Box, Divider, HStack, Text } from "@chakra-ui/react";
+import { Box, Divider, Image, Stack, Text } from "@chakra-ui/react";
 import OurPromise from "../assets/OurPromise/ourpromise.png";
 
 const OurPromice = () => {
@@ -15,8 +15,10 @@ const OurPromice = () => {
           alignItems={"center"}
           justifyContent={"space-between"}
           p={"5"}
+          // w={["80px", "150px"]}
+          // h={["80px", "150px"]}
         >
-          <img src={image} width={80} height={80} />
+          <Image src={image} width={[20, 28]} height={[20, 28]} />
           <Text>{title}</Text>
         </Box>
         <Divider />
@@ -25,12 +27,12 @@ const OurPromice = () => {
   };
 
   return (
-    <HStack>
+    <Stack direction={["column", "row"]}>
       <Box>
         <img src={OurPromise} width={"100%"} height={"100%"} />
       </Box>
-      <Box w={"50%"}>
-        <Box>
+      <Box w={["full", "50%"]}>
+        <Box p={"5"}>
           <Text>TECHNOLOGY WITH</Text>
           <Text>EASURE-SCRUBS</Text>
         </Box>
@@ -57,7 +59,7 @@ const OurPromice = () => {
           />
         </Box>
       </Box>
-    </HStack>
+    </Stack>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Box, HStack, Text } from "@chakra-ui/react";
+import { Box, HStack, Image, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import FabricBox from "../../components/Fabrics/FabricBox";
 
@@ -91,13 +91,13 @@ const Fabric = () => {
           justifyContent={"center"}
           alignItems={"center"}
           display={"flex"}
-          fontSize={"5xl"}
+          fontSize={["md", "5xl"]}
           fontWeight={"bold"}
         >
           FABRIC TECHNOLOGY
         </Text>
         <Text
-          fontSize={"5xl"}
+          fontSize={["md", "5xl"]}
           fontWeight={"bold"}
           color={"white"}
           position={"absolute"}
@@ -109,14 +109,14 @@ const Fabric = () => {
         >
           {fabrics[currentFabric].fabric_Name}
         </Text>
-        <img
+        <Image
           src={fabrics[currentFabric].fabricImage}
           width={"100%"}
-          height={"100%"}
+          height={["200px", "100%"]}
         />
       </Box>
       <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
-        <Text fontSize={"xl"} p={"8"} fontWeight={"bold"}>
+        <Text fontSize={["md", "xl"]} p={"8"} fontWeight={"bold"}>
           EXPLORE OUR FABRICS
         </Text>
       </Box>

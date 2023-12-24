@@ -287,7 +287,7 @@ const NavbarComp = () => {
                       )}
                     </li>
                   </Link>
-                  <Link to={"/fabric"}>
+                  <Link to={"/technology"}>
                     <li>
                       <a
                         href="#"
