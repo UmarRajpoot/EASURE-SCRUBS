@@ -12,6 +12,7 @@ import { Routes, Route } from "react-router-dom";
 import Technology from "./pages/Technology/Technology";
 import OurStory from "./pages/OurStory/OurStory";
 import fitguide from "./pages/fitguide/fitguide";
+import ProductList from "./pages/ProductList/ProductList";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Wrapper>
         <Routes>
           <Route path="/checkout" Component={Checkout} />
+          <Route path="/:cattype/:category" Component={ProductList} />
           <Route path="/fitguide/:category" Component={fitguide} />
           <Route path="/OurStory" Component={OurStory} />
           <Route path="/technology" Component={Technology} />
