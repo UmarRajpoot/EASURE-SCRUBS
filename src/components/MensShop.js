@@ -13,12 +13,28 @@ import { IconButton } from "@chakra-ui/react";
 const MensShop = () => {
   const [MensTrend, setMensTrend] = useState([]);
 
+  const ShopmenList = [
+    "7a7eb867-60d9-47f0-aa6d-96f413b7308f",
+    "23e3dad3-66e8-4c51-a815-361dfda4a96c",
+    "3fc48366-c37a-4075-8c09-d29272c67b99",
+    "ba42e3b0-97f8-44fe-8ae2-26183baa228f",
+    "0bd93b32-729c-4ddc-833e-3414514ca18c",
+  ];
+
   const getMensTrending = async () => {
     return await axios
       .get(`${BASEURL}/Product`)
       .then((resp) => {
         // console.log(resp.data);
-        setMensTrend(resp.data.response);
+        let temp_data = [];
+        ShopmenList.map((list_id) => {
+          resp.data.response.filter((men_prod) => {
+            if (men_prod.id === list_id) {
+              return temp_data.push(men_prod);
+            }
+          });
+        });
+        setMensTrend(temp_data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -58,19 +74,48 @@ const MensShop = () => {
       />
     );
   };
+  const [onHover, setonHover] = useState("");
 
   const Card_comp = ({ mensT, index }) => {
     return (
       <Link
         to={`/products/${mensT.productname.toLowerCase()}/men`}
         key={index.toString()}
+        onMouseEnter={() => {
+          const getIndexValue = MensTrend[index];
+          if (getIndexValue.id === mensT.id) {
+            setonHover(getIndexValue.id);
+          }
+        }}
+        onMouseLeave={() => {
+          // console.log("mouse leave", WTrend.id);
+          setonHover("");
+        }}
       >
-        <div className="py-10 px-3 hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer">
+        <div className="py-10 px-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
           <div className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center">
-            <Image
-              src={mensT.productimage && mensT.productimage[0]}
+            {mensT.productimage && onHover === mensT.id ? (
+              <Image
+                src={mensT.productimage[1]}
+                // onLoad={() => console.log("loading")}
+                className="h-80 w-64"
+              />
+            ) : (
+              <Image
+                src={mensT.productimage[0]}
+                // onLoad={() => console.log("loading")}
+                className="h-80 w-64"
+              />
+            )}
+            {/* <Image
+              src={
+                mensT.productimage && onHover === mensT.id
+                  ? mensT.productimage[1]
+                  : mensT.productimage[0]
+              }
               // onLoad={() => console.log("loading")}
-            />
+              className="h-80 w-64"
+            /> */}
             <div className="p-2 text-base font-bold text-gray-500 ">
               <h1>
                 {mensT.personname && mensT?.personname[0]}

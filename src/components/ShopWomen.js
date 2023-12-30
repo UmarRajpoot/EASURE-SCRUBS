@@ -98,14 +98,27 @@ const ShopWomen = () => {
       >
         <div className="md:py-10 px-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
           <div className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center">
-            <Image
+            {WTrend.productimage && onHover === WTrend.id ? (
+              <Image
+                src={WTrend.productimage[1]}
+                // onLoad={() => console.log("loading")}
+                className="h-80 w-64"
+              />
+            ) : (
+              <Image
+                src={WTrend.productimage[0]}
+                // onLoad={() => console.log("loading")}
+                className="h-80 w-64"
+              />
+            )}
+            {/* <Image
               src={
                 WTrend.productimage && onHover === WTrend.id
                   ? WTrend.productimage[1]
                   : WTrend.productimage[0]
               }
               // onLoad={() => console.log("loading")}
-            />
+            /> */}
             <div className="p-2 text-base font-bold text-gray-500 ">
               <h1>
                 {WTrend.personname && WTrend?.personname[0]}
