@@ -46,15 +46,16 @@ const ProductList = () => {
         if (params.category === "women") {
           let temp_data = [];
           WomenList.map((list_id) => {
-            resp.data.response.filter((women_prod) => {
+            return resp.data.response.filter((women_prod) => {
               if (women_prod.id === list_id) {
                 return temp_data.push(women_prod);
               }
+              return 0;
             });
           });
-          setAllProducts(temp_data);
+          return setAllProducts(temp_data);
         } else {
-          setAllProducts(resp.data.response);
+          return setAllProducts(resp.data.response);
         }
       })
       .catch((error) => {
@@ -96,24 +97,49 @@ const ProductList = () => {
       </Link>
     );
   };
+  const [onHover, setonHover] = useState("");
+
   const CardWomen = ({ WTrend, index }) => {
     return (
       <Link
         to={`/products/${WTrend.productname.toLowerCase()}/women`}
         key={index.toString()}
+        onMouseEnter={(e) => {
+          const getIndexValue = AllProducts[index];
+          if (getIndexValue.id === WTrend.id) {
+            setonHover(getIndexValue.id);
+          }
+        }}
+        onMouseLeave={() => {
+          // console.log("mouse leave", WTrend.id);
+          setonHover("");
+        }}
       >
-        <div className="px-3 hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer">
+        <div className="px-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
           <div className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center">
-            <Image
+            {/* <Image
               src={WTrend.productimage && WTrend.productimage[0]}
               // onLoad={() => console.log("loading")}
-            />
+            /> */}
+            {WTrend.productimage && onHover === WTrend.id ? (
+              <Image
+                src={WTrend.productimage[1]}
+                // onLoad={() => console.log("loading")}
+                className="h-80 w-64"
+              />
+            ) : (
+              <Image
+                src={WTrend.productimage[0]}
+                // onLoad={() => console.log("loading")}
+                className="h-80 w-64"
+              />
+            )}
             <div className="p-2 text-base font-bold text-gray-500 ">
               <h1>
-                {WTrend.personname && WTrend?.personname[0]}
-                {WTrend.personname &&
-                  WTrend?.personname?.slice(1).toLowerCase()}
-                -{WTrend.varientname && WTrend?.varientname?.toLowerCase()}-
+                {/* {WTrend.personname && WTrend?.personname[0]} */}
+                {/* {WTrend.personname &&
+                  WTrend?.personname?.slice(1).toLowerCase()} */}
+                {WTrend.varientname && WTrend?.varientname?.toLowerCase()}-
                 {WTrend.typename && WTrend?.typename?.toLowerCase()}-
                 {WTrend.typestylename && WTrend?.typestylename[0]}
                 {WTrend.typestylename &&
