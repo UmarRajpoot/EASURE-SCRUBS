@@ -13,13 +13,31 @@ import { IconButton } from "@chakra-ui/react";
 const ShopWomen = () => {
   const [womenShop, setWomenShop] = useState([]);
 
+  const ShopwomenList = [
+    "21044dbb-3be8-4c8c-aa36-84470d0b8bb3",
+    "50e81ca6-2a68-4e47-bca2-6822bbf9eb9d",
+    "e413e985-3977-463c-a83f-33cd584e9e2c",
+    "36d8a10a-3ffe-4c4e-8aa8-4242dfcc3de2",
+    "c8552fa8-1163-475b-8a61-d60ee247826f",
+    "d8085138-a576-4070-ad7d-2c3c556b0f25",
+    "3f9a826f-6694-482d-a96a-f37044198c26",
+    "544a84dc-ec52-4b02-b4e7-8568e4aa8574",
+  ];
+
   const getWomensProduct = async () => {
     return await axios
       .get(`${BASEURL}/Product`)
       .then((resp) => {
         // console.log(resp.data);
-
-        setWomenShop(resp.data.response);
+        let temp_data = [];
+        ShopwomenList.map((list_id) => {
+          resp.data.response.filter((women_prod) => {
+            if (women_prod.id === list_id) {
+              return temp_data.push(women_prod);
+            }
+          });
+        });
+        setWomenShop(temp_data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -60,16 +78,32 @@ const ShopWomen = () => {
     );
   };
 
+  const [onHover, setonHover] = useState("");
+
   const Card_comp = ({ WTrend, index }) => {
     return (
       <Link
         to={`/products/${WTrend.productname.toLowerCase()}/women`}
         key={index.toString()}
+        onMouseEnter={(e) => {
+          const getIndexValue = womenShop[index];
+          if (getIndexValue.id === WTrend.id) {
+            setonHover(getIndexValue.id);
+          }
+        }}
+        onMouseLeave={() => {
+          // console.log("mouse leave", WTrend.id);
+          setonHover("");
+        }}
       >
-        <div className="md:py-10 px-3 hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer">
+        <div className="md:py-10 px-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
           <div className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center">
             <Image
-              src={WTrend.productimage && WTrend.productimage[0]}
+              src={
+                WTrend.productimage && onHover === WTrend.id
+                  ? WTrend.productimage[1]
+                  : WTrend.productimage[0]
+              }
               // onLoad={() => console.log("loading")}
             />
             <div className="p-2 text-base font-bold text-gray-500 ">
