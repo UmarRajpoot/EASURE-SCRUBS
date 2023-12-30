@@ -12,12 +12,50 @@ const ProductList = () => {
 
   const [AllProducts, setAllProducts] = useState([]);
 
+  const WomenList = [
+    "3982c326-3160-463a-a8b4-8d82865e23d3",
+    "e413e985-3977-463c-a83f-33cd584e9e2c",
+    "544a84dc-ec52-4b02-b4e7-8568e4aa8574",
+    "ea88584d-50b8-4732-aa66-c1d016d4b7d6",
+    "36d8a10a-3ffe-4c4e-8aa8-4242dfcc3de2",
+    "0d8bb012-74f9-4cde-894d-a5a477bb9321",
+    "50e81ca6-2a68-4e47-bca2-6822bbf9eb9d",
+    "6dde2c76-352b-4683-b954-f0a10ba73928",
+    "604a4d77-99c2-4387-b3a1-25ac809f279c",
+    "31717dc4-b7ab-42cb-91f5-0385db6175b3",
+    "6e002472-8941-448c-b664-9708ae7d8165",
+    "3f9a826f-6694-482d-a96a-f37044198c26",
+    "c8552fa8-1163-475b-8a61-d60ee247826f",
+    "f637416c-ec0b-486d-aa9c-e22c25048a61",
+    "81287ebc-616c-4784-a784-67811e405f4d",
+    "701f0a28-2c93-43cf-9212-d55a0ad593a9",
+    "b89fa01c-5c93-44bd-91f8-89cac605f248",
+    "449f50da-68c7-4168-a705-4d1e22d8bab8",
+    "4bb35bc4-ea4c-4e1a-8fb7-2007c3a646e7",
+    "6e5710d3-0f41-4ef5-8e29-89cc7075cd59",
+    "d79a4676-0ae1-46d8-845d-ba4eda5f474a",
+    "e3be9847-9ff8-4091-9e7c-2ddd19fd13b0",
+    "8bbba27e-70ae-48ea-b3ac-40c3e5b6e4f7",
+    "3e99340b-4d47-4f1c-a9ec-85efea5230b3",
+  ];
+
   const getProducts = async () => {
     return await axios
       .get(`${BASEURL}/Product`)
       .then((resp) => {
-        // console.log(resp.data);
-        setAllProducts(resp.data.response);
+        if (params.category === "women") {
+          let temp_data = [];
+          WomenList.map((list_id) => {
+            resp.data.response.filter((women_prod) => {
+              if (women_prod.id === list_id) {
+                return temp_data.push(women_prod);
+              }
+            });
+          });
+          setAllProducts(temp_data);
+        } else {
+          setAllProducts(resp.data.response);
+        }
       })
       .catch((error) => {
         console.log(error.response.data);
