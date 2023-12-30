@@ -121,10 +121,10 @@ const ShopWomen = () => {
             /> */}
             <div className="p-2 text-base font-bold text-gray-500 ">
               <h1>
-                {WTrend.personname && WTrend?.personname[0]}
-                {WTrend.personname &&
-                  WTrend?.personname?.slice(1).toLowerCase()}
-                -{WTrend.varientname && WTrend?.varientname?.toLowerCase()}-
+                {/* {WTrend.personname && WTrend?.personname[0]} */}
+                {/* {WTrend.personname &&
+                  WTrend?.personname?.slice(1).toLowerCase()} */}
+                {WTrend.varientname && WTrend?.varientname?.toLowerCase()}-
                 {WTrend.typename && WTrend?.typename?.toLowerCase()}-
                 {WTrend.typestylename && WTrend?.typestylename[0]}
                 {WTrend.typestylename &&

@@ -118,9 +118,9 @@ const MensShop = () => {
             /> */}
             <div className="p-2 text-base font-bold text-gray-500 ">
               <h1>
-                {mensT.personname && mensT?.personname[0]}
-                {mensT.personname && mensT?.personname?.slice(1).toLowerCase()}
-                {mensT.varientname !== "JOGGER" && "-"}
+                {/* {mensT.personname && mensT?.personname[0]} */}
+                {/* {mensT.personname && mensT?.personname?.slice(1).toLowerCase()} */}
+                {/* {mensT.varientname !== "JOGGER" && "-"} */}
                 {mensT.varientname !== "JOGGER" &&
                   mensT?.varientname?.toLowerCase()}
                 -{mensT.typename && mensT?.typename?.toLowerCase()}-
