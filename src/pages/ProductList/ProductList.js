@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import AccordionComp from "../../components/AccordionComp/AccordionComp";
-import { Box, Image, Stack } from "@chakra-ui/react";
+import { Box, Divider, Image, Stack, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { BASEURL } from "../../Config/URL";
+import { CheckIcon } from "@chakra-ui/icons";
 
 const ProductList = () => {
   const params = useParams();
-  const FiltersList = ["Category", "Gender", "Size", "Color", "Review"];
-  const [isOpen, setIsOpen] = useState(false);
+
+  const FiltersList = [
+    { name: "Scrub Top", mensTo: "", womenTo: "" },
+    { name: "Scrub Pants", mensTo: "", womenTo: "" },
+    { name: "Fit Guide", mensTo: "", womenTo: "" },
+    { name: "Color", mensTo: "", womenTo: "" },
+  ];
 
   const [AllProducts, setAllProducts] = useState([]);
 
@@ -63,6 +69,36 @@ const ProductList = () => {
     "d4d14f4f-ee63-4cc0-8daa-b1fcafbda65e",
     "c3e83f1c-4f79-49db-a111-da14bdc05875",
     "887b3438-1762-4de7-905a-86282e7bdcd3",
+    "02892d78-e1b3-4b84-9975-600236a17ba8",
+  ];
+
+  const ScrubMenTop = [
+    "7a7eb867-60d9-47f0-aa6d-96f413b7308f",
+    "0bd93b32-729c-4ddc-833e-3414514ca18c",
+    "bd8dfba5-18f3-48a3-9ba0-74bed74fa4ca",
+    "f45ca9ec-28bf-4a72-a988-a221c34f561d",
+    "9c8ee103-3602-44f0-a998-f2f2dc805b8f",
+    "23e3dad3-66e8-4c51-a815-361dfda4a96c",
+    "5b59d340-bd90-427b-b9af-73d878ba0ca8",
+    "ba42e3b0-97f8-44fe-8ae2-26183baa228f",
+    "fd4d680f-9a97-4a09-a5a3-f8347aad54e6",
+    "5d539a1a-c9a1-42c2-96a0-06c59f4a39d6",
+    "d4d14f4f-ee63-4cc0-8daa-b1fcafbda65e",
+    "887b3438-1762-4de7-905a-86282e7bdcd3",
+  ];
+
+  const ScrubMenPents = [
+    "b9111dda-0333-4b86-8ebd-8f2d5d11dc87",
+    "ae10d922-e6ae-441a-bf8a-a6887fbfc7b9",
+    "4f56991e-9e5d-4321-8328-b274d971a846",
+    "26d0a543-ef36-4112-999e-7d7a8a4a36ab",
+    "03c4f8f3-31b3-4f12-84c6-6f12d7886cfc",
+    "0235245d-fc50-4f17-abda-5660c0d5d525",
+    "f4b0061e-9294-4bda-9547-0cd84fdac30c",
+    "26da3c77-0bde-4c64-88db-09dbb116d4b7",
+    "049c50c0-b9cf-4740-995c-c898a26bc362",
+    "3fc48366-c37a-4075-8c09-d29272c67b99",
+    "c3e83f1c-4f79-49db-a111-da14bdc05875",
     "02892d78-e1b3-4b84-9975-600236a17ba8",
   ];
 
@@ -211,15 +247,66 @@ const ProductList = () => {
       </Link>
     );
   };
+  const [selected, setSelected] = useState("");
 
   return (
     <Stack minH={"100vh"} direction={"row"}>
-      <Box w={"20%"} p={"10"} display={["none", "block"]}>
-        <AccordionComp
-          FiltersList={FiltersList}
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-        />
+      <Box w={"25%"} p={"10"} display={["none", "block"]}>
+        {/* <AccordionComp FiltersList={FiltersList} /> */}
+        <Stack spacing={"2"} direction={"column"}>
+          {FiltersList.map((data, index) => {
+            return (
+              <>
+                <Stack direction={"row"} alignItems={"center"} key={index}>
+                  {selected === index && <CheckIcon />}
+                  <Text
+                    userSelect={"none"}
+                    cursor={"pointer"}
+                    color={selected === index ? "blue" : "black"}
+                    _hover={{ color: "blue" }}
+                    onClick={() => {
+                      if (selected === index) {
+                        setSelected("");
+                        getProducts();
+                      } else {
+                        setSelected(index);
+                        switch (data.name) {
+                          case "Scrub Top":
+                            let temp_scrubTop = [];
+                            ScrubMenTop.map((list_id) => {
+                              return AllProducts.filter((scrubtopMen_prod) => {
+                                if (scrubtopMen_prod.id === list_id) {
+                                  return temp_scrubTop.push(scrubtopMen_prod);
+                                }
+                                return 0;
+                              });
+                            });
+                            return setAllProducts(temp_scrubTop);
+                          case "Scrub Pants":
+                            let temp_scrubPant = [];
+                            ScrubMenPents.map((list_id) => {
+                              return AllProducts.filter((scrubpantMen_prod) => {
+                                if (scrubpantMen_prod.id === list_id) {
+                                  return temp_scrubPant.push(scrubpantMen_prod);
+                                }
+                                return 0;
+                              });
+                            });
+                            return setAllProducts(temp_scrubPant);
+                          default:
+                            return getProducts();
+                        }
+                      }
+                    }}
+                  >
+                    {data.name}
+                  </Text>
+                </Stack>
+                <Divider />
+              </>
+            );
+          })}
+        </Stack>
       </Box>
       <Box
         flex={1}
@@ -230,12 +317,13 @@ const ProductList = () => {
         justifyContent={"center"}
       >
         {AllProducts.map((product, index) => {
-          if (product.parentcategory === params.category.toUpperCase())
+          if (product.parentcategory === params.category.toUpperCase()) {
             if (product.parentcategory === "MEN") {
               return <CardMen mensT={product} index={index} />;
             } else if (product.parentcategory === "WOMEN") {
               return <CardWomen WTrend={product} index={index} />;
             }
+          }
         })}
       </Box>
     </Stack>
