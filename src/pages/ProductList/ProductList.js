@@ -39,6 +39,33 @@ const ProductList = () => {
     "3e99340b-4d47-4f1c-a9ec-85efea5230b3",
   ];
 
+  const MenList = [
+    "7a7eb867-60d9-47f0-aa6d-96f413b7308f",
+    "b9111dda-0333-4b86-8ebd-8f2d5d11dc87",
+    "0bd93b32-729c-4ddc-833e-3414514ca18c",
+    "ae10d922-e6ae-441a-bf8a-a6887fbfc7b9",
+    "bd8dfba5-18f3-48a3-9ba0-74bed74fa4ca",
+    "4f56991e-9e5d-4321-8328-b274d971a846",
+    "f45ca9ec-28bf-4a72-a988-a221c34f561d",
+    "26d0a543-ef36-4112-999e-7d7a8a4a36ab",
+    "9c8ee103-3602-44f0-a998-f2f2dc805b8f",
+    "03c4f8f3-31b3-4f12-84c6-6f12d7886cfc",
+    "23e3dad3-66e8-4c51-a815-361dfda4a96c",
+    "0235245d-fc50-4f17-abda-5660c0d5d525",
+    "5b59d340-bd90-427b-b9af-73d878ba0ca8",
+    "f4b0061e-9294-4bda-9547-0cd84fdac30c",
+    "ba42e3b0-97f8-44fe-8ae2-26183baa228f",
+    "26da3c77-0bde-4c64-88db-09dbb116d4b7",
+    "fd4d680f-9a97-4a09-a5a3-f8347aad54e6",
+    "049c50c0-b9cf-4740-995c-c898a26bc362",
+    "5d539a1a-c9a1-42c2-96a0-06c59f4a39d6",
+    "3fc48366-c37a-4075-8c09-d29272c67b99",
+    "d4d14f4f-ee63-4cc0-8daa-b1fcafbda65e",
+    "c3e83f1c-4f79-49db-a111-da14bdc05875",
+    "887b3438-1762-4de7-905a-86282e7bdcd3",
+    "02892d78-e1b3-4b84-9975-600236a17ba8",
+  ];
+
   const getProducts = async () => {
     return await axios
       .get(`${BASEURL}/Product`)
@@ -55,7 +82,16 @@ const ProductList = () => {
           });
           return setAllProducts(temp_data);
         } else {
-          return setAllProducts(resp.data.response);
+          let temp_data = [];
+          MenList.map((list_id) => {
+            return resp.data.response.filter((men_prod) => {
+              if (men_prod.id === list_id) {
+                return temp_data.push(men_prod);
+              }
+              return 0;
+            });
+          });
+          return setAllProducts(temp_data);
         }
       })
       .catch((error) => {
@@ -67,23 +103,48 @@ const ProductList = () => {
     getProducts();
   }, []);
 
+  const [onHover, setonHover] = useState("");
+
   const CardMen = ({ mensT, index }) => {
     return (
       <Link
         to={`/products/${mensT.productname.toLowerCase()}/men`}
         key={index.toString()}
+        onMouseEnter={(e) => {
+          const getIndexValue = AllProducts[index];
+          if (getIndexValue.id === mensT.id) {
+            setonHover(getIndexValue.id);
+          }
+        }}
+        onMouseLeave={() => {
+          setonHover("");
+        }}
       >
-        <div className="px-3 hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer">
+        <div className="px-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
           <div className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center">
-            <Image
+            {/* <Image
               src={mensT.productimage && mensT.productimage[0]}
               // onLoad={() => console.log("loading")}
-            />
+            /> */}
+            {mensT.productimage && onHover === mensT.id ? (
+              <Image
+                src={mensT.productimage[1]}
+                // onLoad={() => console.log("loading")}
+                className="h-80 w-64"
+              />
+            ) : (
+              <Image
+                src={mensT.productimage[0]}
+                // onLoad={() => console.log("loading")}
+                className="h-80 w-64"
+              />
+            )}
             <div className="p-2 text-base font-bold text-gray-500 ">
               <h1>
-                {mensT.personname && mensT?.personname[0]}
-                {mensT.personname && mensT?.personname?.slice(1).toLowerCase()}
-                {mensT.varientname !== "JOGGER" && "-"}
+                {/* {mensT.personname && mensT?.personname[0]} */}
+                {/* {mensT.personname && mensT?.personname?.slice(1).toLowerCase()} */}
+                {mensT.varientname === "JOGGER" &&
+                  mensT?.varientname?.toLowerCase()}
                 {mensT.varientname !== "JOGGER" &&
                   mensT?.varientname?.toLowerCase()}
                 -{mensT.typename && mensT?.typename?.toLowerCase()}-
@@ -97,7 +158,6 @@ const ProductList = () => {
       </Link>
     );
   };
-  const [onHover, setonHover] = useState("");
 
   const CardWomen = ({ WTrend, index }) => {
     return (
