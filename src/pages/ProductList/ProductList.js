@@ -5,6 +5,7 @@ import { Box, Divider, Image, Stack, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { BASEURL } from "../../Config/URL";
 import { CheckIcon } from "@chakra-ui/icons";
+import NewsLetter from "../../components/NewsLetter";
 
 const ProductList = () => {
   const params = useParams();
@@ -382,107 +383,110 @@ const ProductList = () => {
   // }, [selected]);
 
   return (
-    <Stack minH={"100vh"} direction={"row"}>
-      <Box w={"25%"} p={"10"} display={["none", "block"]}>
-        {/* <AccordionComp FiltersList={FiltersList} /> */}
-        <Stack spacing={"2"} direction={"column"}>
-          {FiltersList.map((data, index) => {
-            return (
-              <>
-                <Stack direction={"row"} alignItems={"center"} key={index}>
-                  {selected === index && <CheckIcon />}
-                  <Text
-                    userSelect={"none"}
-                    cursor={"pointer"}
-                    color={selected === index ? "blue" : "black"}
-                    _hover={{ color: "blue" }}
-                    onClick={() => {
-                      if (selected === index) {
-                        setSelected("");
-                        setAllProducts(getIndProducts);
-                      } else if (selected !== index) {
-                        setSelected(index);
-                        ToggleFilter(data);
-                      }
-                    }}
-                  >
-                    {data.name}
-                  </Text>
-                </Stack>
-                <Divider />
-              </>
-            );
-          })}
-          <Box
-            display={"flex"}
-            alignItems={"center"}
-            justifyContent={"space-between"}
-          >
-            <Text userSelect={"none"} fontSize={"md"}>
-              Colors
-            </Text>
-            {colorSelect !== "" && (
-              <Text
-                cursor={"pointer"}
-                onClick={() => {
-                  setColorSelect("");
-                  setAllProducts(getIndProducts);
-                }}
-              >
-                Reset
-              </Text>
-            )}
-          </Box>
-          <Box flexWrap={"wrap"} display={"flex"}>
-            {Colors.map((color, index) => {
+    <>
+      <Stack minH={"100vh"} direction={"row"}>
+        <Box w={"25%"} p={"10"} display={["none", "block"]}>
+          {/* <AccordionComp FiltersList={FiltersList} /> */}
+          <Stack spacing={"2"} direction={"column"}>
+            {FiltersList.map((data, index) => {
               return (
-                <Box
-                  key={index}
-                  w={"5"}
-                  h={"5"}
-                  bgColor={color.code}
-                  rounded={"full"}
-                  m={"1"}
-                  title={color.name}
-                  cursor={"pointer"}
-                  ring={colorSelect === index ? "2" : "0"}
-                  onClick={() => {
-                    setColorSelect(index);
-                    let allpro = getIndProducts.filter((prod_col) => {
-                      if (
-                        prod_col.colors?.name.toUpperCase() ===
-                        color.name.toUpperCase()
-                      ) {
-                        return prod_col;
-                      }
-                    });
-                    return setAllProducts(allpro);
-                  }}
-                ></Box>
+                <>
+                  <Stack direction={"row"} alignItems={"center"} key={index}>
+                    {selected === index && <CheckIcon />}
+                    <Text
+                      userSelect={"none"}
+                      cursor={"pointer"}
+                      color={selected === index ? "blue" : "black"}
+                      _hover={{ color: "blue" }}
+                      onClick={() => {
+                        if (selected === index) {
+                          setSelected("");
+                          setAllProducts(getIndProducts);
+                        } else if (selected !== index) {
+                          setSelected(index);
+                          ToggleFilter(data);
+                        }
+                      }}
+                    >
+                      {data.name}
+                    </Text>
+                  </Stack>
+                  <Divider />
+                </>
               );
             })}
-          </Box>
-        </Stack>
-      </Box>
-      <Box
-        flex={1}
-        p={"5"}
-        flexWrap={"wrap"}
-        display={"flex"}
-        alignItems={"center"}
-        justifyContent={"center"}
-      >
-        {AllProducts.map((product, index) => {
-          if (product.parentcategory === params.category.toUpperCase()) {
-            if (product.parentcategory === "MEN") {
-              return <CardMen mensT={product} index={index} />;
-            } else if (product.parentcategory === "WOMEN") {
-              return <CardWomen WTrend={product} index={index} />;
+            <Box
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
+            >
+              <Text userSelect={"none"} fontSize={"md"}>
+                Colors
+              </Text>
+              {colorSelect !== "" && (
+                <Text
+                  cursor={"pointer"}
+                  onClick={() => {
+                    setColorSelect("");
+                    setAllProducts(getIndProducts);
+                  }}
+                >
+                  Reset
+                </Text>
+              )}
+            </Box>
+            <Box flexWrap={"wrap"} display={"flex"}>
+              {Colors.map((color, index) => {
+                return (
+                  <Box
+                    key={index}
+                    w={"5"}
+                    h={"5"}
+                    bgColor={color.code}
+                    rounded={"full"}
+                    m={"1"}
+                    title={color.name}
+                    cursor={"pointer"}
+                    ring={colorSelect === index ? "2" : "0"}
+                    onClick={() => {
+                      setColorSelect(index);
+                      let allpro = getIndProducts.filter((prod_col) => {
+                        if (
+                          prod_col.colors?.name.toUpperCase() ===
+                          color.name.toUpperCase()
+                        ) {
+                          return prod_col;
+                        }
+                      });
+                      return setAllProducts(allpro);
+                    }}
+                  ></Box>
+                );
+              })}
+            </Box>
+          </Stack>
+        </Box>
+        <Box
+          flex={1}
+          p={"5"}
+          flexWrap={"wrap"}
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
+          {AllProducts.map((product, index) => {
+            if (product.parentcategory === params.category.toUpperCase()) {
+              if (product.parentcategory === "MEN") {
+                return <CardMen mensT={product} index={index} />;
+              } else if (product.parentcategory === "WOMEN") {
+                return <CardWomen WTrend={product} index={index} />;
+              }
             }
-          }
-        })}
-      </Box>
-    </Stack>
+          })}
+        </Box>
+      </Stack>
+      <NewsLetter />
+    </>
   );
 };
 

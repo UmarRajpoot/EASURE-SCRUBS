@@ -13,6 +13,8 @@ import Technology from "./pages/Technology/Technology";
 import OurStory from "./pages/OurStory/OurStory";
 import fitguide from "./pages/fitguide/fitguide";
 import ProductList from "./pages/ProductList/ProductList";
+import FAQs from "./components/FAQs";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/fitguide/:category" Component={fitguide} />
           <Route path="/OurStory" Component={OurStory} />
           <Route path="/technology" Component={Technology} />
+          <Route path="/FAQs" Component={FAQs} />
+          <Route path="/PrivacyPolicy" Component={PrivacyPolicy} />
           <Route path="/account/register" Component={register} />
           <Route path="/account/login" Component={login} />
           <Route path="/products/:id/:category" Component={Products} />
