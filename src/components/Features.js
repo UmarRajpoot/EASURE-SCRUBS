@@ -45,7 +45,7 @@ const Features = () => {
 
   return (
     <Box p={"20"} bgColor={"gray.200"}>
-      <Stack direction={["column", "row"]}>
+      <Stack direction={["column", "column", "row"]}>
         {FeatureItems.map((feature, index) => {
           return (
             <FeatureItem

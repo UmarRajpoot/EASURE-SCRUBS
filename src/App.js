@@ -30,7 +30,7 @@ function App() {
           <Route path="/PrivacyPolicy" Component={PrivacyPolicy} />
           <Route path="/account/register" Component={register} />
           <Route path="/account/login" Component={login} />
-          <Route path="/products/:id/:category" Component={Products} />
+          <Route path="/products/:id" Component={Products} />
           <Route
             path="/collection/:collection/:category?"
             Component={Collection}

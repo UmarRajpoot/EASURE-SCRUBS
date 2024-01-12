@@ -79,7 +79,7 @@ const MensShop = () => {
   const Card_comp = ({ mensT, index }) => {
     return (
       <Link
-        to={`/products/${mensT.productname.toLowerCase()}/men`}
+        to={`/products/${mensT.id}`}
         key={index.toString()}
         onMouseEnter={() => {
           const getIndexValue = MensTrend[index];

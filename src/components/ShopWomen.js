@@ -83,7 +83,7 @@ const ShopWomen = () => {
   const Card_comp = ({ WTrend, index }) => {
     return (
       <Link
-        to={`/products/${WTrend.productname.toLowerCase()}/women`}
+        to={`/products/${WTrend.id}`}
         key={index.toString()}
         onMouseEnter={(e) => {
           const getIndexValue = womenShop[index];

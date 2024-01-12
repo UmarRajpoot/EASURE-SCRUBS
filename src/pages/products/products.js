@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 // import { Carousel } from "flowbite-react";
 import Star from "../../components/star";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import ReactPlayer from "react-player";
@@ -10,7 +10,15 @@ import { BASEURL } from "../../Config/URL";
 import { useDispatch, useSelector } from "react-redux";
 import { DrawerState } from "../../Store/Drawer/actions";
 import { AddCartItem } from "../../Store/Cart/actions";
-import { Box, Button, HStack, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  HStack,
+  Image,
+  Stack,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import ReviewModel from "../../components/ReviewModel";
 import Suggestion from "../../components/Suggestion";
 import { GrStar } from "react-icons/gr";
@@ -35,11 +43,13 @@ const Products = () => {
 
   const ReviewModelDis = useDisclosure();
 
-  const Sizes = ["S", "M", "L", "XL", "XXL"];
+  const Sizes = ["XS", "S", "M", "L", "XL", "2XL"];
 
   const [chooseSize, setchooseSize] = useState("");
   const [chooseColor, setchooseColor] = useState("");
   const [selectColor, setSelectColor] = useState("");
+
+  const [selectLength, setSelectLength] = useState("");
 
   const IsDrawerOpen = useSelector((state) => state.DrawerOptions.DrawerState);
   const CartItems = useSelector((state) => state.CartOptions.CartItems);
@@ -51,9 +61,11 @@ const Products = () => {
   const params = useParams();
   const videoRef = useRef();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (selectColor !== "") {
-      allColors.filter((filCol) => {
+      return allColors.filter((filCol) => {
         if (filCol.colorcode === selectColor) {
           setchooseColor(filCol.name);
         }
@@ -65,7 +77,8 @@ const Products = () => {
     return await axios
       .get(`${BASEURL}/Colors`)
       .then((resp) => {
-        setAllColors(resp.data.response);
+        // console.log(resp.data.response);
+        // setAllColors(resp.data.response);
       })
       .catch((error) => {
         console.log(error);
@@ -83,7 +96,6 @@ const Products = () => {
         console.log(error);
       });
   };
-
   const makeCarousel = (prodata) => {
     const images = prodata?.productimage.map((img) => {
       return {
@@ -119,9 +131,10 @@ const Products = () => {
       .then((resp) => {
         // console.log(resp.data);
         // console.log(resp.data.response);
-        getAllReviews(resp.data.response.id);
+        getAllReviews(resp.data.response?.id);
         setProductData(resp.data.response);
         makeCarousel(resp.data.response);
+        setAllColors(resp.data.colors);
       })
       .catch((error) => {
         console.log(error.response.data.error);
@@ -131,10 +144,10 @@ const Products = () => {
   useEffect(() => {
     // getProData();
     getProductData();
-    getAllColors();
+    // getAllColors();
   }, [params.id]);
 
-  const colors = ["Black", "Navy-Blue", "Ceil-Blue"];
+  // const colors = ["Black", "Navy-Blue", "Ceil-Blue"];
 
   const LeftControl = (
     <div className="bg-gray-200 hover:outline outline-2 outline-gray-600 flex items-center justify-center rounded-full">
@@ -335,15 +348,36 @@ const Products = () => {
             </h4>
           </div>
           <div className="my-3">
-            <h3 className="text-base font-medium">CLASSIC</h3>
-            <div className="mt-2 flex items-center">
-              <div
-                className={`w-5 h-5 rounded-full bg-black mx-2 ${
-                  chooseColor === "BLACK" ? "outline-2" : "outline-0"
-                } outline outline-offset-2 outline-0 hover:outline-1 hover:cursor-pointer`}
-                onClick={() => setchooseColor("BLACK")}
-              ></div>
-              <div
+            <h3 className="text-base font-medium">Colors</h3>
+            <div className="mt-2 flex-1 flex items-center">
+              {allColors.map((colors, index) => {
+                return (
+                  <Box
+                    key={index}
+                    title={colors.colors.name}
+                    bgColor={colors.colors.code}
+                    w={"5"}
+                    h={"5"}
+                    mx={"2"}
+                    cursor={"pointer"}
+                    rounded={"full"}
+                    ring={"3"}
+                    ringColor={
+                      chooseColor === colors.colors.code
+                        ? "blackAlpha.600"
+                        : "white"
+                    }
+                    onClick={() => {
+                      setchooseColor(colors.colors.code);
+                      navigate("/products/" + colors.productId, {
+                        preventScrollReset: true,
+                        replace: true,
+                      });
+                    }}
+                  ></Box>
+                );
+              })}
+              {/* <div
                 className={`w-5 h-5 rounded-full bg-[#000080] mr-2 ${
                   chooseColor === "NAVY-BLUE" ? "outline-2" : "outline-0"
                 } outline outline-offset-2 outline-0 hover:outline-1 hover:cursor-pointer`}
@@ -354,11 +388,7 @@ const Products = () => {
                   chooseColor === "CEIL-BLUE" ? "outline-2" : "outline-0"
                 } outline outline-offset-2 outline-0 hover:outline-1 hover:cursor-pointer`}
                 onClick={() => setchooseColor("CEIL-BLUE")}
-              ></div>
-              {/* <div className="w-5 h-5 rounded-full bg-green-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-              <div className="w-5 h-5 rounded-full bg-yellow-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-              <div className="w-5 h-5 rounded-full bg-red-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-              <div className="w-5 h-5 rounded-full bg-pink-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div> */}
+              ></div> */}
             </div>
           </div>
           {/* <div className="my-3">
@@ -413,7 +443,7 @@ const Products = () => {
           <div>
             <h3 className="text-normal font-medium my-3">SIZES</h3>
 
-            <div className="flex item-center">
+            <div className="flex item-center flex-wrap">
               {Sizes.map((size, index) => {
                 return (
                   <button
@@ -429,23 +459,53 @@ const Products = () => {
                   </button>
                 );
               })}
-
-              {/* <h4 className="text-sm p-1.5 px-3 m-1 hover:bg-gray-200 hover:cursor-pointer  rounded-md font-medium  border border-spacing-2 border-gray-300 text-gray-500">
-                S
-              </h4>
-              <h4 className="text-sm p-1.5 px-3 m-1 hover:bg-gray-200 hover:cursor-pointer  rounded-md font-medium border border-spacing-2 border-gray-300 text-gray-500">
-                M
-              </h4>
-              <h4 className="text-sm p-1.5 px-3 m-1 hover:bg-gray-200 hover:cursor-pointer  rounded-md font-medium border border-spacing-2 border-gray-300 text-gray-500">
-                L
-              </h4>
-              <h4 className="text-sm p-1.5 px-3 m-1 hover:bg-gray-200 hover:cursor-pointer  rounded-md font-medium border border-spacing-2 border-gray-300 text-gray-500">
-                X
-              </h4>
-              <h4 className="text-sm p-1.5 px-3 m-1 hover:bg-gray-200 hover:cursor-pointer  rounded-md font-medium border border-spacing-2 border-gray-300 text-gray-500">
-                XXL
-              </h4> */}
             </div>
+            <Link
+              to={
+                productData.parentcategory === "MEN"
+                  ? "/fitguide/men"
+                  : "/fitguide/women"
+              }
+            >
+              <Text cursor={"pointer"}>Fit Guide</Text>
+            </Link>
+            <Box my={"5"}>
+              <Text mb={"2"}>Length</Text>
+              <Stack direction={"row"}>
+                <Box
+                  cursor={"pointer"}
+                  _hover={{
+                    bgColor: "black",
+                    color: "white",
+                  }}
+                  p={"2"}
+                  rounded={"md"}
+                  bgColor={selectLength === "Regular" ? "black" : "gray.300"}
+                  color={selectLength === "Regular" ? "white" : "black"}
+                  onClick={() => {
+                    setSelectLength("Regular");
+                  }}
+                >
+                  <Text>Regular</Text>
+                </Box>
+                <Box
+                  cursor={"pointer"}
+                  _hover={{
+                    bgColor: "black",
+                    color: "white",
+                  }}
+                  p={"2"}
+                  rounded={"md"}
+                  bgColor={selectLength === "Petite" ? "black" : "gray.300"}
+                  color={selectLength === "Petite" ? "white" : "black"}
+                  onClick={() => {
+                    setSelectLength("Petite");
+                  }}
+                >
+                  <Text>Petite</Text>
+                </Box>
+              </Stack>
+            </Box>
             {/* <div className="flex item-center">
               {productData?.sizes?.map((size, index) => {
                 return (
@@ -492,6 +552,21 @@ const Products = () => {
                 <p className="text-sm">Add to Cart</p>
               </div>
             </div>
+            <Stack direction={"column"}>
+              <Box display={"flex"} alignItems={"center"}>
+                <Image src="/Images/Features/Artboard3.svg" w={"10"} h={"10"} />
+                <Text>Product Fit Guarantee</Text>
+              </Box>
+              <Box display={"flex"} alignItems={"center"}>
+                <Image
+                  src="/Images/Features/Artboard1.svg"
+                  w={"10"}
+                  h={"10"}
+                  p={"1"}
+                />
+                <Text>Free Shipping & Returns</Text>
+              </Box>
+            </Stack>
           </div>
         </div>
       </div>
@@ -549,7 +624,7 @@ const Products = () => {
         Don't Forget to Check These
       </h4>
       <div className="px-3 md:px-10">
-        <Suggestion productSuggestions={productData.suggestions} />
+        {/* <Suggestion productSuggestions={productData.suggestions} /> */}
       </div>
       <div className="flex flex-col px-10">
         <ReviewModel

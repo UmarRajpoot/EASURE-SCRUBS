@@ -204,7 +204,7 @@ const ProductList = () => {
   const CardMen = ({ mensT, index }) => {
     return (
       <Link
-        to={`/products/${mensT.productname.toLowerCase()}/men`}
+        to={`/products/${mensT.id}`}
         key={index.toString()}
         onMouseEnter={(e) => {
           const getIndexValue = AllProducts[index];
@@ -260,7 +260,7 @@ const ProductList = () => {
   const CardWomen = ({ WTrend, index }) => {
     return (
       <Link
-        to={`/products/${WTrend.productname.toLowerCase()}/women`}
+        to={`/products/${WTrend.id}`}
         key={index.toString()}
         onMouseEnter={(e) => {
           const getIndexValue = AllProducts[index];
