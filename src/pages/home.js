@@ -7,6 +7,7 @@ import OurPromise from "../components/OurPromise";
 import NewsLetter from "../components/NewsLetter";
 import ModelBanner from "../components/Model/ModelBanner";
 import Features from "../components/Features";
+import BottomImage from "../components/BottomImage";
 
 const index = () => {
   return (
@@ -19,6 +20,7 @@ const index = () => {
       <OurPromise />
       <NewsLetter />
       <ModelBanner />
+      <BottomImage />
     </div>
   );
 };
