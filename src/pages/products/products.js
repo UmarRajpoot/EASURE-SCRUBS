@@ -18,6 +18,11 @@ import {
   Stack,
   Text,
   useDisclosure,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
 } from "@chakra-ui/react";
 import ReviewModel from "../../components/ReviewModel";
 import Suggestion from "../../components/Suggestion";
@@ -467,66 +472,49 @@ const Products = () => {
                   : "/fitguide/women"
               }
             >
-              <Text cursor={"pointer"}>Fit Guide</Text>
+              <Text cursor={"pointer"} p={"2"}>
+                Fit Guide
+              </Text>
             </Link>
-            <Box my={"5"}>
-              <Text mb={"2"}>Length</Text>
-              <Stack direction={"row"}>
-                <Box
-                  cursor={"pointer"}
-                  _hover={{
-                    bgColor: "black",
-                    color: "white",
-                  }}
-                  p={"2"}
-                  rounded={"md"}
-                  bgColor={selectLength === "Regular" ? "black" : "gray.300"}
-                  color={selectLength === "Regular" ? "white" : "black"}
-                  onClick={() => {
-                    setSelectLength("Regular");
-                  }}
-                >
-                  <Text>Regular</Text>
-                </Box>
-                <Box
-                  cursor={"pointer"}
-                  _hover={{
-                    bgColor: "black",
-                    color: "white",
-                  }}
-                  p={"2"}
-                  rounded={"md"}
-                  bgColor={selectLength === "Petite" ? "black" : "gray.300"}
-                  color={selectLength === "Petite" ? "white" : "black"}
-                  onClick={() => {
-                    setSelectLength("Petite");
-                  }}
-                >
-                  <Text>Petite</Text>
-                </Box>
-              </Stack>
-            </Box>
-            {/* <div className="flex item-center">
-              {productData?.sizes?.map((size, index) => {
-                return (
-                  <h4
-                    key={index.toString()}
-                    className={`text-sm p-1.5 px-3 m-1 hover:bg-gray-100  hover:cursor-pointer rounded-md font-medium  border border-spacing-2 border-gray-300 ${
-                      chooseSize === size
-                        ? "hover:bg-gray-800"
-                        : "text-gray-300"
-                    } ${
-                      chooseSize === size ? "text-gray-100" : "text-gray-600"
-                    }  ${chooseSize === size ? "bg-gray-800" : "bg-gray-300"} `}
+            {productData.typestylename === "PANTS" && (
+              <Box my={"3"}>
+                <Text mb={"2"}>Length</Text>
+                <Stack direction={"row"}>
+                  <Box
+                    cursor={"pointer"}
+                    _hover={{
+                      bgColor: "black",
+                      color: "white",
+                    }}
+                    p={"2"}
+                    rounded={"md"}
+                    bgColor={selectLength === "Regular" ? "black" : "gray.300"}
+                    color={selectLength === "Regular" ? "white" : "black"}
                     onClick={() => {
-                      setchooseSize(size);
+                      setSelectLength("Regular");
                     }}
                   >
-                    {size}
-                  </h4>
-                );
-              })}
-            </div> */}
+                    <Text>Regular</Text>
+                  </Box>
+                  <Box
+                    cursor={"pointer"}
+                    _hover={{
+                      bgColor: "black",
+                      color: "white",
+                    }}
+                    p={"2"}
+                    rounded={"md"}
+                    bgColor={selectLength === "Petite" ? "black" : "gray.300"}
+                    color={selectLength === "Petite" ? "white" : "black"}
+                    onClick={() => {
+                      setSelectLength("Petite");
+                    }}
+                  >
+                    <Text>Petite</Text>
+                  </Box>
+                </Stack>
+              </Box>
+            )}
             <div
               className="flex flex-col items-center my-3 "
               onClick={() => {
@@ -567,6 +555,42 @@ const Products = () => {
                 <Text>Free Shipping & Returns</Text>
               </Box>
             </Stack>
+            <Box>
+              <Accordion allowToggle>
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Box as="span" flex="1" textAlign="left">
+                        Materials
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel pb={4}>
+                    Our fabric blend is meticulously crafted to ensure
+                    flexibility, designed specifically to move seamlessly with
+                    your body. Comprising 74% Polyester, 20% Rayon, and 6%
+                    Spandex, it offers both comfort and reliability.
+                  </AccordionPanel>
+                </AccordionItem>
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Box as="span" flex="1" textAlign="left">
+                        Free Shipping & Returns
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel pb={4}>
+                    Our fabric blend is meticulously crafted to ensure
+                    flexibility, designed specifically to move seamlessly with
+                    your body. Comprising 74% Polyester, 20% Rayon, and 6%
+                    Spandex, it offers both comfort and reliability.
+                  </AccordionPanel>
+                </AccordionItem>
+              </Accordion>
+            </Box>
           </div>
         </div>
       </div>
@@ -620,11 +644,9 @@ const Products = () => {
           </div> */}
         </div>
       </div>
-      <h4 className="text-xl px-10 mt-10 font-bold ">
-        Don't Forget to Check These
-      </h4>
+      <h4 className="text-xl px-10 mt-10 font-bold ">Wear It With</h4>
       <div className="px-3 md:px-10">
-        {/* <Suggestion productSuggestions={productData.suggestions} /> */}
+        <Suggestion productSuggestions={productData?.suggestions} />
       </div>
       <div className="flex flex-col px-10">
         <ReviewModel

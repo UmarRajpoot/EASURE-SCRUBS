@@ -40,10 +40,10 @@ const HeroSection = () => {
             spacing={["10", "40"]}
             my={["3", "6"]}
           >
-            <Link to={"/collection/black-scrubs-men"}>
+            <Link to={"/scrubs/men"}>
               <Button label={"Shop Men →"} />
             </Link>
-            <Link to={"/collection/navy-blue-scrubs-women"}>
+            <Link to={"/scrubs/women"}>
               <div className="">
                 <Button label={"Shop Women →"} />
               </div>
