@@ -12,6 +12,11 @@ import {
   InputGroup,
   InputRightElement,
   VStack,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  Stack,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { BASEURL } from "../../Config/URL";
@@ -20,6 +25,17 @@ import { AddUser } from "../../Store/Auth/actions";
 
 import LoginSideImage from "../../assets/black3.jpeg";
 import NewsLetter from "../../components/NewsLetter";
+
+import { FirebaseApp } from "../../components/Firebase/Firebase";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
+import { CheckIcon } from "@chakra-ui/icons";
+import { FcGoogle } from "react-icons/fc";
+import { BsFacebook } from "react-icons/bs";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -36,15 +52,71 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [errorAlert, setErrorAlert] = useState("");
+  const [successAlert, setSuccessAlert] = useState("");
+
+  const AlertComp = ({ message }) => {
+    return (
+      <Alert status="error">
+        <AlertIcon />
+        <AlertTitle>Alert</AlertTitle>
+        <AlertDescription>{message}</AlertDescription>
+      </Alert>
+    );
+  };
+  const SuccessAlertComp = ({ message }) => {
+    return (
+      <Alert status="success">
+        <CheckIcon mx={"2"} />
+        <AlertTitle>Success</AlertTitle>
+        <AlertDescription>{message}</AlertDescription>
+      </Alert>
+    );
+  };
+
   const loginUser = async (email, password) => {
-    return await axios
-      .post(`${BASEURL}/login`, {
-        email: email,
-        password: password,
+    // return await axios
+    //   .post(`${BASEURL}/login`, {
+    //     email: email,
+    //     password: password,
+    //   })
+    //   .then((resp) => {
+    //     // console.log(resp.data);
+    //     dispatch(AddUser(resp.data.response));
+    //     navigate(-1);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    const auth = getAuth(FirebaseApp);
+    await signInWithEmailAndPassword(auth, email, password)
+      .then((getuser) => {
+        setErrorAlert("");
+        setSuccessAlert("Authenticated.");
+        dispatch(AddUser(getuser.user));
+        navigate(-1);
       })
-      .then((resp) => {
-        // console.log(resp.data);
-        dispatch(AddUser(resp.data.response));
+      .catch((error) => {
+        if (error.code === "auth/invalid-credential") {
+          return setErrorAlert("Email and Password is Incorrect.");
+        } else if (error.code === "auth/invalid-email") {
+          return setErrorAlert("Invalid Email");
+        }
+        setErrorAlert(error.code);
+      });
+  };
+
+  const googleLogin = async () => {
+    // Initialize Firebase Auth provider
+    const provider = new GoogleAuthProvider();
+    // whenever a user interacts with the provider, we force them to select an account
+    provider.setCustomParameters({
+      prompt: "select_account ",
+    });
+    const auth = getAuth(FirebaseApp);
+    await signInWithPopup(auth, provider)
+      .then((getuser) => {
+        // console.log(getuser.user);
         navigate(-1);
       })
       .catch((error) => {
@@ -54,6 +126,8 @@ const Login = () => {
 
   return (
     <>
+      {errorAlert !== "" && <AlertComp message={errorAlert} />}
+      {successAlert !== "" && <SuccessAlertComp message={successAlert} />}
       <div className="container md:px-6 md:mx-auto flex mb-20">
         <div className="mt-6 md:w-1/2 hidden  md:flex justify-end">
           <Image src={LoginSideImage} h={"500px"} />
@@ -114,6 +188,7 @@ const Login = () => {
                                 pr="4.5rem"
                                 type={show ? "text" : "password"}
                                 placeholder="Password"
+                                autoComplete="$"
                               />
                               <InputRightElement width="4.5rem">
                                 <Button
@@ -159,7 +234,31 @@ const Login = () => {
                   </Form>
                 )}
               </Formik>
-
+              <Stack
+                w={"full"}
+                display={"flex"}
+                flexDirection={"column"}
+                alignItems={"center"}
+                justifyContent={"center"}
+              >
+                <Button
+                  w={"full"}
+                  variant="outline"
+                  leftIcon={<FcGoogle size={25} />}
+                  fontSize={"sm"}
+                  onClick={() => googleLogin()}
+                >
+                  Sign in with Google
+                </Button>
+                <Button
+                  w={"full"}
+                  variant="outline"
+                  leftIcon={<BsFacebook size={25} color="blue" />}
+                  fontSize={"sm"}
+                >
+                  Sign in with Facebook
+                </Button>
+              </Stack>
               <div className="my-10">
                 <hr />
               </div>
@@ -167,7 +266,7 @@ const Login = () => {
                 <h3 className="text-xl font-medium text-center">
                   New to EASURE?
                 </h3>
-                <Link to={"/account/register"} replace={true}>
+                <Link to={"/register"} replace={true}>
                   <h3 className="text-md text-center my-4 hover:cursor-pointer">
                     Create an account
                   </h3>

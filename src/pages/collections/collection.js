@@ -14,6 +14,7 @@ const Collection = () => {
     return await axios
       .get(`${BASEURL}/collection/${params.collection}`)
       .then((resp) => {
+        console.log(resp.data);
         setExtProduct(resp.data.response);
       })
       .catch((error) => {

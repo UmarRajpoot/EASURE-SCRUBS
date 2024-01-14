@@ -47,7 +47,7 @@ const Drawer = ({ openDrawer }) => {
 
   useEffect(() => {
     // setMobileDropDown(false);
-    console.log("Drawer Closed");
+    // console.log("Drawer Closed");
     dispatch(DrawerState(false));
   }, [navigate.pathname]);
 

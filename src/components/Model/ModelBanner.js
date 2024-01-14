@@ -17,6 +17,8 @@ import {
 } from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { FirebaseApp } from "../Firebase/Firebase";
 
 const ModelBanner = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -30,6 +32,24 @@ const ModelBanner = () => {
       isApplied = false;
     };
   }, []);
+
+  const googleLogin = async () => {
+    // Initialize Firebase Auth provider
+    const provider = new GoogleAuthProvider();
+    // whenever a user interacts with the provider, we force them to select an account
+    provider.setCustomParameters({
+      prompt: "select_account ",
+    });
+    const auth = getAuth(FirebaseApp);
+    await signInWithPopup(auth, provider)
+      .then((getuser) => {
+        // console.log(getuser.user);
+        onClose();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <Modal
       isOpen={isOpen}
@@ -82,6 +102,7 @@ const ModelBanner = () => {
                     variant="outline"
                     leftIcon={<FcGoogle size={25} />}
                     fontSize={"sm"}
+                    onClick={() => googleLogin()}
                   >
                     Sign in with Google
                   </Button>

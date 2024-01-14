@@ -477,9 +477,9 @@ const ProductList = () => {
           {AllProducts.map((product, index) => {
             if (product.parentcategory === params.category.toUpperCase()) {
               if (product.parentcategory === "MEN") {
-                return <CardMen mensT={product} index={index} />;
+                return <CardMen mensT={product} index={index} key={index} />;
               } else if (product.parentcategory === "WOMEN") {
-                return <CardWomen WTrend={product} index={index} />;
+                return <CardWomen WTrend={product} index={index} key={index} />;
               }
             }
           })}

@@ -9,6 +9,8 @@ import { AddUser } from "../Store/Auth/actions";
 import WomenDropDownComp from "./DropDowns/WomenDropDown";
 import MenDropDownComp from "./DropDowns/MenDropDown";
 import { useEffect } from "react";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { FirebaseApp } from "./Firebase/Firebase";
 
 const NavbarComp = () => {
   const [WomenDropDown, setWomenDropDown] = useState(false);
@@ -26,6 +28,33 @@ const NavbarComp = () => {
   }, [navigate.pathname]);
 
   const dispatch = useDispatch();
+
+  const getUserDetail = async () => {
+    const auth = getAuth(FirebaseApp);
+    onAuthStateChanged(
+      auth,
+      (user) => {
+        if (user !== null) {
+          return dispatch(AddUser(user));
+        }
+        return null;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
+  useEffect(() => {
+    let isApplied = true;
+    if (isApplied) {
+      getUserDetail();
+    }
+    return () => {
+      isApplied = false;
+    };
+  }, []);
+
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -67,7 +96,17 @@ const NavbarComp = () => {
               {AuthState.length !== 0 ? (
                 <div
                   className="group ml-3 relative"
-                  onClick={() => dispatch(AddUser([]))}
+                  onClick={async () => {
+                    const auth = getAuth(FirebaseApp);
+                    await signOut(auth)
+                      .then(() => {
+                        console.log("User logout");
+                        dispatch(AddUser([]));
+                      })
+                      .catch((error) => {
+                        console.log(error);
+                      });
+                  }}
                 >
                   <div className="group-hover:cursor-pointer p-2">
                     <BiLogOutCircle size={25} />
@@ -77,7 +116,7 @@ const NavbarComp = () => {
                 </div>
               ) : (
                 <div className="group ml-3 relative">
-                  <Link to={`/account/login`}>
+                  <Link to={`/login`}>
                     <div className="group-hover:cursor-pointer p-2">
                       <BsPerson size={25} />
                     </div>

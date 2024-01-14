@@ -64,7 +64,10 @@ const Suggestion = ({ productSuggestions }) => {
             //   to={`/products/${suggest.response.productname.toLowerCase()}/${suggest.response.parentcategory.toLowerCase()}`}
             //   key={index.toString()}
             // >
-            <div className="flex w-full flex-col md:flex-row py-10 px-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer">
+            <div
+              key={index}
+              className="flex w-full flex-col md:flex-row py-10 px-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer"
+            >
               <div
                 className="h-96 w-64  bg-cover bg-no-repeat bg-center"
                 style={{

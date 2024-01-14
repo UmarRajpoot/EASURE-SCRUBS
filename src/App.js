@@ -15,21 +15,23 @@ import fitguide from "./pages/fitguide/fitguide";
 import ProductList from "./pages/ProductList/ProductList";
 import FAQs from "./components/FAQs";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import Returns from "./components/Returns";
 
 function App() {
   return (
     <div>
       <Wrapper>
         <Routes>
-          <Route path="/checkout" Component={Checkout} />
-          <Route path="/:cattype/:category" Component={ProductList} />
-          <Route path="/fitguide/:category" Component={fitguide} />
+          <Route path="/register" Component={register} />
           <Route path="/OurStory" Component={OurStory} />
           <Route path="/technology" Component={Technology} />
           <Route path="/FAQs" Component={FAQs} />
           <Route path="/PrivacyPolicy" Component={PrivacyPolicy} />
-          <Route path="/account/register" Component={register} />
-          <Route path="/account/login" Component={login} />
+          <Route path="/returns" Component={Returns} />
+          <Route path="/login" Component={login} />
+          <Route path="/checkout" Component={Checkout} />
+          <Route path="/fitguide/:category" Component={fitguide} />
+          <Route path="/:cattype/:category" Component={ProductList} />
           <Route path="/products/:id" Component={Products} />
           <Route
             path="/collection/:collection/:category?"

@@ -163,7 +163,7 @@ const MensShop = () => {
       >
         {MensTrend.map((mensT, index) => {
           if (mensT.parentcategory === "MEN") {
-            return <Card_comp mensT={mensT} index={index} />;
+            return <Card_comp key={index} mensT={mensT} index={index} />;
           }
         })}
       </ScrollMenu>

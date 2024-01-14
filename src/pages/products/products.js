@@ -78,6 +78,10 @@ const Products = () => {
     }
   }, [selectColor]);
 
+  // useEffect(() => {
+  //   localStorage.setItem("cartItem", JSON.stringify(CartItems));
+  // }, [CartItems]);
+
   const getAllColors = async () => {
     return await axios
       .get(`${BASEURL}/Colors`)
@@ -129,6 +133,8 @@ const Products = () => {
   //     videoRef.current.play();
   //   }, 3000);
   // }, []);
+
+  const [productAdded, setProductAdded] = useState(false);
 
   const getProductData = async () => {
     return await axios
@@ -217,12 +223,13 @@ const Products = () => {
             totalSlides={CarouselData.length}
             currentSlide={imageSlide}
             className="relative"
+            // key={imageSlide}
           >
             <Slider>
               {CarouselData?.map((data, index) => {
                 if (data.type === "image") {
                   return (
-                    <Slide index={index}>
+                    <Slide index={index} key={index}>
                       <img
                         className={`object-contain w-full h-full`}
                         key={index}
@@ -313,7 +320,7 @@ const Products = () => {
         <div className=" flex flex-col w-full md:w-[20%] ">
           <div>
             <h4 className="text-3xl">
-              {productData.personname && productData?.personname[0]}
+              {/* {productData.personname && productData?.personname[0]}
               {productData.personname &&
                 productData?.personname?.slice(1).toLowerCase()}
               {productData.parentcategory &&
@@ -323,6 +330,12 @@ const Products = () => {
                 productData.parentcategory === "MEN" &&
                 productData.varientname !== "JOGGER" &&
                 "-" + productData?.varientname?.toLowerCase()}
+              -{productData.typename && productData?.typename?.toLowerCase()}-
+              {productData.typestylename && productData?.typestylename[0]}
+              {productData.typestylename &&
+                productData?.typestylename?.slice(1).toLowerCase()} */}
+              {productData.varientname &&
+                productData?.varientname?.toLowerCase()}
               -{productData.typename && productData?.typename?.toLowerCase()}-
               {productData.typestylename && productData?.typestylename[0]}
               {productData.typestylename &&
@@ -368,12 +381,12 @@ const Products = () => {
                     rounded={"full"}
                     ring={"3"}
                     ringColor={
-                      chooseColor === colors.colors.code
+                      chooseColor === colors.colors.name
                         ? "blackAlpha.600"
                         : "white"
                     }
                     onClick={() => {
-                      setchooseColor(colors.colors.code);
+                      setchooseColor(colors.colors.name);
                       navigate("/products/" + colors.productId, {
                         preventScrollReset: true,
                         replace: true,
@@ -382,67 +395,8 @@ const Products = () => {
                   ></Box>
                 );
               })}
-              {/* <div
-                className={`w-5 h-5 rounded-full bg-[#000080] mr-2 ${
-                  chooseColor === "NAVY-BLUE" ? "outline-2" : "outline-0"
-                } outline outline-offset-2 outline-0 hover:outline-1 hover:cursor-pointer`}
-                onClick={() => setchooseColor("NAVY-BLUE")}
-              ></div>
-              <div
-                className={`w-5 h-5 rounded-full bg-[#92a1cf] mr-2 ${
-                  chooseColor === "CEIL-BLUE" ? "outline-2" : "outline-0"
-                } outline outline-offset-2 outline-0 hover:outline-1 hover:cursor-pointer`}
-                onClick={() => setchooseColor("CEIL-BLUE")}
-              ></div> */}
             </div>
           </div>
-          {/* <div className="my-3">
-            <h3 className="text-base font-medium">ICONIC</h3>
-            <div className="mt-2 flex items-center">
-              <div className="w-5 h-5 rounded-full bg-black mx-2 outline outline-offset-2 outline-0 hover:outline-1 "></div>
-              <div className="w-5 h-5 rounded-full bg-blue-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-              <div className="w-5 h-5 rounded-full bg-green-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-              <div className="w-5 h-5 rounded-full bg-yellow-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-              <div className="w-5 h-5 rounded-full bg-red-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-              <div className="w-5 h-5 rounded-full bg-pink-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-            </div>
-          </div>
-          <div className="my-3">
-            <h3 className="text-base font-medium">INJECTION</h3>
-            <div className="mt-2 flex items-center">
-              <div className="w-5 h-5 rounded-full bg-black mx-2 outline outline-offset-2 outline-0 hover:outline-1 "></div>
-              <div className="w-5 h-5 rounded-full bg-blue-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-              <div className="w-5 h-5 rounded-full bg-green-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-              <div className="w-5 h-5 rounded-full bg-yellow-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-              <div className="w-5 h-5 rounded-full bg-red-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-              <div className="w-5 h-5 rounded-full bg-pink-600 mr-2 outline outline-offset-2 outline-0 hover:outline-1"></div>
-            </div>
-          </div> */}
-          {/* {productData?.colors?.map((color, index) => {
-            return (
-              <div className="my-3" key={index}>
-                <h3 className="text-base">{color.name}</h3>
-                <div className="mt-2 flex items-center">
-                  {color.colors?.map((col, xindex) => {
-                    return (
-                      <div
-                        key={xindex}
-                        style={{ backgroundColor: col }}
-                        className={`w-4 h-4 rounded-full bg-[${col}] mr-2 ${
-                          selectColor === col
-                            ? "outline-4 outline-green-600"
-                            : "outline-1"
-                        } outline outline-offset-2 outline-0 hover:outline-1 hover:cursor-pointer`}
-                        onClick={() => {
-                          setSelectColor(col);
-                        }}
-                      ></div>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })} */}
 
           {/* Sizes */}
           <div>
@@ -523,17 +477,21 @@ const Products = () => {
                   productimage: productData.productimage[0],
                   productname: productData.productname,
                   productsize: chooseSize,
-                  productcolor: chooseColor,
+                  productcolor: chooseColor || productData.colors.name,
                   productPrice: productData.price,
                   originalPrice: productData.price,
                   count: 1,
                 };
-                dispatch(AddCartItem(item));
-                dispatch(DrawerState(!IsDrawerOpen));
-                // if (chooseSize !== "" && chooseColor !== "") {
-                // } else {
-                //   alert("Choose Size and Color");
-                // }
+                const checkCart = CartItems.filter(
+                  (cartItem) => cartItem.productID === item.productID
+                );
+                if (checkCart.length === 0) {
+                  dispatch(AddCartItem(item));
+                  dispatch(DrawerState(!IsDrawerOpen));
+                  setProductAdded(true);
+                } else {
+                  dispatch(DrawerState(!IsDrawerOpen));
+                }
               }}
             >
               <div className="bg-black text-white w-full text-center py-3 rounded-md hover:bg-gray-900 hover:cursor-pointer">
@@ -600,25 +558,7 @@ const Products = () => {
           <div className="flex flex-col items-center">
             <div className="mb-3">
               <img
-                src="https://images.ctfassets.net/5j6wpslh72e4/JY4MM2RQjWzrmNx4jPQNY/0fe7ae049eaf125d3431e93edb3accdd/FIGS_Fabric_Icons_ClassicFit.png"
-                className="w-8 h-8 md:w-12 md:h-12"
-              />
-            </div>
-            <h3 className="text-[10px] md:text-sm">CLASSIC FIT</h3>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="mb-3">
-              <img
-                src="https://images.ctfassets.net/5j6wpslh72e4/BiW7KWk3KwyPSNujJXTZi/ae1fb2611eda4619745e078b30dc76ea/icon-supersoft.svg"
-                className="w-8 h-8 md:w-12 md:h-12"
-              />
-            </div>
-            <h3 className="text-[10px] md:text-sm">RIDICULOUSLY SOFT</h3>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="mb-3">
-              <img
-                src="https://images.ctfassets.net/5j6wpslh72e4/1bcTq6qRNPBHPsqoJOADa8/80ca4177536b7c3cf494f9e9015c5ba2/icon-pocket.svg"
+                src="/Images/FabrImages/ANTI-WRINKLE.png"
                 className="w-8 h-8 md:w-12 md:h-12"
               />
             </div>
@@ -627,11 +567,38 @@ const Products = () => {
           <div className="flex flex-col items-center">
             <div className="mb-3">
               <img
-                src="https://images.ctfassets.net/5j6wpslh72e4/6J3kIc4yq5lYvto7yDVBnP/f305e339b6e0f9735dd0fd6111f07c4c/icon-antiwrinkle.svg"
+                src="/Images/FabrImages/ANTI-MICROBIAL FINISH.png"
                 className="w-8 h-8 md:w-12 md:h-12"
               />
             </div>
-            <h3 className="text-[10px] md:text-sm">ANTI-MICROBIAL</h3>
+            <h3 className="text-[10px] md:text-sm">ANTI-MICROBIAL FINISH</h3>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="mb-3">
+              <img
+                src="/Images/FabrImages/EXTREMELY SOFT.png"
+                className="w-8 h-8 md:w-12 md:h-12"
+              />
+            </div>
+            <h3 className="text-[10px] md:text-sm">EXTREMELY SOFT</h3>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="mb-3">
+              <img
+                src="/Images/FabrImages/4-WAY STRETCH.png"
+                className="w-8 h-8 md:w-12 md:h-12"
+              />
+            </div>
+            <h3 className="text-[10px] md:text-sm">4-WAY STRETCH</h3>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="mb-3">
+              <img
+                src="/Images/FabrImages/FADE RESISTANCE.png"
+                className="w-8 h-8 md:w-12 md:h-12"
+              />
+            </div>
+            <h3 className="text-[10px] md:text-sm">FADE RESISTANCE</h3>
           </div>
           {/* <div className="flex flex-col items-center">
             <div className="mb-3">

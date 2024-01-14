@@ -33,7 +33,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li className="mb-4">
-                <Link to={"/ReturnPolicy"}>
+                <Link to={"/returns"}>
                   <Text className=" hover:underline">Return and Exchange</Text>
                 </Link>
               </li>
