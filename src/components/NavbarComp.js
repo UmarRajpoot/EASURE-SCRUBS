@@ -11,6 +11,7 @@ import MenDropDownComp from "./DropDowns/MenDropDown";
 import { useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { FirebaseApp } from "./Firebase/Firebase";
+import { Image } from "@chakra-ui/react";
 
 const NavbarComp = () => {
   const [WomenDropDown, setWomenDropDown] = useState(false);
@@ -61,7 +62,12 @@ const NavbarComp = () => {
         <div className="flex flex-wrap items-center justify-between p-4">
           {/*max-w-screen-xl */}
           <Link to={"/"} className="flex items-center">
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="flex items-center self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              <Image
+                src={"/Images/Logo/Assest-2Logo.png"}
+                alt="logo"
+                w={"10"}
+              />{" "}
               EASURESCRUBS
             </span>
           </Link>
