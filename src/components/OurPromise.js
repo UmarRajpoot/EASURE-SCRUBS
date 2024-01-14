@@ -27,7 +27,7 @@ const OurPromice = () => {
   };
 
   return (
-    <Stack direction={["column", "row"]}>
+    <Stack direction={["column", "row"]} bgColor={"gray.200"}>
       <Box>
         <img src={OurPromise} width={"100%"} height={"100%"} />
       </Box>
