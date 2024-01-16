@@ -558,8 +558,8 @@ const Products = () => {
           <div className="flex flex-col items-center">
             <div className="mb-3">
               <img
-                src="/Images/FabrImages/ANTI-WRINKLE.png"
-                className="w-8 h-8 md:w-12 md:h-12"
+                src="/Images/OurPromiseAni/ANTI-WRINKLE.gif"
+                className="w-12 h-10 md:w-16 md:h-16"
               />
             </div>
             <h3 className="text-[10px] md:text-sm">ANTI-WRINKLE</h3>
@@ -567,8 +567,8 @@ const Products = () => {
           <div className="flex flex-col items-center">
             <div className="mb-3">
               <img
-                src="/Images/FabrImages/ANTI-MICROBIAL FINISH.png"
-                className="w-8 h-8 md:w-12 md:h-12"
+                src="/Images/OurPromiseAni/ANTI-MICROBIAL FINISH - PEWT.gif"
+                className="w-12 h-10 md:w-16 md:h-16"
               />
             </div>
             <h3 className="text-[10px] md:text-sm">ANTI-MICROBIAL FINISH</h3>
@@ -576,8 +576,8 @@ const Products = () => {
           <div className="flex flex-col items-center">
             <div className="mb-3">
               <img
-                src="/Images/FabrImages/EXTREMELY SOFT.png"
-                className="w-8 h-8 md:w-12 md:h-12"
+                src="/Images/OurPromiseAni/EXTREMELY SOFT - PEWT.gif"
+                className="w-12 h-10 md:w-16 md:h-16"
               />
             </div>
             <h3 className="text-[10px] md:text-sm">EXTREMELY SOFT</h3>
@@ -585,8 +585,8 @@ const Products = () => {
           <div className="flex flex-col items-center">
             <div className="mb-3">
               <img
-                src="/Images/FabrImages/4-WAY STRETCH.png"
-                className="w-8 h-8 md:w-12 md:h-12"
+                src="/Images/OurPromiseAni/4-WAY STRETCH - PEWT.gif"
+                className="w-12 h-10 md:w-16 md:h-16"
               />
             </div>
             <h3 className="text-[10px] md:text-sm">4-WAY STRETCH</h3>
@@ -594,8 +594,8 @@ const Products = () => {
           <div className="flex flex-col items-center">
             <div className="mb-3">
               <img
-                src="/Images/FabrImages/FADE RESISTANCE.png"
-                className="w-8 h-8 md:w-12 md:h-12"
+                src="/Images/OurPromiseAni/FADE RESISTANCE-PEWT.gif"
+                className="w-12 h-10 md:w-16 md:h-16"
               />
             </div>
             <h3 className="text-[10px] md:text-sm">FADE RESISTANCE</h3>

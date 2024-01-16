@@ -1,12 +1,8 @@
 import React from "react";
-import Button from "./button";
-import { useNavigate } from "react-router-dom";
 import { Box, Divider, Image, Stack, Text } from "@chakra-ui/react";
-import OurPromise from "../assets/OurPromise/ourpromise.png";
+import OurPromise from "../assets/OurPromise/main page.png";
 
 const OurPromice = () => {
-  const navigate = useNavigate();
-
   const Strip = ({ image, title }) => {
     return (
       <>
@@ -27,7 +23,7 @@ const OurPromice = () => {
   };
 
   return (
-    <Stack direction={["column", "row"]} bgColor={"gray.200"}>
+    <Stack direction={["column", "row"]} bgColor={"lightgray"}>
       <Box>
         <img src={OurPromise} width={"100%"} height={"100%"} />
       </Box>
