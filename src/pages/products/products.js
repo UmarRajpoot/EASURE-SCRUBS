@@ -541,10 +541,11 @@ const Products = () => {
                     </AccordionButton>
                   </h2>
                   <AccordionPanel pb={4}>
-                    Our fabric blend is meticulously crafted to ensure
-                    flexibility, designed specifically to move seamlessly with
-                    your body. Comprising 74% Polyester, 20% Rayon, and 6%
-                    Spandex, it offers both comfort and reliability.
+                    if you're not satisfied! We offer limitless exchanges for
+                    scrubs with free shipping. Additionally, we accept returns
+                    within 60 days of purchase for any reason, as long as the
+                    scrubs are in their original, unworn, unwashed condition
+                    with all tags attached.
                   </AccordionPanel>
                 </AccordionItem>
               </Accordion>

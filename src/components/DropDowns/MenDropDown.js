@@ -7,9 +7,9 @@ const DropDown = () => {
   return (
     <div className="border-gray-200 shadow-sm bg-gray-50 md:bg-white border-y dark:bg-gray-800 dark:border-gray-600">
       <SimpleGrid
-        columns={3}
+        columns={2}
         spacing={[5, 10]}
-        w={["container.sm", "container.md"]}
+        w={["container.sm", "container.sm"]}
         p={"5"}
         alignItems={"baseline"}
       >
@@ -52,7 +52,7 @@ const DropDown = () => {
               <div className="font-semibold">Scrubs</div>
               <Box>
                 <Link
-                  to="/products/men-vincent-scrub-top/men"
+                  to="/viewall/scrubs/men?filter=scrubtop"
                   className="flex p-3 rounded-lg "
                 >
                   <Text text={"Scrubs Tops"} />
@@ -60,13 +60,13 @@ const DropDown = () => {
               </Box>
               <Box>
                 <Link
-                  to="/products/men-vincent-scrub-pants/men"
+                  to="/viewall/scrubs/men?filter=scrubpants"
                   className="flex p-3 rounded-lg "
                 >
                   <Text text={"Scrub Pants"} />
                 </Link>
               </Box>
-              <Box>
+              {/* <Box>
                 <Link
                   to="/products/men-vincent-scrub-set/men"
                   className="flex p-3 rounded-lg "
@@ -82,11 +82,11 @@ const DropDown = () => {
               </a>
               <a href="#" className="p-2 flex ">
                 <Text text={"Maternity"} />
-              </a>
+              </a> */}
             </div>
           </Box>
         </Box>
-        <Box>
+        {/* <Box>
           <Box>
             <div className="">
               <div className="font-semibold">Scrubs</div>
@@ -125,7 +125,7 @@ const DropDown = () => {
               </a>
             </div>
           </Box>
-        </Box>
+        </Box> */}
       </SimpleGrid>
     </div>
   );

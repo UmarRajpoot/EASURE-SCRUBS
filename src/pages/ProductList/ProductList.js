@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import AccordionComp from "../../components/AccordionComp/AccordionComp";
 import { Box, Divider, Image, Stack, Text } from "@chakra-ui/react";
 import axios from "axios";
@@ -9,14 +9,17 @@ import NewsLetter from "../../components/NewsLetter";
 
 const ProductList = () => {
   const params = useParams();
+
   const Navigate = useNavigate();
 
   const FiltersList = [
-    { name: "Scrub Top" },
-    { name: "Scrub Pants" },
+    { name: "Scrub Top", index: "scrubtop" },
+    { name: "Scrub Pants", index: "scrubpants" },
     { name: "Fit Guide" },
     // { name: "Color" },
   ];
+
+  // console.log(params);
 
   const Colors = [
     {
@@ -42,11 +45,6 @@ const ProductList = () => {
   const [selected, setSelected] = useState("");
 
   const [colorSelect, setColorSelect] = useState("");
-
-  useEffect(() => {
-    // console.log("Added");
-    setAllProducts(getIndProducts);
-  }, [getIndProducts]);
 
   const WomenList = [
     "3982c326-3160-463a-a8b4-8d82865e23d3",
@@ -195,11 +193,26 @@ const ProductList = () => {
       });
   };
 
-  useEffect(() => {
-    getProducts();
-  }, []);
-
   const [onHover, setonHover] = useState("");
+
+  const locations = useLocation();
+
+  useEffect(() => {
+    setAllProducts(getIndProducts);
+    if (locations.search === "?filter=undefined") {
+      Navigate(`/viewall/scrubs/${params.category}`);
+    } else {
+      const search = locations.search.split("=")[1];
+      const maptoAll = FiltersList.filter(
+        (filter) => filter.index === search
+      )[0];
+      const getIndex = FiltersList.indexOf(maptoAll);
+      if (maptoAll.index === "scrubtop" || maptoAll.index === "scrubpants") {
+        setSelected(getIndex);
+        ToggleFilter(maptoAll);
+      }
+    }
+  }, [getIndProducts, locations.search]);
 
   const CardMen = ({ mensT, index }) => {
     return (
@@ -313,6 +326,7 @@ const ProductList = () => {
   const ToggleFilter = (data) => {
     switch (data.name) {
       case "Scrub Top":
+        console.log("Hit");
         if (params.category === "men") {
           let temp_scrubTop = [];
           console.log("Men Search");
@@ -379,8 +393,24 @@ const ProductList = () => {
   };
 
   // useEffect(() => {
-  //   console.log("Effected");
-  // }, [selected]);
+  //   if (locations.search === "?filter=undefined") {
+  //     Navigate(`/viewall/scrubs/${params.category}`);
+  //   } else {
+  //     const search = locations.search.split("=")[1];
+  //     const maptoAll = FiltersList.filter(
+  //       (filter) => filter.index === search
+  //     )[0];
+  //     const getIndex = FiltersList.indexOf(maptoAll);
+  //     if (maptoAll.index === "scrubtop" || maptoAll.index === "scrubpants") {
+  //       setSelected(getIndex);
+  //       ToggleFilter(maptoAll);
+  //     }
+  //   }
+  // }, [locations.search, locations.pathname]);
+
+  useEffect(() => {
+    getProducts();
+  }, [locations.pathname]);
 
   return (
     <>
@@ -390,8 +420,8 @@ const ProductList = () => {
           <Stack spacing={"2"} direction={"column"}>
             {FiltersList.map((data, index) => {
               return (
-                <>
-                  <Stack direction={"row"} alignItems={"center"} key={index}>
+                <Box key={index}>
+                  <Stack direction={"row"} alignItems={"center"}>
                     {selected === index && <CheckIcon />}
                     <Text
                       userSelect={"none"}
@@ -401,9 +431,13 @@ const ProductList = () => {
                       onClick={() => {
                         if (selected === index) {
                           setSelected("");
+                          // Navigate(`/viewall/scrubs/women`, { replace: true });
                           setAllProducts(getIndProducts);
                         } else if (selected !== index) {
                           setSelected(index);
+                          Navigate(
+                            `/viewall/scrubs/${params.category}?filter=${data.index}`
+                          );
                           ToggleFilter(data);
                         }
                       }}
@@ -412,7 +446,7 @@ const ProductList = () => {
                     </Text>
                   </Stack>
                   <Divider />
-                </>
+                </Box>
               );
             })}
             <Box

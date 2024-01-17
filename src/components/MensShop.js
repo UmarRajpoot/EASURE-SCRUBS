@@ -144,7 +144,7 @@ const MensShop = () => {
       }}
     >
       <div style={{ display: "flex", alignItems: "center" }} className="mx-5">
-        <Link to={"/scrubs/men"}>
+        <Link to={"/viewall/scrubs/men"}>
           <h1 className="font-medium underline mr-5">view all</h1>
         </Link>
         <LeftArrow />

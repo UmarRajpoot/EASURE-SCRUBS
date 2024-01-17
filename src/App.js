@@ -32,9 +32,12 @@ function App() {
           <Route path="/returns" Component={Returns} />
           <Route path="/login" Component={login} />
           <Route path="/checkout" Component={Checkout} />
-          <Route path="/fitguide/:category" Component={fitguide} />
-          <Route path="/:cattype/:category" Component={ProductList} />
           <Route path="/products/:id" Component={Products} />
+          <Route
+            path="/viewall/:cattype/:category/filter=?"
+            Component={ProductList}
+          />
+          <Route path="/fitguide/:category" Component={fitguide} />
           <Route
             path="/collection/:collection/:category?"
             Component={Collection}

@@ -142,7 +142,7 @@ const ModelBanner = () => {
                   </Box>
                   <Box bgColor={"black"} p={"2"} w={"full"}>
                     <Text textAlign={"center"} color={"white"}>
-                      Unlock Know
+                      Unlock Now
                     </Text>
                   </Box>
                 </Stack>

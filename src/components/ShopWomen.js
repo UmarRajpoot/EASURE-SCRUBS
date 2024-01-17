@@ -146,7 +146,7 @@ const ShopWomen = () => {
       }}
     >
       <div style={{ display: "flex", alignItems: "center" }} className="mx-5">
-        <Link to={"/scrubs/women"}>
+        <Link to={"/viewall/scrubs/women"}>
           <h1 className="font-medium  mr-5 hover:underline hover:cursor-pointer">
             view all
           </h1>
