@@ -7,13 +7,13 @@ const DropDown = () => {
   return (
     <div className="border-gray-200 shadow-sm bg-gray-50 md:bg-white border-y dark:bg-gray-800 dark:border-gray-600">
       <SimpleGrid
-        columns={2}
+        columns={1}
         spacing={[5, 10]}
-        w={["container.sm", "container.sm"]}
+        w={["container.sm", "40"]}
         p={"5"}
         alignItems={"baseline"}
       >
-        <Box>
+        {/* <Box>
           <Box>
             <Link
               to="/collection/black-scrub-women"
@@ -45,7 +45,7 @@ const DropDown = () => {
               <Text text={"NEW ARRIVALS"} />
             </a>
           </Box>
-        </Box>
+        </Box> */}
         <Box>
           <Box>
             <div className="">

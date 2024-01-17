@@ -288,7 +288,7 @@ const NavbarComp = () => {
                           <div className="absolute mt-2 bg-black w-full h-1"></div>
                           {WomenDropDown && (
                             <div className="relative">
-                              <div className="block min-w-screen absolute top-0 md:-left-60 pt-5 z-50">
+                              <div className="block min-w-screen absolute top-0 md:left-0 pt-5 z-50">
                                 <WomenDropDownComp />
                               </div>
                             </div>
@@ -323,7 +323,7 @@ const NavbarComp = () => {
                           <div className="absolute mt-2 bg-black w-full h-1"></div>
                           {MenDropDown && (
                             <div className="relative">
-                              <div className="block min-w-screen absolute top-0 md:-left-60 pt-5 z-50">
+                              <div className="block min-w-screen absolute top-0 md:left-0 pt-5 z-50">
                                 <MenDropDownComp />
                               </div>
                             </div>
