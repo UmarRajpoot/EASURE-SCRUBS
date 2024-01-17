@@ -16,6 +16,7 @@ import ProductList from "./pages/ProductList/ProductList";
 import FAQs from "./components/FAQs";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Returns from "./components/Returns";
+import ContactUs from "./components/ContactUs";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/technology" Component={Technology} />
           <Route path="/FAQs" Component={FAQs} />
           <Route path="/PrivacyPolicy" Component={PrivacyPolicy} />
+          <Route path="/ContactUs" Component={ContactUs} />
           <Route path="/returns" Component={Returns} />
           <Route path="/login" Component={login} />
           <Route path="/checkout" Component={Checkout} />
