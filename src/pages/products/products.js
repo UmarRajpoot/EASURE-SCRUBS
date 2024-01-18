@@ -616,6 +616,36 @@ const Products = () => {
       <div className="px-3 md:px-10">
         <Suggestion productSuggestions={productData?.suggestions} />
       </div>
+      <Box>
+        <Stack
+          direction={["column-reverse", "row"]}
+          display={"flex"}
+          alignItems={"center"}
+        >
+          <Box p={["8", "10"]}>
+            <Text
+              color={"#00cd9d"}
+              fontSize={["3xl", "5xl"]}
+              fontWeight={"semibold"}
+              w={["full", "80"]}
+              lineHeight={"shorter"}
+            >
+              ELEVATE with EASURE fabric Technology.
+            </Text>
+            <Text w={["full", "96"]} mt={"5"} fontSize={"lg"}>
+              Infused with comfort and luxury, our top-tier design team uses
+              advanced technology to tailor a product meeting the specific needs
+              of healthcare professionals - Magic of threads.
+            </Text>
+          </Box>
+          <Box>
+            <Image
+              src="/Images/Banner/WEB BANNER image.jpg"
+              alt="banner-image"
+            />
+          </Box>
+        </Stack>
+      </Box>
       <div className="flex flex-col px-10">
         <ReviewModel
           isOpen={ReviewModelDis.isOpen}
@@ -675,36 +705,6 @@ const Products = () => {
           </Box>
         </Box>
       </div>
-      <Box>
-        <Stack
-          direction={["column-reverse", "row"]}
-          display={"flex"}
-          alignItems={"center"}
-        >
-          <Box p={["8", "10"]}>
-            <Text
-              color={"#00cd9d"}
-              fontSize={["3xl", "5xl"]}
-              fontWeight={"semibold"}
-              w={["full", "80"]}
-              lineHeight={"shorter"}
-            >
-              ELEVATE with EASURE fabric Technology.
-            </Text>
-            <Text w={["full", "96"]} mt={"5"} fontSize={"lg"}>
-              Infused with comfort and luxury, our top-tier design team uses
-              advanced technology to tailor a product meeting the specific needs
-              of healthcare professionals - Magic of threads.
-            </Text>
-          </Box>
-          <Box>
-            <Image
-              src="/Images/Banner/WEB BANNER image.jpg"
-              alt="banner-image"
-            />
-          </Box>
-        </Stack>
-      </Box>
     </div>
   );
 };

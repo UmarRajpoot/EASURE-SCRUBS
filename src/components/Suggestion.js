@@ -66,7 +66,7 @@ const Suggestion = ({ productSuggestions }) => {
             // >
             <div
               key={index}
-              className="flex w-full flex-col md:flex-row py-10 px-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer"
+              className="flex w-full flex-col md:flex-row py-10 px-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-xl "
             >
               <div
                 className="h-96 w-64  bg-cover bg-no-repeat bg-center"
@@ -153,6 +153,7 @@ const Suggestion = ({ productSuggestions }) => {
                   rounded={"sm"}
                   _hover={{
                     bgColor: "blackAlpha.800",
+                    cursor: "pointer",
                   }}
                 >
                   <Text>ADD TO BAG</Text>
