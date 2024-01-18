@@ -26,12 +26,18 @@ const ModelBanner = () => {
   useEffect(() => {
     let isApplied = true;
     if (isApplied) {
-      onOpen();
+      let pop_status = localStorage.getItem("pop_status");
+      if (!pop_status) {
+        onOpen();
+        localStorage.setItem("pop_status", 1);
+      }
     }
     return () => {
       isApplied = false;
     };
   }, []);
+
+  if (!isOpen) return null;
 
   const googleLogin = async () => {
     // Initialize Firebase Auth provider
