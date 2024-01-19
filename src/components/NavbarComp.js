@@ -132,12 +132,34 @@ const NavbarComp = () => {
               )}
               <div className="group mr-2 relative">
                 <div className="group-hover:cursor-pointer p-2">
-                  <BiBasket
+                  {/* <BiBasket
                     size={25}
                     onClick={() => {
                       dispatch(DrawerState(!IsDrawerOpen));
                     }}
-                  />
+                  /> */}
+                  <svg
+                    height="26px"
+                    width="26px"
+                    className="BaseIcon-sc-8v47i9-0 bPleON"
+                  >
+                    <g
+                      stroke="currentColor"
+                      fill="none"
+                      fill-rule="evenodd"
+                      stroke-width="1.5"
+                      transform="translate(6 6)"
+                    >
+                      <path d="M3.72 4.83V1.4a.73.73 0 0 1 .71-.75h4a.73.73 0 0 1 .71.75v3.43"></path>
+                      <rect
+                        width="12.4"
+                        height="9.2"
+                        x=".13"
+                        y="4.52"
+                        rx=".46"
+                      ></rect>
+                    </g>
+                  </svg>
                 </div>
                 <span className="w-0 group-hover:w-full h-0.5 bg-gray-600 absolute bottom-0 left-0 transition-all ease-in-out duration-200"></span>
               </div>
