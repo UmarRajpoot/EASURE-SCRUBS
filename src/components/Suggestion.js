@@ -1,15 +1,24 @@
-import { Box, Button, Stack, Text } from "@chakra-ui/react";
+import { Box, Image, Stack, Text } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BASEURL } from "../Config/URL";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AddCartItem } from "../Store/Cart/actions";
+import { DrawerState } from "../Store/Drawer/actions";
 
 const Suggestion = ({ productSuggestions }) => {
+  const CartItems = useSelector((state) => state.CartOptions.CartItems);
+  const IsDrawerOpen = useSelector((state) => state.DrawerOptions.DrawerState);
+
+  const dispatch = useDispatch();
+
   const [productData, setProductData] = useState([]);
 
   const [allColors, setAllColors] = useState([]);
 
-  const [chooseSize, setchooseSize] = useState("");
+  const [sizeError, setSizeError] = useState(false);
+
+  const [chooseSize, setchooseSize] = useState(null);
   const [chooseColor, setchooseColor] = useState("");
   const Sizes = ["XS", "S", "M", "L", "XL", "2XL"];
 
@@ -68,31 +77,26 @@ const Suggestion = ({ productSuggestions }) => {
               key={index}
               className="flex w-full flex-col md:flex-row py-10 px-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-xl "
             >
-              <div
+              {/* <div
                 className="h-96 w-64  bg-cover bg-no-repeat bg-center"
                 style={{
                   backgroundImage: `url(${suggest.response.productimage[0]})`,
                 }}
-              ></div>
+              ></div> */}
+              <Image
+                w={"64"}
+                h={"80"}
+                src={suggest.response.productimage[0]}
+                alt="suggestion_image"
+              />
               <div className="flex-1 p-3">
                 {/* <h2 className="text-sm text-blue-600 font-bold cursor-pointer mb-3">
                     BEST SELLER
                   </h2> */}
-                <h2 className="text-lg text-gray-900 font-bold cursor-pointer mb-3">
+                <h2 className="text-lg text-gray-900 font-bold  mb-3">
                   {suggest.response.productname}
                 </h2>
-                {/* <h2 className="text-md text-gray-900 font-extrabold cursor-pointer mb-3">
-                    {suggest.response.colors &&
-                      suggest.response.colors[0].colors[0] === "#000000" &&
-                      "BLACK"}
-                    {suggest.response.colors &&
-                      suggest.response.colors[0].colors[0] === "#000080" &&
-                      "NAVY BLUE"}
-                    {suggest.response.colors &&
-                      suggest.response.colors[0].colors[0] === "#92a1cf" &&
-                      "NAVY BLUE"}
-                  </h2> */}
-                <h2 className="text-xl text-gray-900 font-medium cursor-pointer">
+                <h2 className="text-xl text-gray-900 font-medium ">
                   ${suggest.response.price}.00
                 </h2>
               </div>
@@ -122,9 +126,21 @@ const Suggestion = ({ productSuggestions }) => {
                     );
                   })}
                 </Stack>
-                <Text fontSize={"xl"} fontWeight={"bold"}>
-                  Sizes
-                </Text>
+                <Box display={"flex"} alignItems={"center"}>
+                  <Text fontSize={"xl"} fontWeight={"bold"}>
+                    Sizes
+                  </Text>
+                  {sizeError && (
+                    <Text
+                      fontSize={"sm"}
+                      ml={"2"}
+                      fontWeight={"semibold"}
+                      color={"red"}
+                    >
+                      Size is required
+                    </Text>
+                  )}
+                </Box>
                 {Sizes.map((size, index) => {
                   return (
                     <button
@@ -134,7 +150,10 @@ const Suggestion = ({ productSuggestions }) => {
                           ? "bg-black text-white"
                           : "bg-transparent text-gray-500"
                       } hover:bg-black hover:text-white hover:cursor-pointer  rounded-md font-medium  border border-spacing-2 border-gray-300 `}
-                      onClick={() => setchooseSize(size)}
+                      onClick={() => {
+                        setchooseSize(size);
+                        setSizeError(false);
+                      }}
                     >
                       {size}
                     </button>
@@ -154,6 +173,41 @@ const Suggestion = ({ productSuggestions }) => {
                   _hover={{
                     bgColor: "blackAlpha.800",
                     cursor: "pointer",
+                  }}
+                  userSelect={"none"}
+                  onClick={() => {
+                    if (chooseSize != null) {
+                      const item = {
+                        productID: suggest.response.id,
+                        productimage: suggest.response.productimage[0],
+                        productname: suggest.response.productname,
+                        productsize: chooseSize,
+                        productcolor:
+                          chooseColor || suggest.response.colors.name,
+                        productPrice: suggest.response.price,
+                        originalPrice: suggest.response.price,
+                        count: 1,
+                      };
+                      // console.log(item);
+                      const checkCart = CartItems.filter(
+                        (cartItem) => cartItem.productID === item.productID
+                      );
+                      if (checkCart.length === 0) {
+                        dispatch(AddCartItem(item));
+                        dispatch(DrawerState(!IsDrawerOpen));
+                      } else {
+                        const remainingItems = CartItems.filter((cartItem) => {
+                          if (cartItem.productID === item.productID) {
+                            cartItem.productsize = chooseSize;
+                            cartItem.productcolor =
+                              chooseColor || suggest.response.colors.name;
+                          }
+                        });
+                        dispatch(DrawerState(!IsDrawerOpen));
+                      }
+                    } else {
+                      setSizeError(true);
+                    }
                   }}
                 >
                   <Text>ADD TO BAG</Text>

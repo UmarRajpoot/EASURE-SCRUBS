@@ -50,11 +50,13 @@ const Products = () => {
 
   const Sizes = ["XS", "S", "M", "L", "XL", "2XL"];
 
-  const [chooseSize, setchooseSize] = useState("");
+  const [chooseSize, setchooseSize] = useState(null);
   const [chooseColor, setchooseColor] = useState("");
   const [selectColor, setSelectColor] = useState("");
 
   const [selectLength, setSelectLength] = useState("");
+
+  const [sizeError, setSizeError] = useState(false);
 
   const IsDrawerOpen = useSelector((state) => state.DrawerOptions.DrawerState);
   const CartItems = useSelector((state) => state.CartOptions.CartItems);
@@ -400,7 +402,14 @@ const Products = () => {
 
           {/* Sizes */}
           <div>
-            <h3 className="text-normal font-medium my-3">SIZES</h3>
+            <Box display={"flex"} alignItems={"center"}>
+              <h3 className="text-normal font-medium my-3">SIZES</h3>
+              {sizeError && (
+                <Text ml={"2"} color={"red"} fontWeight={"semibold"}>
+                  Sizes is requires
+                </Text>
+              )}
+            </Box>
 
             <div className="flex item-center flex-wrap">
               {Sizes.map((size, index) => {
@@ -412,7 +421,10 @@ const Products = () => {
                         ? "bg-black text-white"
                         : "bg-transparent text-gray-500"
                     } hover:bg-black hover:text-white hover:cursor-pointer  rounded-md font-medium  border border-spacing-2 border-gray-300 `}
-                    onClick={() => setchooseSize(size)}
+                    onClick={() => {
+                      setchooseSize(size);
+                      setSizeError(false);
+                    }}
                   >
                     {size}
                   </button>
@@ -472,25 +484,36 @@ const Products = () => {
             <div
               className="flex flex-col items-center my-3 "
               onClick={() => {
-                const item = {
-                  productID: productData.id,
-                  productimage: productData.productimage[0],
-                  productname: productData.productname,
-                  productsize: chooseSize,
-                  productcolor: chooseColor || productData.colors.name,
-                  productPrice: productData.price,
-                  originalPrice: productData.price,
-                  count: 1,
-                };
-                const checkCart = CartItems.filter(
-                  (cartItem) => cartItem.productID === item.productID
-                );
-                if (checkCart.length === 0) {
-                  dispatch(AddCartItem(item));
-                  dispatch(DrawerState(!IsDrawerOpen));
-                  setProductAdded(true);
+                if (chooseSize != null) {
+                  const item = {
+                    productID: productData.id,
+                    productimage: productData.productimage[0],
+                    productname: productData.productname,
+                    productsize: chooseSize,
+                    productcolor: chooseColor || productData.colors.name,
+                    productPrice: productData.price,
+                    originalPrice: productData.price,
+                    count: 1,
+                  };
+                  const checkCart = CartItems.filter(
+                    (cartItem) => cartItem.productID === item.productID
+                  );
+                  if (checkCart.length === 0) {
+                    dispatch(AddCartItem(item));
+                    dispatch(DrawerState(!IsDrawerOpen));
+                    setProductAdded(true);
+                  } else {
+                    const remainingItems = CartItems.filter((cartItem) => {
+                      if (cartItem.productID === item.productID) {
+                        cartItem.productsize = chooseSize;
+                        cartItem.productcolor =
+                          chooseColor || productData.colors.name;
+                      }
+                    });
+                    dispatch(DrawerState(!IsDrawerOpen));
+                  }
                 } else {
-                  dispatch(DrawerState(!IsDrawerOpen));
+                  setSizeError(true);
                 }
               }}
             >

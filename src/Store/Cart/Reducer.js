@@ -10,7 +10,7 @@ const CartItemReducers = (state = initialState, actions) => {
     case ActionType.ADD_CART_ITEMS:
       return {
         ...state,
-        CartItems: [...state.CartItems, actions.payload],
+        CartItems: actions.payload,
       };
 
     case ActionType.INC_PRODUCT_COUNT:

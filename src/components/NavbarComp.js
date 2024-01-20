@@ -11,7 +11,7 @@ import MenDropDownComp from "./DropDowns/MenDropDown";
 import { useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { FirebaseApp } from "./Firebase/Firebase";
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 
 const NavbarComp = () => {
   const [WomenDropDown, setWomenDropDown] = useState(false);
@@ -124,7 +124,7 @@ const NavbarComp = () => {
                 <div className="group ml-3 relative">
                   <Link to={`/login`}>
                     <div className="group-hover:cursor-pointer p-2">
-                      <BsPerson size={25} />
+                      <BsPerson style={{ width: "20px", height: "20px" }} />
                     </div>
                   </Link>
                   <span className="w-0 group-hover:w-full h-0.5 bg-gray-600 absolute bottom-0 left-0 transition-all ease-in-out duration-200"></span>
@@ -141,16 +141,12 @@ const NavbarComp = () => {
                       dispatch(DrawerState(!IsDrawerOpen));
                     }}
                   >
-                    <svg
-                      height="26px"
-                      width="26px"
-                      className="BaseIcon-sc-8v47i9-0 bPleON"
-                    >
+                    <svg height="25px" width="25px">
                       <g
                         stroke="currentColor"
                         fill="none"
-                        fill-rule="evenodd"
-                        stroke-width="1.5"
+                        fillRule="evenodd"
+                        strokeWidth="1.5"
                         transform="translate(6 6)"
                       >
                         <path d="M3.72 4.83V1.4a.73.73 0 0 1 .71-.75h4a.73.73 0 0 1 .71.75v3.43"></path>
@@ -261,26 +257,26 @@ const NavbarComp = () => {
                 <>
                   <Link to={"/fitguide/men"}>
                     <li>
-                      <a
+                      <Text
                         className={`block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 hover:text-blue-600 ${
                           navigate.pathname.split("/")[2] === "men" &&
                           "text-blue-600"
                         }`}
                       >
                         Men
-                      </a>
+                      </Text>
                     </li>
                   </Link>
                   <Link to={"/fitguide/women"}>
                     <li>
-                      <a
+                      <Text
                         className={`block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 hover:text-blue-600 ${
                           navigate.pathname.split("/")[2] === "women" &&
                           "text-blue-600"
                         }`}
                       >
                         Women
-                      </a>
+                      </Text>
                     </li>
                   </Link>
                 </>
@@ -303,12 +299,12 @@ const NavbarComp = () => {
                       if (mobileDropDown === false) setWomenDropDown(false);
                     }}
                   >
-                    <a
+                    <Text
                       className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                       aria-current="page"
                     >
                       Women
-                    </a>
+                    </Text>
                     {WomenDropDown && (
                       <>
                         <div className="absolute mt-2 bg-black w-full h-1"></div>
@@ -338,12 +334,12 @@ const NavbarComp = () => {
                       if (mobileDropDown === false) setMenDropDown(false);
                     }}
                   >
-                    <a
+                    <Text
                       className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                       aria-current="page"
                     >
                       Men
-                    </a>
+                    </Text>
                     {MenDropDown && (
                       <>
                         <div className="absolute mt-2 bg-black w-full h-1"></div>
@@ -360,22 +356,22 @@ const NavbarComp = () => {
                   {/* </Link> */}
                   <Link to={"/technology"}>
                     <li>
-                      <a
+                      <Text
                         href="#"
                         className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                       >
                         Technology
-                      </a>
+                      </Text>
                     </li>
                   </Link>
                   <Link to={"/OurStory"}>
                     <li>
-                      <a
+                      <Text
                         href="#"
                         className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                       >
                         Our Story
-                      </a>
+                      </Text>
                     </li>
                   </Link>
                 </>

@@ -1,6 +1,4 @@
 import React from "react";
-import MensImage from "../assets/Kamal0729-min.jpg";
-import WomenImage from "../assets/Kamal0633-min.jpg";
 import Button from "./button";
 import { Link } from "react-router-dom";
 
@@ -30,23 +28,35 @@ const HeroSection = () => {
               WINE
             </Text>
           </div>
-          <HStack
-            // className="w-full md:w-1/2 h-full bg-contain bg-right bg-no-repeat hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-2xl cursor-pointer"
-            // className="w-full md:w-1/2 "
-            // className="flex"
-            // style={{
-            //   backgroundImage: `url(${MensImage})`,
-            // }}
-            spacing={["10", "40"]}
-            my={["3", "6"]}
-          >
+          <HStack spacing={["10", "40"]} my={["3", "6"]}>
             <Link to={"/viewall/scrubs/men"}>
-              <Button label={"Shop Men →"} />
+              <Text
+                bgColor={"white"}
+                px={"10"}
+                py={"3"}
+                fontWeight={"semibold"}
+                _hover={{
+                  bgColor: "black",
+                  color: "white",
+                }}
+              >
+                Shop Men →
+              </Text>
             </Link>
             <Link to={"/viewall/scrubs/women"}>
-              <div className="">
-                <Button label={"Shop Women →"} />
-              </div>
+              <Text
+                bgColor={"white"}
+                px={"10"}
+                py={"3"}
+                fontWeight={"semibold"}
+                _hover={{
+                  bgColor: "black",
+                  color: "white",
+                }}
+              >
+                Shop Women →
+              </Text>
+              {/* <Button label={"Shop Women →"} /> */}
             </Link>
           </HStack>
           <div>

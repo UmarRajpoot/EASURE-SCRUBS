@@ -96,19 +96,19 @@ const ShopWomen = () => {
           setonHover("");
         }}
       >
-        <div className="md:py-10 px-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
-          <div className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center">
+        <div className="md:my-10 mx-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer w-72 h-96">
+          <div className="h-full w-full rounded-lg bg-cover bg-no-repeat bg-center">
             {WTrend.productimage && onHover === WTrend.id ? (
               <Image
                 src={WTrend.productimage[1]}
                 // onLoad={() => console.log("loading")}
-                className="h-80 w-64"
+                className="h-full w-full"
               />
             ) : (
               <Image
                 src={WTrend.productimage[0]}
                 // onLoad={() => console.log("loading")}
-                className="h-80 w-64"
+                className="h-full w-full"
               />
             )}
             {/* <Image
@@ -167,6 +167,7 @@ const ShopWomen = () => {
         scrollContainerClassName="no-scrollbar"
         transitionBehavior={"smooth"}
         Header={Arrows}
+        options={{ rootMargin: "20px" }}
       >
         {womenShop?.map((WTrend, index) => {
           if (WTrend.parentcategory === "WOMEN") {

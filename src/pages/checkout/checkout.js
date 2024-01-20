@@ -15,7 +15,7 @@ import axios from "axios";
 // import { Select } from "flowbite-react";
 import { Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import { BASEURL } from "../../Config/URL";
+import { BASEURL, BASEURLDev } from "../../Config/URL";
 import { useDispatch, useSelector } from "react-redux";
 import CheckoutItems from "../../components/Checkout/CheckoutItems";
 import { AddCartItem, ResetCart } from "../../Store/Cart/actions";
@@ -80,17 +80,38 @@ const Checkout = () => {
   const [StripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState(null);
 
-  const FirstLoad = async () => {
-    let StripePromise = await loadStripe(
-      process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
-    );
-    let clientSecret = process.env.REACT_APP_STRIPE_SECRET_KEY;
-    setClientSecret(clientSecret);
-    setStripePromise(StripePromise);
+  const getPublishKey = async () => {
+    return await axios
+      .get(BASEURLDev + "/config")
+      .then((resp) => {
+        const { publishablekey } = resp.data;
+        return setStripePromise(loadStripe(publishablekey));
+      })
+      .catch((error) => {
+        console.log("pub error", error);
+        console.log(error);
+      });
+  };
+
+  const getClientSecret = async () => {
+    return await axios
+      .post(BASEURLDev + "/create-payment-intent", {})
+      .then((resp) => {
+        const { clientSecrets } = resp.data;
+        return setClientSecret(clientSecrets);
+      })
+      .catch((error) => {
+        console.log("client error", error);
+
+        console.log(error);
+      });
   };
 
   useEffect(() => {
-    FirstLoad();
+    // getPublishKey();
+  }, []);
+  useEffect(() => {
+    // getClientSecret();
   }, []);
 
   const options = {
@@ -170,7 +191,7 @@ const Checkout = () => {
   };
 
   return (
-    <Elements stripe={StripePromise} options={options}>
+    <>
       <Box px={"2.5"} minH={"full"} pb={"28"}>
         <section className="pt-5 px-6 md:px-0">
           <div className="container mx-auto flex flex-col md:flex-row  md:h-96 lg:h-screen justify-center">
@@ -495,15 +516,19 @@ const Checkout = () => {
           </div>
         </section>
       </Box>
-      <Box
-        display={"flex"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        my={"10"}
-      >
-        {clientSecret && StripePromise && <CheckoutForm />}
-      </Box>
-    </Elements>
+      {clientSecret && StripePromise && (
+        <Elements stripe={StripePromise} options={{ clientSecret }}>
+          <Box
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            my={"10"}
+          >
+            {clientSecret && StripePromise && <CheckoutForm />}
+          </Box>
+        </Elements>
+      )}
+    </>
   );
 };
 
