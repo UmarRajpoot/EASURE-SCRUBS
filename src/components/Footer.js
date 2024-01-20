@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -15,13 +15,13 @@ const Footer = () => {
           {/* <h1 className="text-xl text-white font-normal ">With EASURE</h1> */}
         </div>
       </div>
-      <div className="mx-auto w-full max-w-screen-xl">
-        <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3">
+      <div className="p-5 w-full ">
+        <div className="grid grid-cols-1 gap-8 px-4 py-6 md:grid-cols-4">
           <div>
             {/* <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
               Company
             </h2> */}
-            <ul className="text-white dark:text-gray-400 font-medium">
+            <ul className="text-white dark:text-gray-400 font-medium block">
               <li className="mb-4">
                 <a href="/ContactUs" className=" hover:underline">
                   Contact Us
@@ -42,27 +42,9 @@ const Footer = () => {
                   <Text className=" hover:underline">Our Story</Text>
                 </Link>
               </li>
-              {/* <li className="mb-4">
-                <a href="#" className=" hover:underline">
-                  About
-                </a>
-              </li>
-              <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  Blog
-                </a>
-              </li>
-              <Link to={"/fitguide/men"}>
-                <li className="mb-4">
-                  <a className="hover:underline">Fit Guide</a>
-                </li>
-              </Link> */}
             </ul>
           </div>
           <div>
-            {/* <h2 className="mb-6 text-sm font-semibold text-white uppercase ">
-              Help center
-            </h2> */}
             <ul className="text-white font-medium">
               <li className="mb-4">
                 <Link to={"/scrubs/men"}>
@@ -184,6 +166,63 @@ const Footer = () => {
                 </svg>
                 <span className="sr-only">Dribbble account</span>
               </a>
+            </div>
+          </div>
+          <div>
+            <Text fontSize={"2xl"} color={"white"}>
+              Be in the know
+            </Text>
+            <Text fontSize={"sm"} color={"white"}>
+              Sign up for new arrivals, offers and more!Be in the know
+            </Text>
+            <div className="flex">
+              <div className="flex items-center mr-4 hover:cursor-pointer my-5">
+                <input
+                  id="Women"
+                  type="radio"
+                  value="Women"
+                  name="inline-radio"
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 hover:cursor-pointer"
+                />
+                <label
+                  htmlFor="Women"
+                  className="ml-2 text-sm font-medium text-white hover:cursor-pointer"
+                >
+                  Women
+                </label>
+              </div>
+              <div className="flex items-center mr-4 ">
+                <input
+                  id="Men"
+                  type="radio"
+                  value="Men"
+                  name="inline-radio"
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 hover:cursor-pointer"
+                />
+                <label
+                  htmlFor="Men"
+                  className="ml-2 text-sm font-medium text-white hover:cursor-pointer"
+                >
+                  Men
+                </label>
+              </div>
+            </div>
+            <div className="py-3  flex items-center">
+              <input
+                type="text"
+                id="first_name"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Enter your email"
+                required
+              />
+              <Box
+                bgColor={"black"}
+                _hover={{ bgColor: "gray.900", cursor: "pointer" }}
+              >
+                <Text color={"white"} px={"10"} py={"4"} userSelect={"none"}>
+                  SignUp
+                </Text>
+              </Box>
             </div>
           </div>
         </div>

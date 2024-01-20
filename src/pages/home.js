@@ -18,7 +18,7 @@ const index = () => {
       <ShopWomen />
       <MensShop />
       <OurPromise />
-      <NewsLetter />
+      {/* <NewsLetter /> */}
       <ModelBanner />
       <BottomImage />
     </div>
