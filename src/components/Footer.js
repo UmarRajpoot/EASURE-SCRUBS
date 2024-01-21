@@ -47,12 +47,12 @@ const Footer = () => {
           <div>
             <ul className="text-white font-medium">
               <li className="mb-4">
-                <Link to={"/scrubs/men"}>
+                <Link to={"/viewall/scrubs/men"}>
                   <Text className="hover:underline">Shop Men</Text>
                 </Link>
               </li>
               <li className="mb-4">
-                <Link to={"/scrubs/women"}>
+                <Link to={"/viewall/scrubs/women"}>
                   <Text className="hover:underline">Shop Women</Text>
                 </Link>
               </li>

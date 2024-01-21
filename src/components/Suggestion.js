@@ -137,7 +137,7 @@ const Suggestion = ({ productSuggestions }) => {
                       fontWeight={"semibold"}
                       color={"red"}
                     >
-                      Size is required
+                      *Size is required
                     </Text>
                   )}
                 </Box>
@@ -193,7 +193,7 @@ const Suggestion = ({ productSuggestions }) => {
                         (cartItem) => cartItem.productID === item.productID
                       );
                       if (checkCart.length === 0) {
-                        dispatch(AddCartItem(item));
+                        dispatch(AddCartItem([...CartItems, item]));
                         dispatch(DrawerState(!IsDrawerOpen));
                       } else {
                         const remainingItems = CartItems.filter((cartItem) => {

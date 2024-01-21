@@ -406,7 +406,7 @@ const Products = () => {
               <h3 className="text-normal font-medium my-3">SIZES</h3>
               {sizeError && (
                 <Text ml={"2"} color={"red"} fontWeight={"semibold"}>
-                  Sizes is requires
+                  *Size is required
                 </Text>
               )}
             </Box>
@@ -499,7 +499,7 @@ const Products = () => {
                     (cartItem) => cartItem.productID === item.productID
                   );
                   if (checkCart.length === 0) {
-                    dispatch(AddCartItem(item));
+                    dispatch(AddCartItem([...CartItems, item]));
                     dispatch(DrawerState(!IsDrawerOpen));
                     setProductAdded(true);
                   } else {

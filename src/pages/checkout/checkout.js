@@ -472,7 +472,7 @@ const Checkout = () => {
             <div className={`w-full md:w-2/5 md:px-4 pt-3 md:pt-0 `}>
               <h2 className="text-xl py-5">Items</h2>
               <Box>
-                {CartItems.map((item, index) => {
+                {CartItems?.map((item, index) => {
                   return (
                     <CheckoutItems
                       key={index}
