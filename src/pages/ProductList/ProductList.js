@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import AccordionComp from "../../components/AccordionComp/AccordionComp";
-import { Box, Divider, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, Divider, Image, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { BASEURL } from "../../Config/URL";
 import { CheckIcon } from "@chakra-ui/icons";
@@ -229,8 +229,8 @@ const ProductList = () => {
           setonHover("");
         }}
       >
-        <div className="px-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
-          <div className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center">
+        <div className="mx-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
+          <div className="rounded-lg bg-cover bg-no-repeat bg-center">
             {/* <Image
               src={mensT.productimage && mensT.productimage[0]}
               // onLoad={() => console.log("loading")}
@@ -286,8 +286,8 @@ const ProductList = () => {
           setonHover("");
         }}
       >
-        <div className="px-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
-          <div className=" h-96 w-64 rounded-lg bg-cover bg-no-repeat bg-center">
+        <div className="mx-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
+          <div className=" rounded-lg bg-cover bg-no-repeat bg-center">
             {/* <Image
               src={WTrend.productimage && WTrend.productimage[0]}
               // onLoad={() => console.log("loading")}
@@ -500,7 +500,24 @@ const ProductList = () => {
             </Box>
           </Stack>
         </Box>
-        <Box
+        <SimpleGrid
+          columns={[1, null, 3]}
+          placeItems={["center", null, "center"]}
+          w={"full"}
+          spacing={"5"}
+          my={"5"}
+        >
+          {AllProducts.map((product, index) => {
+            if (product.parentcategory === params.category.toUpperCase()) {
+              if (product.parentcategory === "MEN") {
+                return <CardMen mensT={product} index={index} key={index} />;
+              } else if (product.parentcategory === "WOMEN") {
+                return <CardWomen WTrend={product} index={index} key={index} />;
+              }
+            }
+          })}
+        </SimpleGrid>
+        {/* <Box
           flex={1}
           p={"5"}
           flexWrap={"wrap"}
@@ -517,9 +534,8 @@ const ProductList = () => {
               }
             }
           })}
-        </Box>
+        </Box> */}
       </Stack>
-      <NewsLetter />
     </>
   );
 };
