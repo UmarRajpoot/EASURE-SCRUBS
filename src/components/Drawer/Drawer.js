@@ -54,18 +54,18 @@ const Drawer = ({ openDrawer }) => {
   return (
     <>
       <div className="relative">
-        <div
-          onClick={() => dispatch(DrawerState(!IsDrawerOpen))}
-          className={`bg-black w-full h-screen absolute z-20 opacity-50 ${
-            openDrawer ? "block" : "hidden"
-          }`}
-        ></div>
         {openDrawer && (
           <div
             className="absolute z-10 w-full h-screen opacity-25"
             onClick={() => dispatch(DrawerState(!IsDrawerOpen))}
           ></div>
         )}
+        <div
+          onClick={() => dispatch(DrawerState(!IsDrawerOpen))}
+          className={`bg-black fixed top-0 right-0 z-10 w-full overflow-y-auto h-screen p-4 overflow-y-auto opacity-50 ${
+            openDrawer ? "block" : "hidden"
+          }`}
+        ></div>
         <div
           id="drawer-form"
           className={`fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform ${
