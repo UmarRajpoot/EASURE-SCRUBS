@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { BsBagDash } from "react-icons/bs";
 import DrawerBodyItems from "./DrawerBodyItems";
 import { useDispatch, useSelector } from "react-redux";
 import { DrawerState } from "../../Store/Drawer/actions";
 import {
+  AddCartItem,
   AllProductPrice,
   CartItemDec,
   CartItemInc,
@@ -50,6 +51,13 @@ const Drawer = ({ openDrawer }) => {
     // console.log("Drawer Closed");
     dispatch(DrawerState(false));
   }, [navigate.pathname]);
+
+  useLayoutEffect(() => {
+    if (JSON.parse(localStorage.getItem("cartItems"))) {
+      dispatch(AddCartItem(JSON.parse(localStorage.getItem("cartItems"))));
+      dispatch(AllProductPrice());
+    }
+  }, []);
 
   return (
     <>
@@ -113,29 +121,37 @@ const Drawer = ({ openDrawer }) => {
             </div>
           )}
           <div className="my-2">
-            {CartItems.map((item, index) => {
-              return (
-                <DrawerBodyItems
-                  key={index}
-                  productID={item.productID}
-                  productimage={item.productimage}
-                  productName={item.productname}
-                  productsize={item.productsize}
-                  productcolor={item.productcolor}
-                  productPrice={item.productPrice}
-                  count={item.count}
-                  Incrementbtn={() => {
-                    dispatch(CartItemInc(item.productID));
-                  }}
-                  decrementbtn={() => {
-                    dispatch(CartItemDec(item.productID));
-                  }}
-                  deletebtn={() => {
-                    dispatch(CartRemoveItem(item.productID));
-                  }}
-                />
-              );
-            })}
+            {CartItems &&
+              CartItems.map((item, index) => {
+                return (
+                  <DrawerBodyItems
+                    key={index}
+                    productID={item.productID}
+                    productimage={item.productimage}
+                    productName={item.productname}
+                    productsize={item.productsize}
+                    productcolor={item.productcolor}
+                    productPrice={item.productPrice}
+                    count={item.count}
+                    Incrementbtn={() => {
+                      dispatch(CartItemInc(item.productID));
+                    }}
+                    decrementbtn={() => {
+                      dispatch(CartItemDec(item.productID));
+                    }}
+                    deletebtn={() => {
+                      let remainingItems = CartItems.filter(
+                        (cartitem) => cartitem.productID !== item.productID
+                      );
+                      localStorage.setItem(
+                        "cartItems",
+                        JSON.stringify(remainingItems)
+                      );
+                      dispatch(CartRemoveItem(item.productID));
+                    }}
+                  />
+                );
+              })}
           </div>
           <div className="flex items-center justify-between p-3">
             <h4 className="text-xl ">Total:</h4>
@@ -144,10 +160,18 @@ const Drawer = ({ openDrawer }) => {
           <Button
             w={"full"}
             mt={4}
-            colorScheme="teal"
+            bgColor={"black"}
+            color={"white"}
+            rounded={"none"}
+            _hover={{
+              bgColor: "gray.900",
+            }}
             onClick={() => {
+              localStorage.setItem("cartItems", JSON.stringify(CartItems));
               dispatch(DrawerState(!IsDrawerOpen));
-              Navigate("/checkout");
+              setTimeout(() => {
+                Navigate("/checkout?step=shipping_address");
+              }, 500);
             }}
           >
             Checkout

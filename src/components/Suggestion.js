@@ -202,7 +202,12 @@ const Suggestion = ({ productSuggestions }) => {
                             cartItem.productcolor =
                               chooseColor || suggest.response.colors.name;
                           }
+                          return cartItem;
                         });
+                        localStorage.setItem(
+                          "cartItems",
+                          JSON.stringify(remainingItems)
+                        );
                         dispatch(DrawerState(!IsDrawerOpen));
                       }
                     } else {

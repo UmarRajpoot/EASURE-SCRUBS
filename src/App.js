@@ -31,7 +31,7 @@ function App() {
           <Route path="/ContactUs" Component={ContactUs} />
           <Route path="/returns" Component={Returns} />
           <Route path="/login" Component={login} />
-          <Route path="/checkout" Component={Checkout} />
+          <Route path="/checkout/step=?" Component={Checkout} />
           <Route path="/products/:id" Component={Products} />
           <Route
             path="/viewall/:cattype/:category/filter=?"

@@ -23,6 +23,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  Spacer,
 } from "@chakra-ui/react";
 import ReviewModel from "../../components/ReviewModel";
 import Suggestion from "../../components/Suggestion";
@@ -62,6 +63,12 @@ const Products = () => {
   const CartItems = useSelector((state) => state.CartOptions.CartItems);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (CartItems.length !== 0) {
+      localStorage.setItem("cartItems", JSON.stringify(CartItems));
+    }
+  }, [CartItems]);
 
   const [videoplayer, setvideoPlayer] = useState(false);
 
@@ -372,29 +379,30 @@ const Products = () => {
             <div className="mt-2 flex-1 flex items-center">
               {allColors.map((colors, index) => {
                 return (
-                  <Box
-                    key={index}
-                    title={colors.colors.name}
-                    bgColor={colors.colors.code}
-                    w={"5"}
-                    h={"5"}
-                    mx={"2"}
-                    cursor={"pointer"}
-                    rounded={"full"}
-                    ring={"3"}
-                    ringColor={
-                      chooseColor === colors.colors.name
-                        ? "blackAlpha.600"
-                        : "white"
-                    }
-                    onClick={() => {
-                      setchooseColor(colors.colors.name);
-                      navigate("/products/" + colors.productId, {
-                        preventScrollReset: true,
-                        replace: true,
-                      });
-                    }}
-                  ></Box>
+                  <Spacer>
+                    <Box
+                      key={index}
+                      title={colors.colors.name}
+                      bgColor={colors.colors.code}
+                      w={"5"}
+                      h={"5"}
+                      cursor={"pointer"}
+                      rounded={"full"}
+                      ring={"3"}
+                      ringColor={
+                        chooseColor === colors.colors.name
+                          ? "blackAlpha.600"
+                          : "white"
+                      }
+                      onClick={() => {
+                        setchooseColor(colors.colors.name);
+                        navigate("/products/" + colors.productId, {
+                          preventScrollReset: true,
+                          replace: true,
+                        });
+                      }}
+                    ></Box>
+                  </Spacer>
                 );
               })}
             </div>
@@ -509,7 +517,12 @@ const Products = () => {
                         cartItem.productcolor =
                           chooseColor || productData.colors.name;
                       }
+                      return cartItem;
                     });
+                    localStorage.setItem(
+                      "cartItems",
+                      JSON.stringify(remainingItems)
+                    );
                     dispatch(DrawerState(!IsDrawerOpen));
                   }
                 } else {

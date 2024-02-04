@@ -1,7 +1,11 @@
-import { Badge, ButtonGroup, IconButton, Image, Text } from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons";
+import { IconButton, Image } from "@chakra-ui/react";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AddCartItem, AllProductPrice } from "../../Store/Cart/actions";
 
 const CheckoutItems = ({
+  productId,
   productName,
   productsize,
   productcolor,
@@ -9,11 +13,13 @@ const CheckoutItems = ({
   productimage,
   count,
 }) => {
+  const CartItems = useSelector((state) => state.CartOptions.CartItems);
+  const dispatch = useDispatch();
   return (
     <>
-      <div className="flex">
-        <div className="w-20 h-20  rounded-xl bg-gray-100 relative">
-          <div class="absolute inline-flex items-center justify-center w-6 h-6 p-1 text-xs font-bold text-white bg-gray-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
+      <div className="flex items-center">
+        <div className="w-20 h-20 rounded-xl bg-gray-100 relative">
+          <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-gray-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
             {count}
           </div>
           <Image
@@ -39,8 +45,22 @@ const CheckoutItems = ({
             </div>
           </div>
         </div>
+        <IconButton
+          icon={<DeleteIcon />}
+          size={"sm"}
+          colorScheme="red"
+          m={"2"}
+          onClick={() => {
+            let remainigItem = CartItems.filter(
+              (cartItem) => cartItem.productID !== productId
+            );
+            dispatch(AddCartItem(remainigItem));
+            localStorage.setItem("cartItems", JSON.stringify(remainigItem));
+            dispatch(AllProductPrice());
+          }}
+        />
       </div>
-      <hr className="mt-3" />
+      <hr className="my-3" />
     </>
   );
 };
