@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BsPerson } from "react-icons/bs";
 import { BiBasket, BiLogOutCircle } from "react-icons/bi";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Drawer from "./Drawer/Drawer";
 import { useDispatch, useSelector } from "react-redux";
 import { DrawerState } from "../Store/Drawer/actions";
@@ -21,8 +21,26 @@ const NavbarComp = () => {
 
   const IsDrawerOpen = useSelector((state) => state.DrawerOptions.DrawerState);
   const AuthState = useSelector((state) => state.Auths.users);
+  const Products = useSelector((state) => state.ProductsReducer.Products);
+
+  const [productSearch, setProductSearch] = useState("");
+  const [searchedProduct, setSearchedProduct] = useState([]);
+
+  useEffect(() => {
+    if (productSearch !== "") {
+      let filteredProducts = Products.filter((product) =>
+        `${product.typestylename.toLowerCase()} ${product.typename.toLowerCase()} ${product.varientname.toLowerCase()} ${product.parentcategory.toLowerCase()}`.includes(
+          productSearch.toLowerCase()
+        )
+      );
+      setSearchedProduct(filteredProducts);
+    } else {
+      setSearchedProduct([]);
+    }
+  }, [productSearch]);
 
   const navigate = useLocation();
+  const MoveTo = useNavigate();
 
   useEffect(() => {
     setMobileDropDown(false);
@@ -74,30 +92,77 @@ const NavbarComp = () => {
           <div className="flex md:order-2">
             <div className="flex flex-row items-center">
               <div className="relative hidden md:block">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg
-                    className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                    />
-                  </svg>
-                  <span className="sr-only">Search icon</span>
+                <div>
+                  <div className="absolute inset-y-0 left-0 flex pt-3 pl-3 pointer-events-none">
+                    <svg
+                      className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                      />
+                    </svg>
+                    <span className="sr-only">Search icon</span>
+                  </div>
+                  <input
+                    type="text"
+                    id="search-navbar1"
+                    className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-sm bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Search..."
+                    value={productSearch}
+                    onChange={(e) => setProductSearch(e.target.value)}
+                  />
                 </div>
-                <input
-                  type="text"
-                  id="search-navbar1"
-                  className="block  w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-sm bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Search..."
-                />
+                <Box
+                  w={"64"}
+                  bgColor={"gray.100"}
+                  className="absolute z-20 mx-auto"
+                >
+                  {searchedProduct.slice(0, 6)?.map((prod, index) => {
+                    return (
+                      <Text
+                        key={index}
+                        px={"2"}
+                        py={"1"}
+                        fontSize={"sm"}
+                        cursor={"pointer"}
+                        _hover={{
+                          textDecoration: "underline",
+                        }}
+                        color={"gray.700"}
+                        onClick={() => {
+                          MoveTo(`/products/${prod.id}`);
+                          setSearchedProduct([]);
+                          setProductSearch("");
+                        }}
+                      >
+                        {`${prod.parentcategory.toLowerCase()}-${prod.varientname.toLowerCase()}-${prod.typename?.toLowerCase()}-${prod.typestylename?.toLowerCase()}`}
+                      </Text>
+                    );
+                  })}
+                  {searchedProduct.slice(6).length !== 0 && (
+                    <Text
+                      color={"blue"}
+                      textDecoration={"underline"}
+                      cursor={"pointer"}
+                      p={"2"}
+                      onClick={() => {
+                        MoveTo("/viewall/scrubs/women");
+                        setSearchedProduct([]);
+                        setProductSearch("");
+                      }}
+                    >
+                      See all {searchedProduct.slice(6).length}
+                    </Text>
+                  )}
+                </Box>
               </div>
               {AuthState.length !== 0 ? (
                 <div
@@ -132,10 +197,6 @@ const NavbarComp = () => {
               )}
               <div className="group mr-2 relative">
                 <div className="group-hover:cursor-pointer p-2">
-                  {/* <BiBasket
-                    size={25}
-                    
-                  /> */}
                   <Box
                     onClick={() => {
                       dispatch(DrawerState(!IsDrawerOpen));

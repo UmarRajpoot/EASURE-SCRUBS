@@ -379,30 +379,33 @@ const Products = () => {
             <div className="mt-2 flex-1 flex items-center">
               {allColors.map((colors, index) => {
                 return (
-                  <Spacer>
-                    <Box
-                      key={index}
-                      title={colors.colors.name}
-                      bgColor={colors.colors.code}
-                      w={"5"}
-                      h={"5"}
-                      cursor={"pointer"}
-                      rounded={"full"}
-                      ring={"3"}
-                      ringColor={
-                        chooseColor === colors.colors.name
-                          ? "blackAlpha.600"
-                          : "white"
-                      }
-                      onClick={() => {
-                        setchooseColor(colors.colors.name);
-                        navigate("/products/" + colors.productId, {
-                          preventScrollReset: true,
-                          replace: true,
-                        });
-                      }}
-                    ></Box>
-                  </Spacer>
+                  <Box
+                    key={index}
+                    title={colors.colors.name}
+                    bgColor={colors.colors.code}
+                    w={"5"}
+                    h={"5"}
+                    cursor={"pointer"}
+                    rounded={"full"}
+                    ring={"3"}
+                    ml={"2"}
+                    _hover={{
+                      ring: 3,
+                      ringColor: "lightblue",
+                    }}
+                    ringColor={
+                      chooseColor === colors.colors.name
+                        ? "blackAlpha.600"
+                        : "white"
+                    }
+                    onClick={() => {
+                      setchooseColor(colors.colors.name);
+                      navigate("/products/" + colors.productId, {
+                        preventScrollReset: true,
+                        replace: true,
+                      });
+                    }}
+                  ></Box>
                 );
               })}
             </div>

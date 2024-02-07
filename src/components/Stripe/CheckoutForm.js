@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
   CardElement,
-  Elements,
   ElementsConsumer,
-  PaymentRequestButtonElement,
   PaymentElement,
+  PaymentRequestButtonElement,
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
@@ -54,13 +53,6 @@ const CheckoutForm = ({ clientSecret }) => {
       return;
     }
 
-    // Create the PaymentIntent and obtain clientSecret from your server endpoint
-    // const res = await fetch('/create-intent', {
-    //   method: 'POST',
-    // });
-
-    // const {client_secret: clientSecret} = await res.json();
-
     const { error } = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
       elements,
@@ -83,13 +75,11 @@ const CheckoutForm = ({ clientSecret }) => {
   };
   return (
     <Box>
-      {paymentRequest && (
+      {/* {paymentRequest && (
         <PaymentRequestButtonElement options={{ paymentRequest }} />
-      )}
+      )} */}
       <form onSubmit={handleSubmit}>
         <PaymentElement />
-        {/* <CardElement /> */}
-        {/* <ElementsConsumer /> */}
         <Button
           colorScheme="blue"
           w={"full"}

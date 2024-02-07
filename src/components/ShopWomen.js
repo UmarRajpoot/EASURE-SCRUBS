@@ -9,6 +9,8 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
 import { IconButton } from "@chakra-ui/react";
+import { ProductState } from "../Store/Products/actions";
+import { useDispatch } from "react-redux";
 
 const ShopWomen = () => {
   const [womenShop, setWomenShop] = useState([]);
@@ -24,11 +26,14 @@ const ShopWomen = () => {
     "544a84dc-ec52-4b02-b4e7-8568e4aa8574",
   ];
 
+  const dispatch = useDispatch();
+
   const getWomensProduct = async () => {
     return await axios
       .get(`${BASEURL}/Product`)
       .then((resp) => {
         // console.log(resp.data);
+        dispatch(ProductState(resp.data.response));
         let temp_data = [];
         ShopwomenList.map((list_id) => {
           resp.data.response.filter((women_prod) => {

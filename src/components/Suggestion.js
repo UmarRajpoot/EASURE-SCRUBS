@@ -5,6 +5,7 @@ import { BASEURL } from "../Config/URL";
 import { useDispatch, useSelector } from "react-redux";
 import { AddCartItem } from "../Store/Cart/actions";
 import { DrawerState } from "../Store/Drawer/actions";
+import { Link } from "react-router-dom";
 
 const Suggestion = ({ productSuggestions }) => {
   const CartItems = useSelector((state) => state.CartOptions.CartItems);
@@ -75,7 +76,7 @@ const Suggestion = ({ productSuggestions }) => {
             // >
             <div
               key={index}
-              className="flex w-full flex-col md:flex-row py-10 px-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-xl "
+              className="flex w-full flex-col md:flex-row py-10 px-3 hover:scale-100 transition-all ease-in-out duration-200"
             >
               {/* <div
                 className="h-96 w-64  bg-cover bg-no-repeat bg-center"
@@ -83,19 +84,23 @@ const Suggestion = ({ productSuggestions }) => {
                   backgroundImage: `url(${suggest.response.productimage[0]})`,
                 }}
               ></div> */}
-              <Image
-                w={"64"}
-                h={"80"}
-                src={suggest.response.productimage[0]}
-                alt="suggestion_image"
-              />
+              <Link to={`/products/${suggest.response.id}`}>
+                <Image
+                  w={"64"}
+                  h={"80"}
+                  src={suggest.response.productimage[0]}
+                  alt="suggestion_image"
+                />
+              </Link>
               <div className="flex-1 p-3">
                 {/* <h2 className="text-sm text-blue-600 font-bold cursor-pointer mb-3">
                     BEST SELLER
                   </h2> */}
-                <h2 className="text-lg text-gray-900 font-bold  mb-3">
-                  {suggest.response.productname}
-                </h2>
+                <Link to={`/products/${suggest.response.id}`}>
+                  <h2 className="text-lg text-gray-900 font-bold mb-3 hover:underline hover:cursor-pointer">
+                    {suggest.response.productname}
+                  </h2>
+                </Link>
                 <h2 className="text-xl text-gray-900 font-medium ">
                   ${suggest.response.price}.00
                 </h2>

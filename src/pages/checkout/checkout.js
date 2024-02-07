@@ -14,6 +14,8 @@ import Breadcrumbcomp from "../../components/Breadcrumbcomp";
 import ShippingAddress from "../../components/ShippingAddress";
 import { DrawerState } from "../../Store/Drawer/actions";
 import Payments from "../../components/Stripe/Payments";
+import axios from "axios";
+import { BASEURL } from "../../Config/URL";
 
 const Checkout = () => {
   const CartItems = useSelector((state) => state.CartOptions.CartItems);
@@ -45,6 +47,24 @@ const Checkout = () => {
   }, [step]);
 
   const AuthState = useSelector((state) => state.Auths.users);
+
+  const [clientSecret, setClientSecret] = useState(
+    "pi_3OgVgLDsONF5GHPk2mLqfgtT_secret_hA30NkfLeyZMSv09qBH1rGqIA"
+  );
+
+  const getClientSecret = async () => {
+    return await axios
+      .post(BASEURL + "/create-payment-intent", {})
+      .then((resp) => {
+        const { clientSecrets } = resp.data;
+        return setClientSecret(clientSecrets);
+      })
+      .catch((error) => {
+        console.log("client error", error);
+
+        console.log(error);
+      });
+  };
 
   return (
     <>
@@ -100,7 +120,9 @@ const Checkout = () => {
                 {step?.toLowerCase() === "shipping_address" && (
                   <ShippingAddress />
                 )}
-                {step?.toLowerCase() === "payment" && <Payments />}
+                {step?.toLowerCase() === "payment" && (
+                  <Payments clientSecret={clientSecret} />
+                )}
               </Box>
             </div>
             <div className={`w-full md:w-[70%] pt-3 md:pt-0 bg-gray-100 p-10`}>

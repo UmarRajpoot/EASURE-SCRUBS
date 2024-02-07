@@ -2,15 +2,12 @@ import { Box } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BASEURL, BASEURLDev } from "../../Config/URL";
-import { Elements } from "@stripe/react-stripe-js";
+import { Elements, ExpressCheckoutElement } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 
-const Payments = () => {
+const Payments = ({ clientSecret }) => {
   const [StripePromise, setStripePromise] = useState(null);
-  const [clientSecret, setClientSecret] = useState(
-    "pi_3Og8QwDsONF5GHPk231bi0Te_secret_FJUgrUv274PEkVz0f9wufGDwC"
-  );
 
   const getPublishKey = async () => {
     return await axios
@@ -25,26 +22,9 @@ const Payments = () => {
       });
   };
 
-  const getClientSecret = async () => {
-    return await axios
-      .post(BASEURLDev + "/create-payment-intent", {})
-      .then((resp) => {
-        const { clientSecrets } = resp.data;
-        return setClientSecret(clientSecrets);
-      })
-      .catch((error) => {
-        console.log("client error", error);
-
-        console.log(error);
-      });
-  };
-
   useEffect(() => {
     getPublishKey();
   }, []);
-  //   useEffect(() => {
-  //     getClientSecret();
-  //   }, []);
   return (
     <Box>
       {StripePromise && clientSecret && (
