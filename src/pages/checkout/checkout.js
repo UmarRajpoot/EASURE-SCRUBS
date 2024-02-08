@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, Image, Stack, Text } from "@chakra-ui/react";
 // import { Select } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +8,7 @@ import {
   AllProductPrice,
   ResetCart,
 } from "../../Store/Cart/actions";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import Breadcrumbcomp from "../../components/Breadcrumbcomp";
 import ShippingAddress from "../../components/ShippingAddress";
@@ -66,8 +66,59 @@ const Checkout = () => {
       });
   };
 
+  const [emptyCart, setEmptyCart] = useState(false);
+
+  useEffect(() => {
+    if (CartItems?.length === 0) {
+      setEmptyCart(true);
+    } else {
+      setEmptyCart(false);
+    }
+  }, [CartItems]);
+
   return (
     <>
+      {emptyCart && (
+        <Box
+          w={"full"}
+          h={"full"}
+          bgColor={"blackAlpha.600"}
+          position={"fixed"}
+          top={0}
+          right={0}
+          zIndex={"10"}
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
+          <Box bgColor={"white"} p={"8"}>
+            <Stack
+              display={"flex"}
+              flexDirection={"column"}
+              alignItems={"center"}
+              spacing={"5"}
+            >
+              <Text fontSize={"xl"} fontWeight={"medium"}>
+                Your Bag is Empty
+              </Text>
+              <Text fontSize={"md"}>
+                It looks like you don’t have any items in your bag.
+              </Text>
+              <Link to={"/"}>
+                <Box
+                  bgColor={"black"}
+                  color={"white"}
+                  px={"5"}
+                  py={"3"}
+                  cursor={"pointer"}
+                >
+                  <Text>SHOP NOW</Text>
+                </Box>
+              </Link>
+            </Stack>
+          </Box>
+        </Box>
+      )}
       <Box minH={"full"}>
         <section>
           <div className="flex-1 flex flex-col md:flex-row md:h-96 lg:h-screen item-center justify-center">

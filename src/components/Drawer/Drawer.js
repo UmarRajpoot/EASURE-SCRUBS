@@ -70,7 +70,7 @@ const Drawer = ({ openDrawer }) => {
         )}
         <div
           onClick={() => dispatch(DrawerState(!IsDrawerOpen))}
-          className={`bg-black fixed top-0 right-0 z-10 w-full overflow-y-auto h-screen p-4 overflow-y-auto opacity-50 ${
+          className={`bg-black fixed top-0 right-0 z-10 w-full h-screen p-4 overflow-y-auto opacity-50 ${
             openDrawer ? "block" : "hidden"
           }`}
         ></div>
