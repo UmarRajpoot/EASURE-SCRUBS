@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { BsBagDash } from "react-icons/bs";
 import DrawerBodyItems from "./DrawerBodyItems";
 import { useDispatch, useSelector } from "react-redux";
@@ -58,6 +58,16 @@ const Drawer = ({ openDrawer }) => {
       dispatch(AllProductPrice());
     }
   }, []);
+
+  const [emptyCart, setEmptyCart] = useState(false);
+
+  useEffect(() => {
+    if (CartItems?.length === 0) {
+      setEmptyCart(true);
+    } else {
+      setEmptyCart(false);
+    }
+  }, [CartItems]);
 
   return (
     <>
@@ -166,6 +176,7 @@ const Drawer = ({ openDrawer }) => {
             _hover={{
               bgColor: "gray.900",
             }}
+            isDisabled={emptyCart}
             onClick={() => {
               localStorage.setItem("cartItems", JSON.stringify(CartItems));
               dispatch(DrawerState(!IsDrawerOpen));

@@ -1,7 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import {
-  Box,
   Button,
   FormControl,
   FormErrorMessage,
@@ -38,6 +37,7 @@ const ShippingAddress = () => {
   }
 
   const addOrder = async (
+    email,
     country,
     firstname,
     lastname,
@@ -49,6 +49,7 @@ const ShippingAddress = () => {
   ) => {
     return await axios
       .post(`${BASEURL}/Order`, {
+        email,
         country,
         firstname,
         lastname,
@@ -71,6 +72,7 @@ const ShippingAddress = () => {
   return (
     <Formik
       initialValues={{
+        email: "",
         country: "",
         firstname:
           AuthState.length !== 0 ? AuthState.displayName?.split(" ")[0] : "",
@@ -85,6 +87,7 @@ const ShippingAddress = () => {
       enableReinitialize
       onSubmit={async (values, actions) => {
         await addOrder(
+          values.email,
           values.country,
           values.firstname,
           values.lastname,
@@ -106,6 +109,21 @@ const ShippingAddress = () => {
       {(props) => (
         <Form>
           <VStack>
+            <Field
+              name="email"
+              validate={(value) => validateField(value, "email")}
+            >
+              {({ field, form }) => (
+                <FormControl
+                  isInvalid={form.errors.email && form.touched.email}
+                  isRequired
+                >
+                  <Input {...field} placeholder="Email Address*" />
+
+                  <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
             <Field
               name="country"
               validate={(value) => validateField(value, "country")}

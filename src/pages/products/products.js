@@ -232,44 +232,40 @@ const Products = () => {
             totalSlides={CarouselData.length}
             currentSlide={imageSlide}
             className="relative"
-            // key={imageSlide}
           >
             <Slider>
-              {CarouselData?.map((data, index) => {
-                if (data.type === "image") {
+              {CarouselData &&
+                CarouselData?.map((data, index) => {
                   return (
                     <Slide index={index} key={index}>
-                      <img
-                        className={`object-contain w-full h-full`}
-                        key={index}
-                        src={data.link}
-                        width={"100%"}
-                        height={"100%"}
-                      />
+                      {data.type === "image" ? (
+                        <img
+                          className={`object-contain w-full h-full`}
+                          key={index}
+                          src={data.link}
+                          width={"100%"}
+                          height={"100%"}
+                        />
+                      ) : (
+                        <video
+                          ref={videoRef}
+                          key={index}
+                          autoPlay={true}
+                          playsInline
+                          muted
+                          loop
+                          // controls
+                          style={{ height: "100%", width: "100%" }}
+                          src={data.link}
+                        >
+                          <source src={data.link} type="video/mp4" />
+                        </video>
+                      )}
                     </Slide>
                   );
-                } else {
-                  return (
-                    <Slide index={index}>
-                      <video
-                        ref={videoRef}
-                        key={index}
-                        autoPlay={true}
-                        playsInline
-                        muted
-                        loop
-                        // controls
-                        style={{ height: "100%", width: "100%" }}
-                        src={data.link}
-                      >
-                        <source src={data.link} type="video/mp4" />
-                      </video>
-                    </Slide>
-                  );
-                }
-              })}
+                })}
             </Slider>
-            {/* <div className="flex items-center justify-between absolute w-full top-0 left-0 bottom-0 right-0"> */}
+
             <ButtonBack className="absolute top-0 bottom-0 left-0 ">
               {LeftControl}
             </ButtonBack>
@@ -653,7 +649,7 @@ const Products = () => {
       </div>
       <h4 className="text-xl px-10 mt-10 font-bold ">Wear It With</h4>
       <div className="px-3 md:px-10">
-        <Suggestion productSuggestions={productData?.suggestions} />
+        {/* <Suggestion productSuggestions={productData?.suggestions} /> */}
       </div>
       <Box>
         <Stack
@@ -686,11 +682,11 @@ const Products = () => {
         </Stack>
       </Box>
       <div className="flex flex-col px-10">
-        <ReviewModel
+        {/* <ReviewModel
           isOpen={ReviewModelDis.isOpen}
           onClose={ReviewModelDis.onClose}
           productID={productData.id}
-        />
+        /> */}
         <Box w={"100%"}>
           <Box
             display={"flex"}
@@ -704,7 +700,7 @@ const Products = () => {
               Write a Review
             </Button>
           </Box>
-          <Box
+          {/* <Box
             w={"100%"}
             display={"flex"}
             flexDirection={"column"}
@@ -741,7 +737,7 @@ const Products = () => {
                 </Box>
               );
             })}
-          </Box>
+          </Box> */}
         </Box>
       </div>
     </div>
