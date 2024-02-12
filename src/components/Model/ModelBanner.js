@@ -112,14 +112,14 @@ const ModelBanner = () => {
                   >
                     Sign in with Google
                   </Button>
-                  <Button
+                  {/* <Button
                     w={"full"}
                     variant="outline"
                     leftIcon={<BsFacebook size={25} color="blue" />}
                     fontSize={"sm"}
                   >
                     Sign in with Facebook
-                  </Button>
+                  </Button> */}
                 </Stack>
                 <Box
                   display={"flex"}
