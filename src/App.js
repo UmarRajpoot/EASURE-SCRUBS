@@ -23,14 +23,14 @@ function App() {
     <div>
       <Wrapper>
         <Routes>
-          <Route path="/register" Component={register} />
+          <Route path="/register/email=?" Component={register} />
+          <Route path="/login" Component={login} />
           <Route path="/OurStory" Component={OurStory} />
           <Route path="/technology" Component={Technology} />
           <Route path="/FAQs" Component={FAQs} />
           <Route path="/PrivacyPolicy" Component={PrivacyPolicy} />
           <Route path="/ContactUs" Component={ContactUs} />
           <Route path="/returns" Component={Returns} />
-          <Route path="/login" Component={login} />
           <Route path="/checkout/step=?" Component={Checkout} />
           <Route path="/products/:id" Component={Products} />
           <Route

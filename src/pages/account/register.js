@@ -16,8 +16,13 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { Field, Form, Formik } from "formik";
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { BASEURL } from "../../Config/URL";
 import { AddUser } from "../../Store/Auth/actions";
 import { useDispatch } from "react-redux";
@@ -46,6 +51,19 @@ const Register = () => {
     }
     return error;
   }
+  const Navigate = useNavigate();
+  const locations = useLocation();
+
+  const [paramEmail, setParamEmail] = useState("");
+
+  useEffect(() => {
+    if (locations.search === "?email=undefined") {
+      Navigate(`/register`);
+    } else {
+      const searchEmail = locations.search.split("=")[1];
+      setParamEmail(searchEmail?.replace(",", "."));
+    }
+  }, [locations.search]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -140,10 +158,11 @@ const Register = () => {
             </div>
             <div>
               <Formik
+                enableReinitialize
                 initialValues={{
                   firstname: "",
                   lastname: "",
-                  email: "",
+                  email: paramEmail !== "" ? paramEmail : "",
                   password: "",
                 }}
                 onSubmit={async (values, actions) => {

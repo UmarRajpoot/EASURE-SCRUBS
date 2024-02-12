@@ -19,6 +19,7 @@ import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { FirebaseApp } from "../Firebase/Firebase";
+import { Link } from "react-router-dom";
 
 const ModelBanner = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -141,16 +142,30 @@ const ModelBanner = () => {
                   </Stack>
                 </RadioGroup>
                 <Stack w={"full"}>
-                  <Box bgColor={"gray.300"} p={"2"} w={"full"}>
-                    <Text textAlign={"center"} fontWeight={"medium"}>
-                      Email Address
-                    </Text>
-                  </Box>
-                  <Box bgColor={"black"} p={"2"} w={"full"}>
-                    <Text textAlign={"center"} color={"white"}>
-                      Unlock Now
-                    </Text>
-                  </Box>
+                  <Link to={"/register"}>
+                    <Box
+                      bgColor={"gray.300"}
+                      p={"2"}
+                      w={"full"}
+                      cursor={"pointer"}
+                    >
+                      <Text textAlign={"center"} fontWeight={"medium"}>
+                        Email Address
+                      </Text>
+                    </Box>
+                  </Link>
+                  <Link to={"/register"}>
+                    <Box
+                      bgColor={"black"}
+                      p={"2"}
+                      w={"full"}
+                      cursor={"pointer"}
+                    >
+                      <Text textAlign={"center"} color={"white"}>
+                        Unlock Now
+                      </Text>
+                    </Box>
+                  </Link>
                 </Stack>
               </Stack>
             </Box>
