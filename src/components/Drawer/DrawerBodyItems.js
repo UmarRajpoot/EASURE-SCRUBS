@@ -2,10 +2,13 @@ import { ButtonGroup, IconButton } from "@chakra-ui/react";
 import React from "react";
 
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 
 const DrawerBodyItems = ({
+  productID,
   productName,
   productsize,
+  productLength,
   productcolor,
   productimage,
   productPrice,
@@ -24,15 +27,23 @@ const DrawerBodyItems = ({
         <div className="flex justify-between flex-1">
           <div className="ml-2 flex flex-col justify-between">
             <div>
+              {/* <Link to={`/products/${productID}`}> */}
               <h1 className="text-sm font-bold">{productName}</h1>
+              {/* </Link> */}
               <h1 className="text-sm font-bold text-gray-500 ">
                 {productsize} • {productcolor}
               </h1>
+              {productLength !== "" && (
+                <h1 className="text-sm font-bold text-gray-500 ">
+                  Length: {productLength}
+                </h1>
+              )}
             </div>
-            <div className="flex items-center justify-between w-fit border border-gray-700 rounded-md px-1 py-0.5 ">
+            <div className="flex items-center justify-between w-fit border border-gray-300 rounded-md px-1 py-0.5 ">
               <ButtonGroup size="sm" isAttached variant="outline">
                 <IconButton
-                  aria-label="Add to friends"
+                  variant={"ghost"}
+                  aria-label="decrement"
                   size={"xs"}
                   icon={<MinusIcon />}
                   onClick={decrementbtn}
@@ -41,7 +52,8 @@ const DrawerBodyItems = ({
                   {parseInt(count)}
                 </h1>
                 <IconButton
-                  aria-label="Add to friends"
+                  variant={"ghost"}
+                  aria-label="increment"
                   size={"xs"}
                   icon={<AddIcon />}
                   onClick={Incrementbtn}
@@ -72,7 +84,7 @@ const DrawerBodyItems = ({
           </div>
         </div>
       </div>
-      <hr className="mt-3" />
+      <hr className="my-3" />
     </>
   );
 };

@@ -7,6 +7,7 @@ import { AddCartItem, AllProductPrice } from "../../Store/Cart/actions";
 const CheckoutItems = ({
   productId,
   productName,
+  productLength,
   productsize,
   productcolor,
   productPrice,
@@ -37,6 +38,11 @@ const CheckoutItems = ({
               <h1 className="text-sm font-bold text-gray-500 ">
                 {productsize} • {productcolor}
               </h1>
+              {productLength !== "" && (
+                <h1 className="text-sm font-bold text-gray-500 ">
+                  Length: {productLength}
+                </h1>
+              )}
             </div>
           </div>
           <div className="flex flex-col items-end justify-center">

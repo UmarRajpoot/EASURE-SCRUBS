@@ -55,9 +55,10 @@ const Products = () => {
   const [chooseColor, setchooseColor] = useState("");
   const [selectColor, setSelectColor] = useState("");
 
-  const [selectLength, setSelectLength] = useState("");
+  const [selectLength, setSelectLength] = useState(null);
 
   const [sizeError, setSizeError] = useState(false);
+  const [lengthError, setLengthError] = useState(false);
 
   const IsDrawerOpen = useSelector((state) => state.DrawerOptions.DrawerState);
   const CartItems = useSelector((state) => state.CartOptions.CartItems);
@@ -155,6 +156,11 @@ const Products = () => {
         setProductData(resp.data.response);
         makeCarousel(resp.data.response);
         setAllColors(resp.data.colors);
+        if (resp.data.response.typestylename.toLowerCase() === "pants") {
+          setSelectLength(null);
+        } else {
+          setSelectLength("");
+        }
       })
       .catch((error) => {
         console.log(error.response.data.error);
@@ -445,13 +451,26 @@ const Products = () => {
                   : "/fitguide/women"
               }
             >
-              <Text cursor={"pointer"} p={"2"}>
+              <Text
+                cursor={"pointer"}
+                mt={"2"}
+                _hover={{
+                  textDecoration: "underline",
+                }}
+              >
                 Fit Guide
               </Text>
             </Link>
             {productData.typestylename === "PANTS" && (
-              <Box my={"3"}>
-                <Text mb={"2"}>Length</Text>
+              <Box>
+                <Box display={"flex"} alignItems={"center"} my={"2"}>
+                  <Text>Length</Text>
+                  {lengthError && (
+                    <Text ml={"2"} color={"red"} fontWeight={"semibold"}>
+                      *Length is required
+                    </Text>
+                  )}
+                </Box>
                 <Stack direction={"row"}>
                   <Box
                     cursor={"pointer"}
@@ -465,6 +484,7 @@ const Products = () => {
                     color={selectLength === "Regular" ? "white" : "black"}
                     onClick={() => {
                       setSelectLength("Regular");
+                      setLengthError(false);
                     }}
                   >
                     <Text>Regular</Text>
@@ -481,6 +501,7 @@ const Products = () => {
                     color={selectLength === "Petite" ? "white" : "black"}
                     onClick={() => {
                       setSelectLength("Petite");
+                      setLengthError(false);
                     }}
                   >
                     <Text>Petite</Text>
@@ -491,12 +512,13 @@ const Products = () => {
             <div
               className="flex flex-col items-center my-3 "
               onClick={() => {
-                if (chooseSize != null) {
+                if (chooseSize != null && selectLength !== null) {
                   const item = {
                     productID: productData.id,
                     productimage: productData.productimage[0],
                     productname: productData.productname,
                     productsize: chooseSize,
+                    productLength: selectLength,
                     productcolor: chooseColor || productData.colors.name,
                     productPrice: productData.price,
                     originalPrice: productData.price,
@@ -515,6 +537,7 @@ const Products = () => {
                         cartItem.productsize = chooseSize;
                         cartItem.productcolor =
                           chooseColor || productData.colors.name;
+                        cartItem.productLength = selectLength;
                       }
                       return cartItem;
                     });
@@ -525,7 +548,8 @@ const Products = () => {
                     dispatch(DrawerState(!IsDrawerOpen));
                   }
                 } else {
-                  setSizeError(true);
+                  chooseSize === null && setSizeError(true);
+                  selectLength === null && setLengthError(true);
                 }
               }}
             >

@@ -140,6 +140,7 @@ const Drawer = ({ openDrawer }) => {
                     productimage={item.productimage}
                     productName={item.productname}
                     productsize={item.productsize}
+                    productLength={item.productLength}
                     productcolor={item.productcolor}
                     productPrice={item.productPrice}
                     count={item.count}

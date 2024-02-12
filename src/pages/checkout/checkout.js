@@ -185,6 +185,7 @@ const Checkout = () => {
                         key={index}
                         productId={item.productID}
                         productName={item.productname}
+                        productLength={item.productLength}
                         productimage={item.productimage}
                         productsize={item.productsize}
                         productcolor={item.productcolor}
