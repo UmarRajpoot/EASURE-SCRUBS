@@ -276,7 +276,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <NewsLetter />
+      {/* <NewsLetter /> */}
     </>
   );
 };

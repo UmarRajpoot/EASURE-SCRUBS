@@ -324,7 +324,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <NewsLetter />
+      {/* <NewsLetter /> */}
     </>
   );
 };
