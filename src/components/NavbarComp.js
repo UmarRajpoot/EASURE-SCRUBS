@@ -22,6 +22,7 @@ const NavbarComp = () => {
   const IsDrawerOpen = useSelector((state) => state.DrawerOptions.DrawerState);
   const AuthState = useSelector((state) => state.Auths.users);
   const Products = useSelector((state) => state.ProductsReducer.Products);
+  const CartItems = useSelector((state) => state.CartOptions.CartItems);
 
   const [productSearch, setProductSearch] = useState("");
   const [searchedProduct, setSearchedProduct] = useState([]);
@@ -196,7 +197,14 @@ const NavbarComp = () => {
                 </div>
               )}
               <div className="group mr-2 relative">
-                <div className="group-hover:cursor-pointer p-2">
+                <div className="group-hover:cursor-pointer p-2 relative">
+                  {CartItems?.length !== 0 && (
+                    <div className="w-5 h-5 bg-red-500 flex items-center justify-center rounded-full absolute -top-0 -right-0">
+                      <h1 className="text-xs text-white">
+                        {CartItems?.length}
+                      </h1>
+                    </div>
+                  )}
                   <Box
                     onClick={() => {
                       dispatch(DrawerState(!IsDrawerOpen));
