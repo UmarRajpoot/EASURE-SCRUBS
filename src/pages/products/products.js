@@ -649,7 +649,7 @@ const Products = () => {
       </div>
       <h4 className="text-xl px-10 mt-10 font-bold ">Wear It With</h4>
       <div className="px-3 md:px-10">
-        {/* <Suggestion productSuggestions={productData?.suggestions} /> */}
+        <Suggestion productSuggestions={productData?.suggestions} />
       </div>
       <Box>
         <Stack
@@ -682,11 +682,11 @@ const Products = () => {
         </Stack>
       </Box>
       <div className="flex flex-col px-10">
-        {/* <ReviewModel
+        <ReviewModel
           isOpen={ReviewModelDis.isOpen}
           onClose={ReviewModelDis.onClose}
           productID={productData.id}
-        /> */}
+        />
         <Box w={"100%"}>
           <Box
             display={"flex"}
@@ -700,7 +700,7 @@ const Products = () => {
               Write a Review
             </Button>
           </Box>
-          {/* <Box
+          <Box
             w={"100%"}
             display={"flex"}
             flexDirection={"column"}
@@ -737,7 +737,7 @@ const Products = () => {
                 </Box>
               );
             })}
-          </Box> */}
+          </Box>
         </Box>
       </div>
     </div>
