@@ -32,7 +32,7 @@ const HeroSection = () => {
             <Link to={"/viewall/scrubs/men"}>
               <Text
                 bgColor={"white"}
-                px={"10"}
+                px={["5", "10"]}
                 py={"3"}
                 fontWeight={"semibold"}
                 _hover={{
@@ -46,7 +46,7 @@ const HeroSection = () => {
             <Link to={"/viewall/scrubs/women"}>
               <Text
                 bgColor={"white"}
-                px={"10"}
+                px={["5", "10"]}
                 py={"3"}
                 fontWeight={"semibold"}
                 _hover={{

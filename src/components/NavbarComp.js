@@ -294,7 +294,7 @@ const NavbarComp = () => {
             className={`items-center justify-between ${
               mobileDropDown ? "block" : "hidden"
             } w-full md:flex md:w-auto md:order-1`}
-            id="navbar-search"
+            id="navbar-search_mobile"
           >
             <div className="relative w-full block md:hidden">
               <div>

@@ -14,7 +14,7 @@ const Collection = () => {
     return await axios
       .get(`${BASEURL}/collection/${params.collection}`)
       .then((resp) => {
-        console.log(resp.data);
+        // console.log(resp.data);
         setExtProduct(resp.data.response);
       })
       .catch((error) => {
@@ -133,10 +133,7 @@ const Collection = () => {
       <div className="flex md:flex-wrap overflow-x-scroll px-10 no-scrollbar">
         {extProduct.map((prod, index) => {
           return (
-            <Link
-              to={`/products/${prod.productname.toLowerCase()}/${prod.parentcategory.toLowerCase()}`}
-              key={index.toString()}
-            >
+            <Link to={`/products/${prod.id}`} key={index.toString()}>
               <div className="py-10 px-3 hover:scale-105 transition-all ease-in-out duration-200 hover:drop-shadow-xl cursor-pointer">
                 <div
                   className=" h-96 w-64 bg-contain bg-no-repeat bg-center"

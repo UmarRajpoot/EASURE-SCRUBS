@@ -1,7 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import AccordionComp from "../../components/AccordionComp/AccordionComp";
-import { Box, Divider, Image, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Divider,
+  Image,
+  SimpleGrid,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { BASEURL } from "../../Config/URL";
 import { CheckIcon } from "@chakra-ui/icons";
@@ -229,7 +241,7 @@ const ProductList = () => {
           setonHover("");
         }}
       >
-        <div className="mx-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
+        <div className="my-3 md:mx-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
           <div className="rounded-lg bg-cover bg-no-repeat bg-center">
             {/* <Image
               src={mensT.productimage && mensT.productimage[0]}
@@ -286,7 +298,7 @@ const ProductList = () => {
           setonHover("");
         }}
       >
-        <div className="mx-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
+        <div className="my-3 md:mx-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
           <div className=" rounded-lg bg-cover bg-no-repeat bg-center">
             {/* <Image
               src={WTrend.productimage && WTrend.productimage[0]}
@@ -414,9 +426,111 @@ const ProductList = () => {
 
   return (
     <>
-      <Stack minH={"100vh"} direction={"row"}>
+      <Stack minH={"100vh"} direction={["column", "row"]}>
+        {/* <AccordionComp FiltersList={FiltersList} /> */}
+        <Accordion
+          allowToggle
+          bgColor={"white"}
+          border={"none"}
+          display={["block", "none"]}
+        >
+          <AccordionItem border={"none"}>
+            <h2>
+              <AccordionButton>
+                <Box as="span" flex="1" textAlign="left" fontSize={"sm"}>
+                  <Text fontSize={"md"}>Filters</Text>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              <Box w={"100%"} p={"10"} display={["block", "none"]}>
+                <Stack spacing={"2"} direction={"column"}>
+                  {FiltersList.map((data, index) => {
+                    return (
+                      <Box key={index}>
+                        <Stack direction={"row"} alignItems={"center"}>
+                          {selected === index && <CheckIcon />}
+                          <Text
+                            userSelect={"none"}
+                            cursor={"pointer"}
+                            color={selected === index ? "blue" : "black"}
+                            _hover={{ color: "blue" }}
+                            onClick={() => {
+                              if (selected === index) {
+                                setSelected("");
+                                setAllProducts(getIndProducts);
+                              } else if (selected !== index) {
+                                setSelected(index);
+                                Navigate(
+                                  `/viewall/scrubs/${params.category}?filter=${data.index}`
+                                );
+                                ToggleFilter(data);
+                              }
+                            }}
+                          >
+                            {data.name}
+                          </Text>
+                        </Stack>
+                        <Divider />
+                      </Box>
+                    );
+                  })}
+                  <Box
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent={"space-between"}
+                  >
+                    <Text userSelect={"none"} fontSize={"md"}>
+                      Colors
+                    </Text>
+                    {colorSelect !== "" && (
+                      <Text
+                        cursor={"pointer"}
+                        onClick={() => {
+                          setColorSelect("");
+                          setAllProducts(getIndProducts);
+                        }}
+                      >
+                        Reset
+                      </Text>
+                    )}
+                  </Box>
+                  <Box flexWrap={"wrap"} display={"flex"}>
+                    {Colors.map((color, index) => {
+                      return (
+                        <Box
+                          key={index}
+                          w={"5"}
+                          h={"5"}
+                          bgColor={color.code}
+                          rounded={"full"}
+                          m={"1"}
+                          title={color.name}
+                          cursor={"pointer"}
+                          ring={colorSelect === index ? "2" : "0"}
+                          onClick={() => {
+                            setColorSelect(index);
+                            let allpro = getIndProducts.filter((prod_col) => {
+                              if (
+                                prod_col.colors?.name.toUpperCase() ===
+                                color.name.toUpperCase()
+                              ) {
+                                return prod_col;
+                              }
+                            });
+                            return setAllProducts(allpro);
+                          }}
+                        ></Box>
+                      );
+                    })}
+                  </Box>
+                </Stack>
+              </Box>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
         <Box w={"25%"} p={"10"} display={["none", "block"]}>
-          {/* <AccordionComp FiltersList={FiltersList} /> */}
           <Stack spacing={"2"} direction={"column"}>
             {FiltersList.map((data, index) => {
               return (
@@ -431,7 +545,9 @@ const ProductList = () => {
                       onClick={() => {
                         if (selected === index) {
                           setSelected("");
-                          // Navigate(`/viewall/scrubs/women`, { replace: true });
+                          Navigate(`/viewall/scrubs/${params.category}`, {
+                            replace: true,
+                          });
                           setAllProducts(getIndProducts);
                         } else if (selected !== index) {
                           setSelected(index);
@@ -500,8 +616,8 @@ const ProductList = () => {
             </Box>
           </Stack>
         </Box>
-        <SimpleGrid
-          columns={[1, null, 3]}
+        {/* <SimpleGrid
+          columns={[1, 2, 3, 4]}
           placeItems={["center", null, "center"]}
           w={"full"}
           spacing={"5"}
@@ -516,14 +632,14 @@ const ProductList = () => {
               }
             }
           })}
-        </SimpleGrid>
-        {/* <Box
+        </SimpleGrid> */}
+        <Box
           flex={1}
-          p={"5"}
+          // p={"5"}
           flexWrap={"wrap"}
           display={"flex"}
           alignItems={"center"}
-          justifyContent={"center"}
+          justifyContent={["center", "space-between"]}
         >
           {AllProducts.map((product, index) => {
             if (product.parentcategory === params.category.toUpperCase()) {
@@ -534,7 +650,7 @@ const ProductList = () => {
               }
             }
           })}
-        </Box> */}
+        </Box>
       </Stack>
     </>
   );

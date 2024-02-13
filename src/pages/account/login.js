@@ -163,7 +163,11 @@ const Login = () => {
                             isInvalid={form.errors.email && form.touched.email}
                             isRequired
                           >
-                            <Input {...field} placeholder="Email" />
+                            <Input
+                              {...field}
+                              placeholder="Email"
+                              autoCapitalize="username"
+                            />
                             <FormErrorMessage>
                               {form.errors.email}
                             </FormErrorMessage>
@@ -188,7 +192,7 @@ const Login = () => {
                                 pr="4.5rem"
                                 type={show ? "text" : "password"}
                                 placeholder="Password"
-                                autoComplete="$"
+                                autoComplete="current-password"
                               />
                               <InputRightElement width="4.5rem">
                                 <Button
