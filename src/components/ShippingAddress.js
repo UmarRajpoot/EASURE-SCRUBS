@@ -77,22 +77,18 @@ const ShippingAddress = ({ setisStandardShipping }) => {
   return (
     <Formik
       initialValues={{
-        email: "bitc322@gmail.com",
+        email: "",
         gender: "",
-        country: "Pakistan",
+        country: "",
         firstname:
-          AuthState.length !== 0
-            ? AuthState.displayName?.split(" ")[0]
-            : "Umar",
+          AuthState.length !== 0 ? AuthState.displayName?.split(" ")[0] : "",
         lastname:
-          AuthState.length !== 0
-            ? AuthState.displayName?.split(" ")[1]
-            : "Saleem",
-        address: "Khewra",
-        city: "Khewra",
-        state: "Punjab",
-        zipcode: "49060",
-        phone: "03404960397",
+          AuthState.length !== 0 ? AuthState.displayName?.split(" ")[1] : "",
+        address: "",
+        city: "",
+        state: "",
+        zipcode: "",
+        phone: "",
         shippingWay: "standard",
       }}
       enableReinitialize
