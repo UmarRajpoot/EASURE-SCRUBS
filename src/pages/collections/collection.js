@@ -146,7 +146,12 @@ const Collection = () => {
                     BEST SELLER
                   </h2> */}
                   <h2 className="text-lg text-gray-900 font-bold cursor-pointer mb-3">
-                    {prod.productname}
+                    {/* {prod.productname} */}
+                    {prod.varientname && prod?.varientname?.toLowerCase()}-
+                    {prod.typename && prod?.typename?.toLowerCase()}-
+                    {prod.typestylename && prod?.typestylename[0]}
+                    {prod.typestylename &&
+                      prod?.typestylename?.slice(1).toLowerCase()}
                   </h2>
                   {/* <h2 className="text-md text-gray-900 font-extrabold cursor-pointer mb-3">
                     {prod.colors[0].colors[0] === "#000000" && "BLACK"}
