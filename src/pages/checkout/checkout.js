@@ -6,6 +6,7 @@ import CheckoutItems from "../../components/Checkout/CheckoutItems";
 import {
   AddCartItem,
   AllProductPrice,
+  AllProductPriceShip,
   ResetCart,
 } from "../../Store/Cart/actions";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
@@ -18,8 +19,14 @@ import axios from "axios";
 import { BASEURL } from "../../Config/URL";
 
 const Checkout = () => {
+  const [isStandardShipping, setisStandardShipping] = useState(true);
+  const [shippingCharges, setShippingCharges] = useState(9);
+
   const CartItems = useSelector((state) => state.CartOptions.CartItems);
   const GrandTotalPrice = useSelector((state) => state.CartOptions.GrandTotal);
+  const GrandTotalShipPrice = useSelector(
+    (state) => state.CartOptions.GrandTotalWithShip
+  );
   const IsDrawerOpen = useSelector((state) => state.DrawerOptions.DrawerState);
 
   const dispatch = useDispatch();
@@ -28,7 +35,12 @@ const Checkout = () => {
     dispatch(DrawerState(!IsDrawerOpen));
     if (JSON.parse(localStorage.getItem("cartItems"))) {
       dispatch(AddCartItem(JSON.parse(localStorage.getItem("cartItems"))));
-      dispatch(AllProductPrice());
+      if (GrandTotalPrice > 50) {
+        // dispatch(AllProductPrice());
+        dispatch(AllProductPriceShip(0));
+      } else {
+        dispatch(AllProductPriceShip(shippingCharges));
+      }
     }
   };
 
@@ -36,10 +48,26 @@ const Checkout = () => {
     getItemsFromStorage();
   }, []);
 
+  useEffect(() => {
+    if (isStandardShipping === true && parseInt(GrandTotalPrice) < 50) {
+      console.log("it runs");
+      setShippingCharges(9);
+      dispatch(AllProductPriceShip(9));
+    } else if (isStandardShipping === false && parseInt(GrandTotalPrice) < 50) {
+      console.log("it runs ss");
+      setShippingCharges(19);
+      dispatch(AllProductPriceShip(19));
+    } else if (GrandTotalPrice > 50) {
+      setShippingCharges(0);
+      dispatch(AllProductPriceShip(0));
+    }
+  }, [isStandardShipping, CartItems]);
+
   const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
   const step = searchParams.get("step");
+
   useEffect(() => {
     if (step === null) {
       navigate("/checkout?step=shipping_address");
@@ -77,7 +105,7 @@ const Checkout = () => {
   }, [CartItems]);
 
   return (
-    <>
+    <Box minH={"100%"}>
       {emptyCart && (
         <Box
           w={"full"}
@@ -119,10 +147,10 @@ const Checkout = () => {
           </Box>
         </Box>
       )}
-      <Box minH={"full"}>
+      <Box>
         <section>
-          <div className="flex-1 flex flex-col md:flex-row md:h-96 lg:h-screen item-center justify-center">
-            <div className="w-full flex flex-col items-center mt-10">
+          <div className=" flex-1 flex flex-col md:flex-row md:h-96 lg:h-screen item-center justify-center">
+            <div className="pb-5 overflow-auto w-full flex flex-col items-center mt-10">
               <Box w={["90%", "70%"]}>
                 <Heading>EASURE</Heading>
                 <Box my={"3"}>
@@ -169,14 +197,18 @@ const Checkout = () => {
                   )}
                 </Box>
                 {step?.toLowerCase() === "shipping_address" && (
-                  <ShippingAddress />
+                  <ShippingAddress
+                    setisStandardShipping={setisStandardShipping}
+                  />
                 )}
                 {step?.toLowerCase() === "payment" && (
                   <Payments clientSecret={clientSecret} />
                 )}
               </Box>
             </div>
-            <div className={`w-full md:w-[70%] pt-3 md:pt-0 bg-gray-100 p-10`}>
+            <div
+              className={` w-full md:w-[70%] pt-3 md:pt-0 bg-gray-100  px-10`}
+            >
               <Box className="my-10">
                 {CartItems &&
                   CartItems?.map((item, index) => {
@@ -195,39 +227,65 @@ const Checkout = () => {
                     );
                   })}
               </Box>
-              <Box
-                display={"flex"}
-                flexDirection={"row"}
-                alignItems={"center"}
-                justifyContent={"space-between"}
-                p={"3"}
-              >
-                <Text className="text-sm">Subtotal</Text>
-                <Text fontWeight={"bold"} className="text-sm">
-                  ${GrandTotalPrice}.00
-                </Text>
-              </Box>
-              <hr />
-              <Box
-                display={"flex"}
-                flexDirection={"row"}
-                alignItems={"center"}
-                justifyContent={"space-between"}
-                p={"3"}
-              >
-                <Text className="text-sm">Total</Text>
-                <Box display={"flex"} alignItems={"center"}>
-                  <Text className="text-sm">USD</Text>
-                  <Text className="text-sm" fontWeight={"medium"} pl={"2"}>
-                    {GrandTotalPrice}.00
-                  </Text>
+              <Box bgColor={"gray.200"} mb={["5", "0"]}>
+                <Box
+                  display={"flex"}
+                  flexDirection={"row"}
+                  alignItems={"center"}
+                  justifyContent={"space-between"}
+                  p={"3"}
+                >
+                  <Text className="text-sm">Subtotal</Text>
+                  <Text className="text-sm">${GrandTotalPrice.toFixed(2)}</Text>
+                </Box>
+
+                <Box
+                  display={"flex"}
+                  flexDirection={"row"}
+                  alignItems={"center"}
+                  justifyContent={"space-between"}
+                  p={"3"}
+                >
+                  <Text className="text-sm">Shipping Charges</Text>
+                  <Text className="text-sm">${shippingCharges.toFixed(2)}</Text>
+                </Box>
+                {/* {!isStandardShipping && (
+                  <Box
+                    display={"flex"}
+                    flexDirection={"row"}
+                    alignItems={"center"}
+                    justifyContent={"space-between"}
+                    p={"3"}
+                  >
+                    <Text className="text-sm">Express Shipping</Text>
+                    <Text className="text-sm">
+                      ${ExpressShipping.toFixed(2)}
+                    </Text>
+                  </Box>
+                )} */}
+
+                <hr />
+                <Box
+                  display={"flex"}
+                  flexDirection={"row"}
+                  alignItems={"center"}
+                  justifyContent={"space-between"}
+                  p={"3"}
+                >
+                  <Text className="text-sm font-medium">Total</Text>
+                  <Box display={"flex"} alignItems={"center"}>
+                    {/* <Text className="text-sm">USD</Text> */}
+                    <Text className="text-sm font-medium" pl={"2"}>
+                      ${Number(GrandTotalShipPrice).toFixed(2)}
+                    </Text>
+                  </Box>
                 </Box>
               </Box>
             </div>
           </div>
         </section>
       </Box>
-    </>
+    </Box>
   );
 };
 

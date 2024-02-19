@@ -1,4 +1,4 @@
-import { ButtonGroup, IconButton } from "@chakra-ui/react";
+import { ButtonGroup, IconButton, Text } from "@chakra-ui/react";
 import React from "react";
 
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
@@ -28,37 +28,42 @@ const DrawerBodyItems = ({
           <div className="ml-2 flex flex-col justify-between">
             <div>
               {/* <Link to={`/products/${productID}`}> */}
-              <h1 className="text-sm font-bold">{productName}</h1>
+              <h1 className="text-xs font-bold">{productName}</h1>
               {/* </Link> */}
-              <h1 className="text-sm font-bold text-gray-500 ">
+              <h1 className="text-xs font-bold text-gray-500 ">
                 {productsize} • {productcolor}
               </h1>
               {productLength !== "" && (
-                <h1 className="text-sm font-bold text-gray-500 ">
+                <h1 className="text-xs font-bold text-gray-500 ">
                   Length: {productLength}
                 </h1>
               )}
             </div>
-            <div className="flex items-center justify-between w-fit border border-gray-300 rounded-md px-1 py-0.5 ">
-              <ButtonGroup size="sm" isAttached variant="outline">
-                <IconButton
-                  variant={"ghost"}
-                  aria-label="decrement"
-                  size={"xs"}
-                  icon={<MinusIcon />}
-                  onClick={decrementbtn}
-                />
-                <h1 className="text-md font-semibold px-3">
-                  {parseInt(count)}
-                </h1>
-                <IconButton
-                  variant={"ghost"}
-                  aria-label="increment"
-                  size={"xs"}
-                  icon={<AddIcon />}
-                  onClick={Incrementbtn}
-                />
-              </ButtonGroup>
+            <div className="flex items-center">
+              <Text fontSize={"sm"} pr={"2"}>
+                Qty
+              </Text>
+              <div className="flex items-center justify-between w-fit border border-gray-300 rounded-md px-1 py-0.5 ">
+                <ButtonGroup size="sm" isAttached variant="outline">
+                  <IconButton
+                    variant={"ghost"}
+                    aria-label="decrement"
+                    size={"xs"}
+                    icon={<MinusIcon />}
+                    onClick={decrementbtn}
+                  />
+                  <h1 className="text-md font-semibold px-3">
+                    {parseInt(count)}
+                  </h1>
+                  <IconButton
+                    variant={"ghost"}
+                    aria-label="increment"
+                    size={"xs"}
+                    icon={<AddIcon />}
+                    onClick={Incrementbtn}
+                  />
+                </ButtonGroup>
+              </div>
             </div>
           </div>
           <div className="flex flex-col items-end justify-between">

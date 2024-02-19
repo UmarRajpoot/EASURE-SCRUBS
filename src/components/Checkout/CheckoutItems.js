@@ -34,12 +34,12 @@ const CheckoutItems = ({
         <div className="flex justify-between flex-1">
           <div className="ml-2 flex flex-col justify-between">
             <div>
-              <h1 className="text-sm font-bold">{productName}</h1>
-              <h1 className="text-sm font-bold text-gray-500 ">
+              <h1 className="text-xs font-bold">{productName}</h1>
+              <h1 className="text-xs font-bold text-gray-500 ">
                 {productsize} • {productcolor}
               </h1>
               {productLength !== "" && (
-                <h1 className="text-sm font-bold text-gray-500 ">
+                <h1 className="text-xs font-bold text-gray-500 ">
                   Length: {productLength}
                 </h1>
               )}
@@ -47,7 +47,7 @@ const CheckoutItems = ({
           </div>
           <div className="flex flex-col items-end justify-center">
             <div>
-              <h1 className="text-md font-semibold">${productPrice}</h1>
+              <h1 className="text-sm font-semibold">${productPrice}</h1>
             </div>
           </div>
         </div>

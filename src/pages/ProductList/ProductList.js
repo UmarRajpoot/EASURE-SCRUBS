@@ -227,6 +227,8 @@ const ProductList = () => {
   }, [getIndProducts, locations.search]);
 
   const CardMen = ({ mensT, index }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
     return (
       <Link
         to={`/products/${mensT.id}`}
@@ -241,25 +243,26 @@ const ProductList = () => {
           setonHover("");
         }}
       >
-        <div className="my-3 md:mx-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
-          <div className="rounded-lg bg-cover bg-no-repeat bg-center">
+        <div className="p-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
+          <div className="rounded-lg bg-cover bg-no-repeat bg-center ">
             {/* <Image
               src={mensT.productimage && mensT.productimage[0]}
               // onLoad={() => console.log("loading")}
             /> */}
-            {mensT.productimage &&
+            {isLoaded &&
+            mensT.productimage &&
             colorSelect === "" &&
             onHover === mensT.id ? (
               <Image
                 src={mensT.productimage[1]}
                 // onLoad={() => console.log("loading")}
-                className="h-80 w-64"
+                className="h-full w-full"
               />
             ) : (
               <Image
                 src={mensT.productimage[0]}
-                // onLoad={() => console.log("loading")}
-                className="h-80 w-64"
+                onLoad={() => setIsLoaded(true)}
+                className="h-full w-full"
               />
             )}
             <div className="p-2 text-base font-bold text-gray-500 ">
@@ -283,6 +286,8 @@ const ProductList = () => {
   };
 
   const CardWomen = ({ WTrend, index }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
     return (
       <Link
         to={`/products/${WTrend.id}`}
@@ -298,23 +303,23 @@ const ProductList = () => {
           setonHover("");
         }}
       >
-        <div className="my-3 md:mx-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
+        <div className="p-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
           <div className=" rounded-lg bg-cover bg-no-repeat bg-center">
             {/* <Image
               src={WTrend.productimage && WTrend.productimage[0]}
               // onLoad={() => console.log("loading")}
             /> */}
-            {WTrend.productimage && onHover === WTrend.id ? (
+            {isLoaded && WTrend.productimage && onHover === WTrend.id ? (
               <Image
                 src={WTrend.productimage[1]}
                 // onLoad={() => console.log("loading")}
-                className="h-80 w-64"
+                className="h-full w-full"
               />
             ) : (
               <Image
                 src={WTrend.productimage[0]}
-                // onLoad={() => console.log("loading")}
-                className="h-80 w-64"
+                onLoad={() => setIsLoaded(true)}
+                className="h-full w-full"
               />
             )}
             <div className="p-2 text-base font-bold text-gray-500 ">
@@ -338,10 +343,10 @@ const ProductList = () => {
   const ToggleFilter = (data) => {
     switch (data.name) {
       case "Scrub Top":
-        console.log("Hit");
+        // console.log("Hit");
         if (params.category === "men") {
           let temp_scrubTop = [];
-          console.log("Men Search");
+          // console.log("Men Search");
           ScrubMenTop.map((list_id) => {
             return getIndProducts.filter((scrubtopMen_prod) => {
               if (scrubtopMen_prod.id === list_id) {
@@ -426,13 +431,13 @@ const ProductList = () => {
 
   return (
     <>
-      <Stack minH={"100vh"} direction={["column", "row"]}>
+      <Stack minH={"100vh"} direction={["column", "column", "row"]}>
         {/* <AccordionComp FiltersList={FiltersList} /> */}
         <Accordion
           allowToggle
           bgColor={"white"}
           border={"none"}
-          display={["block", "none"]}
+          display={["block", "block", "none"]}
         >
           <AccordionItem border={"none"}>
             <h2>
@@ -444,7 +449,7 @@ const ProductList = () => {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              <Box w={"100%"} p={"10"} display={["block", "none"]}>
+              <Box w={"100%"} p={"10"}>
                 <Stack spacing={"2"} direction={"column"}>
                   {FiltersList.map((data, index) => {
                     return (
@@ -530,7 +535,7 @@ const ProductList = () => {
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
-        <Box w={"25%"} p={"10"} display={["none", "block"]}>
+        <Box w={"25%"} p={"10"} display={["none", "none", "block"]}>
           <Stack spacing={"2"} direction={"column"}>
             {FiltersList.map((data, index) => {
               return (
@@ -616,11 +621,12 @@ const ProductList = () => {
             </Box>
           </Stack>
         </Box>
-        {/* <SimpleGrid
-          columns={[1, 2, 3, 4]}
-          placeItems={["center", null, "center"]}
+        <SimpleGrid
+          columns={[1, 2, 3]}
+          placeItems={["center", null, "end"]}
           w={"full"}
           spacing={"5"}
+          // rowGap={"5"}
           my={"5"}
         >
           {AllProducts.map((product, index) => {
@@ -632,8 +638,8 @@ const ProductList = () => {
               }
             }
           })}
-        </SimpleGrid> */}
-        <Box
+        </SimpleGrid>
+        {/* <Box
           flex={1}
           // p={"5"}
           flexWrap={"wrap"}
@@ -650,7 +656,7 @@ const ProductList = () => {
               }
             }
           })}
-        </Box>
+        </Box> */}
       </Stack>
     </>
   );

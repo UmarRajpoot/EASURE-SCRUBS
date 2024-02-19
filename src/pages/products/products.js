@@ -516,7 +516,7 @@ const Products = () => {
                   const item = {
                     productID: productData.id,
                     productimage: productData.productimage[0],
-                    productname: productData.productname,
+                    productname: `${productData.varientname}-${productData.typename}-${productData.typestylename}`,
                     productsize: chooseSize,
                     productLength: selectLength,
                     productcolor: chooseColor || productData.colors.name,

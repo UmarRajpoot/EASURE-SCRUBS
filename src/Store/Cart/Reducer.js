@@ -3,6 +3,7 @@ import * as ActionType from "./actions";
 const initialState = {
   CartItems: [],
   GrandTotal: 0,
+  GrandTotalWithShip: 0,
 };
 
 const CartItemReducers = (state = initialState, actions) => {
@@ -61,6 +62,17 @@ const CartItemReducers = (state = initialState, actions) => {
       return {
         ...state,
         GrandTotal: calculatePrice,
+      };
+    case ActionType.ALL_PRODUCT_PRICE_Shipping:
+      let calculatePriceShip = 0;
+      let shippingCharges = actions.payload;
+      const allProductPriceShipUpdate = state.CartItems.map((product) => {
+        calculatePriceShip =
+          calculatePriceShip + parseInt(product.productPrice);
+      });
+      return {
+        ...state,
+        GrandTotalWithShip: calculatePriceShip + parseInt(shippingCharges),
       };
 
     case ActionType.RESET_CART:

@@ -16,8 +16,10 @@ const Suggestion = ({ productSuggestions }) => {
   const [productData, setProductData] = useState([]);
 
   const [allColors, setAllColors] = useState([]);
+  const [selectLength, setSelectLength] = useState(null);
 
   const [sizeError, setSizeError] = useState(false);
+  const [lengthError, setLengthError] = useState(false);
 
   const [chooseSize, setchooseSize] = useState(null);
   const [chooseColor, setchooseColor] = useState("");
@@ -98,7 +100,16 @@ const Suggestion = ({ productSuggestions }) => {
                   </h2> */}
                 <Link to={`/products/${suggest.response.id}`}>
                   <h2 className="text-lg text-gray-900 font-bold mb-3 hover:underline hover:cursor-pointer">
-                    {suggest.response.productname}
+                    {suggest.response.varientname &&
+                      suggest.response?.varientname?.toLowerCase()}
+                    -
+                    {suggest.response.typename &&
+                      suggest.response?.typename?.toLowerCase()}
+                    -
+                    {suggest.response.typestylename &&
+                      suggest.response?.typestylename[0]}
+                    {suggest.response.typestylename &&
+                      suggest.response?.typestylename?.slice(1).toLowerCase()}
                   </h2>
                 </Link>
                 <h2 className="text-xl text-gray-900 font-medium ">
@@ -106,7 +117,7 @@ const Suggestion = ({ productSuggestions }) => {
                 </h2>
               </div>
               <div className="p-3 flex-1">
-                <Text fontSize={"xl"} fontWeight={"bold"}>
+                <Text fontSize={"md"} fontWeight={"bold"}>
                   Colors
                 </Text>
                 <Stack direction={"row"} my={"3"}>
@@ -132,7 +143,7 @@ const Suggestion = ({ productSuggestions }) => {
                   })}
                 </Stack>
                 <Box display={"flex"} alignItems={"center"}>
-                  <Text fontSize={"xl"} fontWeight={"bold"}>
+                  <Text fontSize={"md"} fontWeight={"bold"}>
                     Sizes
                   </Text>
                   {sizeError && (
@@ -164,6 +175,61 @@ const Suggestion = ({ productSuggestions }) => {
                     </button>
                   );
                 })}
+
+                {suggest.response.typestylename === "PANTS" && (
+                  <Box>
+                    <Box display={"flex"} alignItems={"center"} my={"2"}>
+                      <Text fontSize={"md"} fontWeight={"bold"}>
+                        Length
+                      </Text>
+                      {lengthError && (
+                        <Text ml={"2"} color={"red"} fontWeight={"semibold"}>
+                          *Length is required
+                        </Text>
+                      )}
+                    </Box>
+                    <Stack direction={"row"}>
+                      <Box
+                        cursor={"pointer"}
+                        _hover={{
+                          bgColor: "black",
+                          color: "white",
+                        }}
+                        p={"2"}
+                        rounded={"md"}
+                        bgColor={
+                          selectLength === "Regular" ? "black" : "gray.300"
+                        }
+                        color={selectLength === "Regular" ? "white" : "black"}
+                        onClick={() => {
+                          setSelectLength("Regular");
+                          setLengthError(false);
+                        }}
+                      >
+                        <Text>Regular</Text>
+                      </Box>
+                      <Box
+                        cursor={"pointer"}
+                        _hover={{
+                          bgColor: "black",
+                          color: "white",
+                        }}
+                        p={"2"}
+                        rounded={"md"}
+                        bgColor={
+                          selectLength === "Petite" ? "black" : "gray.300"
+                        }
+                        color={selectLength === "Petite" ? "white" : "black"}
+                        onClick={() => {
+                          setSelectLength("Petite");
+                          setLengthError(false);
+                        }}
+                      >
+                        <Text>Petite</Text>
+                      </Box>
+                    </Stack>
+                  </Box>
+                )}
               </div>
               <div className="flex-1">
                 <Box
@@ -185,8 +251,9 @@ const Suggestion = ({ productSuggestions }) => {
                       const item = {
                         productID: suggest.response.id,
                         productimage: suggest.response.productimage[0],
-                        productname: suggest.response.productname,
+                        productname: `${suggest.response.varientname}-${suggest.response.typename}-${suggest.response.typestylename}`,
                         productsize: chooseSize,
+                        productLength: selectLength,
                         productcolor:
                           chooseColor || suggest.response.colors.name,
                         productPrice: suggest.response.price,
@@ -206,6 +273,7 @@ const Suggestion = ({ productSuggestions }) => {
                             cartItem.productsize = chooseSize;
                             cartItem.productcolor =
                               chooseColor || suggest.response.colors.name;
+                            cartItem.productLength = selectLength;
                           }
                           return cartItem;
                         });
@@ -217,6 +285,9 @@ const Suggestion = ({ productSuggestions }) => {
                       }
                     } else {
                       setSizeError(true);
+                      if (!selectLength) {
+                        setLengthError(true);
+                      }
                     }
                   }}
                 >

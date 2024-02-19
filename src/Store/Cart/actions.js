@@ -77,3 +77,17 @@ export function ResetCart() {
     dispatch(reset_cart_Payload());
   };
 }
+
+// Calculate all Product Price with shipping
+export const ALL_PRODUCT_PRICE_Shipping = "ALL_PRODUCT_PRICE_Shipping";
+
+export const getPRODUCT_PRICE_ship_Payload = (shippingCharges) => ({
+  type: ALL_PRODUCT_PRICE_Shipping,
+  payload: shippingCharges,
+});
+
+export function AllProductPriceShip(shippingCharges) {
+  return (dispatch) => {
+    dispatch(getPRODUCT_PRICE_ship_Payload(shippingCharges));
+  };
+}

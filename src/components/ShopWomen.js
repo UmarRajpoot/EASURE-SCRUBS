@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { BASEURL } from "../Config/URL";
-import { Image } from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem, Image, SimpleGrid } from "@chakra-ui/react";
 
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
@@ -85,7 +85,23 @@ const ShopWomen = () => {
 
   const [onHover, setonHover] = useState("");
 
+  const calculateNumToShow = () => {
+    const screenWidth = window.innerWidth;
+    // You can adjust these values as needed
+    if (screenWidth >= 1200) {
+      return 5;
+    } else if (screenWidth >= 992) {
+      return 4;
+    } else if (screenWidth >= 768) {
+      return 2;
+    } else {
+      return 1;
+    }
+  };
+
   const Card_comp = ({ WTrend, index }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
     return (
       <Link
         to={`/products/${WTrend.id}`}
@@ -101,18 +117,20 @@ const ShopWomen = () => {
           setonHover("");
         }}
       >
-        <div className="md:my-10 mx-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer w-72 h-96">
-          <div className="h-full w-full rounded-lg bg-cover bg-no-repeat bg-center">
-            {WTrend.productimage && onHover === WTrend.id ? (
+        <div
+          className={`md:my-10 mx-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer w-auto h-auto`}
+        >
+          <div className="rounded-lg bg-cover bg-no-repeat bg-center w-72 h-96 ">
+            {isLoaded && WTrend.productimage && onHover === WTrend.id ? (
               <Image
                 src={WTrend.productimage[1]}
-                // onLoad={() => console.log("loading")}
+                // onLoad={() => console.log("Loaded")}
                 className="h-full w-full"
               />
             ) : (
               <Image
                 src={WTrend.productimage[0]}
-                // onLoad={() => console.log("loading")}
+                onLoad={() => setIsLoaded(true)}
                 className="h-full w-full"
               />
             )}
@@ -177,11 +195,13 @@ const ShopWomen = () => {
         {womenShop?.map((WTrend, index) => {
           if (WTrend.parentcategory === "WOMEN") {
             return (
-              <Card_comp
-                key={index.toString()}
-                WTrend={WTrend}
-                index={index.toString()}
-              />
+              <Box w={window.innerWidth / calculateNumToShow()} mx={["0", "3"]}>
+                <Card_comp
+                  key={index.toString()}
+                  WTrend={WTrend}
+                  index={index.toString()}
+                />
+              </Box>
             );
           }
           return null;

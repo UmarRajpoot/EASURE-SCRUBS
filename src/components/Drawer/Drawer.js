@@ -164,30 +164,40 @@ const Drawer = ({ openDrawer }) => {
                 );
               })}
           </div>
-          <div className="flex items-center justify-between p-3">
-            <h4 className="text-xl ">Total:</h4>
-            <h4 className="text-xl ">${GrandTotalPrice}</h4>
+          <div className="fixed bottom-5 w-full left-0 p-3">
+            <div className="flex items-center justify-between p-3">
+              <h4 className="text-sm ">SubTotal:</h4>
+              <h4 className="text-sm ">${GrandTotalPrice}</h4>
+            </div>
+            <div className="flex items-center justify-between p-3">
+              <h4 className="text-sm font-medium">Total:</h4>
+              <h4 className="text-sm font-medium">${GrandTotalPrice}</h4>
+            </div>
+            <Button
+              w={"full"}
+              mt={4}
+              bgColor={"black"}
+              color={"white"}
+              rounded={"none"}
+              py={"6"}
+              _hover={{
+                bgColor: "gray.900",
+              }}
+              isDisabled={emptyCart}
+              onClick={() => {
+                localStorage.setItem("cartItems", JSON.stringify(CartItems));
+                dispatch(DrawerState(!IsDrawerOpen));
+                setTimeout(() => {
+                  Navigate("/checkout?step=shipping_address");
+                }, 500);
+              }}
+            >
+              Checkout
+            </Button>
+            <h4 className="text-sm text-center mt-3">
+              Free Shipping On U.S. Orders $50+
+            </h4>
           </div>
-          <Button
-            w={"full"}
-            mt={4}
-            bgColor={"black"}
-            color={"white"}
-            rounded={"none"}
-            _hover={{
-              bgColor: "gray.900",
-            }}
-            isDisabled={emptyCart}
-            onClick={() => {
-              localStorage.setItem("cartItems", JSON.stringify(CartItems));
-              dispatch(DrawerState(!IsDrawerOpen));
-              setTimeout(() => {
-                Navigate("/checkout?step=shipping_address");
-              }, 500);
-            }}
-          >
-            Checkout
-          </Button>
         </div>
       </div>
     </>

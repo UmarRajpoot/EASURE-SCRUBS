@@ -35,7 +35,7 @@ const Features = () => {
           <Text textAlign={"center"} fontWeight={"bold"}>
             {title}
           </Text>
-          <Text textAlign={"center"} noOfLines={"2"} w={"80"}>
+          <Text textAlign={"center"} noOfLines={"2"} w={["40", "80"]}>
             {desc}
           </Text>
         </Box>
@@ -45,7 +45,7 @@ const Features = () => {
 
   return (
     <Box p={"20"} bgColor={"gray.200"}>
-      <Stack direction={["column", "column", "row"]}>
+      <Stack direction={["column", "column", "column", "row"]}>
         {FeatureItems.map((feature, index) => {
           return (
             <FeatureItem

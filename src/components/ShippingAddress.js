@@ -9,12 +9,17 @@ import {
   Textarea,
   VStack,
   Select,
+  Radio,
+  FormLabel,
+  RadioGroup,
+  Text,
+  Box,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { BASEURL } from "../Config/URL";
 import axios from "axios";
 
-const ShippingAddress = () => {
+const ShippingAddress = ({ setisStandardShipping }) => {
   const AuthState = useSelector((state) => state.Auths.users);
   const CartItems = useSelector((state) => state.CartOptions.CartItems);
 
@@ -72,43 +77,55 @@ const ShippingAddress = () => {
   return (
     <Formik
       initialValues={{
-        email: "",
-        country: "",
+        email: "bitc322@gmail.com",
+        gender: "",
+        country: "Pakistan",
         firstname:
-          AuthState.length !== 0 ? AuthState.displayName?.split(" ")[0] : "",
+          AuthState.length !== 0
+            ? AuthState.displayName?.split(" ")[0]
+            : "Umar",
         lastname:
-          AuthState.length !== 0 ? AuthState.displayName?.split(" ")[1] : "",
-        address: "",
-        city: "",
-        state: "",
-        zipcode: "",
-        phone: "",
+          AuthState.length !== 0
+            ? AuthState.displayName?.split(" ")[1]
+            : "Saleem",
+        address: "Khewra",
+        city: "Khewra",
+        state: "Punjab",
+        zipcode: "49060",
+        phone: "03404960397",
+        shippingWay: "standard",
       }}
       enableReinitialize
       onSubmit={async (values, actions) => {
-        await addOrder(
-          values.email,
-          values.country,
-          values.firstname,
-          values.lastname,
-          values.address,
-          values.city,
-          values.state,
-          values.zipcode,
-          values.phone
-        )
-          .then((resp) => {
-            actions.setSubmitting(false);
-            actions.resetForm();
-          })
-          .catch((error) => {
-            actions.setSubmitting(false);
-          });
+        console.log(values);
+        // await addOrder(
+        //   values.email,
+        //   values.country,
+        //   values.firstname,
+        //   values.lastname,
+        //   values.address,
+        //   values.city,
+        //   values.state,
+        //   values.zipcode,
+        //   values.phone
+        // )
+        //   .then((resp) => {
+        //     actions.setSubmitting(false);
+        //     actions.resetForm();
+        //   })
+        //   .catch((error) => {
+        //     actions.setSubmitting(false);
+        //   });
       }}
     >
       {(props) => (
         <Form>
-          <VStack>
+          <VStack spacing={"5"}>
+            <Box w={"full"}>
+              <Text fontSize={"xl"} fontWeight={"medium"} textAlign={"left"}>
+                Contact Information
+              </Text>
+            </Box>
             <Field
               name="email"
               validate={(value) => validateField(value, "email")}
@@ -124,6 +141,69 @@ const ShippingAddress = () => {
                 </FormControl>
               )}
             </Field>
+            <Field
+              name="gender"
+              validate={(value) => validateField(value, "gender")}
+            >
+              {({ field, form }) => (
+                <FormControl
+                  isInvalid={form.errors.gender && form.touched.gender}
+                >
+                  <RadioGroup {...field}>
+                    <HStack>
+                      <Field as={Radio} value="men">
+                        Men
+                      </Field>
+                      <Field as={Radio} value="women">
+                        Women
+                      </Field>
+                    </HStack>
+                  </RadioGroup>
+
+                  <FormErrorMessage>{form.errors.gender}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Box w={"full"}>
+              <Text fontSize={"xl"} fontWeight={"medium"} textAlign={"left"}>
+                Shipping Detail
+              </Text>
+            </Box>
+            <Field
+              name="shippingWay"
+              validate={(value) => validateField(value, "shippingWay")}
+            >
+              {({ field, form }) => (
+                <FormControl
+                  isInvalid={
+                    form.errors.shippingWay && form.touched.shippingWay
+                  }
+                >
+                  {/* <FormLabel>Shipping</FormLabel> */}
+                  <RadioGroup
+                    {...field}
+                    onChange={(e) => {
+                      if (e === "standard") {
+                        setisStandardShipping(true);
+                      } else {
+                        setisStandardShipping(false);
+                      }
+                    }}
+                  >
+                    <HStack>
+                      <Field as={Radio} value="standard">
+                        Standard Shipping
+                      </Field>
+                      <Field as={Radio} value="express">
+                        Express Shipping
+                      </Field>
+                    </HStack>
+                  </RadioGroup>
+                  <FormErrorMessage>{form.errors.shippingWay}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+
             <Field
               name="country"
               validate={(value) => validateField(value, "country")}
