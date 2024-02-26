@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BASEURL } from "../Config/URL";
 import { useDispatch, useSelector } from "react-redux";
-import { AddCartItem } from "../Store/Cart/actions";
+import { AddCartItem, synced_Cart } from "../Store/Cart/actions";
 import { DrawerState } from "../Store/Drawer/actions";
 import { Link } from "react-router-dom";
 
@@ -266,6 +266,7 @@ const Suggestion = ({ productSuggestions }) => {
                       );
                       if (checkCart.length === 0) {
                         dispatch(AddCartItem([...CartItems, item]));
+                        dispatch(synced_Cart(true));
                         dispatch(DrawerState(!IsDrawerOpen));
                       } else {
                         const remainingItems = CartItems.filter((cartItem) => {
@@ -277,10 +278,7 @@ const Suggestion = ({ productSuggestions }) => {
                           }
                           return cartItem;
                         });
-                        localStorage.setItem(
-                          "cartItems",
-                          JSON.stringify(remainingItems)
-                        );
+                        dispatch(synced_Cart(true));
                         dispatch(DrawerState(!IsDrawerOpen));
                       }
                     } else {

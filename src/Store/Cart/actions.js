@@ -91,3 +91,30 @@ export function AllProductPriceShip(shippingCharges) {
     dispatch(getPRODUCT_PRICE_ship_Payload(shippingCharges));
   };
 }
+
+// Sync with server
+export const SYNC_CART = "SYNC_CART";
+
+export const syncCart = (isUpdated) => ({
+  type: SYNC_CART,
+  payload: isUpdated,
+});
+
+export function synced_Cart(isUpdated) {
+  return (dispatch) => {
+    dispatch(syncCart(isUpdated));
+  };
+}
+// Delete Cart
+export const DELETE_CART = "DELETE_CART";
+
+export const delCart = (isDeleted) => ({
+  type: DELETE_CART,
+  payload: isDeleted,
+});
+
+export function delete_Cart(isDeleted) {
+  return (dispatch) => {
+    dispatch(delCart(isDeleted));
+  };
+}

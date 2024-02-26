@@ -58,7 +58,9 @@ const CheckoutForm = ({ clientSecret }) => {
       elements,
       clientSecret: clientSecret,
       confirmParams: {
-        return_url: "https://example.com/order/123/complete",
+        return_url: `http://localhost:3000/confirmation?order_id=${localStorage.getItem(
+          "orderId"
+        )}`,
       },
     });
 
@@ -66,8 +68,10 @@ const CheckoutForm = ({ clientSecret }) => {
       // This point will only be reached if there is an immediate error when
       // confirming the payment. Show error to your customer (for example, payment
       // details incomplete)
+      // https://example.com/order/123/complete?payment_intent=pi_3OmDoRDsONF5GHPk2odl8QHa&payment_intent_client_secret=pi_3OmDoRDsONF5GHPk2odl8QHa_secret_aNMSG2kSZEwdyrbhpBJX7Jbhg&redirect_status=succeeded
       setErrorMessage(error.message);
     } else {
+      console.log("Upload the records");
       // Your customer will be redirected to your `return_url`. For some payment
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.
@@ -97,3 +101,5 @@ const CheckoutForm = ({ clientSecret }) => {
 };
 
 export default CheckoutForm;
+
+// http://localhost:3000/confirmation?order_id{&&payment_intent=pi_3Oo2fRDsONF5GHPk1kUSTtnf&payment_intent_client_secret=pi_3Oo2fRDsONF5GHPk1kUSTtnf_secret_Yy6suYMzu4RSW6cZ1EyZgm1yQ&redirect_status=succeeded

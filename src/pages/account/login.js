@@ -166,7 +166,7 @@ const Login = () => {
                             <Input
                               {...field}
                               placeholder="Email"
-                              autoCapitalize="username"
+                              autoComplete="on"
                             />
                             <FormErrorMessage>
                               {form.errors.email}
@@ -192,7 +192,7 @@ const Login = () => {
                                 pr="4.5rem"
                                 type={show ? "text" : "password"}
                                 placeholder="Password"
-                                autoComplete="current-password"
+                                autoComplete="on"
                               />
                               <InputRightElement width="4.5rem">
                                 <Button

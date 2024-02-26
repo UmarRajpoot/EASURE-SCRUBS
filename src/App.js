@@ -17,12 +17,16 @@ import FAQs from "./components/FAQs";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Returns from "./components/Returns";
 import ContactUs from "./components/ContactUs";
+import Confirmation from "./components/Confirmation";
+import OrderInfo from "./components/OrderInfo";
 
 function App() {
   return (
     <div>
       <Wrapper>
         <Routes>
+          <Route path="/OrderInfo" Component={OrderInfo} />
+          <Route path="/confirmation" Component={Confirmation} />
           <Route path="/register/email=?" Component={register} />
           <Route path="/login" Component={login} />
           <Route path="/OurStory" Component={OurStory} />

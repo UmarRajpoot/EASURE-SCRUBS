@@ -32,17 +32,15 @@ const Breadcrumbcomp = () => {
           <BreadcrumbItem
             key={index}
             isCurrentPage={
-              bradcrumb.id?.toLowerCase() === step?.toLowerCase() ? true : false
+              bradcrumb.id?.toLowerCase() !== step?.toLowerCase() ? true : false
             }
+            onClick={() => {
+              if (bradcrumb.id?.toLowerCase() === step?.toLowerCase()) {
+                navigate(`/checkout?step=${bradcrumb.id}`, { replace: true });
+              }
+            }}
           >
-            <BreadcrumbLink
-              fontSize={"sm"}
-              onClick={() => {
-                navigate(`/checkout?step=${bradcrumb.id}`);
-              }}
-            >
-              {bradcrumb.name}
-            </BreadcrumbLink>
+            <BreadcrumbLink fontSize={"sm"}>{bradcrumb.name}</BreadcrumbLink>
           </BreadcrumbItem>
         );
       })}

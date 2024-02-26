@@ -71,6 +71,13 @@ const Footer = () => {
                   </Text>
                 </Link>
               </li>
+              <li className="mb-4">
+                <Link to={"/OrderInfo"}>
+                  <Text href="#" className="hover:underline">
+                    My Order Info
+                  </Text>
+                </Link>
+              </li>
             </ul>
           </div>
           <div>

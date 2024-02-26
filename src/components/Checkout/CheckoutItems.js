@@ -20,7 +20,7 @@ const CheckoutItems = ({
     <>
       <div className="flex items-center">
         <div className="w-20 h-20 rounded-xl bg-gray-100 relative">
-          <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-gray-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
+          <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-gray-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
             {count}
           </div>
           <Image
@@ -51,7 +51,7 @@ const CheckoutItems = ({
             </div>
           </div>
         </div>
-        <IconButton
+        {/* <IconButton
           icon={<DeleteIcon />}
           size={"sm"}
           colorScheme="red"
@@ -64,7 +64,7 @@ const CheckoutItems = ({
             localStorage.setItem("cartItems", JSON.stringify(remainigItem));
             dispatch(AllProductPrice());
           }}
-        />
+        /> */}
       </div>
       <hr className="my-3" />
     </>

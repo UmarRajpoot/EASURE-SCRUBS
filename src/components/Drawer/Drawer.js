@@ -9,9 +9,12 @@ import {
   CartItemDec,
   CartItemInc,
   CartRemoveItem,
+  synced_Cart,
 } from "../../Store/Cart/actions";
 import { Button } from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BASEURL } from "../../Config/URL";
 
 const Drawer = ({ openDrawer }) => {
   useEffect(() => {
@@ -47,16 +50,14 @@ const Drawer = ({ openDrawer }) => {
   const navigate = useLocation();
 
   useEffect(() => {
-    // setMobileDropDown(false);
-    // console.log("Drawer Closed");
     dispatch(DrawerState(false));
   }, [navigate.pathname]);
 
   useLayoutEffect(() => {
-    if (JSON.parse(localStorage.getItem("cartItems"))) {
-      dispatch(AddCartItem(JSON.parse(localStorage.getItem("cartItems"))));
-      dispatch(AllProductPrice());
-    }
+    // if (JSON.parse(localStorage.getItem("cartItems"))) {
+    //   dispatch(AddCartItem(JSON.parse(localStorage.getItem("cartItems"))));
+    // }
+    dispatch(AllProductPrice());
   }, []);
 
   const [emptyCart, setEmptyCart] = useState(false);
@@ -132,7 +133,7 @@ const Drawer = ({ openDrawer }) => {
           )}
           <div className="my-2">
             {CartItems &&
-              CartItems.map((item, index) => {
+              CartItems?.map((item, index) => {
                 return (
                   <DrawerBodyItems
                     key={index}
@@ -144,21 +145,39 @@ const Drawer = ({ openDrawer }) => {
                     productcolor={item.productcolor}
                     productPrice={item.productPrice}
                     count={item.count}
-                    Incrementbtn={() => {
+                    Incrementbtn={async () => {
                       dispatch(CartItemInc(item.productID));
+                      dispatch(synced_Cart(true));
                     }}
-                    decrementbtn={() => {
+                    decrementbtn={async () => {
                       dispatch(CartItemDec(item.productID));
+                      dispatch(synced_Cart(true));
                     }}
-                    deletebtn={() => {
+                    deletebtn={async () => {
                       let remainingItems = CartItems.filter(
                         (cartitem) => cartitem.productID !== item.productID
                       );
-                      localStorage.setItem(
-                        "cartItems",
-                        JSON.stringify(remainingItems)
-                      );
-                      dispatch(CartRemoveItem(item.productID));
+                      if (remainingItems.length !== 0) {
+                        dispatch(CartRemoveItem(item.productID));
+                        dispatch(synced_Cart(true));
+                      } else {
+                        console.log("Delete Btn");
+                        return await axios
+                          .put(`${BASEURL}/updateAllCart`, {
+                            products: [],
+                            subTotal: 0,
+                            total: 0,
+                            cartId: localStorage.getItem("cartId"),
+                            deleteCart: true,
+                          })
+                          .then((resp) => {
+                            localStorage.removeItem("cartId");
+                            dispatch(AddCartItem([]));
+                          })
+                          .catch((error) =>
+                            console.log(error.response.data.error)
+                          );
+                      }
                     }}
                   />
                 );
@@ -185,7 +204,6 @@ const Drawer = ({ openDrawer }) => {
               }}
               isDisabled={emptyCart}
               onClick={() => {
-                localStorage.setItem("cartItems", JSON.stringify(CartItems));
                 dispatch(DrawerState(!IsDrawerOpen));
                 setTimeout(() => {
                   Navigate("/checkout?step=shipping_address");

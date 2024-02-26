@@ -12,6 +12,9 @@ import { useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { FirebaseApp } from "./Firebase/Firebase";
 import { Box, Image, Text } from "@chakra-ui/react";
+import axios from "axios";
+import { BASEURL } from "../Config/URL";
+import { AddCartItem, synced_Cart } from "../Store/Cart/actions";
 
 const NavbarComp = () => {
   const [WomenDropDown, setWomenDropDown] = useState(false);
@@ -23,6 +26,13 @@ const NavbarComp = () => {
   const AuthState = useSelector((state) => state.Auths.users);
   const Products = useSelector((state) => state.ProductsReducer.Products);
   const CartItems = useSelector((state) => state.CartOptions.CartItems);
+
+  const SubTotalPrice = useSelector((state) => state.CartOptions.GrandTotal);
+  const GrandTotalShipPrice = useSelector(
+    (state) => state.CartOptions.GrandTotalWithShip
+  );
+
+  const isCartSynced = useSelector((state) => state.CartOptions.isUpdated);
 
   const [productSearch, setProductSearch] = useState("");
   const [searchedProduct, setSearchedProduct] = useState([]);
@@ -75,9 +85,65 @@ const NavbarComp = () => {
     };
   }, []);
 
+  const getCartId = localStorage.getItem("cartId") || null;
+
+  const getCart = async () => {
+    return await axios
+      .post(`${BASEURL}/allCartItems`, {
+        cartId: getCartId,
+      })
+      .then((resp) => {
+        if (resp.data.response !== undefined) {
+          // console.log(resp.data);
+          if (resp.data?.response?.products) {
+            dispatch(AddCartItem(resp.data.response.products));
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error.response.data.error);
+      });
+  };
+
+  useEffect(() => {
+    // console.log("Work");
+    getCart();
+  }, []);
+
+  const UpdateCart = async () => {
+    console.log("Updated: Cart Item Use Effect");
+    return await axios
+      .put(`${BASEURL}/updateAllCart`, {
+        products: CartItems,
+        subTotal: SubTotalPrice,
+        total: GrandTotalShipPrice,
+        cartId: localStorage.getItem("cartId"),
+      })
+      .then((resp) => {
+        console.log(resp.data);
+        if (resp.data.response !== null) {
+          dispatch(AddCartItem(resp.data.response.products));
+          dispatch(synced_Cart(false));
+        } else {
+          localStorage.removeItem("cartId");
+        }
+      })
+      .catch((error) => console.log(error.response.data.error));
+  };
+
+  useEffect(() => {
+    if (CartItems.length !== 0) {
+      // localStorage.setItem("cartItems", JSON.stringify(CartItems));
+      if (isCartSynced === true) {
+        console.log("Cart Item Use Effect");
+        UpdateCart();
+      }
+    }
+  }, [CartItems, isCartSynced, GrandTotalShipPrice]);
+
   return (
     <>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
+      <nav className={`bg-white border-gray-200 dark:bg-gray-900 `}>
         <div className="flex flex-wrap items-center justify-between p-4">
           {/*max-w-screen-xl */}
           <Link to={"/"} className="flex items-center">
@@ -114,7 +180,7 @@ const NavbarComp = () => {
                   </div>
                   <input
                     type="text"
-                    id="search-navbar1"
+                    id="search-navbar2"
                     className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-sm bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Search..."
                     value={productSearch}

@@ -5,9 +5,18 @@ import { BASEURL, BASEURLDev } from "../../Config/URL";
 import { Elements, ExpressCheckoutElement } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
+import { useNavigate } from "react-router-dom";
 
 const Payments = ({ clientSecret }) => {
   const [StripePromise, setStripePromise] = useState(null);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (clientSecret === "") {
+      navigate("/checkout?step=shipping_address", { replace: true });
+    }
+  }, [clientSecret]);
 
   const getPublishKey = async () => {
     return await axios
@@ -23,8 +32,10 @@ const Payments = ({ clientSecret }) => {
   };
 
   useEffect(() => {
-    getPublishKey();
-  }, []);
+    if (clientSecret !== "") {
+      getPublishKey();
+    }
+  }, [clientSecret]);
   return (
     <Box>
       {StripePromise && clientSecret && (

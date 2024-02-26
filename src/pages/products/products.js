@@ -9,7 +9,7 @@ import axios from "axios";
 import { BASEURL } from "../../Config/URL";
 import { useDispatch, useSelector } from "react-redux";
 import { DrawerState } from "../../Store/Drawer/actions";
-import { AddCartItem } from "../../Store/Cart/actions";
+import { AddCartItem, synced_Cart } from "../../Store/Cart/actions";
 import {
   Box,
   Button,
@@ -65,11 +65,33 @@ const Products = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (CartItems.length !== 0) {
-      localStorage.setItem("cartItems", JSON.stringify(CartItems));
-    }
-  }, [CartItems]);
+  const [isUpdated, setIsUpdated] = useState(true);
+
+  // const UpdateCart = async () => {
+  //   console.log("Updated: Cart Item Use Effect");
+  //   return await axios
+  //     .put(`${BASEURL}/updateAllCart`, {
+  //       products: CartItems,
+  //       cartId: localStorage.getItem("cartId"),
+  //     })
+  //     .then((resp) => {
+  //       console.log(resp.data.response.products);
+  //       dispatch(AddCartItem(resp.data.response.products));
+  //       setIsUpdated(false);
+  //       // dispatch(DrawerState(!IsDrawerOpen));
+  //     })
+  //     .catch((error) => console.log(error.response.data.error));
+  // };
+
+  // useEffect(() => {
+  //   if (CartItems.length !== 0) {
+  //     // localStorage.setItem("cartItems", JSON.stringify(CartItems));
+  //     if (isUpdated === true) {
+  //       console.log("Cart Item Use Effect");
+  //       UpdateCart();
+  //     }
+  //   }
+  // }, [CartItems]);
 
   const [videoplayer, setvideoPlayer] = useState(false);
 
@@ -511,8 +533,9 @@ const Products = () => {
             )}
             <div
               className="flex flex-col items-center my-3 "
-              onClick={() => {
+              onClick={async () => {
                 if (chooseSize != null && selectLength !== null) {
+                  // console.log(CartItems);
                   const item = {
                     productID: productData.id,
                     productimage: productData.productimage[0],
@@ -524,14 +547,43 @@ const Products = () => {
                     originalPrice: productData.price,
                     count: 1,
                   };
+
                   const checkCart = CartItems.filter(
                     (cartItem) => cartItem.productID === item.productID
                   );
                   if (checkCart.length === 0) {
-                    dispatch(AddCartItem([...CartItems, item]));
-                    dispatch(DrawerState(!IsDrawerOpen));
-                    setProductAdded(true);
+                    console.log("Create New", localStorage.getItem("cartId"));
+                    if (localStorage.getItem("cartId") === null) {
+                      await axios
+                        .post(`${BASEURL}/addCartItems`, {
+                          products: item, // b667419a-2191-4005-9e75-b0aca6468f9c
+                        })
+                        .then((resp) => {
+                          console.log(resp.data.response.products);
+                          dispatch(AddCartItem(resp.data.response.products));
+                          dispatch(DrawerState(!IsDrawerOpen));
+                          localStorage.setItem("cartId", resp.data.response.id);
+                        })
+                        .catch((error) =>
+                          console.log(error.response.data.error)
+                        );
+                    } else {
+                      dispatch(AddCartItem([...CartItems, item]));
+                      dispatch(synced_Cart(true));
+                      dispatch(DrawerState(!IsDrawerOpen));
+                    }
                   } else {
+                    // return await axios
+                    //   .put(`${BASEURL}/updateCart`, {
+                    //     products: item,
+                    //     cartId: localStorage.getItem("cartId"),
+                    //   })
+                    //   .then((resp) => {
+                    //     console.log(resp.data.response.products);
+                    //     dispatch(AddCartItem(resp.data.response.products));
+                    //     dispatch(DrawerState(!IsDrawerOpen));
+                    //   })
+                    //   .catch((error) => console.log(error));
                     const remainingItems = CartItems.filter((cartItem) => {
                       if (cartItem.productID === item.productID) {
                         cartItem.productsize = chooseSize;
@@ -541,11 +593,22 @@ const Products = () => {
                       }
                       return cartItem;
                     });
-                    localStorage.setItem(
-                      "cartItems",
-                      JSON.stringify(remainingItems)
-                    );
+                    console.log("For Update");
+                    dispatch(AddCartItem(remainingItems));
+                    dispatch(synced_Cart(true));
                     dispatch(DrawerState(!IsDrawerOpen));
+                    // // localStorage.setItem(
+                    // //   "cartItems",
+                    // //   JSON.stringify(remainingItems)
+                    // // );
+                    // dispatch(DrawerState(!IsDrawerOpen));
+                    // return await axios
+                    //   .post(`${BASEURL}/addCartItems`, {
+                    //     cartId: localStorage.getItem("cartId"),
+                    //     products: CartItems,
+                    //   })
+                    //   .then((resp) => console.log("added"))
+                    //   .catch((error) => console.log(error));
                   }
                 } else {
                   chooseSize === null && setSizeError(true);

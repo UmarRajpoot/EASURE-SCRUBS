@@ -108,8 +108,10 @@ const MensShop = () => {
           setonHover("");
         }}
       >
-        <div className="my-10 mx-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer w-auto h-auto ">
-          <div className="rounded-lg bg-cover bg-no-repeat bg-center w-72 h-96 ">
+        <div className="my-10 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer w-auto h-auto ">
+          <div className="rounded-lg bg-cover bg-no-repeat bg-center  ">
+            {" "}
+            {/* w-72 h-96 */}
             {isLoaded && mensT.productimage && onHover === mensT.id ? (
               <Image
                 src={mensT.productimage[1]}
@@ -181,8 +183,12 @@ const MensShop = () => {
         {MensTrend.map((mensT, index) => {
           if (mensT.parentcategory === "MEN") {
             return (
-              <Box w={window.innerWidth / calculateNumToShow()} mx={["0", "3"]}>
-                <Card_comp key={index} mensT={mensT} index={index} />;
+              <Box
+                w={window.innerWidth / calculateNumToShow()}
+                mx={["0", "1.5"]}
+                key={index}
+              >
+                <Card_comp mensT={mensT} index={index} />
               </Box>
             );
           }

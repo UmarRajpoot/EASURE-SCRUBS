@@ -61,7 +61,9 @@ const Register = () => {
       Navigate(`/register`);
     } else {
       const searchEmail = locations.search.split("=")[1];
-      setParamEmail(searchEmail?.replace(",", "."));
+      if (searchEmail !== undefined) {
+        setParamEmail(searchEmail?.replace(",", "."));
+      }
     }
   }, [locations.search]);
 

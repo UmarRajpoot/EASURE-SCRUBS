@@ -19,7 +19,13 @@ import { useSelector } from "react-redux";
 import { BASEURL } from "../Config/URL";
 import axios from "axios";
 
-const ShippingAddress = ({ setisStandardShipping }) => {
+const ShippingAddress = ({
+  setisStandardShipping,
+  setClientSecret,
+  GrandTotalShipPrice,
+  GrandTotalPrice,
+  setOrder_id,
+}) => {
   const AuthState = useSelector((state) => state.Auths.users);
   const CartItems = useSelector((state) => state.CartOptions.CartItems);
 
@@ -50,7 +56,8 @@ const ShippingAddress = ({ setisStandardShipping }) => {
     city,
     state,
     zipcode,
-    phone
+    phone,
+    gender
   ) => {
     return await axios
       .post(`${BASEURL}/Order`, {
@@ -64,54 +71,113 @@ const ShippingAddress = ({ setisStandardShipping }) => {
         zipcode,
         phone,
         orderItems: CartItems,
+        subTotal: GrandTotalPrice,
+        total: GrandTotalShipPrice,
+        shippingCharges: GrandTotalShipPrice - GrandTotalPrice,
+        gender: gender,
       })
       .then((resp) => {
-        // console.log(resp.data);
+        console.log(resp.data.response);
+        localStorage.setItem("orderId", resp.data.response.order_id);
         // dispatch(ResetCart());
+        setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error.response.data.error);
+        setIsLoading(false);
+      });
+  };
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getClientSecret = async (
+    name,
+    email,
+    phone,
+    address,
+    country,
+    city,
+    state,
+    postalCode,
+    gender
+  ) => {
+    return await axios
+      .post(BASEURL + "/create-payment-intent", {
+        name,
+        email,
+        phone,
+        address,
+        country,
+        city,
+        state,
+        postalCode,
+        cartId: localStorage.getItem("cartId"),
+        GrandTotalShipPrice: GrandTotalShipPrice,
+        ShippingCharges: GrandTotalShipPrice - GrandTotalPrice,
+        gender: gender,
+      })
+      .then((resp) => {
+        console.log(resp.data);
+        setIsLoading(false);
+        const { clientSecrets } = resp.data;
+        return setClientSecret(clientSecrets);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.log(gender);
+        console.log("client error", error.response.data.error);
+        // console.log(error);
       });
   };
 
   return (
     <Formik
       initialValues={{
-        email: "",
-        gender: "",
-        country: "",
+        email: AuthState.length !== 0 ? AuthState.email : "",
+        gender: "men",
+        country: "Pakistan",
         firstname:
-          AuthState.length !== 0 ? AuthState.displayName?.split(" ")[0] : "",
+          AuthState.length !== 0 && AuthState.displayName !== null
+            ? AuthState.displayName?.split(" ")[0]
+            : "Umar",
         lastname:
-          AuthState.length !== 0 ? AuthState.displayName?.split(" ")[1] : "",
-        address: "",
-        city: "",
-        state: "",
-        zipcode: "",
-        phone: "",
+          AuthState.length !== 0 && AuthState.displayName !== null
+            ? AuthState.displayName?.split(" ")[1]
+            : "Saleem",
+        address: "Khewra",
+        city: "Khewra",
+        state: "Punjab",
+        zipcode: "49060",
+        phone: "03404960397",
         shippingWay: "standard",
       }}
       enableReinitialize
       onSubmit={async (values, actions) => {
-        console.log(values);
-        // await addOrder(
-        //   values.email,
-        //   values.country,
-        //   values.firstname,
-        //   values.lastname,
-        //   values.address,
-        //   values.city,
-        //   values.state,
-        //   values.zipcode,
-        //   values.phone
-        // )
-        //   .then((resp) => {
-        //     actions.setSubmitting(false);
-        //     actions.resetForm();
-        //   })
-        //   .catch((error) => {
-        //     actions.setSubmitting(false);
-        //   });
+        setIsLoading(true);
+
+        await addOrder(
+          values.email,
+          values.country,
+          values.firstname,
+          values.lastname,
+          values.address,
+          values.city,
+          values.state,
+          values.zipcode,
+          values.phone,
+          values.gender
+        );
+        await getClientSecret(
+          `${values.firstname} ${values.lastname}`,
+          values.email,
+          values.phone,
+          values.address,
+          values.country,
+          values.city,
+          values.state,
+          values.zipcode,
+          values.gender
+        );
       }}
     >
       {(props) => (
@@ -129,7 +195,6 @@ const ShippingAddress = ({ setisStandardShipping }) => {
               {({ field, form }) => (
                 <FormControl
                   isInvalid={form.errors.email && form.touched.email}
-                  isRequired
                 >
                   <Input {...field} placeholder="Email Address*" />
 
@@ -207,19 +272,18 @@ const ShippingAddress = ({ setisStandardShipping }) => {
               {({ field, form }) => (
                 <FormControl
                   isInvalid={form.errors.country && form.touched.country}
-                  isRequired
                 >
                   {/* <FormLabel>Country</FormLabel> */}
                   <Select {...field} placeholder="Country">
-                    <option>Azerbaijan</option>
+                    {/* <option>Azerbaijan</option>
                     <option>Belgium</option>
                     <option>France</option>
                     <option>Germany</option>
                     <option>Italy</option>
                     <option>India</option>
-                    <option>Pakistan</option>
+                    <option>Pakistan</option> */}
                     <option>United States</option>
-                    <option>United Kingdom</option>
+                    {/* <option>United Kingdom</option> */}
                   </Select>
                   <FormErrorMessage>{form.errors.country}</FormErrorMessage>
                 </FormControl>
@@ -233,7 +297,6 @@ const ShippingAddress = ({ setisStandardShipping }) => {
                 {({ field, form }) => (
                   <FormControl
                     isInvalid={form.errors.firstname && form.touched.firstname}
-                    isRequired
                   >
                     {/* <FormLabel>firstname</FormLabel> */}
                     <Input {...field} placeholder="First name" />
@@ -248,7 +311,6 @@ const ShippingAddress = ({ setisStandardShipping }) => {
                 {({ field, form }) => (
                   <FormControl
                     isInvalid={form.errors.lastname && form.touched.lastname}
-                    isRequired
                   >
                     {/* <FormLabel>lastname</FormLabel> */}
                     <Input {...field} placeholder="Last name" />
@@ -264,7 +326,6 @@ const ShippingAddress = ({ setisStandardShipping }) => {
               {({ field, form }) => (
                 <FormControl
                   isInvalid={form.errors.address && form.touched.address}
-                  isRequired
                 >
                   {/* <FormLabel>address</FormLabel> */}
                   <Textarea {...field} placeholder="Address" />
@@ -280,7 +341,6 @@ const ShippingAddress = ({ setisStandardShipping }) => {
                 {({ field, form }) => (
                   <FormControl
                     isInvalid={form.errors.city && form.touched.city}
-                    isRequired
                   >
                     {/* <FormLabel>city</FormLabel> */}
                     <Input {...field} placeholder="City" />
@@ -295,7 +355,6 @@ const ShippingAddress = ({ setisStandardShipping }) => {
                 {({ field, form }) => (
                   <FormControl
                     isInvalid={form.errors.state && form.touched.state}
-                    isRequired
                   >
                     {/* <FormLabel>state</FormLabel> */}
                     <Input {...field} placeholder="State" />
@@ -310,7 +369,6 @@ const ShippingAddress = ({ setisStandardShipping }) => {
                 {({ field, form }) => (
                   <FormControl
                     isInvalid={form.errors.zipcode && form.touched.zipcode}
-                    isRequired
                   >
                     {/* <FormLabel>zipcode</FormLabel> */}
                     <Input {...field} placeholder="Zip Code" />
@@ -326,7 +384,6 @@ const ShippingAddress = ({ setisStandardShipping }) => {
               {({ field, form }) => (
                 <FormControl
                   isInvalid={form.errors.phone && form.touched.phone}
-                  isRequired
                 >
                   {/* <FormLabel>phone</FormLabel> */}
                   <Input {...field} placeholder="Phone" />
@@ -352,7 +409,8 @@ const ShippingAddress = ({ setisStandardShipping }) => {
               fontSize={["xs", "sm"]}
               fontWeight={"medium"}
               p={["5", "8"]}
-              isLoading={props.isSubmitting}
+              isLoading={isLoading}
+              loadingText={"Submitting.."}
               type="submit"
               isDisabled={btnstate}
             >

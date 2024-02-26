@@ -118,9 +118,10 @@ const ShopWomen = () => {
         }}
       >
         <div
-          className={`md:my-10 mx-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer w-auto h-auto`}
+          className={`md:my-10  hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer w-auto h-auto`}
         >
-          <div className="rounded-lg bg-cover bg-no-repeat bg-center w-72 h-96 ">
+          {/* w-72 h-96 */}
+          <div className="rounded-lg bg-cover bg-no-repeat bg-center  ">
             {isLoaded && WTrend.productimage && onHover === WTrend.id ? (
               <Image
                 src={WTrend.productimage[1]}
@@ -195,12 +196,12 @@ const ShopWomen = () => {
         {womenShop?.map((WTrend, index) => {
           if (WTrend.parentcategory === "WOMEN") {
             return (
-              <Box w={window.innerWidth / calculateNumToShow()} mx={["0", "3"]}>
-                <Card_comp
-                  key={index.toString()}
-                  WTrend={WTrend}
-                  index={index.toString()}
-                />
+              <Box
+                w={window.innerWidth / calculateNumToShow()}
+                mx={["0", "1.5"]}
+                key={index.toString()}
+              >
+                <Card_comp WTrend={WTrend} index={index.toString()} />
               </Box>
             );
           }

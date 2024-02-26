@@ -8,6 +8,7 @@ import {
   AllProductPrice,
   AllProductPriceShip,
   ResetCart,
+  synced_Cart,
 } from "../../Store/Cart/actions";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
@@ -17,6 +18,9 @@ import { DrawerState } from "../../Store/Drawer/actions";
 import Payments from "../../components/Stripe/Payments";
 import axios from "axios";
 import { BASEURL } from "../../Config/URL";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { FirebaseApp } from "../../components/Firebase/Firebase";
+import { AddUser } from "../../Store/Auth/actions";
 
 const Checkout = () => {
   const [isStandardShipping, setisStandardShipping] = useState(true);
@@ -32,29 +36,26 @@ const Checkout = () => {
   const dispatch = useDispatch();
 
   const getItemsFromStorage = () => {
-    dispatch(DrawerState(!IsDrawerOpen));
-    if (JSON.parse(localStorage.getItem("cartItems"))) {
-      dispatch(AddCartItem(JSON.parse(localStorage.getItem("cartItems"))));
-      if (GrandTotalPrice > 50) {
-        // dispatch(AllProductPrice());
-        dispatch(AllProductPriceShip(0));
-      } else {
-        dispatch(AllProductPriceShip(shippingCharges));
-      }
+    console.log("getItemsFromStorage");
+    dispatch(AllProductPrice());
+    if (GrandTotalPrice > 50) {
+      dispatch(AllProductPriceShip(0));
+    } else {
+      dispatch(AllProductPriceShip(shippingCharges));
     }
   };
 
   useEffect(() => {
     getItemsFromStorage();
-  }, []);
+  }, [CartItems]);
 
   useEffect(() => {
     if (isStandardShipping === true && parseInt(GrandTotalPrice) < 50) {
-      console.log("it runs");
+      // console.log("it runs");
       setShippingCharges(9);
       dispatch(AllProductPriceShip(9));
     } else if (isStandardShipping === false && parseInt(GrandTotalPrice) < 50) {
-      console.log("it runs ss");
+      // console.log("it runs ss");
       setShippingCharges(19);
       dispatch(AllProductPriceShip(19));
     } else if (GrandTotalPrice > 50) {
@@ -77,32 +78,67 @@ const Checkout = () => {
   const AuthState = useSelector((state) => state.Auths.users);
 
   const [clientSecret, setClientSecret] = useState(
-    "pi_3OgVgLDsONF5GHPk2mLqfgtT_secret_hA30NkfLeyZMSv09qBH1rGqIA"
+    "" //pi_3OmFqIDsONF5GHPk2H29u5ms_secret_4YEd8yyJpxZCHqare8bIdKglO
   );
 
-  const getClientSecret = async () => {
-    return await axios
-      .post(BASEURL + "/create-payment-intent", {})
-      .then((resp) => {
-        const { clientSecrets } = resp.data;
-        return setClientSecret(clientSecrets);
-      })
-      .catch((error) => {
-        console.log("client error", error);
+  useEffect(() => {
+    if (clientSecret !== "") {
+      navigate("/checkout?step=payment", { replace: true });
+    }
+  }, [clientSecret]);
 
-        console.log(error);
-      });
-  };
+  const getCartId = localStorage.getItem("cartId") || null;
 
   const [emptyCart, setEmptyCart] = useState(false);
 
+  const getCart = async () => {
+    return await axios
+      .post(`${BASEURL}/allCartItems`, {
+        cartId: getCartId,
+      })
+      .then((resp) => {
+        if (resp.data.response !== undefined) {
+          // console.log(resp.data);
+          if (resp.data?.response?.products) {
+            dispatch(AddCartItem(resp.data.response.products));
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error.response.data.error);
+      });
+  };
+
   useEffect(() => {
-    if (CartItems?.length === 0) {
-      setEmptyCart(true);
-    } else {
-      setEmptyCart(false);
+    console.log("Work");
+    getCart();
+  }, []);
+
+  const getUserDetail = async () => {
+    const auth = getAuth(FirebaseApp);
+    onAuthStateChanged(
+      auth,
+      (user) => {
+        if (user !== null) {
+          return dispatch(AddUser(user));
+        }
+        return null;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
+  useEffect(() => {
+    let isApplied = true;
+    if (isApplied) {
+      getUserDetail();
     }
-  }, [CartItems]);
+    return () => {
+      isApplied = false;
+    };
+  }, []);
 
   return (
     <Box minH={"100%"}>
@@ -176,7 +212,7 @@ const Checkout = () => {
                         fontSize={"md"}
                         fontWeight={"medium"}
                       >
-                        {AuthState.displayName}
+                        {AuthState?.displayName || "4"}
                       </Text>
                     </Text>
                   ) : (
@@ -199,6 +235,9 @@ const Checkout = () => {
                 {step?.toLowerCase() === "shipping_address" && (
                   <ShippingAddress
                     setisStandardShipping={setisStandardShipping}
+                    setClientSecret={setClientSecret}
+                    GrandTotalShipPrice={GrandTotalShipPrice}
+                    GrandTotalPrice={GrandTotalPrice}
                   />
                 )}
                 {step?.toLowerCase() === "payment" && (

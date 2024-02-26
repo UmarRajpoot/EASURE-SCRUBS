@@ -4,6 +4,8 @@ const initialState = {
   CartItems: [],
   GrandTotal: 0,
   GrandTotalWithShip: 0,
+  isUpdated: true,
+  deleteCart: false,
 };
 
 const CartItemReducers = (state = initialState, actions) => {
@@ -73,6 +75,16 @@ const CartItemReducers = (state = initialState, actions) => {
       return {
         ...state,
         GrandTotalWithShip: calculatePriceShip + parseInt(shippingCharges),
+      };
+    case ActionType.SYNC_CART:
+      return {
+        ...state,
+        isUpdated: actions.payload,
+      };
+    case ActionType.DELETE_CART:
+      return {
+        ...state,
+        deleteCart: actions.payload,
       };
 
     case ActionType.RESET_CART:
