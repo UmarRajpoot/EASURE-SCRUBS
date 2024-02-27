@@ -134,21 +134,21 @@ const ShippingAddress = ({
     <Formik
       initialValues={{
         email: AuthState.length !== 0 ? AuthState.email : "",
-        gender: "men",
-        country: "Pakistan",
+        gender: "",
+        country: "",
         firstname:
           AuthState.length !== 0 && AuthState.displayName !== null
             ? AuthState.displayName?.split(" ")[0]
-            : "Umar",
+            : "",
         lastname:
           AuthState.length !== 0 && AuthState.displayName !== null
             ? AuthState.displayName?.split(" ")[1]
-            : "Saleem",
-        address: "Khewra",
-        city: "Khewra",
-        state: "Punjab",
-        zipcode: "49060",
-        phone: "03404960397",
+            : "",
+        address: "",
+        city: "",
+        state: "",
+        zipcode: "",
+        phone: "",
         shippingWay: "standard",
       }}
       enableReinitialize
