@@ -243,7 +243,7 @@ const ProductList = () => {
           setonHover("");
         }}
       >
-        <div className="p-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
+        <div className="p-2 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
           <div className="rounded-lg bg-cover bg-no-repeat bg-center ">
             {/* <Image
               src={mensT.productimage && mensT.productimage[0]}
@@ -265,7 +265,7 @@ const ProductList = () => {
                 className="h-full w-full"
               />
             )}
-            <div className="p-2 text-base font-bold text-gray-500 ">
+            <div className="py-3 text-base font-bold text-gray-500 ">
               <h1>
                 {/* {mensT.personname && mensT?.personname[0]} */}
                 {/* {mensT.personname && mensT?.personname?.slice(1).toLowerCase()} */}
@@ -303,7 +303,7 @@ const ProductList = () => {
           setonHover("");
         }}
       >
-        <div className="p-3 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
+        <div className="p-2 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
           <div className=" rounded-lg bg-cover bg-no-repeat bg-center">
             {/* <Image
               src={WTrend.productimage && WTrend.productimage[0]}
@@ -322,7 +322,7 @@ const ProductList = () => {
                 className="h-full w-full"
               />
             )}
-            <div className="p-2 text-base font-bold text-gray-500 ">
+            <div className="py-3 text-base font-bold text-gray-500 ">
               <h1>
                 {/* {WTrend.personname && WTrend?.personname[0]} */}
                 {/* {WTrend.personname &&
@@ -625,7 +625,7 @@ const ProductList = () => {
           columns={[1, 2, 3]}
           placeItems={["center", null, "end"]}
           w={"full"}
-          spacing={"5"}
+          spacing={"0"}
           // rowGap={"5"}
           my={"5"}
         >

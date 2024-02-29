@@ -10,12 +10,12 @@ const OurPromice = () => {
           display={"flex"}
           alignItems={"center"}
           justifyContent={"space-between"}
-          p={"5"}
+          p={["3", "5"]}
           // w={["80px", "150px"]}
           // h={["80px", "150px"]}
         >
-          <Image src={image} width={[20, 28]} height={[20, 28]} />
-          <Text>{title}</Text>
+          <Image src={image} width={[10, 28]} height={[10, 28]} />
+          <Text fontSize={["xs", "md"]}>{title}</Text>
         </Box>
         <Divider />
       </>
@@ -23,14 +23,18 @@ const OurPromice = () => {
   };
 
   return (
-    <Stack direction={["column", "row"]} bgColor={"#c4c9d1"}>
-      <Box>
-        <img src={OurPromise} width={"100%"} height={"100%"} />
+    <Stack direction={"row"} alignItems={"center"} bgColor={"#c4c9d1"}>
+      <Box w={"50%"}>
+        <img
+          src={OurPromise}
+          width={["100%", "100%"]}
+          height={["100%", "100%"]}
+        />
       </Box>
       <Box w={["full", "50%"]}>
         <Box p={"5"}>
-          <Text>TECHNOLOGY WITH</Text>
-          <Text>EASURE-SCRUBS</Text>
+          <Text fontSize={["xs", "md"]}>TECHNOLOGY WITH</Text>
+          <Text fontSize={["xs", "md"]}>EASURE-SCRUBS</Text>
         </Box>
         <Box>
           <Strip
