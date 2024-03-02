@@ -22,20 +22,21 @@ const Features = () => {
 
   const FeatureItem = ({ title, desc, image }) => {
     return (
-      <Stack
-        direction={"column"}
-        alignItems={"center"}
-        // justifyContent={"center"}
-        flex={1}
-      >
-        <Box w={"28"} h={"28"}>
+      <Stack direction={["row"]} alignItems={"start"} justifyContent={"start"}>
+        <Box w={["20"]} h={["20"]}>
           <Image src={image} />
         </Box>
-        <Box>
-          <Text textAlign={"center"} fontWeight={"bold"}>
+        <Box pl={"3"}>
+          <Text textAlign={["start"]} fontWeight={"bold"}>
             {title}
           </Text>
-          <Text textAlign={"center"} noOfLines={"2"} w={["40", "80"]}>
+          <Text
+            textAlign={["start"]}
+            noOfLines={["", "2"]}
+            w={["60"]}
+            color={"gray.600"}
+            fontSize={["sm"]}
+          >
             {desc}
           </Text>
         </Box>
@@ -44,8 +45,16 @@ const Features = () => {
   };
 
   return (
-    <Box p={"20"} bgColor={"gray.200"}>
-      <Stack direction={["column", "column", "column", "row"]}>
+    <Box
+      px={["7", "10"]}
+      py={["7", "10"]}
+      // bgColor={"gray.100"}
+      display={"flex"}
+      flexDirection={"row"}
+      alignItems={"center"}
+      justifyContent={"center"}
+    >
+      <Stack direction={["column", "column", "column", "row"]} spacing={"5"}>
         {FeatureItems.map((feature, index) => {
           return (
             <FeatureItem

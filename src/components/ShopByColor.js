@@ -35,10 +35,12 @@ const ShopByColor = () => {
         opacity={isFirstItemVisible ? "0" : "1"}
         disabled={isFirstItemVisible}
         onClick={() => scrollPrev()}
-        icon={<BsChevronLeft size={20} />}
+        icon={<BsChevronLeft />}
         rounded={"full"}
-        size={"lg"}
         m={"2"}
+        fontSize={["sm", "xl"]}
+        w={["10", "12"]}
+        h={["10", "12"]}
       />
     );
   };
@@ -50,10 +52,12 @@ const ShopByColor = () => {
         opacity={isLastItemVisible ? "0" : "1"}
         disabled={isLastItemVisible}
         onClick={() => scrollNext()}
-        icon={<BsChevronRight size={20} />}
+        icon={<BsChevronRight />}
         rounded={"full"}
-        size={"lg"}
         m={"2"}
+        fontSize={["sm", "xl"]}
+        w={["10", "12"]}
+        h={["10", "12"]}
       />
     );
   };
