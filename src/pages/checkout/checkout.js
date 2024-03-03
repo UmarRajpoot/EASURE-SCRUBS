@@ -1,4 +1,4 @@
-import { Box, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 // import { Select } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,14 +7,14 @@ import {
   AddCartItem,
   AllProductPrice,
   AllProductPriceShip,
-  ResetCart,
-  synced_Cart,
+  // ResetCart,
+  // synced_Cart,
 } from "../../Store/Cart/actions";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import Breadcrumbcomp from "../../components/Breadcrumbcomp";
 import ShippingAddress from "../../components/ShippingAddress";
-import { DrawerState } from "../../Store/Drawer/actions";
+// import { DrawerState } from "../../Store/Drawer/actions";
 import Payments from "../../components/Stripe/Payments";
 import axios from "axios";
 import { BASEURL } from "../../Config/URL";

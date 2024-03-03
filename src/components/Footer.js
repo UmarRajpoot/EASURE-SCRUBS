@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Text } from "@chakra-ui/react";
+import { Box, Stack, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import FooterAccordian from "./AccordionComp/FooterAccordian";
@@ -175,7 +175,7 @@ const Footer = () => {
             </h2>
             <div className="flex mt-4 space-x-8  md:mt-0 pt-5">
               <a
-                href="#"
+                href="/"
                 className="text-white hover:text-gray-900 dark:hover:text-white"
               >
                 <svg
@@ -194,7 +194,7 @@ const Footer = () => {
                 <span className="sr-only">Facebook page</span>
               </a>
               <a
-                href="#"
+                href="/"
                 className="text-white hover:text-gray-900 dark:hover:text-white"
               >
                 <svg
@@ -208,7 +208,7 @@ const Footer = () => {
                 <span className="sr-only">Instagram page</span>
               </a>
               <a
-                href="#"
+                href="/"
                 className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
               >
                 <svg
@@ -227,7 +227,7 @@ const Footer = () => {
                 <span className="sr-only">Twitter page</span>
               </a>
               <a
-                href="#"
+                href="/"
                 className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
               >
                 <svg

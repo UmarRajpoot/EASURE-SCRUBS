@@ -1,7 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BASEURL } from "../Config/URL";
-import { Button, IconButton, Input } from "@chakra-ui/react";
+import { Button, Input } from "@chakra-ui/react";
 
 const OrderInfo = () => {
   const [result, setResult] = useState("");

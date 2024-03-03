@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-} from "@chakra-ui/react";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -23,6 +18,7 @@ const Breadcrumbcomp = () => {
     if (step === null) {
       navigate("/checkout?step=shipping_address");
     }
+    return;
   }, [step]);
 
   return (

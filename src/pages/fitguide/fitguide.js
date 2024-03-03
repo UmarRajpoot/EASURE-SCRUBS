@@ -12,10 +12,9 @@ import {
   Tr,
   Td,
   TableContainer,
-  HStack,
 } from "@chakra-ui/react";
 import ReactPlayer from "react-player/lazy";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Fitguide = () => {
   const params = useParams();

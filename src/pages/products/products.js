@@ -3,8 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Star from "../../components/star";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
-import { AiOutlinePlayCircle } from "react-icons/ai";
-import ReactPlayer from "react-player";
+// import { AiOutlinePlayCircle } from "react-icons/ai";
+// import ReactPlayer from "react-player";
 import axios from "axios";
 import { BASEURL } from "../../Config/URL";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +23,6 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  Spacer,
 } from "@chakra-ui/react";
 import ReviewModel from "../../components/ReviewModel";
 import Suggestion from "../../components/Suggestion";
@@ -65,7 +64,7 @@ const Products = () => {
 
   const dispatch = useDispatch();
 
-  const [isUpdated, setIsUpdated] = useState(true);
+  // const [isUpdated, setIsUpdated] = useState(true);
 
   // const UpdateCart = async () => {
   //   console.log("Updated: Cart Item Use Effect");
@@ -93,7 +92,7 @@ const Products = () => {
   //   }
   // }, [CartItems]);
 
-  const [videoplayer, setvideoPlayer] = useState(false);
+  // const [videoplayer, setvideoPlayer] = useState(false);
 
   const params = useParams();
   const videoRef = useRef();
@@ -114,17 +113,17 @@ const Products = () => {
   //   localStorage.setItem("cartItem", JSON.stringify(CartItems));
   // }, [CartItems]);
 
-  const getAllColors = async () => {
-    return await axios
-      .get(`${BASEURL}/Colors`)
-      .then((resp) => {
-        // console.log(resp.data.response);
-        // setAllColors(resp.data.response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const getAllColors = async () => {
+  //   return await axios
+  //     .get(`${BASEURL}/Colors`)
+  //     .then((resp) => {
+  //       // console.log(resp.data.response);
+  //       // setAllColors(resp.data.response);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   const getAllReviews = async (productID) => {
     return await axios
@@ -166,7 +165,7 @@ const Products = () => {
   //   }, 3000);
   // }, []);
 
-  const [productAdded, setProductAdded] = useState(false);
+  // const [productAdded, setProductAdded] = useState(false);
 
   const getProductData = async () => {
     return await axios
@@ -225,6 +224,7 @@ const Products = () => {
                     src={data.link}
                     width={"100%"}
                     height={"100%"}
+                    alt="product_img"
                     onClick={() => {
                       setImageSlide(index);
                     }}
@@ -273,6 +273,7 @@ const Products = () => {
                           src={data.link}
                           width={"100%"}
                           height={"100%"}
+                          alt="slide_img"
                         />
                       ) : (
                         <video
@@ -318,6 +319,7 @@ const Products = () => {
                     onClick={() => {
                       setImageSlide(index);
                     }}
+                    alt="slide_img"
                   />
                 );
               } else {
@@ -353,20 +355,6 @@ const Products = () => {
         <div className=" flex flex-col w-full md:w-[20%] ">
           <div>
             <h4 className="text-3xl">
-              {/* {productData.personname && productData?.personname[0]}
-              {productData.personname &&
-                productData?.personname?.slice(1).toLowerCase()}
-              {productData.parentcategory &&
-                productData.parentcategory === "WOMEN" &&
-                "-" + productData?.varientname?.toLowerCase()}
-              {productData.parentcategory &&
-                productData.parentcategory === "MEN" &&
-                productData.varientname !== "JOGGER" &&
-                "-" + productData?.varientname?.toLowerCase()}
-              -{productData.typename && productData?.typename?.toLowerCase()}-
-              {productData.typestylename && productData?.typestylename[0]}
-              {productData.typestylename &&
-                productData?.typestylename?.slice(1).toLowerCase()} */}
               {productData.varientname &&
                 productData?.varientname?.toLowerCase()}
               -{productData.typename && productData?.typename?.toLowerCase()}-
@@ -683,6 +671,7 @@ const Products = () => {
               <img
                 src="/Images/OurPromiseAni/ANTI-WRINKLE.gif"
                 className="w-12 h-10 md:w-16 md:h-16"
+                alt="anti"
               />
             </div>
             <h3 className="text-[10px] md:text-sm">ANTI-WRINKLE</h3>
@@ -692,6 +681,7 @@ const Products = () => {
               <img
                 src="/Images/OurPromiseAni/ANTI-MICROBIAL FINISH - PEWT.gif"
                 className="w-12 h-10 md:w-16 md:h-16"
+                alt="MICROBIAL"
               />
             </div>
             <h3 className="text-[10px] md:text-sm">ANTI-MICROBIAL FINISH</h3>
@@ -701,6 +691,7 @@ const Products = () => {
               <img
                 src="/Images/OurPromiseAni/EXTREMELY SOFT - PEWT.gif"
                 className="w-12 h-10 md:w-16 md:h-16"
+                alt="EXTREMELY"
               />
             </div>
             <h3 className="text-[10px] md:text-sm">EXTREMELY SOFT</h3>
@@ -710,6 +701,7 @@ const Products = () => {
               <img
                 src="/Images/OurPromiseAni/4-WAY STRETCH - PEWT.gif"
                 className="w-12 h-10 md:w-16 md:h-16"
+                alt="STRETCH"
               />
             </div>
             <h3 className="text-[10px] md:text-sm">4-WAY STRETCH</h3>
@@ -719,6 +711,7 @@ const Products = () => {
               <img
                 src="/Images/OurPromiseAni/FADE RESISTANCE-PEWT.gif"
                 className="w-12 h-10 md:w-16 md:h-16"
+                alt="RESISTANCE"
               />
             </div>
             <h3 className="text-[10px] md:text-sm">FADE RESISTANCE</h3>

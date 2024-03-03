@@ -2,10 +2,8 @@ import { ButtonGroup, IconButton, Text } from "@chakra-ui/react";
 import React from "react";
 
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
 
 const DrawerBodyItems = ({
-  productID,
   productName,
   productsize,
   productLength,
@@ -21,7 +19,7 @@ const DrawerBodyItems = ({
     <>
       <div className="flex">
         <div className="w-20">
-          <img src={productimage} />
+          <img src={productimage} alt="product_img" />
         </div>
 
         <div className="flex justify-between flex-1">

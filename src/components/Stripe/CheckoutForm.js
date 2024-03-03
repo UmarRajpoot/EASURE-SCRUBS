@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  CardElement,
-  ElementsConsumer,
   PaymentElement,
-  PaymentRequestButtonElement,
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
@@ -12,29 +9,29 @@ import { Box, Button } from "@chakra-ui/react";
 const CheckoutForm = ({ clientSecret }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const [paymentRequest, setPaymentRequest] = useState(null);
+  // const [paymentRequest, setPaymentRequest] = useState(null);
 
-  useEffect(() => {
-    if (stripe) {
-      const pr = stripe.paymentRequest({
-        country: "US",
-        currency: "usd",
-        total: {
-          label: "Demo total",
-          amount: 1099,
-        },
-        requestPayerName: true,
-        requestPayerEmail: true,
-      });
-      // Check the availability of the Payment Request API.
-      pr.canMakePayment().then((result) => {
-        if (result) {
-          console.log(result);
-          setPaymentRequest(pr);
-        }
-      });
-    }
-  }, [stripe]);
+  // useEffect(() => {
+  //   if (stripe) {
+  //     const pr = stripe.paymentRequest({
+  //       country: "US",
+  //       currency: "usd",
+  //       total: {
+  //         label: "Demo total",
+  //         amount: 1099,
+  //       },
+  //       requestPayerName: true,
+  //       requestPayerEmail: true,
+  //     });
+  //     // Check the availability of the Payment Request API.
+  //     pr.canMakePayment().then((result) => {
+  //       if (result) {
+  //         console.log(result);
+  //         setPaymentRequest(pr);
+  //       }
+  //     });
+  //   }
+  // }, [stripe]);
 
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -79,9 +76,6 @@ const CheckoutForm = ({ clientSecret }) => {
   };
   return (
     <Box>
-      {/* {paymentRequest && (
-        <PaymentRequestButtonElement options={{ paymentRequest }} />
-      )} */}
       <form onSubmit={handleSubmit}>
         <PaymentElement />
         <Button

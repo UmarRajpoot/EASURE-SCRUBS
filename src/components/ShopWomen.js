@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { BASEURL } from "../Config/URL";
-import { Box, Flex, Grid, GridItem, Image, SimpleGrid } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 

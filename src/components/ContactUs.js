@@ -3,9 +3,6 @@ import {
   Stack,
   Text,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
   Textarea,
   Button,
@@ -17,7 +14,6 @@ const ContactUs = () => {
     <Box
       w={"full"}
       display={"flex"}
-      //   justifyContent={"center"}
       flexDirection={"column"}
       alignItems={"center"}
       h={"100vh"}

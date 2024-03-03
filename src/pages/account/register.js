@@ -14,21 +14,15 @@ import {
   AlertDescription,
   Stack,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import {
-  Link,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
-import { BASEURL } from "../../Config/URL";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+// import { BASEURL } from "../../Config/URL";
 import { AddUser } from "../../Store/Auth/actions";
 import { useDispatch } from "react-redux";
 
 import RegisterSideImage from "../../assets/black3.jpeg";
-import NewsLetter from "../../components/NewsLetter";
+// import NewsLetter from "../../components/NewsLetter";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -38,7 +32,7 @@ import {
 } from "firebase/auth";
 import { FirebaseApp } from "../../components/Firebase/Firebase";
 import { FcGoogle } from "react-icons/fc";
-import { BsFacebook } from "react-icons/bs";
+// import { BsFacebook } from "react-icons/bs";
 
 const Register = () => {
   const [show, setShow] = useState(false);

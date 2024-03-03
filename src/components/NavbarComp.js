@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BsPerson } from "react-icons/bs";
-import { BiBasket, BiLogOutCircle } from "react-icons/bi";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { BiLogOutCircle } from "react-icons/bi";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Drawer from "./Drawer/Drawer";
 import { useDispatch, useSelector } from "react-redux";
 import { DrawerState } from "../Store/Drawer/actions";

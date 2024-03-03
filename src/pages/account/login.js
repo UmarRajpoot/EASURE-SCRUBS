@@ -18,13 +18,11 @@ import {
   AlertDescription,
   Stack,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { BASEURL } from "../../Config/URL";
 import { useDispatch } from "react-redux";
 import { AddUser } from "../../Store/Auth/actions";
 
 import LoginSideImage from "../../assets/black3.jpeg";
-import NewsLetter from "../../components/NewsLetter";
+// import NewsLetter from "../../components/NewsLetter";
 
 import { FirebaseApp } from "../../components/Firebase/Firebase";
 import {
@@ -35,7 +33,7 @@ import {
 } from "firebase/auth";
 import { CheckIcon } from "@chakra-ui/icons";
 import { FcGoogle } from "react-icons/fc";
-import { BsFacebook } from "react-icons/bs";
+// import { BsFacebook } from "react-icons/bs";
 
 const Login = () => {
   const [show, setShow] = useState(false);

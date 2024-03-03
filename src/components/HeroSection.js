@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "./button";
 import { Link } from "react-router-dom";
 
 import HomeImage from "../assets/home/Wine-min.png";

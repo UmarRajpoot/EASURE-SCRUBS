@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { BASEURL, BASEURLDev } from "../../Config/URL";
-import { Elements, ExpressCheckoutElement } from "@stripe/react-stripe-js";
+import { BASEURL } from "../../Config/URL";
+import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from "react-router-dom";

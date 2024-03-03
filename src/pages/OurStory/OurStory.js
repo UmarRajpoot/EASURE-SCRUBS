@@ -1,7 +1,7 @@
 import React from "react";
 import OurStory5 from "../../assets/OurStory/OurStory5-min.jpg";
 import ModelPhoto from "../../assets/OurStory/Modelphoto-min.png";
-import { Box, HStack, Stack, Text, VStack } from "@chakra-ui/react";
+import { Box, Stack, Text, VStack } from "@chakra-ui/react";
 import ReactPlayer from "react-player";
 
 const OurStory = () => {
@@ -35,7 +35,12 @@ const OurStory = () => {
         className="flex flex-col md:flex-row items-center justify-center my-40"
       >
         <Box w={"80"} h={"80"}>
-          <img src={ModelPhoto} width={"100%"} height={"100%"} />
+          <img
+            src={ModelPhoto}
+            width={"100%"}
+            height={"100%"}
+            alt="modelphoto"
+          />
         </Box>
         <Box w={["70%", "40%"]}>
           <Text fontWeight={"bold"} fontSize={"3xl"} mt={"10"} mb={"5"}>

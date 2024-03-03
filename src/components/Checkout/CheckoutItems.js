@@ -1,11 +1,7 @@
-import { DeleteIcon } from "@chakra-ui/icons";
-import { IconButton, Image } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AddCartItem, AllProductPrice } from "../../Store/Cart/actions";
 
 const CheckoutItems = ({
-  productId,
   productName,
   productLength,
   productsize,
@@ -14,8 +10,6 @@ const CheckoutItems = ({
   productimage,
   count,
 }) => {
-  const CartItems = useSelector((state) => state.CartOptions.CartItems);
-  const dispatch = useDispatch();
   return (
     <>
       <div className="flex items-center">
@@ -51,20 +45,6 @@ const CheckoutItems = ({
             </div>
           </div>
         </div>
-        {/* <IconButton
-          icon={<DeleteIcon />}
-          size={"sm"}
-          colorScheme="red"
-          m={"2"}
-          onClick={() => {
-            let remainigItem = CartItems.filter(
-              (cartItem) => cartItem.productID !== productId
-            );
-            dispatch(AddCartItem(remainigItem));
-            localStorage.setItem("cartItems", JSON.stringify(remainigItem));
-            dispatch(AllProductPrice());
-          }}
-        /> */}
       </div>
       <hr className="my-3" />
     </>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
-import AccordionComp from "../../components/AccordionComp/AccordionComp";
+// import AccordionComp from "../../components/AccordionComp/AccordionComp";
 import {
   Accordion,
   AccordionButton,
@@ -17,7 +17,7 @@ import {
 import axios from "axios";
 import { BASEURL } from "../../Config/URL";
 import { CheckIcon } from "@chakra-ui/icons";
-import NewsLetter from "../../components/NewsLetter";
+// import NewsLetter from "../../components/NewsLetter";
 
 const ProductList = () => {
   const params = useParams();

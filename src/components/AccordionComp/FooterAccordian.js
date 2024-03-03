@@ -7,7 +7,6 @@ import {
   AccordionIcon,
   Box,
   Stack,
-  Checkbox,
 } from "@chakra-ui/react";
 
 const FooterAccordian = ({ title, body }) => {

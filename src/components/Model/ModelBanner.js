@@ -16,7 +16,6 @@ import {
   RadioGroup,
 } from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
-import { BsFacebook } from "react-icons/bs";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { FirebaseApp } from "../Firebase/Firebase";
 import { Link } from "react-router-dom";
