@@ -18,7 +18,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="p-5 w-full ">
-        <div>
+        <div className="block md:hidden">
           <Stack>
             <FooterAccordian
               title={"Get help"}
