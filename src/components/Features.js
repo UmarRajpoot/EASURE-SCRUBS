@@ -22,12 +22,17 @@ const Features = () => {
 
   const FeatureItem = ({ title, desc, image }) => {
     return (
-      <Stack direction={["row"]} alignItems={"start"} justifyContent={"start"}>
-        <Box w={["20"]} h={["20"]}>
+      <Stack
+        direction={["row"]}
+        alignItems={"start"}
+        justifyContent={"start"}
+        p={"5"}
+      >
+        <Box w={["16"]} h={["16"]}>
           <Image src={image} />
         </Box>
         <Box pl={"3"}>
-          <Text textAlign={["start"]} fontWeight={"bold"}>
+          <Text textAlign={["start"]} fontWeight={"bold"} fontSize={"xs"}>
             {title}
           </Text>
           <Text
@@ -35,7 +40,7 @@ const Features = () => {
             noOfLines={["", "2"]}
             w={["60"]}
             color={"gray.600"}
-            fontSize={["sm"]}
+            fontSize={["xs"]}
           >
             {desc}
           </Text>
@@ -46,7 +51,7 @@ const Features = () => {
 
   return (
     <Box
-      px={["7", "10"]}
+      // px={["7", "10"]}
       py={["7", "10"]}
       // bgColor={"gray.100"}
       display={"flex"}
@@ -57,12 +62,14 @@ const Features = () => {
       <Stack direction={["column", "column", "column", "row"]} spacing={"5"}>
         {FeatureItems.map((feature, index) => {
           return (
-            <FeatureItem
-              image={feature.image}
-              title={feature.title.toUpperCase()}
-              desc={feature.desc}
-              key={index}
-            />
+            <Box bgColor={"gray.300"} rounded={"xl"} mx={"5"}>
+              <FeatureItem
+                image={feature.image}
+                title={feature.title.toUpperCase()}
+                desc={feature.desc}
+                key={index}
+              />
+            </Box>
           );
         })}
       </Stack>
