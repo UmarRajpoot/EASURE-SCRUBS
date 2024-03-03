@@ -32,13 +32,14 @@ const HeroSection = () => {
             <Link to={"/viewall/scrubs/men"}>
               <Text
                 bgColor={"white"}
-                px={["5", "10"]}
-                py={"3"}
+                px={["2", "10"]}
+                py={"1.5"}
                 fontWeight={"semibold"}
                 _hover={{
                   bgColor: "black",
                   color: "white",
                 }}
+                fontSize={"sm"}
               >
                 Shop Men →
               </Text>
@@ -46,13 +47,14 @@ const HeroSection = () => {
             <Link to={"/viewall/scrubs/women"}>
               <Text
                 bgColor={"white"}
-                px={["5", "10"]}
-                py={"3"}
+                px={["2", "10"]}
+                py={"1.5"}
                 fontWeight={"semibold"}
                 _hover={{
                   bgColor: "black",
                   color: "white",
                 }}
+                fontSize={"sm"}
               >
                 Shop Women →
               </Text>

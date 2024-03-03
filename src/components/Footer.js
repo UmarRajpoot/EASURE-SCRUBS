@@ -1,6 +1,7 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Stack, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import FooterAccordian from "./AccordionComp/FooterAccordian";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -14,17 +15,105 @@ const Footer = () => {
           <h1 className="text-3xl text-white font-medium ">
             Comfort Assured with EASURE
           </h1>
-          {/* <h1 className="text-4xl text-white font-medium ">HUMANS</h1> */}
-          {/* <h1 className="text-xl text-white font-normal ">With EASURE</h1> */}
         </div>
       </div>
       <div className="p-5 w-full ">
+        <div>
+          <Stack>
+            <FooterAccordian
+              title={"Get help"}
+              body={
+                <div>
+                  <ul className="text-white dark:text-gray-400 font-medium block">
+                    <li className="mb-4">
+                      <a href="/ContactUs" className=" hover:underline">
+                        Contact Us
+                      </a>
+                    </li>
+                    <li className="mb-4">
+                      <Link to={"/FAQs"}>
+                        <Text className=" hover:underline">
+                          Shipping & FAQs
+                        </Text>
+                      </Link>
+                    </li>
+                    <li className="mb-4">
+                      <Link to={"/returns"}>
+                        <Text className=" hover:underline">
+                          Return and Exchange
+                        </Text>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              }
+            />
+            <FooterAccordian
+              title={"Our Company"}
+              body={
+                <div>
+                  <ul className="text-white dark:text-gray-400 font-medium block">
+                    <li className="mb-4">
+                      <Link to={"/OurStory"}>
+                        <Text className=" hover:underline">Our Story</Text>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              }
+            />
+            <FooterAccordian
+              title={"More info"}
+              body={
+                <div>
+                  <ul className="text-white dark:text-gray-400 font-medium block">
+                    <li className="mb-4">
+                      <Link to={"/OrderInfo"}>
+                        <Text href="#" className="hover:underline">
+                          My Order Info
+                        </Text>
+                      </Link>
+                    </li>
+                    <li className="mb-4">
+                      <Link to={"/PrivacyPolicy"}>
+                        <Text href="#" className="hover:underline">
+                          Privacy Policy
+                        </Text>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              }
+            />
+            <FooterAccordian
+              title={"Guide"}
+              body={
+                <div>
+                  <ul className="text-white dark:text-gray-400 font-medium block">
+                    <li className="mb-4">
+                      <Link to={"/viewall/scrubs/men"}>
+                        <Text className="hover:underline">Shop Men</Text>
+                      </Link>
+                    </li>
+                    <li className="mb-4">
+                      <Link to={"/viewall/scrubs/women"}>
+                        <Text className="hover:underline">Shop Women</Text>
+                      </Link>
+                    </li>
+                    <li className="mb-4">
+                      <Link to={"/fitguide/men"}>
+                        <Text className="hover:underline">Fit Guide</Text>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              }
+            />
+          </Stack>
+        </div>
         <div className="grid grid-cols-1 gap-8 px-4 py-6 md:grid-cols-4">
           <div>
-            {/* <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
-              Company
-            </h2> */}
-            <ul className="text-white dark:text-gray-400 font-medium block">
+            <ul className="text-white dark:text-gray-400 font-medium md:block hidden">
               <li className="mb-4">
                 <a href="/ContactUs" className=" hover:underline">
                   Contact Us
@@ -47,7 +136,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div>
+          <div className=" md:block hidden">
             <ul className="text-white font-medium">
               <li className="mb-4">
                 <Link to={"/viewall/scrubs/men"}>

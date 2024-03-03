@@ -33,7 +33,7 @@ const BottomImage = () => {
       <Image
         src={"/Images/BottomImagefull.png"}
         w={"full"}
-        h={"80vh"}
+        h={["full", "80vh"]}
         display={"flex"}
       />
     </Box>

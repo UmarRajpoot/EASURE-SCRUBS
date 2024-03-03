@@ -11,8 +11,6 @@ const OurPromice = () => {
           alignItems={"center"}
           justifyContent={"space-between"}
           p={["3", "5"]}
-          // w={["80px", "150px"]}
-          // h={["80px", "150px"]}
         >
           <Image src={image} width={[10, 28]} height={[10, 28]} />
           <Text fontSize={["xs", "md"]}>{title}</Text>
@@ -24,7 +22,7 @@ const OurPromice = () => {
 
   return (
     <Stack direction={"row"} alignItems={"center"} bgColor={"#c4c9d1"}>
-      <Box w={"50%"}>
+      <Box w={["full", "50%"]}>
         <img
           src={OurPromise}
           width={["100%", "100%"]}

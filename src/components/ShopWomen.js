@@ -174,7 +174,7 @@ const ShopWomen = () => {
       }}
     >
       <div style={{ display: "flex", alignItems: "center" }} className="mx-5">
-        <Link to={"/viewall/scrubs/women"}>
+        <Link to={"/viewall/scrubs/women"} className="hidden md:block">
           <h1 className="font-medium  mr-5 hover:underline hover:cursor-pointer">
             view all
           </h1>
@@ -187,9 +187,16 @@ const ShopWomen = () => {
 
   return (
     <div className="px-5 md:pl-32 my-10 md:my-14">
-      <h3 className="text-gray-800 text-lg md:text-3xl font-bold">
-        Shop Women
-      </h3>
+      <div className="flex items-center justify-between">
+        <h3 className="text-gray-800 text-lg md:text-3xl font-bold">
+          Shop Women
+        </h3>
+        <Link to={"/viewall/scrubs/women"} className="block md:hidden">
+          <h1 className="font-medium  mr-5 hover:underline hover:cursor-pointer">
+            view all
+          </h1>
+        </Link>
+      </div>
       {/* <div className="flex overflow-x-auto  overflow-y-hidden no-scrollbar w-full"> */}
       <ScrollMenu
         scrollContainerClassName="no-scrollbar"

@@ -166,7 +166,7 @@ const MensShop = () => {
       }}
     >
       <div style={{ display: "flex", alignItems: "center" }} className="mx-5">
-        <Link to={"/viewall/scrubs/men"}>
+        <Link to={"/viewall/scrubs/men"} className="hidden md:block">
           <h1 className="font-medium underline mr-5">view all</h1>
         </Link>
         <LeftArrow />
@@ -176,8 +176,14 @@ const MensShop = () => {
   );
   return (
     <div className="px-5 md:pl-32 my-10 md:my-14">
-      <h3 className="text-gray-800 text-lg md:text-3xl font-bold">Mens Shop</h3>
-      {/* <div className="flex overflow-x-auto  overflow-y-hidden no-scrollbar w-full"> */}
+      <div className="flex items-center justify-between">
+        <h3 className="text-gray-800 text-lg md:text-3xl font-bold">
+          Mens Shop
+        </h3>
+        <Link to={"/viewall/scrubs/men"} className="block md:hidden">
+          <h1 className="font-medium underline mr-5">view all</h1>
+        </Link>
+      </div>
       <ScrollMenu
         scrollContainerClassName="no-scrollbar"
         transitionBehavior={"smooth"}
