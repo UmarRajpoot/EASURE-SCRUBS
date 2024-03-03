@@ -175,7 +175,7 @@ const MensShop = () => {
     <div className="px-5 md:pl-32 my-10 md:my-14">
       <div className="flex items-center justify-between">
         <h3 className="text-gray-800 text-lg md:text-3xl font-bold">
-          Mens Shop
+          Shop Men
         </h3>
         <Link to={"/viewall/scrubs/men"} className="block md:hidden">
           <h1 className="font-medium underline mr-5">view all</h1>
