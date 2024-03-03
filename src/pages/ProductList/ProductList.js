@@ -243,7 +243,7 @@ const ProductList = () => {
           setonHover("");
         }}
       >
-        <div className="p-2 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
+        <div className="m-1 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
           <div className="rounded-lg bg-cover bg-no-repeat bg-center ">
             {/* <Image
               src={mensT.productimage && mensT.productimage[0]}
@@ -253,11 +253,7 @@ const ProductList = () => {
             mensT.productimage &&
             colorSelect === "" &&
             onHover === mensT.id ? (
-              <Image
-                src={mensT.productimage[1]}
-                // onLoad={() => console.log("loading")}
-                className="h-full w-full"
-              />
+              <Image src={mensT.productimage[1]} className="h-full w-full" />
             ) : (
               <Image
                 src={mensT.productimage[0]}
@@ -265,10 +261,8 @@ const ProductList = () => {
                 className="h-full w-full"
               />
             )}
-            <div className="py-3 text-base font-bold text-gray-500 ">
+            <div className="py-3 text-xs md:text-base text-gray-500 ">
               <h1>
-                {/* {mensT.personname && mensT?.personname[0]} */}
-                {/* {mensT.personname && mensT?.personname?.slice(1).toLowerCase()} */}
                 {mensT.varientname === "JOGGER" &&
                   mensT?.varientname?.toLowerCase()}
                 {mensT.varientname !== "JOGGER" &&
@@ -299,22 +293,13 @@ const ProductList = () => {
           }
         }}
         onMouseLeave={() => {
-          // console.log("mouse leave", WTrend.id);
           setonHover("");
         }}
       >
-        <div className="p-2 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
+        <div className="m-1 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
           <div className=" rounded-lg bg-cover bg-no-repeat bg-center">
-            {/* <Image
-              src={WTrend.productimage && WTrend.productimage[0]}
-              // onLoad={() => console.log("loading")}
-            /> */}
             {isLoaded && WTrend.productimage && onHover === WTrend.id ? (
-              <Image
-                src={WTrend.productimage[1]}
-                // onLoad={() => console.log("loading")}
-                className="h-full w-full"
-              />
+              <Image src={WTrend.productimage[1]} className="h-full w-full" />
             ) : (
               <Image
                 src={WTrend.productimage[0]}
@@ -322,11 +307,8 @@ const ProductList = () => {
                 className="h-full w-full"
               />
             )}
-            <div className="py-3 text-base font-bold text-gray-500 ">
+            <div className="py-3 text-xs md:text-base text-gray-500 ">
               <h1>
-                {/* {WTrend.personname && WTrend?.personname[0]} */}
-                {/* {WTrend.personname &&
-                  WTrend?.personname?.slice(1).toLowerCase()} */}
                 {WTrend.varientname && WTrend?.varientname?.toLowerCase()}-
                 {WTrend.typename && WTrend?.typename?.toLowerCase()}-
                 {WTrend.typestylename && WTrend?.typestylename[0]}
@@ -622,7 +604,7 @@ const ProductList = () => {
           </Stack>
         </Box>
         <SimpleGrid
-          columns={[1, 2, 3]}
+          columns={[2, 2, 3]}
           placeItems={["center", null, "end"]}
           w={"full"}
           spacing={"0"}
@@ -639,24 +621,6 @@ const ProductList = () => {
             }
           })}
         </SimpleGrid>
-        {/* <Box
-          flex={1}
-          // p={"5"}
-          flexWrap={"wrap"}
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={["center", "space-between"]}
-        >
-          {AllProducts.map((product, index) => {
-            if (product.parentcategory === params.category.toUpperCase()) {
-              if (product.parentcategory === "MEN") {
-                return <CardMen mensT={product} index={index} key={index} />;
-              } else if (product.parentcategory === "WOMEN") {
-                return <CardWomen WTrend={product} index={index} key={index} />;
-              }
-            }
-          })}
-        </Box> */}
       </Stack>
     </>
   );
