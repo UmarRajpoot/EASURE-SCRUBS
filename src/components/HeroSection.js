@@ -32,7 +32,7 @@ const HeroSection = () => {
               <Text
                 bgColor={"white"}
                 px={["2", "10"]}
-                py={"1.5"}
+                py={["1.5", "3"]}
                 fontWeight={"semibold"}
                 _hover={{
                   bgColor: "black",
@@ -47,7 +47,7 @@ const HeroSection = () => {
               <Text
                 bgColor={"white"}
                 px={["2", "10"]}
-                py={"1.5"}
+                py={["1.5", "3"]}
                 fontWeight={"semibold"}
                 _hover={{
                   bgColor: "black",
