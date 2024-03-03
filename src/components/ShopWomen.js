@@ -147,7 +147,7 @@ const ShopWomen = () => {
               }
               // onLoad={() => console.log("loading")}
             /> */}
-            <div className="p-2 text-xs md:text-base text-gray-500 ">
+            <div className="p-2 text-xs md:text-base md:font-medium text-gray-500 ">
               <h1>
                 {WTrend.varientname && WTrend?.varientname?.toLowerCase()}-
                 {WTrend.typename && WTrend?.typename?.toLowerCase()}-

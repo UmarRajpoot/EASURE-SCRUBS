@@ -138,7 +138,7 @@ const MensShop = () => {
               // onLoad={() => console.log("loading")}
               className="h-80 w-64"
             /> */}
-            <div className="p-2 text-xs md:text-base text-gray-500 ">
+            <div className="p-2 text-xs md:text-base md:font-medium text-gray-500 ">
               <h1>
                 {mensT.varientname !== "JOGGER" &&
                   mensT?.varientname?.toLowerCase()}

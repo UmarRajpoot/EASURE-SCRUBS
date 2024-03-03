@@ -261,7 +261,7 @@ const ProductList = () => {
                 className="h-full w-full"
               />
             )}
-            <div className="py-3 text-xs md:text-base text-gray-500 ">
+            <div className="py-3 text-xs md:text-base md:font-medium text-gray-500 ">
               <h1>
                 {mensT.varientname === "JOGGER" &&
                   mensT?.varientname?.toLowerCase()}
@@ -307,7 +307,7 @@ const ProductList = () => {
                 className="h-full w-full"
               />
             )}
-            <div className="py-3 text-xs md:text-base text-gray-500 ">
+            <div className="py-3 text-xs md:text-base md:font-medium text-gray-500 ">
               <h1>
                 {WTrend.varientname && WTrend?.varientname?.toLowerCase()}-
                 {WTrend.typename && WTrend?.typename?.toLowerCase()}-
