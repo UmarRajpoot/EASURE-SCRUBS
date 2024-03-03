@@ -89,41 +89,65 @@ const Collection = () => {
       <div className="relative  ">
         {/* <img src="https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Black%201.jpg?alt=media&token=52bc7761-5989-466f-a39b-a0ec430c83ab" /> */}
         {params.collection.split("-")[0] === "black" ? (
-          <img src="https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Black%201.jpg?alt=media&token=52bc7761-5989-466f-a39b-a0ec430c83ab" />
+          <Image
+            src="https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Black%201.jpg?alt=media&token=52bc7761-5989-466f-a39b-a0ec430c83ab"
+            width={"full"}
+            height={"40"}
+          />
         ) : params.collection
             .split("-")
             .slice(0, params.collection.split("-").length - 2)
             .toString()
             .replace(",", "-") === "navy-blue" ? (
-          <img src="https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Navy%20Blue%206.jpg?alt=media&token=17c6a5cc-839f-470d-a2b2-774d3c52557a" />
+          <Image
+            src="https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Navy%20Blue%206.jpg?alt=media&token=17c6a5cc-839f-470d-a2b2-774d3c52557a"
+            width={"full"}
+            height={"40"}
+          />
         ) : // "bg-[url('https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Navy%20Blue%206.jpg?alt=media&token=17c6a5cc-839f-470d-a2b2-774d3c52557a')]"
         params.collection
             .split("-")
             .slice(0, params.collection.split("-").length - 2)
             .toString()
             .replace(",", "-") === "ceil-blue" ? (
-          <img src="https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Ceil%20Blue%202.jpg?alt=media&token=60769f7f-f10b-4718-8eb0-5bfe2feb7190" />
+          <Image
+            src="https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Ceil%20Blue%202.jpg?alt=media&token=60769f7f-f10b-4718-8eb0-5bfe2feb7190"
+            width={"full"}
+            height={"40"}
+          />
         ) : // "bg-[url('https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Ceil%20Blue%202.jpg?alt=media&token=60769f7f-f10b-4718-8eb0-5bfe2feb7190')]"
         params.collection
             .split("-")
             .slice(0, params.collection.split("-").length - 2)
             .toString()
             .replace(",", "-") === "wine" ? (
-          <img src="https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Wine%203.jpg?alt=media&token=45502092-4d36-4c9a-901b-aaa2d9434058" />
+          <Image
+            src="https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Wine%203.jpg?alt=media&token=45502092-4d36-4c9a-901b-aaa2d9434058"
+            width={"full"}
+            height={"40"}
+          />
         ) : // "bg-[url('https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Wine%203.jpg?alt=media&token=45502092-4d36-4c9a-901b-aaa2d9434058')]"
         params.collection
             .split("-")
             .slice(0, params.collection.split("-").length - 2)
             .toString()
             .replace(",", "-") === "pewt" ? (
-          <img src="https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Pewt%205.jpg?alt=media&token=72a021b6-d274-424f-ac05-749f7d5c6bfc" />
+          <Image
+            src="https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Pewt%205.jpg?alt=media&token=72a021b6-d274-424f-ac05-749f7d5c6bfc"
+            width={"full"}
+            height={"40"}
+          />
         ) : // "bg-[url('https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Pewt%205.jpg?alt=media&token=72a021b6-d274-424f-ac05-749f7d5c6bfc')]"
         params.collection
             .split("-")
             .slice(0, params.collection.split("-").length - 2)
             .toString()
             .replace(",", "-") === "royal-blue" ? (
-          <img src="https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Royal%20Blue%204.jpg?alt=media&token=3a454bda-1603-4319-8e0d-5df65c7ef23a" />
+          <Image
+            src="https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Royal%20Blue%204.jpg?alt=media&token=3a454bda-1603-4319-8e0d-5df65c7ef23a"
+            width={"full"}
+            height={"40"}
+          />
         ) : (
           // "bg-[url('https://firebasestorage.googleapis.com/v0/b/easure.appspot.com/o/Royal%20Blue%204.jpg?alt=media&token=3a454bda-1603-4319-8e0d-5df65c7ef23a')]"
           "bg-gray-800"
