@@ -88,9 +88,9 @@ const MensShop = () => {
     } else if (screenWidth >= 992) {
       return 4;
     } else if (screenWidth >= 768) {
-      return 2;
+      return 3;
     } else {
-      return 1;
+      return 3;
     }
   };
 
@@ -138,11 +138,8 @@ const MensShop = () => {
               // onLoad={() => console.log("loading")}
               className="h-80 w-64"
             /> */}
-            <div className="p-2 text-base font-bold text-gray-500 ">
+            <div className="p-2 text-xs md:text-base text-gray-500 ">
               <h1>
-                {/* {mensT.personname && mensT?.personname[0]} */}
-                {/* {mensT.personname && mensT?.personname?.slice(1).toLowerCase()} */}
-                {/* {mensT.varientname !== "JOGGER" && "-"} */}
                 {mensT.varientname !== "JOGGER" &&
                   mensT?.varientname?.toLowerCase()}
                 -{mensT.typename && mensT?.typename?.toLowerCase()}-
@@ -195,7 +192,7 @@ const MensShop = () => {
             return (
               <Box
                 w={window.innerWidth / calculateNumToShow()}
-                mx={["0", "1.5"]}
+                mx={["1", "1.5"]}
                 key={index}
               >
                 <Card_comp mensT={mensT} index={index} />

@@ -97,9 +97,9 @@ const ShopWomen = () => {
     } else if (screenWidth >= 992) {
       return 4;
     } else if (screenWidth >= 768) {
-      return 2;
+      return 3;
     } else {
-      return 1;
+      return 3;
     }
   };
 
@@ -147,11 +147,8 @@ const ShopWomen = () => {
               }
               // onLoad={() => console.log("loading")}
             /> */}
-            <div className="p-2 text-base font-bold text-gray-500 ">
+            <div className="p-2 text-xs md:text-base text-gray-500 ">
               <h1>
-                {/* {WTrend.personname && WTrend?.personname[0]} */}
-                {/* {WTrend.personname &&
-                  WTrend?.personname?.slice(1).toLowerCase()} */}
                 {WTrend.varientname && WTrend?.varientname?.toLowerCase()}-
                 {WTrend.typename && WTrend?.typename?.toLowerCase()}-
                 {WTrend.typestylename && WTrend?.typestylename[0]}
@@ -202,14 +199,13 @@ const ShopWomen = () => {
         scrollContainerClassName="no-scrollbar"
         transitionBehavior={"smooth"}
         Header={Arrows}
-        options={{ rootMargin: "20px" }}
       >
         {womenShop?.map((WTrend, index) => {
           if (WTrend.parentcategory === "WOMEN") {
             return (
               <Box
                 w={window.innerWidth / calculateNumToShow()}
-                mx={["0", "1.5"]}
+                mx={["1", "1.5"]}
                 key={index.toString()}
               >
                 <Card_comp WTrend={WTrend} index={index.toString()} />

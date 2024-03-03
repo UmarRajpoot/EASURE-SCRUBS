@@ -7,7 +7,7 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
-import { IconButton } from "@chakra-ui/react";
+import { Box, IconButton, Image } from "@chakra-ui/react";
 
 const ShopByColor = () => {
   const [allColors, setAllColors] = useState([]);
@@ -62,7 +62,19 @@ const ShopByColor = () => {
     );
   };
 
-  // overflow-x-auto overflow-y-hidden no-scrollbar
+  const calculateNumToShow = () => {
+    const screenWidth = window.innerWidth;
+    // You can adjust these values as needed
+    if (screenWidth >= 1200) {
+      return 5;
+    } else if (screenWidth >= 992) {
+      return 4;
+    } else if (screenWidth >= 768) {
+      return 3;
+    } else {
+      return 3;
+    }
+  };
 
   const Color_Card = ({ index, shBC }) => {
     const visibility = React.useContext(VisibilityContext);
@@ -73,14 +85,20 @@ const ShopByColor = () => {
         tabIndex={0}
       >
         {/* <div>visible: {JSON.stringify(!!visibility.isItemVisible(index))}</div> */}
-        <div className="py-3 px-3 hover:scale-105 transition-all ease-in-out duration-200 cursor-pointer">
+        <div className="py-3 hover:scale-105 transition-all ease-in-out duration-200 cursor-pointer">
           <div
-            className=" h-96 w-80 rounded-sm bg-cover bg-no-repeat bg-center"
-            style={{
-              backgroundImage: `url(${shBC.photo})`,
-            }}
-          ></div>
-          <h5 className="text-gray-800 text-sm md:text-md font-semibold mt-2">
+            className=" rounded-sm bg-cover bg-no-repeat bg-center"
+            // style={{
+            //   backgroundImage: `url(${})`,
+            // }}
+          >
+            <Image
+              src={shBC.photo}
+              // onLoad={() => console.log("Loaded")}
+              className="h-full w-full"
+            />
+          </div>
+          <h5 className="text-gray-800 text-xs md:text-base font-semibold mt-2">
             {shBC.name}
           </h5>
         </div>
@@ -109,15 +127,17 @@ const ShopByColor = () => {
         Shop By Color
       </h3>
       <ScrollMenu
-        // LeftArrow={LeftArrow}
-        // RightArrow={RightArrow}
         scrollContainerClassName="no-scrollbar"
         transitionBehavior={"smooth"}
         Header={Arrows}
       >
         {/* <div className="flex w-full no-scrollbar"> */}
         {allColors.map((shBC, index) => {
-          return <Color_Card key={index} shBC={shBC} index={index} />;
+          return (
+            <Box w={window.innerWidth / calculateNumToShow()} mx={["1", "1.5"]}>
+              <Color_Card key={index} shBC={shBC} index={index} />
+            </Box>
+          );
         })}
         {/* </div> */}
       </ScrollMenu>
