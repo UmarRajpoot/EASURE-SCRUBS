@@ -120,13 +120,13 @@ const MensShop = () => {
               <Image
                 src={mensT.productimage[1]}
                 // onLoad={() => console.log("loading")}
-                className="h-full w-full"
+                className="h-full md:h-96 w-full"
               />
             ) : (
               <Image
                 src={mensT.productimage[0]}
                 onLoad={() => setIsLoaded(true)}
-                className="h-full w-full"
+                className="h-full md:h-96 w-full"
               />
             )}
             {/* <Image

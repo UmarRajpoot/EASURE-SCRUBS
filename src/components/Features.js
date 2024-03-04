@@ -53,7 +53,7 @@ const Features = () => {
     <Box
       // px={["7", "10"]}
       py={["7", "10"]}
-      // bgColor={"gray.100"}
+      bgColor={"gray.100"}
       display={"flex"}
       flexDirection={"row"}
       alignItems={"center"}
@@ -62,7 +62,7 @@ const Features = () => {
       <Stack direction={["column", "column", "column", "row"]} spacing={"5"}>
         {FeatureItems.map((feature, index) => {
           return (
-            <Box bgColor={"gray.300"} rounded={"xl"} mx={"5"}>
+            <Box bgColor={["gray.300", "transparent"]} rounded={"xl"} mx={"5"}>
               <FeatureItem
                 image={feature.image}
                 title={feature.title.toUpperCase()}

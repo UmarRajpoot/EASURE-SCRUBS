@@ -63,18 +63,18 @@ const Collection = () => {
             {isLoaded && Product.productimage && onHover === Product.id ? (
               <Image
                 src={Product.productimage[1]}
-                className="h-full w-full"
+                className="h-full md:h-96 w-full"
                 alt="bg"
               />
             ) : (
               <Image
                 src={Product.productimage[0]}
                 onLoad={() => setIsLoaded(true)}
-                className="h-full w-full"
+                className="h-full md:h-96 w-full"
                 alt="bg"
               />
             )}
-            <div className="py-3 text-sm md:text-base text-gray-500 ">
+            <div className="py-3 text-sm md:text-base md:font-medium text-gray-500 ">
               <h1>
                 {Product.varientname && Product?.varientname?.toLowerCase()}-
                 {Product.typename && Product?.typename?.toLowerCase()}-
@@ -215,7 +215,7 @@ const Collection = () => {
       </div>
 
       {/* className="flex md:flex-wrap overflow-x-scroll px-10 no-scrollbar" */}
-      <div className="px-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+      <div className="px-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 md:px-20">
         {extProduct.map((prod, index) => {
           return <ProductCard Product={prod} index={index} />;
         })}

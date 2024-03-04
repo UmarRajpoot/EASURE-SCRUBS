@@ -253,12 +253,15 @@ const ProductList = () => {
             mensT.productimage &&
             colorSelect === "" &&
             onHover === mensT.id ? (
-              <Image src={mensT.productimage[1]} className="h-full w-full" />
+              <Image
+                src={mensT.productimage[1]}
+                className="h-full md:h-96 w-full"
+              />
             ) : (
               <Image
                 src={mensT.productimage[0]}
                 onLoad={() => setIsLoaded(true)}
-                className="h-full w-full"
+                className="h-full md:h-96 w-full"
               />
             )}
             <div className="py-3 text-xs md:text-base md:font-medium text-gray-500 ">
@@ -299,12 +302,15 @@ const ProductList = () => {
         <div className="m-1 hover:scale-100 transition-all ease-in-out duration-200 hover:drop-shadow-sm cursor-pointer">
           <div className=" rounded-lg bg-cover bg-no-repeat bg-center">
             {isLoaded && WTrend.productimage && onHover === WTrend.id ? (
-              <Image src={WTrend.productimage[1]} className="h-full w-full" />
+              <Image
+                src={WTrend.productimage[1]}
+                className="h-full md:h-96 w-full"
+              />
             ) : (
               <Image
                 src={WTrend.productimage[0]}
                 onLoad={() => setIsLoaded(true)}
-                className="h-full w-full"
+                className="h-full md:h-96 w-full"
               />
             )}
             <div className="py-3 text-xs md:text-base md:font-medium text-gray-500 ">
@@ -610,6 +616,7 @@ const ProductList = () => {
           spacing={"0"}
           // rowGap={"5"}
           my={"5"}
+          px={["3", "24"]}
         >
           {AllProducts.map((product, index) => {
             if (product.parentcategory === params.category.toUpperCase()) {
