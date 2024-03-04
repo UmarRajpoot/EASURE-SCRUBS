@@ -130,13 +130,13 @@ const ShopWomen = () => {
               <Image
                 src={WTrend.productimage[1]}
                 // onLoad={() => console.log("Loaded")}
-                className="h-full md:h-96 w-full"
+                className="h-full w-full"
               />
             ) : (
               <Image
                 src={WTrend.productimage[0]}
                 onLoad={() => setIsLoaded(true)}
-                className="h-full md:h-96 w-full"
+                className="h-full w-full"
               />
             )}
             {/* <Image

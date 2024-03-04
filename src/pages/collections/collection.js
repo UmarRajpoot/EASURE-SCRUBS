@@ -63,14 +63,14 @@ const Collection = () => {
             {isLoaded && Product.productimage && onHover === Product.id ? (
               <Image
                 src={Product.productimage[1]}
-                className="h-full md:h-96 w-full"
+                className="h-full w-full md:h-96 md:w-72"
                 alt="bg"
               />
             ) : (
               <Image
                 src={Product.productimage[0]}
                 onLoad={() => setIsLoaded(true)}
-                className="h-full md:h-96 w-full"
+                className="h-full w-full md:h-96 md:w-72"
                 alt="bg"
               />
             )}
@@ -214,8 +214,9 @@ const Collection = () => {
         </Link>
       </div>
 
+      {/* <div className="px-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 md:px-20 "> */}
       {/* className="flex md:flex-wrap overflow-x-scroll px-10 no-scrollbar" */}
-      <div className="px-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 md:px-20">
+      <div className="flex md:flex-wrap overflow-x-scroll px-10 no-scrollbar">
         {extProduct.map((prod, index) => {
           return <ProductCard Product={prod} index={index} />;
         })}
